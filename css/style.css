@@ -16,7 +16,8 @@
 }
 
 .hero-img {
-    width: 75%;
+    width: 85%;
+    height: auto;
     margin: 0 auto; /* Centers image horizontally */
 }
 
