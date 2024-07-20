@@ -1,46 +1,49 @@
-/* Mobile First Styles */
-
-/* 
-Small Devices (Tablets, 600px and up):
-This breakpoint targets tablets and small screens.
-
-Medium Devices (Tablets in landscape, 768px and up):
-This breakpoint targets tablets in landscape mode and smaller laptops.
-
-Large Devices (Laptops, 992px and up):
-This breakpoint targets larger laptops and desktops.
-
-Extra Large Devices (Large Desktops, 1200px and up):
-This breakpoint targets large desktop monitors. */
-
-/* HERO SECTION */
-
-/* Small devices (600px and up) */
-@media (min-width: 600px) {
-    .hero {
-        /* Styles for tablets */
-        max-width: 48rem;
-        flex-direction: row; /* Example: change from column to row */
-        justify-content: space-between;
+@media (min-width: 500px) {
+    .hero__heading-primary {
+        font-size: 2.4rem;
     }
 
-    .hero__text-container {
-        justify-content: space-between;
-        align-items: center;
+    .hero__text {
+        font-size: 1.4rem;
+    }
+}
+
+@media (min-width: 600px) {
+    .hero {
+        justify-content: space-evenly;
     }
 
     .hero__heading-primary {
-        margin-bottom: 5rem;
+        font-size: 3rem;
     }
 
-    .hero__img-box {
-        overflow: hidden;
+    .hero__text {
+        font-size: 1.6rem;
+    }
+}
+
+/* Adjust further for larger devices */
+@media (min-width: 768px) {
+    .hero {
+        justify-content: center;
     }
 
-    .hero__img {
-        width: 50%; /* Adjust image size for larger screens */
-        height: auto;
-        object-fit: cover;
-        border-radius: 20px 0 20px 0;
+    .hero__text-container {
+        width: 50%;
     }
+}
+
+/* For LapTops */
+@media (min-width: 992px) {
+    .hero__heading-primary {
+        font-size: 3.6rem;
+    }
+
+    .hero__text {
+        font-size: 1.8rem;
+    }
+}
+
+/* For Larger */
+@media (min-width: 1200px) {
 }
