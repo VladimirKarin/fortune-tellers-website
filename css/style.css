@@ -1,9 +1,7 @@
 /* HERO SECTION */
 
 .hero-section {
-    /* width: 90vw; */
-    max-width: 192rem;
-    /* height: 75vh; */
+    max-width: 193rem;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -14,23 +12,19 @@
 
 .hero__content {
     text-align: left;
-    color: var(--color-card-bg); /* Белый текст */
-    padding: 20px;
+    color: var(--color-card-bg);
 }
 
 .hero__heading-primary {
-    margin: 3.6rem 7.2rem;
-    /* padding: 3.6rem; */
-    font-size: 4rem;
+    margin: 4.8rem 6rem;
+    font-size: 4.8rem;
     margin-bottom: 20px;
 }
 
 .hero__text {
-    width: 40%;
-    /* margin: 0 7.2rem; */
-    padding: 3.6rem 7.2rem;
+    width: 50%;
+    padding: 3.2rem 6.4rem;
     font-size: 2.4rem;
-    margin-bottom: 20px;
 }
 
 .hero__buttons {
@@ -38,11 +32,11 @@
     justify-content: flex-start;
     gap: 10px;
 
-    padding: 3.6rem 7.2rem;
+    padding: 4.8rem 6.4rem;
 }
 
 .hero__button {
-    padding: 15px 25px;
+    padding: 1.6rem 2.4rem;
     background: var(--color-highlight);
     border: none;
     color: var(--color-card-bg);
