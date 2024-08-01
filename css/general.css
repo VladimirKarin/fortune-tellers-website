@@ -1,16 +1,18 @@
 :root {
-    --main-purple-color: #4b0082;
-    --main-text-color: #f5f5f5;
-    --main-background-purple-color: linear-gradient(
-        150deg,
-        hsl(275, 100%, 25%, 1),
-        hsl(260, 60%, 65%, 1)
-    );
-    --main-heading-golden-gradient-color: linear-gradient(
-        to bottom,
-        #ffd700,
-        #ffa500
-    );
+    /* Colors */
+    --color-main-background: #eec9cc;
+    --color-header-bg: #b68cb8;
+    --color-section-bg: #f2b4b4;
+    --color-card-bg: #ffffff;
+    --color-footer-bg: #9b59b6;
+    --color-text: #141414;
+    --color-highlight: #8e44ad;
+    --color-gradient-start: #f2e7f2;
+    --color-gradient-end: #b68cb8;
+
+    /* Fonts */
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
 }
 
 * {
@@ -24,9 +26,24 @@ html {
 }
 
 body {
-    font-family: 'Rubik', sans-serif;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
     line-height: 1;
     font-weight: 400;
-    color: #f5f5f5;
-    background: var(--main-background-purple-color);
+    color: var(--color-text);
+    background: var(--color-main-background);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-primary);
+}
+
+p {
+    font-family: var(--font-secondary);
 }
