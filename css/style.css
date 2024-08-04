@@ -36,7 +36,7 @@
 
 .hero__button {
     padding: 1.6rem 2.4rem;
-    background: var(--color-highlight); /* Regular button background */
+    background: var(--color-highlight);
     border: none;
     color: var(--color-card-bg);
     cursor: pointer;
@@ -50,7 +50,7 @@
 .hero__button:hover {
     background: var(--color-footer-bg);
     border: 2px solid var(--color-highlight);
-    background-image: var(--btn-gradient); /* Gradient background on hover */
+    background-image: var(--btn-gradient);
 }
 
 /* HEADER */
@@ -94,8 +94,8 @@ header {
 }
 
 .icon-mobile-nav {
-    height: 4.8rem;
-    width: 4.8rem;
+    height: 3.2rem;
+    width: 3.2rem;
     color: var(--color-text);
 }
 
@@ -108,17 +108,42 @@ header {
 }
 
 /* NAV MENU */
-/* NAV MENU */
+
+.main-nav {
+    display: flex;
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    backdrop-filter: none;
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .main-nav__list {
     list-style: none;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 3.2rem;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
 }
 
 .main-nav__list__link {
-    position: relative;
-    transition: all 0.3s ease;
+    font-size: 1rem;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+    position: relative; /* Added for proper positioning of the pseudo-element */
+    display: inline-block; /* Ensures the link is only as wide as its content */
 }
 
 .main-nav__list__link:link,
@@ -130,6 +155,7 @@ header {
     font-size: 1.8rem;
     padding: 0.5rem 1.3rem;
     text-transform: uppercase;
+    position: relative; /* Added for proper positioning of the pseudo-element */
 }
 
 .main-nav__list__link::after {
