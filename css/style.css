@@ -31,13 +31,12 @@
     display: flex;
     justify-content: flex-start;
     gap: 10px;
-
     padding: 4.8rem 6.4rem;
 }
 
 .hero__button {
     padding: 1.6rem 2.4rem;
-    background: var(--color-highlight); /* Обычный фон кнопки */
+    background: var(--color-highlight); /* Regular button background */
     border: none;
     color: var(--color-card-bg);
     cursor: pointer;
@@ -51,7 +50,7 @@
 .hero__button:hover {
     background: var(--color-footer-bg);
     border: 2px solid var(--color-highlight);
-    background-image: var(--btn-gradient); /* Градиентный фон при наведении */
+    background-image: var(--btn-gradient); /* Gradient background on hover */
 }
 
 /* HEADER */
@@ -64,15 +63,51 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-
     height: 9.6rem;
     padding: 0 4.8rem;
+}
+
+/* .sticky .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    z-index: 999;
+    background-color: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+} */
+
+/* .sticky .section-hero {
+    margin-top: 9.6rem;
+} */
+
+/* MOBILE NAV */
+
+.btn-mobile-nav {
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: none;
+}
+
+.icon-mobile-nav {
+    height: 4.8rem;
+    width: 4.8rem;
+    color: var(--color-text);
+}
+
+.icon-mobile-nav[name='close'] {
+    display: none;
 }
 
 .logo {
     height: 8rem;
 }
 
+/* NAV MENU */
 /* NAV MENU */
 .main-nav__list {
     list-style: none;
@@ -120,10 +155,4 @@ header {
 .main-nav__list__link:hover::after,
 .main-nav__list__link:active::after {
     width: 100%;
-}
-
-.icon-mobile-nav[name='close'],
-.icon-mobile-nav[name='color-wand'],
-.btn-mobile-nav {
-    display: none;
 }

@@ -9,7 +9,7 @@
     восковая отливка, восковая заливка, снятие негатива, снятие порчи, защита, контейнеры, обереги.">
 
     <!-- FONT -->
-    <!-- Montserat -->
+    <!-- Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -37,24 +37,24 @@
 <body>
     <main>
         <!-- Header + NavMenu -->
-        <header>
+        <header class="header">
             <a href="#">
                 <img src="./img/logoCrop2.png" class="logo" alt="The logo of the fortune teller">
             </a>
 
-            <nav class="main-nav">
+            <nav class="main-nav" aria-label="Main navigation">
                 <ul class="main-nav__list">
-                    <li><a href="#about" class="main-nav__list__link">Обо мне</a> </li>
-                    <li><a href="#services" class="main-nav__list__link">Услуги</a> </li>
-                    <!-- <li><a href="#gallery" class="main-nav__list__link">Фотогаллерея</a> </li> -->
-                    <li><a href="#credentials" class="main-nav__list__link">Отзывы</a> </li>
-                    <li><a href="#moon" class="main-nav__list__link">Фаза Луны и обряды</a> </li>
-                    <!-- <li><a href="#rituals" class="main-nav__list__link">Грядущие обряды</a> </li> -->
-                    <li><a href="#contacts" class="main-nav__list__link">Контакты</a> </li>
+                    <li><a href="#about" class="main-nav__list__link" aria-label="About me">Обо мне</a></li>
+                    <li><a href="#services" class="main-nav__list__link" aria-label="Services">Услуги</a></li>
+                    <!-- <li><a href="#gallery" class="main-nav__list__link" aria-label="Gallery">Фотогаллерея</a></li> -->
+                    <li><a href="#credentials" class="main-nav__list__link" aria-label="Testimonials">Отзывы</a></li>
+                    <li><a href="#moon" class="main-nav__list__link" aria-label="Moon phase and rituals">Фаза Луны и обряды</a></li>
+                    <!-- <li><a href="#rituals" class="main-nav__list__link" aria-label="Upcoming rituals">Грядущие обряды</a></li> -->
+                    <li><a href="#contacts" class="main-nav__list__link" aria-label="Contacts">Контакты</a></li>
                 </ul>
             </nav>
 
-            <button class="btn-mobile-nav">
+            <button class="btn-mobile-nav" aria-label="Open navigation menu">
                 <ion-icon class="icon-mobile-nav" name="color-wand"></ion-icon>
                 <ion-icon class="icon-mobile-nav" name="close"></ion-icon>
             </button>
@@ -66,12 +66,11 @@
                 <h1 class="hero__heading-primary">Уголок Доброй Феи</h1>
                 <p class="hero__text">Мур мяу, мои дорогие! Нагадаю, обласкаю, всю правду скажу и расскажу, от беды уберегу, денег наколдую. За сметану</p>
                 <div class="hero__buttons">
-                    <button class="hero__button">Услуги и цены</button>
-                    <button class="hero__button">Контакты</button>
+                    <button class="hero__button" aria-label="View services and prices">Услуги и цены</button>
+                    <button class="hero__button" aria-label="View contacts">Контакты</button>
                 </div>
             </div>
         </section>
-
     </main>
 </body>
 

@@ -1,6 +1,6 @@
 :root {
     /* Colors */
-    --color-main-background: #eec9cc;
+    --color-main-background: rgb(238, 201, 204);
     --color-header-bg: #b68cb8;
     --color-section-bg: #f2b4b4;
     --color-card-bg: #ffffff;
