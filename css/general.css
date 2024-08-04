@@ -9,11 +9,18 @@
     --color-highlight: #8e44ad;
     --color-gradient-start: #f2e7f2;
     --color-gradient-end: #b68cb8;
+    --btn-gradient: linear-gradient(
+        90deg,
+        hsla(279, 83%, 70%, 1) 0%,
+        hsla(321, 90%, 70%, 1) 100%
+    );
 
     /* Fonts */
     --font-primary: 'Montserrat', sans-serif;
     --font-secondary: 'Roboto', sans-serif;
 }
+
+/* Settings Reset */
 
 * {
     padding: 0;
