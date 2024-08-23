@@ -52,3 +52,40 @@ h3 {
 p {
     font-family: var(--font-secondary);
 }
+
+.container {
+    max-width: 140rem;
+    padding: 0 3.2rem;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    row-gap: 9.6rem;
+    column-gap: 6.4rem;
+}
+
+.grid--2-cols {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--center-v {
+    align-items: center;
+}
+
+.heading-secondary {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 9.6rem;
+    text-transform: uppercase;
+}
+
+.subheading {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--main-orange-shade);
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    letter-spacing: 0.75px;
+}

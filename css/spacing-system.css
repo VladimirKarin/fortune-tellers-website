@@ -176,12 +176,6 @@ Font sizes (px):
 /* GENERAL REUSABLE COMPONENTS */
 /* ********************** */
 
-/* .container {
-    max-width: 120rem;
-    padding: 0 3.2rem;
-    margin: 0 auto;
-} */
-
 /* .grid {
     display: grid;
     row-gap: 9.6rem;
@@ -208,6 +202,4 @@ Font sizes (px):
     grid-template-columns: repeat(5, 1fr);
 }
 
-.grid--center-v {
-    align-items: center;
-} */
+*/
