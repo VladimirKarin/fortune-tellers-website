@@ -217,3 +217,12 @@ header {
     font-size: 1.8rem;
     line-height: 1.6;
 }
+
+.about-me-img {
+    width: 100%;
+    border: 2px solid var(--color-text);
+}
+
+.about-me-img__arrow {
+    height: 75%;
+}
