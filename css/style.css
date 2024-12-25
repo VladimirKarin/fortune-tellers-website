@@ -199,9 +199,11 @@ header {
 
 .about-me-card__img {
     width: 100%;
+    top: 500px;
 }
 
 .about-me-card__content {
+    background-color: var(--color-card-bg);
     padding: 3.2rem 4.8rem 4.8rem 4.8rem;
 }
 
@@ -219,10 +221,43 @@ header {
 }
 
 .about-me-img {
-    width: 100%;
-    border: 2px solid var(--color-text);
+    position: relative;
+    width: 75%;
+    height: 75%;
 }
 
 .about-me-img__arrow {
-    height: 75%;
+    width: 100%;
+    height: 100%;
+}
+
+.about-me-img__arrow-first {
+    position: absolute;
+    top: 80%;
+    left: 43%;
+    transform: translate(-50%, -50%);
+}
+
+.about-me-img__arrow-second {
+    position: absolute;
+    top: 80%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+}
+
+.about-me-img__arrow-third {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    z-index: 1;
+}
+
+.about-me-img__logo {
+    height: 15rem;
+    position: absolute;
+    z-index: 2;
+    left: 80%;
+    top: 25%;
 }

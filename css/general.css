@@ -1,9 +1,9 @@
 :root {
     /* Colors */
-    --color-main-background: rgb(238, 201, 204);
+    --color-main-background: hsl(355, 52%, 86%);
     --color-header-bg: #b68cb8;
     --color-section-bg: #f2b4b4;
-    --color-card-bg: #ffffff;
+    --color-card-bg: #f4f3f2;
     --color-footer-bg: #9b59b6;
     --color-text: #141414;
     --color-highlight: #8e44ad;
