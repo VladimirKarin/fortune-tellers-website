@@ -261,3 +261,13 @@ header {
     left: 80%;
     top: 25%;
 }
+
+/* Services Section */
+.services__card {
+    border: 2px solid black;
+}
+
+.services__card__icon {
+    width: 128px;
+    height: auto;
+}
