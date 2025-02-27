@@ -209,7 +209,6 @@ header {
 
 .about-me-card__title {
     font-size: 2.4rem;
-
     font-weight: 600;
     margin-bottom: 3.2rem;
 }
@@ -263,11 +262,27 @@ header {
 }
 
 /* Services Section */
+
 .services__card {
     border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .services__card__icon {
-    width: 128px;
+    width: 96px;
     height: auto;
+}
+
+.services__card__heading {
+    font-size: 3.2rem;
+    font-weight: 600;
+    margin-bottom: 1.4rem;
+}
+
+.services__card__text {
+    font-size: 2rem;
+    text-align: center;
 }
