@@ -281,6 +281,14 @@ header {
     font-size: 2rem;
     text-align: center;
     margin-bottom: 5.6rem;
+
+    /* truncation */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Show only 3 lines */
+    -webkit-box-orient: vertical;
+    max-height: 4.5em; /* Approximately 3 lines */
 }
 
 .services__card_button {
@@ -320,4 +328,39 @@ header {
     background: var(--btn-gradient); /* Your original gradient */
     transform: translateY(-1px);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: var(--color-footer-bg);
+    padding: 3.2rem;
+    border-radius: 5px;
+    width: 80%;
+    height: 60%;
+    max-width: 600px;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #222;
+    font-size: 2.4rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 4.8rem;
+    cursor: pointer;
 }

@@ -28,3 +28,40 @@ document
             closeIcon.style.display = 'block';
         }
     });
+
+//Services Section
+
+document.querySelectorAll('.services__card_button').forEach((button) => {
+    button.addEventListener('click', function () {
+        // Get the full content from the data attribute
+        const card = this.closest('.services__card');
+        const paragraph = card.querySelector('.services__card__text');
+        const fullContent = paragraph.getAttribute('data-full-content');
+
+        // Create and show popup with the full content
+        showPopup(fullContent);
+    });
+});
+
+function showPopup(content) {
+    // Create popup elements
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+
+    const popupContent = document.createElement('div');
+    popupContent.className = 'popup-content';
+
+    const closeBtn = document.createElement('span');
+    closeBtn.className = 'close-btn';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.onclick = () => popup.remove();
+
+    const text = document.createElement('p');
+    text.innerHTML = content;
+
+    // Assemble and show popup
+    popupContent.appendChild(closeBtn);
+    popupContent.appendChild(text);
+    popup.appendChild(popupContent);
+    document.body.appendChild(popup);
+}
