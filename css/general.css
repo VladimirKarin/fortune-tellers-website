@@ -53,6 +53,15 @@ p {
     font-family: var(--font-secondary);
 }
 
+button {
+    padding: 1.6rem 2.4rem;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-secondary);
+    font-size: 1.8rem;
+    border-radius: 5px;
+}
+
 .container {
     max-width: 140rem;
     padding: 0 3.2rem;
