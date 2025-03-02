@@ -61,6 +61,7 @@ header {
     gap: 2rem;
     height: 9.6rem;
     padding: 0 4.8rem;
+    z-index: 1000;
 }
 
 .sticky {
@@ -377,18 +378,19 @@ header {
 .footer {
     background-color: var(--color-footer-bg);
     padding: 3.2rem;
-    text-align: center;
+    /* text-align: center; */
     font-size: 1.4rem;
     color: var(--color-card-bg);
 }
 
-.footer__list {
-    list-style: none;
-    margin-bottom: 3.2rem;
+.footer__text {
+    /* margin-bottom: 3.2rem; */
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 4.8rem;
+    flex-direction: column;
+}
+
+.footer__text-icon {
+    width: 3.6rem;
 }
 
 .footer__item {
@@ -397,5 +399,5 @@ header {
 }
 
 .social-network-logo {
-    width: 5rem;
+    width: 3.6rem;
 }

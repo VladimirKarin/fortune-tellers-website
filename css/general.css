@@ -86,6 +86,10 @@ button {
     align-items: center;
 }
 
+.footer-grid {
+    grid-template-columns: 30% 60%;
+}
+
 .heading-secondary {
     font-size: 3rem;
     line-height: 1.2;
