@@ -167,14 +167,14 @@ header {
 .hero__buttons {
     display: flex;
     justify-content: flex-start;
-    gap: 10px;
+    margin-left: 14rem;
     padding: 4.8rem 6.4rem;
 }
 
 .hero__button {
     background: var(--color-highlight);
     color: var(--color-card-bg);
-    transition: all 0.75s;
+    transition: all 0.8s;
     border: 3px solid var(--color-footer-bg);
 }
 
@@ -187,12 +187,13 @@ header {
 /* About Me Section */
 .about-me-section {
     padding: 9.6rem 0;
+    text-align: center;
 }
 
 .about-me-card {
     width: 100%;
     color: var(--color-text);
-    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
     border-radius: 11px;
     overflow: hidden;
 }
@@ -204,11 +205,11 @@ header {
 
 .about-me-card__content {
     background-color: var(--color-card-bg);
-    padding: 3.2rem 4.8rem 4.8rem 4.8rem;
+    padding: 2.4rem 3.6rem 3.6rem 3.6rem;
 }
 
 .about-me-card__title {
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: 600;
     margin-bottom: 3.2rem;
 }
