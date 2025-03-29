@@ -38,17 +38,20 @@
     <main>
         <!-- Header + NavMenu -->
         <header class="header sticky">
-            <a href="#">
-                <img src="./img/logoCrop2.png" class="logo" alt="The logo of the fortune teller">
-            </a>
+            <div class="header__left-side">
+                <a href="#">
+                    <img src="./img/logoCrop2.png" class="logo" alt="The logo of the fortune teller">
+                </a>
+                <p class="header__left-side__text">Гадалкина Избушка</p>
+            </div>
 
             <nav class="main-nav" aria-label="Main navigation">
                 <ul class="main-nav__list">
                     <li><a href="#about" class="main-nav__list__link" aria-label="About me">Обо мне</a></li>
                     <li><a href="#services" class="main-nav__list__link" aria-label="Services">Услуги</a></li>
-                    <!-- <li><a href="#gallery" class="main-nav__list__link" aria-label="Gallery">Фотогаллерея</a></li> -->
+                    <li><a href="#prices" class="main-nav__list__link" aria-label="Prices">Цены</a></li>
+                    <li><a href="#calendar" class="main-nav__list__link" aria-label="Calendar">Календарь</a></li>
                     <li><a href="#credentials" class="main-nav__list__link" aria-label="Testimonials">Отзывы</a></li>
-                    <li><a href="#moon" class="main-nav__list__link" aria-label="Moon phase and rituals">Фаза Луны и обряды</a></li>
                     <!-- <li><a href="#rituals" class="main-nav__list__link" aria-label="Upcoming rituals">Грядущие обряды</a></li> -->
                     <li><a href="#contacts" class="main-nav__list__link" aria-label="Contacts">Контакты</a></li>
                 </ul>
@@ -224,8 +227,10 @@
             </div>
         </section>
 
+        <!-- Services Footer -->
         <footer class="footer">
             <div class="container grid footer-grid">
+                <img src="./img/logoCrop2.png" alt="The logo of the fortune teller" class="footer__logo">
                 <div class="footer__contacts">
                     <h3 class="footer__heading">
                         Контакты

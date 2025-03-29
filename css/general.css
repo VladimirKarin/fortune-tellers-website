@@ -1,12 +1,17 @@
 :root {
     /* Colors */
-    --color-main-background: hsl(355, 52%, 86%);
-    --color-header-bg: #b68cb8;
+    /* Background Colors */
+    --color-main-background: #ece5f5;
+    --color-header-bg: rgba(249, 248, 252, 0.7);
     --color-section-bg: #f2b4b4;
     --color-card-bg: #f4f3f2;
     --color-footer-bg: #9b59b6;
-    --color-text: #141414;
+
+    /* Text Colors */
+    --color-text: #4a3f70;
     --color-highlight: #8e44ad;
+
+    /* Gradients */
     --color-gradient-start: #f2e7f2;
     --color-gradient-end: #b68cb8;
     --btn-gradient: linear-gradient(
@@ -53,6 +58,8 @@ p {
     font-family: var(--font-secondary);
 }
 
+/* Reusable Classes */
+
 button {
     padding: 1.6rem 2.4rem;
     border: none;
@@ -61,6 +68,25 @@ button {
     font-size: 1.8rem;
     border-radius: 5px;
 }
+
+.heading-secondary {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 9.6rem;
+    text-transform: uppercase;
+}
+
+.subheading {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--main-orange-shade);
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    letter-spacing: 0.75px;
+}
+
+/*Grid System */
 
 .container {
     max-width: 140rem;
@@ -88,21 +114,4 @@ button {
 
 .footer-grid {
     grid-template-columns: 30% 60%;
-}
-
-.heading-secondary {
-    font-size: 3rem;
-    line-height: 1.2;
-    margin-bottom: 9.6rem;
-    text-transform: uppercase;
-}
-
-.subheading {
-    display: block;
-    font-size: 1.6rem;
-    font-weight: 500;
-    color: var(--main-orange-shade);
-    text-transform: uppercase;
-    margin-bottom: 1.6rem;
-    letter-spacing: 0.75px;
 }
