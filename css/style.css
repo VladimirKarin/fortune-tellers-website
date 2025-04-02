@@ -190,6 +190,10 @@ header {
     text-align: center;
 }
 
+.about-me-section__heading {
+    text-align: left;
+}
+
 .about-me-card {
     width: 100%;
     color: var(--color-text);
@@ -264,112 +268,22 @@ header {
 
 /* Services Section */
 
-.services__card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.services__card__icon {
-    width: 80px;
-    height: auto;
-}
-
-.services__card__heading {
-    font-size: 3.2rem;
-    font-weight: 600;
-    margin-bottom: 1.4rem;
-}
-
-.services__card__text {
-    font-size: 2rem;
+.services-section {
+    padding: 9.6rem 0;
     text-align: center;
-    margin-bottom: 5.6rem;
-
-    /* truncation */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    line-clamp: 3;
-    -webkit-line-clamp: 3; /* Show only 3 lines */
-    -webkit-box-orient: vertical;
-    max-height: 4.5em; /* Approximately 3 lines */
 }
 
-.services__card_button {
-    /* background: var(--color-highlight);
-    color: var(--color-card-bg);
-    border: 3px solid var(--color-footer-bg);
-    transition: all 0.75s;
-     background: linear-gradient(
-        to right,
-        hsl(340, 35%, 60%),
-        hsl(350, 40%, 65%)
-    );
-    color: #333; /* or a dark color like #333 if you prefer */
-    /* transition: all 0.3s ease;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px; */
-    position: absolute;
-    bottom: 0%;
-    right: 5%;
-    background: linear-gradient(
-        90deg,
-        hsla(279, 83%, 75%, 1) 0%,
-        hsla(321, 90%, 75%, 1) 100%
-    );
-    color: var(--color-text); /* Using your text color */
-    transition: all 0.3s ease;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-}
-
-.services__card_button:hover {
-    /* background: var(--color-footer-bg);
-    border: 2px solid var(--color-highlight);
-    background-image: var(--btn-gradient); */
-    background: var(--btn-gradient); /* Your original gradient */
-    transform: translateY(-1px);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
-}
-
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+.services__sliding-area {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    gap: 3.2rem;
+    overflow: hidden;
 }
 
-.popup-content {
-    background-color: var(--color-footer-bg);
-    padding: 3.2rem;
-    border-radius: 5px;
-    width: 80%;
-    height: 60%;
-    max-width: 600px;
-    position: relative;
-    max-height: 80vh;
-    overflow-y: auto;
-    color: #222;
-    font-size: 2.4rem;
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 4.8rem;
-    cursor: pointer;
+.services__sliding-area__item {
+    width: 40rem;
+    height: 50rem;
 }
 
 .footer {
