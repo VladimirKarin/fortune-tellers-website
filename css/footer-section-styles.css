@@ -1,0 +1,31 @@
+.footer {
+    background-color: var(--color-footer-bg);
+    padding: 3.2rem;
+    /* text-align: center; */
+    font-size: 1.4rem;
+    color: var(--color-card-bg);
+}
+
+.footer__logo {
+    width: 20rem;
+    height: auto;
+}
+
+.footer__text {
+    /* margin-bottom: 3.2rem; */
+    display: flex;
+    flex-direction: column;
+}
+
+.footer__text-icon {
+    width: 3rem;
+}
+
+.footer__item {
+    margin-bottom: 1.6rem;
+    display: inline-block;
+}
+
+.social-network-logo {
+    width: 3rem;
+}

@@ -1,0 +1,94 @@
+/* NAV MENU */
+
+.main-nav {
+    display: flex;
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    backdrop-filter: none;
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-nav__list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav__list__link {
+    font-size: 1rem;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+    position: relative; /* Added for proper positioning of the pseudo-element */
+    display: inline-block; /* Ensures the link is only as wide as its content */
+}
+
+.main-nav__list__link:link,
+.main-nav__list__link:visited {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 700;
+    font-size: 1.4rem;
+    padding: 0.5rem 1.3rem;
+    text-transform: uppercase;
+    position: relative; /* Added for proper positioning of the pseudo-element */
+}
+
+.main-nav__list__link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-image: var(--btn-gradient);
+    transition: width 0.75s ease;
+}
+
+.main-nav__list__link:hover,
+.main-nav__list__link:active {
+    color: transparent;
+    background: var(--btn-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main-nav__list__link:hover::after,
+.main-nav__list__link:active::after {
+    width: 100%;
+}
+
+/* MOBILE NAV */
+
+.btn-mobile-nav {
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: none;
+}
+
+.icon-mobile-nav {
+    height: 3.2rem;
+    width: 3.2rem;
+    color: var(--color-text);
+}
+
+.icon-mobile-nav[name='close'] {
+    display: none;
+}

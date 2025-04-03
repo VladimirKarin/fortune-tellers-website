@@ -20,9 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <!-- CSS STYLES -->
-    <link rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/queries.css">
 
     <!-- ICONS -->
     <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
@@ -143,102 +141,21 @@
         <section class="services-section container">
             <h2 class="heading-secondary">Что я могу Вам предложить</h2>
             <div class="services__sliding-area">
-
-                <img class="services__sliding-area__item services__sliding-area-item-1" src="/img/services-pictures/1.jpg" alt="services first picture" data-index="1" />
-                <img class="services__sliding-area__item services__sliding-area-item-2" src="/img/services-pictures/2.jpg" alt="services second picture" data-index="2" />
-                <img class="services__sliding-area__item services__sliding-area-item-3" src="/img/services-pictures/3.jpg" alt="services third picture" data-index="3" />
-                <img class="services__sliding-area__item services__sliding-area-item-4" src="/img/services-pictures/4.jpg" alt="services fourth picture" data-index="4" />
-                <img class="services__sliding-area__item services__sliding-area-item-5" src="/img/services-pictures/5.jpg" alt="services fifth picture" data-index="5" />
-                <img class="services__sliding-area__item services__sliding-area-item-6" src="/img/services-pictures/6.jpg" alt="services sixth picture" data-index="6" />
-                <img class="services__sliding-area__item services__sliding-area-item-7" src="/img/services-pictures/7.jpg" alt="services seventh picture" data-index="7" />
-                <img class="services__sliding-area__item services__sliding-area-item-8" src="/img/services-pictures/8.jpg" alt="services eightth picture" data-index="8" />
-                <img class="services__sliding-area__item services__sliding-area-item-9" src="/img/services-pictures/9.jpg" alt="services nineth picture" data-index="9" />
-                <!-- <span class="subheading">
-                    Услуги
-                </span>
-                <h2 class="heading-secondary">
-                    Что же я могу Вам предложить?
-                </h2>
-
-                <div class="services__cards grid grid--3-cols grid--center-v">
-                    <div class="services__card">
-                        <img src="/img/icons/Services-icons/playing-cards.png" class="services__card__icon" aria-label="playing cards ion-icon" alt="playing cards icon">
-                        <h3 class="services__card__heading">
-                            Гадание на картах
-                        </h3>
-                        <p class="services__card__text" data-full-content="Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </p>
-                        <button class="services__card_button">Подробнее</button>
+                <div class="services__sliding-area__content">
+                    <div class="services__sliding-area__content__card">
+                        <div class="services__sliding-area__content__card__img">
+                            <img src="./img/services-pictures/1.jpg" alt="first picture" class="services__sliding-area__content__card__img__img">
+                        </div>
+                        <div class="services__sliding-area__content__card__text">
+                            <h3 class="subheading">Lorem ipsum dolor sit amet</h3>
+                            <p class="services__sliding-area__content__card__text__title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsa.</p>
+                        </div>
                     </div>
-                    <div class="services__card">
-                        <img src="/img/icons/Services-icons/candles.png" class="services__card__icon" aria-label="candles ion-icon" alt="candles icon">
-                        <h3 class="services__card__heading">
-                            Восковая отливка
-                        </h3>
-                        <p class="services__card__text" data-full-content="Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </p>
-                        <button class="services__card_button">Подробнее</button>
+                    <div class="services__sliding-area__controls">
+                        <button class="button services__sliding-area__controls__button" aria-label="button that slides left">LEFT</button>
+                        <button class="button services__sliding-area__controls__button" aria-label="button that slides right">RIGHT</button>
                     </div>
-                    <div class="services__card">
-                        <img src="/img/icons/Services-icons/candle.png" class="services__card__icon" aria-label="candle ion-icon" alt="candle icon">
-                        <h3 class="services__card__heading">
-                            Восковая заливка
-                        </h3>
-                        <p class="services__card__text" data-full-content="Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </p>
-                        <button class="services__card_button">Подробнее</button>
-                    </div>
-                    <div class="services__card">
-                        <img src="/img/icons/Services-icons/amulet.png" class="services__card__icon" aria-label="amulet ion-icon" alt="amulet icon">
-                        <h3 class="services__card__heading">
-                            Обереги
-                        </h3>
-                        <p class="services__card__text" data-full-content="Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </p>
-                        <button class="services__card_button">Подробнее</button>
-                    </div>
-                    <div class="services__card">
-                        <img src="/img/icons/Services-icons/horseshoe.png" class="services__card__icon" aria-label="horseshoe cards ion-icon" alt="horseshoe icon">
-                        <h3 class="services__card__heading">
-                            Заговоры
-                        </h3>
-                        <p class="services__card__text" data-full-content="Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </p>
-                        <button class="services__card_button">Подробнее</button>
-                    </div>
-                    <div class="services__card">
-                        <img src="/img/icons/Services-icons/burner.png" class="services__card__icon" aria-label="burner cards ion-icon" alt="burner icon">
-                        <h3 class="services__card__heading">
-                            Визуализация
-                        </h3>
-                        <p class="services__card__text" data-full-content="Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </p>
-                        <button class="services__card_button">Подробнее</button>
-                    </div>
-                </div> -->
-            </div>
-            <div class="services__sliding-area__controls">
-                <button class="button services__sliding-area__controls__button" aria-label="button that slides left">LEFT</button>
-                <button class="button services__sliding-area__controls__button" aria-label="button that slides right">RIGHT</button>
-            </div>
+                </div>
         </section>
 
         <!-- Footer  Section -->
