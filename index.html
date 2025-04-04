@@ -139,27 +139,178 @@
         </section>
 
         <!-- Services Section -->
-        <!-- Services Section -->
-<section class="services-section container" id="services">
-    <div class="container">
-        <h2 class="heading-secondary">
-            Что я могу Вам предложить
-        </h2>
-    </div>
-    <div class="gallery">
-        <div class="gallery-container">
-            <img class="gallery-item gallery-item-1" src="/img/services-pictures/1.jpg" alt="" data-index="1">
-            <img class="gallery-item gallery-item-2" src="/img/services-pictures/2.jpg" alt="" data-index="2">
-            <img class="gallery-item gallery-item-3" src="/img/services-pictures/3.jpg" alt="" data-index="3">
-            <img class="gallery-item gallery-item-4" src="/img/services-pictures/4.jpg" alt="" data-index="4">
-            <img class="gallery-item gallery-item-5" src="/img/services-pictures/5.jpg" alt="" data-index="5">
-        </div>
-        <div class="gallery-controls">
-            <button class="gallery-controls-button gallery-controls-previous" aria-label="Previous slide">Previous</button>
-            <button class="gallery-controls-button gallery-controls-next" aria-label="Next slide">Next</button>
-        </div>
-    </div>
-</section>
+        <section class="services-section" id="services">
+            <div class="container">
+                <h2 class="heading-secondary">
+                    Что я могу Вам предложить
+                </h2>
+            </div>
+            <div class="gallery">
+                <div class="gallery-container">
+                    <!-- Gallery items with card structure -->
+                    <div class="gallery-item gallery-item-1" data-index="1">
+                        <div class="gallery-item-visual" style="background-image: url('/img/services-pictures/1.jpg')"></div>
+                        <div class="gallery-item-content">
+                            <h3 class="gallery-item-title">Гадание на картах</h3>
+                            <p class="gallery-item-text">Классическое гадание с использованием различных карточных систем для точных предсказаний вашего будущего.</p>
+                            <button class="gallery-item-button" data-popup="popup-1">Узнать больше</button>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item gallery-item-2" data-index="2">
+                        <div class="gallery-item-visual" style="background-image: url('/img/services-pictures/2.jpg')"></div>
+                        <div class="gallery-item-content">
+                            <h3 class="gallery-item-title">Таро расклад</h3>
+                            <p class="gallery-item-text">Глубокий анализ ситуаций с помощью карт Таро, раскрывающий скрытые аспекты и потенциальные пути развития.</p>
+                            <button class="gallery-item-button" data-popup="popup-2">Узнать больше</button>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item gallery-item-3" data-index="3">
+                        <div class="gallery-item-visual" style="background-image: url('/img/services-pictures/3.jpg')"></div>
+                        <div class="gallery-item-content">
+                            <h3 class="gallery-item-title">Ритуалы и заговоры</h3>
+                            <p class="gallery-item-text">Древние обряды и заговоры для привлечения удачи, любви, денег и защиты от негативных влияний.</p>
+                            <button class="gallery-item-button" data-popup="popup-3">Узнать больше</button>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item gallery-item-4" data-index="4">
+                        <div class="gallery-item-visual" style="background-image: url('/img/services-pictures/4.jpg')"></div>
+                        <div class="gallery-item-content">
+                            <h3 class="gallery-item-title">Восковая отливка</h3>
+                            <p class="gallery-item-text">Диагностика и снятие негативных воздействий с помощью древнего метода восковой отливки.</p>
+                            <button class="gallery-item-button" data-popup="popup-4">Узнать больше</button>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item gallery-item-5" data-index="5">
+                        <div class="gallery-item-visual" style="background-image: url('/img/services-pictures/5.jpg')"></div>
+                        <div class="gallery-item-content">
+                            <h3 class="gallery-item-title">Обереги и амулеты</h3>
+                            <p class="gallery-item-text">Создание индивидуальных защитных оберегов и амулетов для различных жизненных ситуаций.</p>
+                            <button class="gallery-item-button" data-popup="popup-5">Узнать больше</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation controls with improved buttons -->
+                <div class="gallery-controls">
+                    <button class="gallery-controls-button gallery-controls-previous" aria-label="Previous slide">
+                        <ion-icon name="arrow-back"></ion-icon> Предыдущее
+                    </button>
+                    <button class="gallery-controls-button gallery-controls-next" aria-label="Next slide">
+                        Следующее <ion-icon name="arrow-forward"></ion-icon>
+                    </button>
+                </div>
+
+                <!-- Carousel position indicators -->
+                <div class="gallery-indicators">
+                    <span class="gallery-indicator" data-index="1"></span>
+                    <span class="gallery-indicator" data-index="2"></span>
+                    <span class="gallery-indicator" data-index="3"></span>
+                    <span class="gallery-indicator" data-index="4"></span>
+                    <span class="gallery-indicator" data-index="5"></span>
+                </div>
+            </div>
+
+            <!-- Hidden popups for each service -->
+            <div class="popup-overlay" id="popup-1">
+                <div class="popup-content">
+                    <button class="popup-close" aria-label="Close popup">&times;</button>
+                    <h3 class="popup-title">Гадание на картах</h3>
+                    <div class="popup-text">
+                        <p>Гадание на картах - это древнее искусство предсказания будущего и анализа настоящего через символы и образы карт. В своей практике я использую как обычные игральные карты, так и специальные гадальные колоды.</p>
+                        <p>С помощью карт можно получить ответы на волнующие вопросы о:</p>
+                        <ul>
+                            <li>Личных отношениях и любви</li>
+                            <li>Карьере и профессиональном развитии</li>
+                            <li>Финансовом положении и материальном благополучии</li>
+                            <li>Жизненном пути и предназначении</li>
+                        </ul>
+                        <p>Каждый расклад индивидуален и учитывает вашу конкретную ситуацию. Я тщательно интерпретирую символы карт и их взаимосвязь, чтобы дать вам наиболее точное и полезное предсказание.</p>
+                        <p>Сеанс гадания на картах поможет вам увидеть скрытые аспекты ситуации, получить совет для принятия решений и узнать о возможных перспективах развития событий.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-overlay" id="popup-2">
+                <div class="popup-content">
+                    <button class="popup-close" aria-label="Close popup">&times;</button>
+                    <h3 class="popup-title">Таро расклад</h3>
+                    <div class="popup-text">
+                        <p>Карты Таро - это мощный инструмент для глубокого анализа жизненных ситуаций и самопознания. В отличие от обычных карт, система Таро имеет богатую символику и многослойные значения, что позволяет проводить детальный анализ прошлого, настоящего и возможного будущего.</p>
+                        <p>В своей практике я использую различные расклады Таро:</p>
+                        <ul>
+                            <li><strong>Кельтский крест</strong> - классический расклад для глубокого анализа конкретной ситуации</li>
+                            <li><strong>Расклад на отношения</strong> - для анализа любовных и партнерских отношений</li>
+                            <li><strong>Карта дня</strong> - для получения совета на текущий день</li>
+                            <li><strong>Расклад "Путь"</strong> - для понимания вашего жизненного пути и предназначения</li>
+                        </ul>
+                        <p>Сеанс гадания на Таро поможет вам получить глубокое понимание происходящих процессов, раскрыть скрытые мотивы, увидеть потенциальные препятствия и найти возможные пути их преодоления.</p>
+                        <p>Каждый расклад сопровождается подробным объяснением значения карт и их взаимосвязей в контексте вашей конкретной ситуации.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-overlay" id="popup-3">
+                <div class="popup-content">
+                    <button class="popup-close" aria-label="Close popup">&times;</button>
+                    <h3 class="popup-title">Ритуалы и заговоры</h3>
+                    <div class="popup-text">
+                        <p>Ритуалы и заговоры - это древние практики, направленные на привлечение желаемых изменений в жизни или защиту от нежелательных влияний. Они основаны на работе с энергиями природы и силой слова.</p>
+                        <p>Я провожу различные виды ритуалов:</p>
+                        <ul>
+                            <li><strong>Любовные ритуалы</strong> - для привлечения любви, улучшения отношений, укрепления чувств</li>
+                            <li><strong>Денежные обряды</strong> - для привлечения финансового благополучия, новых источников дохода</li>
+                            <li><strong>Очистительные ритуалы</strong> - для освобождения от негативных энергий, очищения жилища</li>
+                            <li><strong>Защитные заговоры</strong> - для создания энергетической защиты от внешних воздействий</li>
+                        </ul>
+                        <p>Каждый ритуал подбирается индивидуально, с учетом вашей конкретной ситуации и потребностей. Для достижения наилучшего результата важно соблюдать все рекомендации и выполнять необходимые действия в течение указанного времени.</p>
+                        <p>Помните, что ритуалы и заговоры - это помощь и направление энергии, но они работают в гармонии с вашими собственными усилиями и намерениями.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-overlay" id="popup-4">
+                <div class="popup-content">
+                    <button class="popup-close" aria-label="Close popup">&times;</button>
+                    <h3 class="popup-title">Восковая отливка</h3>
+                    <div class="popup-text">
+                        <p>Восковая отливка - это древний славянский метод диагностики и снятия негативных воздействий. Процедура заключается в выливании расплавленного воска в холодную воду над человеком или его фотографией.</p>
+                        <p>Застывший воск принимает формы, которые имеют диагностическое значение и показывают:</p>
+                        <ul>
+                            <li>Наличие сглаза, порчи, проклятия или других негативных воздействий</li>
+                            <li>Энергетические блоки и проблемные зоны</li>
+                            <li>Источники и причины негативных влияний</li>
+                            <li>Состояние энергетического поля человека</li>
+                        </ul>
+                        <p>Процедура восковой отливки не только диагностирует проблему, но и одновременно снимает негативное воздействие, перенося его с человека на воск. Отлитые формы затем нейтрализуются специальным образом.</p>
+                        <p>Для полного очищения обычно требуется от 1 до 9 сеансов, в зависимости от силы и длительности негативного воздействия. После процедуры даются рекомендации по энергетической защите и восстановлению.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-overlay" id="popup-5">
+                <div class="popup-content">
+                    <button class="popup-close" aria-label="Close popup">&times;</button>
+                    <h3 class="popup-title">Обереги и амулеты</h3>
+                    <div class="popup-text">
+                        <p>Обереги и амулеты - это предметы, заряженные особой энергией для защиты, привлечения удачи и благополучия. Я создаю индивидуальные обереги, учитывая ваши потребности, особенности энергетики и конкретные цели.</p>
+                        <p>Виды оберегов, которые я изготавливаю:</p>
+                        <ul>
+                            <li><strong>Защитные амулеты</strong> - охраняют от негативных энергий и воздействий</li>
+                            <li><strong>Любовные талисманы</strong> - привлекают любовь, гармонизируют отношения</li>
+                            <li><strong>Денежные обереги</strong> - способствуют финансовому благополучию</li>
+                            <li><strong>Здоровье и жизненные силы</strong> - укрепляют энергетику и защищают здоровье</li>
+                            <li><strong>Путевые амулеты</strong> - обеспечивают защиту в пути и при переездах</li>
+                        </ul>
+                        <p>Каждый оберег создается в определенное время, с использованием специальных материалов и ритуалов активации. К амулету прилагаются инструкции по правильному использованию и периодической подзарядке.</p>
+                        <p>Важно помнить, что оберег - это личный предмет, который настраивается на энергетику конкретного человека и не должен передаваться другим людям.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Footer  Section -->
         <footer class="footer">
