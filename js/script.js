@@ -36,81 +36,177 @@ document
     });
 
 // ------------------------------------------------------------------
-// SERVICES SECTION POPUP FUNCTIONALITY
+// UNIFIED POPUP FUNCTIONALITY
 // ------------------------------------------------------------------
 
-// Add click events to all service card buttons
-document.querySelectorAll('.services__card_button').forEach((button) => {
-    button.addEventListener('click', function () {
-        // Get the full content from the data attribute
-        const card = this.closest('.services__card');
-        const paragraph = card.querySelector('.services__card__text');
-        const fullContent = paragraph.getAttribute('data-full-content');
+class PopupManager {
+    constructor() {
+        this.createPopupElements();
+        this.initializeEventListeners();
+    }
 
-        // Create and show popup with the full content
-        showPopup(fullContent);
-    });
-});
+    createPopupElements() {
+        // Create main popup elements
+        this.overlay = document.createElement('div');
+        this.overlay.className = 'popup-overlay';
 
-// Function to create and display a popup with content
-function showPopup(content) {
-    // Create popup elements
-    const popup = document.createElement('div');
-    popup.className = 'popup';
+        this.content = document.createElement('div');
+        this.content.className = 'popup-content';
 
-    const popupContent = document.createElement('div');
-    popupContent.className = 'popup-content';
+        this.title = document.createElement('h2');
+        this.title.className = 'popup-title';
 
-    const closeBtn = document.createElement('span');
-    closeBtn.className = 'close-btn';
-    closeBtn.innerHTML = '&times;';
-    closeBtn.onclick = () => popup.remove();
+        this.closeBtn = document.createElement('span');
+        this.closeBtn.className = 'popup-close';
+        this.closeBtn.innerHTML = '&times;';
 
-    const text = document.createElement('p');
-    text.innerHTML = content;
+        this.text = document.createElement('div');
+        this.text.className = 'popup-text';
 
-    // Assemble and show popup
-    popupContent.appendChild(closeBtn);
-    popupContent.appendChild(text);
-    popup.appendChild(popupContent);
-    document.body.appendChild(popup);
+        // Assemble popup structure
+        this.content.appendChild(this.closeBtn);
+        this.content.appendChild(this.title);
+        this.content.appendChild(this.text);
+        this.overlay.appendChild(this.content);
+        document.body.appendChild(this.overlay);
+    }
+
+    initializeEventListeners() {
+        // Close button click
+        this.closeBtn.addEventListener('click', () => this.close());
+
+        // Click outside content
+        this.overlay.addEventListener('click', (e) => {
+            if (e.target === this.overlay) this.close();
+        });
+
+        // Escape key
+        document.addEventListener('keydown', (e) => {
+            if (
+                e.key === 'Escape' &&
+                this.overlay.classList.contains('active')
+            ) {
+                this.close();
+            }
+        });
+
+        // Service card buttons
+        document
+            .querySelectorAll('.services__card_button')
+            .forEach((button) => {
+                button.addEventListener('click', () => {
+                    const card = button.closest('.services__card');
+                    const paragraph = card.querySelector(
+                        '.services__card__text'
+                    );
+                    const content = paragraph.textContent;
+                    this.show('Service Details', content);
+                });
+            });
+
+        // Gallery item buttons
+        document.querySelectorAll('.gallery-item-button').forEach((button) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const card = button.closest('.gallery-item');
+                const title = card.querySelector(
+                    '.gallery-item-title'
+                ).textContent;
+                const content =
+                    card.querySelector('.gallery-item-text').innerHTML;
+                this.show(title, content);
+            });
+        });
+    }
+
+    show(title, content) {
+        this.title.textContent = title;
+        this.text.innerHTML = content;
+        this.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        this.overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            this.title.textContent = '';
+            this.text.innerHTML = '';
+        }, 300);
+    }
 }
-
-// ------------------------------------------------------------------
-// CAROUSEL AND POPUP FUNCTIONALITY
-// ------------------------------------------------------------------
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Carousel
-    initCarousel();
-
-    // Initialize Popup System
-    initPopup();
-
-    // Initialize Indicators
-    updateIndicators();
-});
 
 // ------------------------------------------------------------------
 // CAROUSEL FUNCTIONALITY
 // ------------------------------------------------------------------
 
-function initCarousel() {
-    // Select the carousel elements
-    const galleryContainer = document.querySelector('.gallery-container');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const prevButton = document.querySelector('.gallery-controls-previous');
-    const nextButton = document.querySelector('.gallery-controls-next');
-    const indicators = document.querySelectorAll('.gallery-indicator');
+class Carousel {
+    constructor() {
+        this.init();
+    }
 
-    // Convert NodeList to Array
-    const itemsArray = Array.from(galleryItems);
-    let currentIndex = 0; // Track the center item's index
+    init() {
+        this.galleryContainer = document.querySelector('.gallery-container');
+        this.galleryItems = document.querySelectorAll('.gallery-item');
+        this.prevButton = document.querySelector('.gallery-controls-previous');
+        this.nextButton = document.querySelector('.gallery-controls-next');
+        this.indicators = document.querySelectorAll('.gallery-indicator');
 
-    // Function to update the gallery display
-    function updateGallery() {
-        itemsArray.forEach((item, index) => {
-            // Remove all position classes
+        this.itemsArray = Array.from(this.galleryItems);
+        this.currentIndex = 0;
+
+        this.setupEventListeners();
+        this.updateGallery();
+    }
+
+    setupEventListeners() {
+        if (this.prevButton) {
+            this.prevButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.moveToPrevSlide();
+            });
+        }
+
+        if (this.nextButton) {
+            this.nextButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.moveToNextSlide();
+            });
+        }
+
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => this.moveToSlide(index));
+        });
+
+        // Touch events
+        let touchStartX = 0;
+        this.galleryContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        this.galleryContainer.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            const minSwipeDistance = 50;
+
+            if (touchEndX < touchStartX - minSwipeDistance) {
+                this.moveToNextSlide();
+            } else if (touchEndX > touchStartX + minSwipeDistance) {
+                this.moveToPrevSlide();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                this.moveToPrevSlide();
+            } else if (e.key === 'ArrowRight') {
+                this.moveToNextSlide();
+            }
+        });
+    }
+
+    updateGallery() {
+        this.itemsArray.forEach((item, index) => {
             item.classList.remove(
                 'gallery-item-1',
                 'gallery-item-2',
@@ -119,189 +215,61 @@ function initCarousel() {
                 'gallery-item-5'
             );
 
-            // Calculate position based on relative index to the current center
             let position =
-                (index - currentIndex + itemsArray.length) % itemsArray.length;
+                (index - this.currentIndex + this.itemsArray.length) %
+                this.itemsArray.length;
 
-            // Only show 5 items
             if (position < 5) {
                 item.classList.add(`gallery-item-${position + 1}`);
-                item.style.opacity = ''; // Reset to CSS value
+                item.style.opacity = '';
             } else {
                 item.style.opacity = '0';
             }
         });
 
-        // Update indicators
-        updateIndicators();
+        this.updateIndicators();
     }
 
-    // Function to move to next slide
-    function moveToNextSlide() {
-        currentIndex =
-            (currentIndex - 1 + itemsArray.length) % itemsArray.length;
-        updateGallery();
+    moveToNextSlide() {
+        // Fix: Changed from subtract to add for next slide
+        this.currentIndex = (this.currentIndex + 1) % this.itemsArray.length;
+        this.updateGallery();
     }
 
-    // Function to move to previous slide
-    function moveToPrevSlide() {
-        currentIndex = (currentIndex + 1) % itemsArray.length;
-        updateGallery();
+    moveToPrevSlide() {
+        // Fix: Changed from add to subtract for previous slide
+        this.currentIndex =
+            (this.currentIndex - 1 + this.itemsArray.length) %
+            this.itemsArray.length;
+        this.updateGallery();
     }
 
-    // Function to move to specific slide
-    function moveToSlide(index) {
-        currentIndex = index;
-        updateGallery();
+    moveToSlide(index) {
+        this.currentIndex = index;
+        this.updateGallery();
     }
 
-    // Add listeners for previous and next buttons
-    if (prevButton) {
-        prevButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            moveToPrevSlide();
-        });
-    }
+    updateIndicators() {
+        const activeItem = document.querySelector('.gallery-item-3');
 
-    if (nextButton) {
-        nextButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            moveToNextSlide();
-        });
-    }
+        if (activeItem && this.indicators.length > 0) {
+            const activeIndex = activeItem.getAttribute('data-index');
 
-    // Add listeners for indicators
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', function () {
-            moveToSlide(index);
-        });
-    });
-
-    // Add touch/swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    galleryContainer.addEventListener(
-        'touchstart',
-        function (e) {
-            touchStartX = e.changedTouches[0].screenX;
-        },
-        false
-    );
-
-    galleryContainer.addEventListener(
-        'touchend',
-        function (e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        },
-        false
-    );
-
-    function handleSwipe() {
-        const minSwipeDistance = 50;
-        if (touchEndX < touchStartX - minSwipeDistance) {
-            // Swipe left, go to next slide
-            moveToNextSlide();
-        } else if (touchEndX > touchStartX + minSwipeDistance) {
-            // Swipe right, go to previous slide
-            moveToPrevSlide();
+            this.indicators.forEach((indicator) => {
+                indicator.classList.remove('active');
+                if (indicator.getAttribute('data-index') === activeIndex) {
+                    indicator.classList.add('active');
+                }
+            });
         }
-    }
-
-    // Add keyboard navigation
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowLeft') {
-            moveToPrevSlide();
-        } else if (e.key === 'ArrowRight') {
-            moveToNextSlide();
-        }
-    });
-
-    // Initialize the gallery
-    updateGallery();
-}
-
-// Update indicator dots to show active slide
-function updateIndicators() {
-    const indicators = document.querySelectorAll('.gallery-indicator');
-    const activeItem = document.querySelector('.gallery-item-3');
-
-    if (activeItem && indicators.length > 0) {
-        const activeIndex = activeItem.getAttribute('data-index');
-
-        indicators.forEach((indicator) => {
-            indicator.classList.remove('active');
-            if (indicator.getAttribute('data-index') === activeIndex) {
-                indicator.classList.add('active');
-            }
-        });
     }
 }
 
 // ------------------------------------------------------------------
-// POPUP FUNCTIONALITY
+// INITIALIZATION
 // ------------------------------------------------------------------
 
-function initPopup() {
-    // Select popup elements
-    const popupOverlay = document.querySelector('.popup-overlay');
-    const popupContent = document.querySelector('.popup-content');
-    const popupTitle = document.querySelector('.popup-title');
-    const popupText = document.querySelector('.popup-text');
-    const popupClose = document.querySelector('.popup-close');
-
-    // Add click event to all service card buttons
-    document.querySelectorAll('.gallery-item-button').forEach((button) => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            // Get content from data attributes
-            const title = this.getAttribute('data-title');
-            const content = this.getAttribute('data-content');
-
-            // Populate and show popup
-            popupTitle.textContent = title;
-            popupText.innerHTML = content;
-            popupOverlay.classList.add('active');
-
-            // Prevent body scrolling when popup is open
-            document.body.style.overflow = 'hidden';
-        });
-    });
-
-    // Close popup when X is clicked
-    if (popupClose) {
-        popupClose.addEventListener('click', closePopup);
-    }
-
-    // Close popup when clicking outside content
-    if (popupOverlay) {
-        popupOverlay.addEventListener('click', function (e) {
-            if (e.target === popupOverlay) {
-                closePopup();
-            }
-        });
-    }
-
-    // Close popup with Escape key
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
-            closePopup();
-        }
-    });
-
-    // Function to close popup
-    function closePopup() {
-        popupOverlay.classList.remove('active');
-
-        // Re-enable body scrolling
-        document.body.style.overflow = '';
-
-        // Clear content after animation completes
-        setTimeout(() => {
-            popupTitle.textContent = '';
-            popupText.innerHTML = '';
-        }, 300);
-    }
-}
+document.addEventListener('DOMContentLoaded', function () {
+    const popupManager = new PopupManager();
+    const carousel = new Carousel();
+});
