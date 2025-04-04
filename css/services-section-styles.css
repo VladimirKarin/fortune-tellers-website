@@ -1,22 +1,26 @@
 /* Services Section */
 
+/* Services Section */
 .services-section {
     padding: 9.6rem 0;
     text-align: center;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column; /* Changed to column to accommodate heading */
     align-items: center;
     background: linear-gradient(
         100deg,
         rgb(236, 213, 213) 0%,
         rgb(50, 112, 118) 100%
     );
+    /* Gradient background for the section */
 }
 
 .gallery {
     width: 100%;
+    /* Full width for the gallery */
 }
+
 .gallery-container {
     display: flex;
     align-items: center;
@@ -24,6 +28,7 @@
     margin: 0 auto;
     max-width: 100rem;
     position: relative;
+    /* Container for the gallery items with fixed height */
 }
 
 .gallery-item {
@@ -35,12 +40,14 @@
     z-index: 0;
     border-radius: 15px;
     background-size: contain;
+    /* Base styling for all gallery items */
 }
 
 .gallery-item-1 {
     left: 15%;
     opacity: 0.4;
     transform: translateX(-50%);
+    /* Styling for the leftmost item (small and semi-transparent) */
 }
 
 .gallery-item-2,
@@ -49,11 +56,13 @@
     opacity: 0.8;
     width: 38rem;
     z-index: 1;
+    /* Styling for items adjacent to the center (medium size and more visible) */
 }
 
 .gallery-item-2 {
     left: 30%;
     transform: translateX(-50%);
+    /* Position for the second item from left */
 }
 
 .gallery-item-3 {
@@ -66,104 +75,102 @@
     transform: translateX(-50%);
     width: 43rem;
     z-index: 2;
+    /* Styling for the center item (largest, fully visible, with shadow) */
 }
 
 .gallery-item-4 {
     left: 70%;
     transform: translateX(-50%);
+    /* Position for the second item from right */
 }
 
 .gallery-item-5 {
     left: 85%;
     opacity: 0.4;
     transform: translateX(-50%);
+    /* Styling for the rightmost item (small and semi-transparent) */
 }
 
+/* Controls section for navigation buttons */
 .gallery-controls {
     display: flex;
     justify-content: center;
-    margin-top: 2.5rem 0;
+    margin: 2.5rem 0;
     height: 10rem;
+    align-items: center;
+    /* Container for the navigation buttons, centered with proper spacing */
 }
 
+/* Base styling for control buttons */
 .gallery-controls-button {
     background-color: transparent;
     border: 0;
     cursor: pointer;
-    font-size: 3rem;
-    margin: 0 5rem;
-    padding: 0 1.2rem;
-    text-transform: capitalize;
-}
-
-.gallery-controls-button:focus {
-    outline: none;
-}
-
-.gallery-controls-previous {
+    font-size: 2rem;
+    font-family: var(--font-secondary);
+    margin: 0 2rem;
+    padding: 1rem 1.5rem;
     position: relative;
+    text-transform: capitalize;
+    color: var(--color-text);
+    transition: all 0.3s ease;
+    /* Style for buttons with text and positioning */
 }
 
+/* Previous button styling with left arrow */
 .gallery-controls-previous::before {
-    border: solid #000;
-    border-width: 0 0.5rem 0.5rem 0;
+    border: solid var(--color-text);
+    border-width: 0 0.3rem 0.3rem 0;
     content: '';
     display: inline-block;
-    height: 0.5rem;
-    left: 0.3rem;
-    padding: 1rem;
+    height: 0.3rem;
+    left: -1rem;
+    padding: 0.5rem;
     position: absolute;
-    top: 25;
+    top: 50%;
     transform: rotate(135deg) translateY(-50%);
     transition: left 0.15s ease-in-out;
-    width: 0.5rem;
+    width: 0.3rem;
+    /* Creates the left-pointing arrow with CSS border trick */
 }
 
+/* Hover effect for the previous button arrow */
 .gallery-controls-previous:hover::before {
-    left: -4rem;
+    left: -1.5rem;
+    /* Moves the arrow further left on hover for interactive feel */
 }
 
-.gallery-controls-next {
-    position: relative;
-}
-
+/* Next button styling with right arrow */
 .gallery-controls-next::before {
-    border: solid #000;
-    border-width: 0 0.5rem 0.5rem 0;
+    border: solid var(--color-text);
+    border-width: 0 0.3rem 0.3rem 0;
     content: '';
     display: inline-block;
-    height: 0.5rem;
-    padding: 1rem;
+    height: 0.3rem;
+    padding: 0.5rem;
     position: absolute;
-    right: -3rem;
-    top: 45;
+    right: -1rem;
+    top: 50%;
     transform: rotate(-45deg) translateY(-50%);
     transition: right 0.15s ease-in-out;
-    width: 0.5rem;
+    width: 0.3rem;
+    /* Creates the right-pointing arrow with CSS border trick */
 }
 
+/* Hover effect for the next button arrow */
 .gallery-controls-next:hover::before {
-    right: -4rem;
+    right: -1.5rem;
+    /* Moves the arrow further right on hover for interactive feel */
 }
 
-.gallery-nav {
-    bottom: -1.5rem;
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-    position: absolute;
-    width: 100%;
+/* Button hover state for text */
+.gallery-controls-button:hover {
+    color: var(--color-highlight);
+    /* Changes text color on hover */
 }
 
-.gallery-nav li {
-    background: #fff;
-    border-radius: 50%;
-    height: 1rem;
-    width: 1rem;
-    margin: 0 1.6rem;
-}
-
-.galery-nav li .galery-nav-selected {
-    background: #555;
+/* Remove default button focus outline */
+.gallery-controls-button:focus {
+    outline: none;
+    /* Removes browser default focus outline */
 }
