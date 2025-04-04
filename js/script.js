@@ -77,28 +77,40 @@ function showPopup(content) {
 }
 
 // ------------------------------------------------------------------
+// CAROUSEL AND POPUP FUNCTIONALITY
+// ------------------------------------------------------------------
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Carousel
+    initCarousel();
+
+    // Initialize Popup System
+    initPopup();
+
+    // Initialize Indicators
+    updateIndicators();
+});
+
+// ------------------------------------------------------------------
 // CAROUSEL FUNCTIONALITY
 // ------------------------------------------------------------------
 
-// Initialize the carousel functionality when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function () {
-    // Select the carousel elements from the DOM
-    const galleryContainer = document.querySelector('.gallery-container'); // Container holding all slides
-    const galleryItems = document.querySelectorAll('.gallery-item'); // All individual gallery images
-    const prevButton = document.querySelector('.gallery-controls-previous'); // Previous slide button
-    const nextButton = document.querySelector('.gallery-controls-next'); // Next slide button
+function initCarousel() {
+    // Select the carousel elements
+    const galleryContainer = document.querySelector('.gallery-container');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const prevButton = document.querySelector('.gallery-controls-previous');
+    const nextButton = document.querySelector('.gallery-controls-next');
+    const indicators = document.querySelectorAll('.gallery-indicator');
 
-    // Convert NodeList of gallery items to Array for easier manipulation
-    // NodeList doesn't have all Array methods, so convert for more flexibility
+    // Convert NodeList to Array
     const itemsArray = Array.from(galleryItems);
+    let currentIndex = 0; // Track the center item's index
 
-    /**
-     * Updates the gallery display by applying the correct classes to each item
-     * This sets the position, size, and opacity of each image based on its position in the array
-     */
+    // Function to update the gallery display
     function updateGallery() {
-        // First remove all position classes from all items to start fresh
-        itemsArray.forEach((item) => {
+        itemsArray.forEach((item, index) => {
+            // Remove all position classes
             item.classList.remove(
                 'gallery-item-1',
                 'gallery-item-2',
@@ -106,59 +118,190 @@ document.addEventListener('DOMContentLoaded', function () {
                 'gallery-item-4',
                 'gallery-item-5'
             );
+
+            // Calculate position based on relative index to the current center
+            let position =
+                (index - currentIndex + itemsArray.length) % itemsArray.length;
+
+            // Only show 5 items
+            if (position < 5) {
+                item.classList.add(`gallery-item-${position + 1}`);
+                item.style.opacity = ''; // Reset to CSS value
+            } else {
+                item.style.opacity = '0';
+            }
         });
 
-        // Add the appropriate position class to each of the first 5 items
-        // gallery-item-3 is the center/featured item, 1 & 5 are the edges
-        for (let i = 0; i < 5 && i < itemsArray.length; i++) {
-            itemsArray[i].classList.add(`gallery-item-${i + 1}`);
-            itemsArray[i].style.opacity = ''; // Reset to use CSS-defined opacity
-        }
-
-        // Hide any items beyond the first 5 (if there are more than 5)
-        for (let i = 5; i < itemsArray.length; i++) {
-            itemsArray[i].style.opacity = '0';
-        }
+        // Update indicators
+        updateIndicators();
     }
 
-    /**
-     * Moves the carousel to the next slide (right direction)
-     * Takes the first item and moves it to the end, shifting everything else left
-     */
+    // Function to move to next slide
     function moveToNextSlide() {
-        // Remove first element and add it to the end
-        const firstItem = itemsArray.shift(); // Remove first item from array
-        itemsArray.push(firstItem); // Add it to the end of array
-        updateGallery(); // Update the visual display
+        currentIndex =
+            (currentIndex - 1 + itemsArray.length) % itemsArray.length;
+        updateGallery();
     }
 
-    /**
-     * Moves the carousel to the previous slide (left direction)
-     * Takes the last item and moves it to the beginning, shifting everything else right
-     */
+    // Function to move to previous slide
     function moveToPrevSlide() {
-        // Remove last element and add it to the beginning
-        const lastItem = itemsArray.pop(); // Remove last item from array
-        itemsArray.unshift(lastItem); // Add it to the beginning of array
-        updateGallery(); // Update the visual display
+        currentIndex = (currentIndex + 1) % itemsArray.length;
+        updateGallery();
     }
 
-    // Add click event listener to the previous button
+    // Function to move to specific slide
+    function moveToSlide(index) {
+        currentIndex = index;
+        updateGallery();
+    }
+
+    // Add listeners for previous and next buttons
     if (prevButton) {
         prevButton.addEventListener('click', function (e) {
-            e.preventDefault(); // Prevent any default button behavior
-            moveToPrevSlide(); // Move to previous slide when clicked
+            e.preventDefault();
+            moveToPrevSlide();
         });
     }
 
-    // Add click event listener to the next button
     if (nextButton) {
         nextButton.addEventListener('click', function (e) {
-            e.preventDefault(); // Prevent any default button behavior
-            moveToNextSlide(); // Move to next slide when clicked
+            e.preventDefault();
+            moveToNextSlide();
         });
     }
 
-    // Initialize the gallery on page load to ensure proper display
+    // Add listeners for indicators
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', function () {
+            moveToSlide(index);
+        });
+    });
+
+    // Add touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    galleryContainer.addEventListener(
+        'touchstart',
+        function (e) {
+            touchStartX = e.changedTouches[0].screenX;
+        },
+        false
+    );
+
+    galleryContainer.addEventListener(
+        'touchend',
+        function (e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        },
+        false
+    );
+
+    function handleSwipe() {
+        const minSwipeDistance = 50;
+        if (touchEndX < touchStartX - minSwipeDistance) {
+            // Swipe left, go to next slide
+            moveToNextSlide();
+        } else if (touchEndX > touchStartX + minSwipeDistance) {
+            // Swipe right, go to previous slide
+            moveToPrevSlide();
+        }
+    }
+
+    // Add keyboard navigation
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') {
+            moveToPrevSlide();
+        } else if (e.key === 'ArrowRight') {
+            moveToNextSlide();
+        }
+    });
+
+    // Initialize the gallery
     updateGallery();
-});
+}
+
+// Update indicator dots to show active slide
+function updateIndicators() {
+    const indicators = document.querySelectorAll('.gallery-indicator');
+    const activeItem = document.querySelector('.gallery-item-3');
+
+    if (activeItem && indicators.length > 0) {
+        const activeIndex = activeItem.getAttribute('data-index');
+
+        indicators.forEach((indicator) => {
+            indicator.classList.remove('active');
+            if (indicator.getAttribute('data-index') === activeIndex) {
+                indicator.classList.add('active');
+            }
+        });
+    }
+}
+
+// ------------------------------------------------------------------
+// POPUP FUNCTIONALITY
+// ------------------------------------------------------------------
+
+function initPopup() {
+    // Select popup elements
+    const popupOverlay = document.querySelector('.popup-overlay');
+    const popupContent = document.querySelector('.popup-content');
+    const popupTitle = document.querySelector('.popup-title');
+    const popupText = document.querySelector('.popup-text');
+    const popupClose = document.querySelector('.popup-close');
+
+    // Add click event to all service card buttons
+    document.querySelectorAll('.gallery-item-button').forEach((button) => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Get content from data attributes
+            const title = this.getAttribute('data-title');
+            const content = this.getAttribute('data-content');
+
+            // Populate and show popup
+            popupTitle.textContent = title;
+            popupText.innerHTML = content;
+            popupOverlay.classList.add('active');
+
+            // Prevent body scrolling when popup is open
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Close popup when X is clicked
+    if (popupClose) {
+        popupClose.addEventListener('click', closePopup);
+    }
+
+    // Close popup when clicking outside content
+    if (popupOverlay) {
+        popupOverlay.addEventListener('click', function (e) {
+            if (e.target === popupOverlay) {
+                closePopup();
+            }
+        });
+    }
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
+            closePopup();
+        }
+    });
+
+    // Function to close popup
+    function closePopup() {
+        popupOverlay.classList.remove('active');
+
+        // Re-enable body scrolling
+        document.body.style.overflow = '';
+
+        // Clear content after animation completes
+        setTimeout(() => {
+            popupTitle.textContent = '';
+            popupText.innerHTML = '';
+        }, 300);
+    }
+}
