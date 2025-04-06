@@ -82,7 +82,7 @@ button {
     font-weight: 500;
     color: var(--main-orange-shade);
     text-transform: uppercase;
-    margin-bottom: 1.6rem;
+    /* margin-bottom: 1.6rem; */
     letter-spacing: 0.75px;
 }
 
