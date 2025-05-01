@@ -1,0 +1,28 @@
+/* Countdown Section */
+.countdown-section {
+    padding: 9.6rem 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timebox {
+    display: flex;
+    gap: 9rem;
+    margin-top: 3.2rem;
+}
+
+.time {
+    text-align: center;
+}
+
+.time h3 {
+    font-size: 7.4rem;
+    font-weight: 400;
+}
+
+.time p {
+    font-size: 1.4rem;
+}
