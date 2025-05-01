@@ -1,3 +1,5 @@
+import { timer } from './countdown-clock.js';
+
 // ------------------------------------------------------------------
 // MOBILE NAVIGATION FUNCTIONALITY
 // ------------------------------------------------------------------
@@ -278,34 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Countdown clock
 // ------------------------------------------------------------------
 
-const Days = document.getElementById('days');
-const Hours = document.getElementById('hours');
-const Minutes = document.getElementById('minutes');
-const Seconds = document.getElementById('seconds');
-
-const targetDate = new Date('May 31 2025 00:00:00').getTime();
-console.log(targetDate);
-
-function timer() {
-    const currentDate = new Date().getTime();
-    const timeDifference = targetDate - currentDate; //miliseconds
-
-    const days = Math.floor(timeDifference / 1000 / 60 / 60 / 24);
-    const hours = Math.floor(timeDifference / 1000 / 60 / 60) % 24;
-    const minutes = Math.floor(timeDifference / 1000 / 60) % 60;
-    const seconds = Math.floor(timeDifference / 1000) % 60;
-
-    Days.innerHTML = days;
-    Hours.innerHTML = hours;
-    Minutes.innerHTML = minutes;
-    Seconds.innerHTML = seconds;
-
-    if (timeDifference < 0) {
-        Days.innerHTML = '00';
-        Hours.innerHTML = '00';
-        Minutes.innerHTML = '00';
-        Seconds.innerHTML = '00';
-    }
-}
-
-setInterval(timer, 1000);
+window.onload = function () {
+    timer();
+    setInterval(timer, 1000);
+};
