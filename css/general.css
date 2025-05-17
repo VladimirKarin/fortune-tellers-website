@@ -115,3 +115,7 @@ button {
 .footer-grid {
     grid-template-columns: 30% 60%;
 }
+
+.hidden {
+    display: none !important;
+}

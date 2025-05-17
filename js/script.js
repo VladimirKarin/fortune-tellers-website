@@ -284,3 +284,27 @@ window.onload = function () {
     timer();
     setInterval(timer, 1000);
 };
+
+// ------------------------------------------------------------------
+// Price Section Logic
+// ------------------------------------------------------------------
+
+let isExpanded = false;
+const priceSection = document.querySelector('.prices-grid');
+const priceSectionButton = document.querySelector('.prices__button');
+
+priceSectionButton.addEventListener('click', () => {
+    if (!isExpanded) {
+        priceSection.classList.remove('.hidden');
+        priceSection.style.transition = 'all 0.5s ease-in-out;';
+        priceSection.style.tranform.origin = 'left top';
+        priceSection.style.transform = 'scaleY(0)';
+        isExpanded = true;
+    } else {
+        priceSection.classList.add('.hidden');
+        priceSection.style.transition = 'all 0.5s ease-in-out;';
+        priceSection.style.tranform.origin = 'left top';
+        priceSection.style.transform = 'scaleY(1)';
+        isExpanded = false;
+    }
+});
