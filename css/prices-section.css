@@ -15,16 +15,37 @@
     display: block;
     margin: 0 auto;
     margin-top: 3.2rem;
+
+    background: var(--color-highlight);
+    color: var(--color-card-bg);
+    transition: all 0.8s;
+    border: 3px solid var(--color-footer-bg);
 }
 
+.prices__button:hover {
+    background: var(--color-footer-bg);
+    border: 2px solid var(--color-highlight);
+    background-image: var(--btn-gradient);
+}
+
+/* When not visible */
 .prices-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(25rem, 1fr));
     gap: 3.2rem;
-    /* border: 3px solid var(--color-footer-bg); */
     max-width: 110rem;
     margin: 0 auto;
     padding: 3.2rem;
+
+    height: 0;
+    overflow: hidden;
+    transition: height 1s ease-in-out, opacity 0.75s ease;
+    opacity: 0;
+}
+
+/* When visible */
+.prices-grid.visible {
+    opacity: 1;
 }
 
 .prices-card {

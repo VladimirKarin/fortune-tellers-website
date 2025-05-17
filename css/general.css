@@ -69,6 +69,11 @@ button {
     border-radius: 2rem 0 1.5rem 0;
 }
 
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
 .heading-secondary {
     font-size: 3rem;
     line-height: 1.2;
@@ -114,8 +119,4 @@ button {
 
 .footer-grid {
     grid-template-columns: 30% 60%;
-}
-
-.hidden {
-    display: none !important;
 }

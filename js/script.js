@@ -289,22 +289,37 @@ window.onload = function () {
 // Price Section Logic
 // ------------------------------------------------------------------
 
-let isExpanded = false;
 const priceSection = document.querySelector('.prices-grid');
 const priceSectionButton = document.querySelector('.prices__button');
+let isVisible = false;
 
 priceSectionButton.addEventListener('click', () => {
-    if (!isExpanded) {
-        priceSection.classList.remove('.hidden');
-        priceSection.style.transition = 'all 0.5s ease-in-out;';
-        priceSection.style.tranform.origin = 'left top';
-        priceSection.style.transform = 'scaleY(0)';
-        isExpanded = true;
+    if (!isVisible) {
+        //Showing section
+        priceSection.classList.add('visible');
+        const fullHeight = priceSection.scrollHeight;
+        priceSection.style.height = fullHeight + 'px';
+
+        // Clear height after transition to let content be flexible
+        priceSection.addEventListener('transitioned', function removeHeight() {
+            priceSection.style.height = auto;
+            priceSection.removeEventListener('transitioned', removeHeight);
+        });
+
+        //Changing button name
+        priceSectionButton.textContent = 'Спрятать цены';
     } else {
-        priceSection.classList.add('.hidden');
-        priceSection.style.transition = 'all 0.5s ease-in-out;';
-        priceSection.style.tranform.origin = 'left top';
-        priceSection.style.transform = 'scaleY(1)';
-        isExpanded = false;
+        //Hiding section
+        const currentHeight = priceSection.scrollHeight;
+        //Setting currentHeight to start transition
+        priceSection.style.height = currentHeight + 'px';
+
+        //Force flow
+        void priceSection.offsetHeight;
+        priceSection.style.height = '0';
+        priceSection.classList.remove('visible');
+
+        priceSectionButton.textContent = 'Показать цены';
     }
+    isVisible = !isVisible;
 });
