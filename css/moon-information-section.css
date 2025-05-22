@@ -2,3 +2,14 @@
     padding: 9.6rem 0;
     text-align: center;
 }
+.moon-information-section__text__description {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    color: var(--color-text);
+    margin: 2.4rem 0;
+}
+
+.moon-information-section__component__picture__img {
+    width: 25%;
+    height: auto;
+}
