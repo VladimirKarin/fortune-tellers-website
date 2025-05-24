@@ -122,7 +122,7 @@ button:hover {
 .grid {
     display: grid;
     row-gap: 9.6rem;
-    column-gap: 6.4rem;
+    gap: 6.4rem;
 }
 
 .grid--2-cols {
@@ -139,4 +139,12 @@ button:hover {
 
 .footer-grid {
     grid-template-columns: 30% 60%;
+}
+
+.span-all {
+    grid-column: span 2;
+}
+
+.moon-information-section__component__information__content__title {
+    font-size: 2rem;
 }
