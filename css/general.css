@@ -1,7 +1,8 @@
 :root {
     /* Colors */
     /* Background Colors */
-    --color-main-background: #ece5f5;
+    /* --color-main-background: #ece5f5; */
+    /* --color-main-background: #9b7bbf; */
     --color-header-bg: rgba(249, 248, 252, 0.7);
     --color-section-bg: #f2b4b4;
     --color-card-bg: #f4f3f2;
@@ -9,9 +10,25 @@
 
     /* Text Colors */
     --color-text: #4a3f70;
+    --color-light-text: #ece5f5;
     --color-highlight: #8e44ad;
 
     /* Gradients */
+    --main-background-gradient: linear-gradient(
+        to bottom,
+        #4a206f,
+        #542778,
+        #5d2f80,
+        #673689,
+        #713e92,
+        #713e92,
+        #713e92,
+        #713e92,
+        #673689,
+        #5d2f80,
+        #542778,
+        #4a206f
+    );
     --color-gradient-start: #f2e7f2;
     --color-gradient-end: #b68cb8;
     --btn-gradient: linear-gradient(
@@ -44,8 +61,11 @@ body {
     flex-direction: column;
     line-height: 1;
     font-weight: 400;
-    color: var(--color-text);
-    background: var(--color-main-background);
+    color: var(--color-light-text);
+}
+
+.backgroud-gradient-container {
+    background-image: var(--main-background-gradient);
 }
 
 h1,
@@ -77,8 +97,8 @@ button:hover {
 .heading-secondary {
     font-size: 3rem;
     line-height: 1.2;
-    /* margin-bottom: 2.4rem; */
     text-transform: uppercase;
+    /* color: var(--color-light-text); */
 }
 
 .subheading {

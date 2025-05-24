@@ -1,7 +1,5 @@
 .footer {
-    background-color: var(--color-footer-bg);
     padding: 3.2rem;
-    /* text-align: center; */
     font-size: 1.4rem;
     color: var(--color-card-bg);
 }
@@ -12,7 +10,6 @@
 }
 
 .footer__text {
-    /* margin-bottom: 3.2rem; */
     display: flex;
     flex-direction: column;
 }
