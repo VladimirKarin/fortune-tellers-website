@@ -365,3 +365,114 @@ const moonPhaseInformation = {
         moonPhaseRitualsLithuanian: ['Dešimtas', 'Vienuoliktas', 'Dviliktas'],
     },
 };
+
+async function fetchMoonPhase() {
+    const apiKey =
+        process.env.WEATHER_API_KEY || '5ab4e849d02243d4884135415252205';
+    const location = 'Klaipeda';
+    const date = new Date().toISOString().split('T')[0];
+
+    const url = `https://api.weatherapi.com/v1/astronomy.json?key=${apiKey}&q=${location}&dt=${date}`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(
+                `API request failed with status ${response.status}`
+            );
+        }
+        const data = await response.json();
+        const moonPhase = data.astronomy.astro.moon_phase;
+        const moonIllumination = data.astronomy.astro.moon_illumination;
+
+        console.log(`data: ${JSON.stringify(data, null, 2)}`);
+        console.log(`Moon Phase: ${moonPhase}`);
+        console.log(`Moon Illumination: ${moonIllumination}%`);
+
+        // Proceed to map the moonPhase to your internal data structure
+        // and update your UI accordingly
+    } catch (error) {
+        console.error('Error fetching moon phase data:', error);
+        const errorMessageElement = document.querySelector('.moon-phase-error');
+        if (errorMessageElement) {
+            errorMessageElement.textContent =
+                'Unable to fetch moon phase data. Please try again later.';
+            errorMessageElement.style.display = 'block';
+        }
+        // Handle errors gracefully in your application
+    }
+}
+
+fetchMoonPhase();
+
+// ------------------------------------------------------------------
+// STEP 3: Process the API response and determine internal moon phase key
+// ------------------------------------------------------------------
+
+// Ensure `data` is fetched before accessing it
+fetchMoonPhase().then((data) => {
+    const moonPhase = data.astronomy.astro.moon_phase; // e.g., "Waxing Crescent"
+
+    // ✅ 2. Map API moon phase names to internal simplified keys
+    const phaseKeyMap = {
+        'New Moon': 'newMoon',
+        'Waxing Crescent': 'waxingMoon',
+        'First Quarter': 'waxingMoon',
+        'Waxing Gibbous': 'waxingMoon',
+        'Full Moon': 'fullMoon',
+        'Waning Gibbous': 'waningMoon',
+        'Last Quarter': 'waningMoon',
+        'Waning Crescent': 'waningMoon',
+    };
+
+    // ✅ 3. Use the mapped key to get the correct internal data
+    const internalKey = phaseKeyMap[moonPhase];
+
+    // ✅ 4. Optional: Handle unexpected or missing mappings
+    if (!internalKey) {
+        console.error(`Unknown moon phase from API: "${moonPhase}"`);
+        // Optionally show a default message/image or fallback phase
+    }
+
+    // ✅ 5. Use internal key to fetch localized moon data
+    const moonData = moonPhaseInformation[internalKey];
+
+    // ✅ Example usage — you can now access everything:
+    console.log(moonData.moonPhaseNameRussian); // e.g., "Растущая луна"
+    console.log(moonData.moonPhaseImage); // image path for waxing moon
+    console.log(moonData.moonPhaseRitualsLithuanian); // Rituals array
+});
+// For example:
+// const data = await fetchMoonDataFromAPI();
+
+// ✅ 1. Extract the moon phase name from the API response
+const moonPhase = data.astronomy.astro.moon_phase; // e.g., "Waxing Crescent"
+
+// ✅ 2. Map API moon phase names to internal simplified keys
+const phaseKeyMap = {
+    'New Moon': 'newMoon',
+    'Waxing Crescent': 'waxingMoon',
+    'First Quarter': 'waxingMoon',
+    'Waxing Gibbous': 'waxingMoon',
+    'Full Moon': 'fullMoon',
+    'Waning Gibbous': 'waningMoon',
+    'Last Quarter': 'waningMoon',
+    'Waning Crescent': 'waningMoon',
+};
+
+// ✅ 3. Use the mapped key to get the correct internal data
+const internalKey = phaseKeyMap[moonPhase];
+
+// ✅ 4. Optional: Handle unexpected or missing mappings
+if (!internalKey) {
+    console.error(`Unknown moon phase from API: "${moonPhase}"`);
+    // Optionally show a default message/image or fallback phase
+}
+
+// ✅ 5. Use internal key to fetch localized moon data
+const moonData = moonPhaseInformation[internalKey];
+
+// ✅ Example usage — you can now access everything:
+console.log(moonData.moonPhaseNameRussian); // e.g., "Растущая луна"
+console.log(moonData.moonPhaseImage); // image path for waxing moon
+console.log(moonData.moonPhaseRitualsLithuanian); // Rituals array
