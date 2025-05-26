@@ -323,3 +323,45 @@ priceSectionButton.addEventListener('click', () => {
     }
     isVisible = !isVisible;
 });
+
+// ------------------------------------------------------------------
+// Moon Phase Section Logic
+// ------------------------------------------------------------------
+
+const moonPhaseInformation = {
+    newMoon: {
+        moonPhaseNameRussian: 'Новолуние',
+        moonPhaseNameLithuanian: 'Jaunatis',
+        moonPhaseImage:
+            './img/moon-information-pictures/moon-phase-1-new-moon.png',
+        moonPhaseRitualsRussian: ['Первый', 'Второй', 'Третий'],
+        moonPhaseRitualsLithuanian: ['Pirmas', 'Antras', 'Trecias'],
+    },
+
+    waxingMoon: {
+        moonPhaseNameRussian: 'Растущая луна',
+        moonPhaseNameLithuanian: 'Augantis mėnulis',
+        moonPhaseImage:
+            './img/moon-information-pictures/moon-phase-2-waxing-moon.png',
+        moonPhaseRitualsRussian: ['Четвёртый', 'Пятый', 'Шестой'],
+        moonPhaseRitualsLithuanian: ['Ketvirtas', 'Penktas', 'Šestas'],
+    },
+
+    fullMoon: {
+        moonPhaseNameRussian: 'Полная луна',
+        moonPhaseNameLithuanian: 'Pilnatis',
+        moonPhaseImage:
+            './img/moon-information-pictures/moon-phase-3-full-moon.png',
+        moonPhaseRitualsRussian: ['Седьмой', 'Восьмой', 'Девятый'],
+        moonPhaseRitualsLithuanian: ['Septintas', 'Aštuntas', 'Devyntas'],
+    },
+
+    waningMoon: {
+        moonPhaseNameRussian: 'Убывающая луна',
+        moonPhaseNameLithuanian: 'Delčia',
+        moonPhaseImage:
+            './img/moon-information-pictures/moon-phase-4-waning-moon.png',
+        moonPhaseRitualsRussian: ['Десятый', 'Одиннадцатый', 'Двенадцатый'],
+        moonPhaseRitualsLithuanian: ['Dešimtas', 'Vienuoliktas', 'Dviliktas'],
+    },
+};
