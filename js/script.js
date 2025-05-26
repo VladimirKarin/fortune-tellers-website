@@ -403,8 +403,6 @@ async function fetchMoonPhase() {
     }
 }
 
-fetchMoonPhase();
-
 // ------------------------------------------------------------------
 // STEP 3: Process the API response and determine internal moon phase key
 // ------------------------------------------------------------------
