@@ -367,8 +367,7 @@ const moonPhaseInformation = {
 };
 
 async function fetchMoonPhase() {
-    const apiKey =
-        process.env.WEATHER_API_KEY || '5ab4e849d02243d4884135415252205';
+    const apiKey = process.env.WEATHER_API_KEY;
     const location = 'Klaipeda';
     const date = new Date().toISOString().split('T')[0];
 
