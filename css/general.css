@@ -132,6 +132,9 @@ button:hover {
 .grid--3-cols {
     grid-template-columns: repeat(3, 1fr);
 }
+.grid--7-cols {
+    grid-template-columns: repeat(7, 1fr);
+}
 
 .grid--center-v {
     align-items: center;
