@@ -185,7 +185,7 @@ function showMoonError(message) {
 function getLocalMoonPhase() {
     // Simple local calculation as fallback (less accurate but works offline)
     const today = new Date();
-    const knownNewMoon = new Date('2024-01-11'); // Known new moon date
+    const knownNewMoon = new Date('2025-05-27'); // Known new moon date
     const lunarCycle = 29.53058867; // days
 
     const daysSinceNewMoon = (today - knownNewMoon) / (1000 * 60 * 60 * 24);
