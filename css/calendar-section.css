@@ -3,4 +3,50 @@
     padding: 3.2rem 0;
     text-align: center;
     width: 100%;
+    border: 3px solid black;
+}
+.calendar-component {
+    width: 100%;
+    border: 3px solid black;
+}
+
+.calendar-header {
+    width: 100%;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem;
+}
+.calendar-grid {
+    width: 100%;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem;
+}
+
+.calendar-weekdays {
+    width: 100%;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3rem;
+}
+
+.calendar-days {
+    width: 100%;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3rem;
 }
