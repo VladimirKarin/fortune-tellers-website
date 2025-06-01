@@ -176,43 +176,42 @@ initializeMoonPhase();
 // Calendar Section Logic
 // ------------------------------------------------------------------
 
-// Get the current date and time
+// ------------------------------------------------------------------
+// Calendar Section Logic
+// ------------------------------------------------------------------
+
+// Get today's date
 const currentDate = new Date();
 
-// Format the current date as 'YYYY-MM-DD' for consistent comparison
-const modifiedCurrentDate = currentDate.toISOString().split('T')[0]; // used in isToday
+// Format today's date to 'YYYY-MM-DD' (used to check if a given day is "today")
+const modifiedCurrentDate = currentDate.toISOString().split('T')[0];
 
-// Extract parts of the current date
-const currentYear = currentDate.getFullYear(); // example: 2025
-const currentMonth = currentDate.getMonth() + 1; // 0-based, so +1 gives correct human month
-const currentDayOfTheWeek = currentDate.getDay(); // 0 (Sunday) to 6 (Saturday)
+// Extract parts of today's date
+const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth() + 1; // +1 to convert from 0-based index
+const currentDayOfTheWeek = currentDate.getDay(); // Sunday = 0
 const currentDayOfTheMonth = currentDate.getDate(); // 1–31
 
-// Used to determine which month is being viewed — this can change via navigation buttons later
+// Initialize state: these will change when navigating months
 let viewedYear = currentYear;
 let viewedMonth = currentMonth;
 
-// First day of viewed month (e.g., if viewedMonth = 6, this returns day index for June 1)
-const firstDayOfMonth = new Date(viewedYear, viewedMonth - 1, 1).getDay(); // 0–6
+// -------------------------
+// Trip data (used in highlight)
+// -------------------------
 
-// Total days in the viewed month (e.g., June = 30)
-const lastDayOfMonth = new Date(viewedYear, viewedMonth, 0).getDate(); // used only here
-
-// Store this weekday for aligning grid later
-let startWeekday = firstDayOfMonth;
-
-// Shift Sunday (0) to 6 and Monday (1) to 0 for ISO-style weeks
-const correctedStartWeekday = startWeekday === 0 ? 6 : startWeekday - 1;
-
-// Days in month (same as lastDayOfMonth — maybe consolidate later?)
-const daysInMonth = new Date(viewedYear, viewedMonth, 0).getDate(); // <= maybe just reuse lastDayOfMonth
+const tripDates = {
+    city: 'Vilnius',
+    start: '2025-06-21',
+    end: '2025-06-24',
+};
 
 // -------------------------
 // Utility functions
 // -------------------------
 
-function isWeekend(dayOfTheWeek) {
-    return dayOfTheWeek === 6 || dayOfTheWeek === 0;
+function isWeekend(dayOfWeek) {
+    return dayOfWeek === 6 || dayOfWeek === 0; // Saturday or Sunday
 }
 
 function isToday(day) {
@@ -224,112 +223,141 @@ function isTrip(day) {
     return formatted >= tripDates.start && formatted <= tripDates.end;
 }
 
-function isViewedMonth(day) {
-    return (
-        day.getMonth() === viewedMonth - 1 && day.getFullYear() === viewedYear
-    );
+function isViewedMonth(day, year, month) {
+    return day.getMonth() === month - 1 && day.getFullYear() === year;
 }
 
 // -------------------------
-// Trip data
+// Weekday labels in two languages
 // -------------------------
 
-const tripDates = {
-    city: 'Vilnius',
-    start: '2025-06-21',
-    end: '2025-06-24',
+const weekdays = {
+    russian: [
+        'Понедельник',
+        'Вторник',
+        'Среда',
+        'Четверг',
+        'Пятница',
+        'Суббота',
+        'Воскресенье',
+    ],
+    lithuanian: [
+        'Pirmadienis',
+        'Antradienis',
+        'Treciadienis',
+        'Ketvirtadienis',
+        'Penktadienis',
+        'Sestadienis',
+        'Sekmadienis',
+    ],
 };
-
-// -------------------------
-// Generate visible days array
-// -------------------------
-
-let days = [];
-
-// Step 1: Add days from the previous month to align with correct weekday start
-for (let i = correctedStartWeekday - 1; i >= 0; i--) {
-    days.push(new Date(viewedYear, viewedMonth - 1, 0 - i)); // go backwards from last day of prev month
-}
-
-// Step 2: Add all days of current viewed month
-for (let i = 1; i <= daysInMonth; i++) {
-    days.push(new Date(viewedYear, viewedMonth - 1, i));
-}
-
-// Step 3: Add extra days from next month to make full 6 weeks (42 calendar squares)
-let nextMonthDays = 42 - days.length;
-for (let i = 1; i <= nextMonthDays; i++) {
-    days.push(new Date(viewedYear, viewedMonth, i));
-}
-
-// -------------------------
-// Add metadata to each day
-// -------------------------
-
-const modifiedDays = days.map((day) => {
-    const formatted = day.toISOString().split('T')[0];
-
-    return {
-        date: formatted,
-        day: day.getDate(),
-        weekend: isWeekend(day.getDay()) ? 'calendar-day--weekend' : '',
-        today: isToday(day) ? 'calendar-day--today' : '',
-        trip: isTrip(day) ? 'calendar-day--travel' : '',
-        otherMonth: !isViewedMonth(day) ? 'calendar-day--other-month' : '',
-    };
-});
-
-// Optional debug
-// console.log(modifiedDays[28]); // preview a random day
 
 // ------------------------------------------------------------------
 // Rendering Calendar UI
 // ------------------------------------------------------------------
 
-// Weekday names (Russian and Lithuanian)
-const weekdaysRus = [
-    'Понедельник',
-    'Вторник',
-    'Среда',
-    'Четверг',
-    'Пятница',
-    'Суббота',
-    'Воскресенье',
-];
+function renderCalendar() {
+    const calendarWeekdays = document.querySelector('.calendar-weekdays');
+    const calendarDays = document.querySelector('.calendar-days');
 
-const weekdaysLt = [
-    'Pirmadienis',
-    'Antradienis',
-    'Treciadienis',
-    'Ketvirtadienis',
-    'Penktadienis',
-    'Sestadienis',
-    'Sekmadienis',
-];
+    calendarWeekdays.innerHTML = '';
+    calendarDays.innerHTML = '';
 
-const calendarWeekdays = document.querySelector('.calendar-weekdays');
+    // Weekday labels (change to weekdays.lithuanian if needed)
+    weekdays.russian.forEach((weekday) => {
+        const weekdayElement = document.createElement('div');
+        weekdayElement.className = 'calendar-weekday';
+        weekdayElement.textContent = weekday;
+        calendarWeekdays.appendChild(weekdayElement);
+    });
 
-// Render weekday labels (you’re currently using Russian)
-weekdaysRus.forEach((weekday) => {
-    const weekdayElement = document.createElement('div');
-    weekdayElement.className = 'calendar-weekday';
-    weekdayElement.textContent = weekday;
-    calendarWeekdays.appendChild(weekdayElement);
+    // ----------- Date Grid Calculation Logic -----------
+
+    // First day of viewed month: 0 (Sun) to 6 (Sat)
+    const firstDayOfMonth = new Date(viewedYear, viewedMonth - 1, 1).getDay();
+
+    // Convert so that Monday = 0, Sunday = 6 (ISO-like)
+    const correctedStartWeekday =
+        firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
+
+    // Days in the viewed month
+    const daysInMonth = new Date(viewedYear, viewedMonth, 0).getDate();
+
+    // Step 1: Previous month's tail
+    const days = [];
+    for (let i = correctedStartWeekday - 1; i >= 0; i--) {
+        days.push(new Date(viewedYear, viewedMonth - 1, 0 - i));
+    }
+
+    // Step 2: Current month
+    for (let i = 1; i <= daysInMonth; i++) {
+        days.push(new Date(viewedYear, viewedMonth - 1, i));
+    }
+
+    // Step 3: Fill up to 42 days (6 weeks)
+    let nextMonthDays = 42 - days.length;
+    for (let i = 1; i <= nextMonthDays; i++) {
+        days.push(new Date(viewedYear, viewedMonth, i));
+    }
+
+    // ----------- Add Metadata to Each Day -----------
+
+    const modifiedDays = days.map((day) => {
+        const formatted = day.toISOString().split('T')[0];
+
+        return {
+            date: formatted,
+            day: day.getDate(),
+            weekend: isWeekend(day.getDay()) ? 'calendar-day--weekend' : '',
+            today: isToday(day) ? 'calendar-day--today' : '',
+            trip: isTrip(day) ? 'calendar-day--travel' : '',
+            otherMonth: !isViewedMonth(day, viewedYear, viewedMonth)
+                ? 'calendar-day--other-month'
+                : '',
+        };
+    });
+
+    // ----------- Render Each Day -----------
+
+    modifiedDays.forEach((day) => {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+
+        // Conditionally add highlight classes
+        if (day.today) dayElement.classList.add(day.today);
+        if (day.weekend) dayElement.classList.add(day.weekend);
+        if (day.trip) dayElement.classList.add(day.trip);
+        if (day.otherMonth) dayElement.classList.add(day.otherMonth);
+
+        dayElement.textContent = day.day;
+        calendarDays.appendChild(dayElement);
+    });
+}
+
+// ------------------------------------------------------------------
+// Calendar Navigation Buttons
+// ------------------------------------------------------------------
+
+const previousButton = document.querySelector('.calendar-button--previous');
+const nextButton = document.querySelector('.calendar-button--next');
+
+previousButton.addEventListener('click', () => {
+    viewedMonth--;
+    if (viewedMonth < 1) {
+        viewedMonth = 12;
+        viewedYear--;
+    }
+    renderCalendar(); // regenerate everything based on new month
 });
 
-// Render each day of the calendar
-const calendarDays = document.querySelector('.calendar-days');
-
-modifiedDays.forEach((day) => {
-    const dayElement = document.createElement('div');
-    dayElement.className = 'calendar-day';
-
-    // Add classes conditionally
-    if (day.today) dayElement.classList.add(day.today); // highlights today
-    if (day.weekend) dayElement.classList.add(day.weekend); // Sat/Sun
-    if (day.trip) dayElement.classList.add(day.trip); // trip period
-    if (day.otherMonth) dayElement.classList.add(day.otherMonth); // padding days
-
-    dayElement.textContent = day.day;
-    calendarDays.appendChild(dayElement);
+nextButton.addEventListener('click', () => {
+    viewedMonth++;
+    if (viewedMonth > 12) {
+        viewedMonth = 1;
+        viewedYear++;
+    }
+    renderCalendar(); // regenerate everything based on new month
 });
+
+// Initial render
+renderCalendar();
