@@ -1,19 +1,33 @@
 /* Calendar section */
 .calendar-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     padding: 3.2rem 0;
     text-align: center;
     width: 100%;
-
-    border: 3px solid black;
+    margin: 3.2rem 0;
 }
+
+.heading-secondary,
+.section-calendar__description {
+    text-align: center;
+}
+
+.section-calendar__description {
+    font-size: 1.4rem;
+}
+
 .calendar-component {
     max-width: 50%;
-    margin: 0 auto;
+    margin: 3.2rem auto;
     padding: 2rem;
     font-size: 2rem;
     text-transform: uppercase;
-
-    border: 3px solid black;
+    color: var(--color-text);
+    background-color: var(--color-card-bg);
 }
 
 .calendar-header {
@@ -24,8 +38,6 @@
     gap: 3rem;
     padding: 2rem;
     margin-bottom: 1rem;
-
-    border: 3px solid black;
 }
 
 .calendar-button {
@@ -37,6 +49,7 @@
 
 .calendar-button ion-icon {
     font-size: 3rem;
+    color: var(--color-text);
 }
 
 .calendar-button--previous:hover,
@@ -51,18 +64,60 @@
     transition: 0.6s ease;
 }
 
-.calendar-grid {
-    width: 100%;
-    border: 3px solid black;
-    padding: 2rem;
+.calendar-weekdays,
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+}
+
+.calendar-weekday,
+.calendar-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
 }
 
 .calendar-weekdays {
-    width: 100%;
-    border: 3px solid black;
+    font-size: 1rem;
+    padding: 1rem;
+}
+
+.calendar-weekday {
+    height: 3rem;
+    border-bottom: 1px solid var(--color-text);
+    font-weight: 700;
 }
 
 .calendar-days {
-    width: 100%;
-    border: 3px solid black;
+    font-size: 1.6rem;
+    padding: 1rem;
+}
+
+.calendar-day {
+    height: 5rem;
+    font-weight: 700;
+
+    border: 1px solid var(--color-text);
+}
+
+.calendar-weekday--weekend {
+    color: rgb(249, 59, 182);
+    border-bottom: 1px solid rgb(249, 59, 182);
+}
+
+.calendar-day--weekend {
+    background-color: rgb(249, 59, 182);
+    color: #000;
+}
+
+.calendar-day__travel {
+    background-color: hsla(279, 83%, 70%, 1);
+    color: #000;
+}
+
+.calendar-day--today {
+    border: 3px solid var(--color-text);
 }
