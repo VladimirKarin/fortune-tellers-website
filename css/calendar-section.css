@@ -103,6 +103,10 @@
     border: 1px solid var(--color-text);
 }
 
+.calendar-day--today {
+    border: 3px solid var(--color-text);
+}
+
 .calendar-weekday--weekend {
     color: rgb(249, 59, 182);
     border-bottom: 1px solid rgb(249, 59, 182);
@@ -116,8 +120,4 @@
 .calendar-day__travel {
     background-color: hsla(279, 83%, 70%, 1);
     color: #000;
-}
-
-.calendar-day--today {
-    border: 3px solid var(--color-text);
 }
