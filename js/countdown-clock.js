@@ -9,7 +9,7 @@ export function timer() {
         return;
     }
 
-    const targetDate = new Date('May 31 2025 00:00:00').getTime();
+    const targetDate = new Date('June 30 2025 00:00:00').getTime();
     const currentDate = new Date().getTime();
     const timeDifference = targetDate - currentDate; //milliseconds
 
