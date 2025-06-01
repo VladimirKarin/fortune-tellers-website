@@ -180,96 +180,113 @@ initializeMoonPhase();
 const currentDate = new Date();
 
 // Format the current date as 'YYYY-MM-DD' for consistent comparison
-const modifiedCurrentDate = currentDate.toISOString().split('T')[0];
+const modifiedCurrentDate = currentDate.toISOString().split('T')[0]; // used in isToday
 
-// Extract the current year
-const currentYear = currentDate.getFullYear();
+// Extract parts of the current date
+const currentYear = currentDate.getFullYear(); // example: 2025
+const currentMonth = currentDate.getMonth() + 1; // 0-based, so +1 gives correct human month
+const currentDayOfTheWeek = currentDate.getDay(); // 0 (Sunday) to 6 (Saturday)
+const currentDayOfTheMonth = currentDate.getDate(); // 1–31
 
-// Extract the current month (add +1 because getMonth() is zero-based)
-const currentMonth = currentDate.getMonth() + 1;
-
-// Get the current day of the week (0 = Sunday, 6 = Saturday)
-const currentDayOfTheWeek = currentDate.getDay();
-
-// Get the current day of the month (1–31)
-const currentDayOfTheMonth = currentDate.getDate();
-
-// Define the viewed year and month — can be changed when navigating the calendar
+// Used to determine which month is being viewed — this can change via navigation buttons later
 let viewedYear = currentYear;
 let viewedMonth = currentMonth;
 
-// Get the weekday of the first day of the viewed month
-const firstDayOfMonth = new Date(viewedYear, viewedMonth - 1, 1).getDay();
+// First day of viewed month (e.g., if viewedMonth = 6, this returns day index for June 1)
+const firstDayOfMonth = new Date(viewedYear, viewedMonth - 1, 1).getDay(); // 0–6
 
-// Get the total number of days in the viewed month
-const lastDayOfMonth = new Date(viewedYear, viewedMonth, 0).getDate();
+// Total days in the viewed month (e.g., June = 30)
+const lastDayOfMonth = new Date(viewedYear, viewedMonth, 0).getDate(); // used only here
 
-// Save the starting weekday for calendar alignment
+// Store this weekday for aligning grid later
 let startWeekday = firstDayOfMonth;
 
-// Adjust so that Monday = 0, Sunday = 6 (ISO-like)
+// Shift Sunday (0) to 6 and Monday (1) to 0 for ISO-style weeks
 const correctedStartWeekday = startWeekday === 0 ? 6 : startWeekday - 1;
 
-// Store the number of days in the viewed month
-const daysInMonth = new Date(viewedYear, viewedMonth, 0).getDate();
+// Days in month (same as lastDayOfMonth — maybe consolidate later?)
+const daysInMonth = new Date(viewedYear, viewedMonth, 0).getDate(); // <= maybe just reuse lastDayOfMonth
 
-// Utility: Check if a given date falls on a weekend (Saturday or Sunday)
+// -------------------------
+// Utility functions
+// -------------------------
+
 function isWeekend(dayOfTheWeek) {
     return dayOfTheWeek === 6 || dayOfTheWeek === 0;
 }
 
-// Utility: Check if a given date is today
 function isToday(day) {
     return day.toISOString().split('T')[0] === modifiedCurrentDate;
 }
 
-// Utility: Check if a given date is within the trip period
 function isTrip(day) {
     const formatted = day.toISOString().split('T')[0];
     return formatted >= tripDates.start && formatted <= tripDates.end;
 }
 
-// Define trip information (used to highlight travel dates)
+function isViewedMonth(day) {
+    return (
+        day.getMonth() === viewedMonth - 1 && day.getFullYear() === viewedYear
+    );
+}
+
+// -------------------------
+// Trip data
+// -------------------------
+
 const tripDates = {
     city: 'Vilnius',
     start: '2025-06-21',
     end: '2025-06-24',
 };
 
-// Array to hold all Date objects (including previous/next month padding)
+// -------------------------
+// Generate visible days array
+// -------------------------
+
 let days = [];
 
-// Step 1: Add trailing days from the previous month to align the calendar grid
+// Step 1: Add days from the previous month to align with correct weekday start
 for (let i = correctedStartWeekday - 1; i >= 0; i--) {
-    days.push(new Date(viewedYear, viewedMonth - 1, 0 - i));
+    days.push(new Date(viewedYear, viewedMonth - 1, 0 - i)); // go backwards from last day of prev month
 }
 
-// Step 2: Add all days of the current month
+// Step 2: Add all days of current viewed month
 for (let i = 1; i <= daysInMonth; i++) {
     days.push(new Date(viewedYear, viewedMonth - 1, i));
 }
 
-// Step 3: Add days from the next month to complete 6 rows (42 days total)
+// Step 3: Add extra days from next month to make full 6 weeks (42 calendar squares)
 let nextMonthDays = 42 - days.length;
 for (let i = 1; i <= nextMonthDays; i++) {
     days.push(new Date(viewedYear, viewedMonth, i));
 }
 
-// Map all Date objects to structured data for rendering (with extra metadata)
+// -------------------------
+// Add metadata to each day
+// -------------------------
+
 const modifiedDays = days.map((day) => {
     const formatted = day.toISOString().split('T')[0];
+
     return {
-        date: formatted, // formatted date string (YYYY-MM-DD)
-        day: day.getDate(), // day number for display
-        weekend: isWeekend(day.getDay()) ? 'calendar-day--weekend' : '', // CSS class for weekend
-        today: isToday(day) ? 'calendar-day--today' : '', // CSS class for today
-        trip: isTrip(day) ? 'calendar-day--travel' : '', // CSS class for trip days
+        date: formatted,
+        day: day.getDate(),
+        weekend: isWeekend(day.getDay()) ? 'calendar-day--weekend' : '',
+        today: isToday(day) ? 'calendar-day--today' : '',
+        trip: isTrip(day) ? 'calendar-day--travel' : '',
+        otherMonth: !isViewedMonth(day) ? 'calendar-day--other-month' : '',
     };
 });
 
-// Optional: Uncomment to preview a specific day’s metadata
-console.log(modifiedDays[28]);
+// Optional debug
+// console.log(modifiedDays[28]); // preview a random day
 
+// ------------------------------------------------------------------
+// Rendering Calendar UI
+// ------------------------------------------------------------------
+
+// Weekday names (Russian and Lithuanian)
 const weekdaysRus = [
     'Понедельник',
     'Вторник',
@@ -290,11 +307,29 @@ const weekdaysLt = [
     'Sekmadienis',
 ];
 
-const calendarWeekdays = document.querySelectorAll('.calendar-weekdays');
+const calendarWeekdays = document.querySelector('.calendar-weekdays');
 
-weekdaysRus.map((weekday) => {
+// Render weekday labels (you’re currently using Russian)
+weekdaysRus.forEach((weekday) => {
     const weekdayElement = document.createElement('div');
     weekdayElement.className = 'calendar-weekday';
     weekdayElement.textContent = weekday;
     calendarWeekdays.appendChild(weekdayElement);
+});
+
+// Render each day of the calendar
+const calendarDays = document.querySelector('.calendar-days');
+
+modifiedDays.forEach((day) => {
+    const dayElement = document.createElement('div');
+    dayElement.className = 'calendar-day';
+
+    // Add classes conditionally
+    if (day.today) dayElement.classList.add(day.today); // highlights today
+    if (day.weekend) dayElement.classList.add(day.weekend); // Sat/Sun
+    if (day.trip) dayElement.classList.add(day.trip); // trip period
+    if (day.otherMonth) dayElement.classList.add(day.otherMonth); // padding days
+
+    dayElement.textContent = day.day;
+    calendarDays.appendChild(dayElement);
 });
