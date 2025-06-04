@@ -176,10 +176,6 @@ initializeMoonPhase();
 // Calendar Section Logic
 // ------------------------------------------------------------------
 
-// ------------------------------------------------------------------
-// Calendar Section Logic
-// ------------------------------------------------------------------
-
 // Get today's date
 const currentDate = new Date();
 
@@ -227,6 +223,7 @@ function isViewedMonth(day, year, month) {
     return day.getMonth() === month - 1 && day.getFullYear() === year;
 }
 
+// 🆕 Provide translations for month names
 const months = {
     russian: [
         'Январь',
@@ -294,7 +291,7 @@ function renderCalendar() {
     calendarWeekdays.innerHTML = '';
     calendarDays.innerHTML = '';
 
-    // Weekday labels (change to weekdays.lithuanian if needed)
+    // 🆕 Render weekday labels (can switch language here)
     weekdays.russian.forEach((weekday) => {
         const weekdayElement = document.createElement('div');
         weekdayElement.className = 'calendar-weekday';
@@ -304,28 +301,26 @@ function renderCalendar() {
 
     // ----------- Date Grid Calculation Logic -----------
 
-    // First day of viewed month: 0 (Sun) to 6 (Sat)
     const firstDayOfMonth = new Date(viewedYear, viewedMonth - 1, 1).getDay();
 
-    // Convert so that Monday = 0, Sunday = 6 (ISO-like)
+    // 🆕 Adjust so Monday is 0, Sunday is 6
     const correctedStartWeekday =
         firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
 
-    // Days in the viewed month
     const daysInMonth = new Date(viewedYear, viewedMonth, 0).getDate();
 
-    // Step 1: Previous month's tail
+    // Step 1: Previous month's tail days
     const days = [];
     for (let i = correctedStartWeekday - 1; i >= 0; i--) {
         days.push(new Date(viewedYear, viewedMonth - 1, 0 - i));
     }
 
-    // Step 2: Current month
+    // Step 2: Current month days
     for (let i = 1; i <= daysInMonth; i++) {
         days.push(new Date(viewedYear, viewedMonth - 1, i));
     }
 
-    // Step 3: Fill up to 42 days (6 weeks)
+    // Step 3: Next month filler to complete 6 weeks (max 42 cells)
     let nextMonthDays = 42 - days.length;
     for (let i = 1; i <= nextMonthDays; i++) {
         days.push(new Date(viewedYear, viewedMonth, i));
@@ -354,7 +349,7 @@ function renderCalendar() {
         const dayElement = document.createElement('div');
         dayElement.className = 'calendar-day';
 
-        // Conditionally add highlight classes
+        // 🆕 Apply class names conditionally
         if (day.today) dayElement.classList.add(day.today);
         if (day.weekend) dayElement.classList.add(day.weekend);
         if (day.trip) dayElement.classList.add(day.trip);
@@ -372,6 +367,7 @@ function renderCalendar() {
 const previousButton = document.querySelector('.calendar-button--previous');
 const nextButton = document.querySelector('.calendar-button--next');
 
+// 🆕 Navigate to previous month
 previousButton.addEventListener('click', () => {
     viewedMonth--;
     if (viewedMonth < 1) {
@@ -381,6 +377,7 @@ previousButton.addEventListener('click', () => {
     renderCalendar(); // regenerate everything based on new month
 });
 
+// 🆕 Navigate to next month
 nextButton.addEventListener('click', () => {
     viewedMonth++;
     if (viewedMonth > 12) {
@@ -390,11 +387,12 @@ nextButton.addEventListener('click', () => {
     renderCalendar(); // regenerate everything based on new month
 });
 
+// 🆕 Set header labels
 const calendarMonth = document.querySelector('.month-name');
 calendarMonth.textContent = months.russian[viewedMonth - 1];
 
 const calendarYear = document.querySelector('.month-year');
 calendarYear.textContent = viewedYear;
 
-// Initial render
+// 🆕 Initial rendering
 renderCalendar();
