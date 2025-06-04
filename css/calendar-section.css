@@ -27,6 +27,8 @@
     font-size: 2rem;
     text-transform: uppercase;
     color: var(--color-text);
+    /* background-color: #9572ac; */
+
     background-color: var(--color-card-bg);
 }
 
@@ -117,7 +119,7 @@
     color: #000;
 }
 
-.calendar-day__travel {
+.calendar-day--travel {
     background-color: hsla(279, 83%, 70%, 1);
     color: #000;
 }

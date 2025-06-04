@@ -202,8 +202,8 @@ let viewedMonth = currentMonth;
 
 const tripDates = {
     city: 'Vilnius',
-    start: '2025-06-21',
-    end: '2025-06-24',
+    start: '2025-06-05',
+    end: '2025-06-13',
 };
 
 // -------------------------
@@ -226,6 +226,37 @@ function isTrip(day) {
 function isViewedMonth(day, year, month) {
     return day.getMonth() === month - 1 && day.getFullYear() === year;
 }
+
+const months = {
+    russian: [
+        'Январь',
+        'Февраль',
+        'Март',
+        'Апрель',
+        'Май',
+        'Июнь',
+        'Июль',
+        'Август',
+        'Сентябрь',
+        'Октябрь',
+        'Ноябрь',
+        'Декабрь',
+    ],
+    lithuanian: [
+        'Sausis',
+        'Vasaris',
+        'Kovas',
+        'Balandis',
+        'Gegužė',
+        'Birželis',
+        'Liepa',
+        'Rugpjūtis',
+        'Rugsėjis',
+        'Spalis',
+        'Lapkritis',
+        'Gruodis',
+    ],
+};
 
 // -------------------------
 // Weekday labels in two languages
@@ -358,6 +389,12 @@ nextButton.addEventListener('click', () => {
     }
     renderCalendar(); // regenerate everything based on new month
 });
+
+const calendarMonth = document.querySelector('.month-name');
+calendarMonth.textContent = months.russian[viewedMonth - 1];
+
+const calendarYear = document.querySelector('.month-year');
+calendarYear.textContent = viewedYear;
 
 // Initial render
 renderCalendar();
