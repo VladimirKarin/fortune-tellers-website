@@ -197,8 +197,9 @@ let viewedMonth = currentMonth;
 // -------------------------
 
 const tripDates = {
-    city: 'Vilnius',
-    start: '2025-06-05',
+    cityRussian: 'Вильнюс',
+    cityLithuanian: 'Vilnius',
+    start: '2025-06-01',
     end: '2025-06-13',
 };
 
@@ -337,6 +338,7 @@ function renderCalendar() {
             weekend: isWeekend(day.getDay()) ? 'calendar-day--weekend' : '',
             today: isToday(day) ? 'calendar-day--today' : '',
             trip: isTrip(day) ? 'calendar-day--travel' : '',
+            tripCity: isTrip(day) ? tripDates.cityRussian : '',
             otherMonth: !isViewedMonth(day, viewedYear, viewedMonth)
                 ? 'calendar-day--other-month'
                 : '',
@@ -355,7 +357,23 @@ function renderCalendar() {
         if (day.trip) dayElement.classList.add(day.trip);
         if (day.otherMonth) dayElement.classList.add(day.otherMonth);
 
-        dayElement.textContent = day.day;
+        // dayElement.textContent = day.day;
+        // calendarDays.appendChild(dayElement);
+
+        // Add main number
+        const dayNumber = document.createElement('div');
+        dayNumber.className = 'calendar-day__number';
+        dayNumber.textContent = day.day;
+        dayElement.appendChild(dayNumber);
+
+        // 🆕 Add city label if it's a travel day
+        if (day.trip) {
+            const cityLabel = document.createElement('div');
+            cityLabel.className = 'calendar-day__city';
+            cityLabel.textContent = day.tripCity;
+            dayElement.appendChild(cityLabel);
+        }
+
         calendarDays.appendChild(dayElement);
     });
 
