@@ -358,6 +358,13 @@ function renderCalendar() {
         dayElement.textContent = day.day;
         calendarDays.appendChild(dayElement);
     });
+
+    // 🆕 Set header labels
+    const calendarMonth = document.querySelector('.month-name');
+    calendarMonth.textContent = months.russian[viewedMonth - 1];
+
+    const calendarYear = document.querySelector('.month-year');
+    calendarYear.textContent = viewedYear;
 }
 
 // ------------------------------------------------------------------
@@ -386,13 +393,6 @@ nextButton.addEventListener('click', () => {
     }
     renderCalendar(); // regenerate everything based on new month
 });
-
-// 🆕 Set header labels
-const calendarMonth = document.querySelector('.month-name');
-calendarMonth.textContent = months.russian[viewedMonth - 1];
-
-const calendarYear = document.querySelector('.month-year');
-calendarYear.textContent = viewedYear;
 
 // 🆕 Initial rendering
 renderCalendar();
