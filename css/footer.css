@@ -1,7 +1,14 @@
 .footer-section {
     height: 100vh;
     padding: 3.2rem 0;
-    text-align: center;
     width: 100%;
-    margin: 3.2rem 0;
+    margin: 3.2rem auto;
+}
+
+.footer_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+    margin-bottom: 3.2rem;
 }
