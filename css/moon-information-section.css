@@ -1,7 +1,3 @@
-.moon-information-section {
-    padding: 9.6rem 0;
-    text-align: center;
-}
 .moon-information-section__text__description {
     font-size: 1.6rem;
     line-height: 1.4;
@@ -22,9 +18,6 @@
     max-height: 25rem;
     height: auto;
     object-fit: contain;
-    /* width: 50%;
-    height: auto;
-    display: flex; */
 }
 
 .moon-information-section__component {

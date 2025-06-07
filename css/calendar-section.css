@@ -1,4 +1,8 @@
 /* Calendar section */
+.section-calendar {
+    padding: 6.4 0;
+}
+
 .calendar-section {
     display: flex;
     flex-direction: column;

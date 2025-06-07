@@ -78,6 +78,11 @@ p {
     font-family: var(--font-secondary);
 }
 
+.section-padding {
+    padding: 6.4rem 0;
+    text-align: center;
+}
+
 /* Reusable Classes */
 
 button {

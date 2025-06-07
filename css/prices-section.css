@@ -1,5 +1,4 @@
 .prices-section {
-    padding: 3.2rem 0;
     background-color: var(--color-main-background);
     display: flex;
     flex-direction: column;
@@ -35,7 +34,7 @@
     gap: 3.2rem;
     max-width: 110rem;
     margin: 0 auto;
-    padding: 3.2rem;
+    padding: 0 3.2rem;
 
     height: 0;
     overflow: hidden;
