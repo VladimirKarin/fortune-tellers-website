@@ -1,5 +1,6 @@
 /* 11d. Волновое свечение */
 
+/* Исправленная анимированная разделительная линия (вариант 1) */
 .divider-glow-wave {
     width: 70%;
     height: 4px;
@@ -10,8 +11,9 @@
     overflow: hidden;
     text-align: center;
     margin: 4.4rem auto;
-    /* Добавляем базовое свечение для равномерности */
+    /* Добавляем базовое свечение для равномерности и пульсацию */
     box-shadow: 0 0 8px rgba(142, 68, 173, 0.3);
+    animation: basePulse 1.5s ease-in-out infinite alternate;
 }
 
 .divider-glow-wave::before {
@@ -28,7 +30,7 @@
         rgba(198, 155, 221, 0.2) 50%,
         transparent 70%
     );
-    animation: glowWave 4s linear infinite;
+    animation: glowWave 3s linear infinite;
     /* Добавляем смешивание для более мягкого эффекта */
     mix-blend-mode: screen;
 }
@@ -45,5 +47,17 @@
     100% {
         transform: translateX(100%) rotate(360deg) scale(0.8);
         opacity: 0.3;
+    }
+}
+
+/* Анимация базовой пульсации */
+@keyframes basePulse {
+    0% {
+        box-shadow: 0 0 8px rgba(142, 68, 173, 0.3),
+            0 0 16px rgba(155, 89, 182, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(142, 68, 173, 0.6),
+            0 0 25px rgba(155, 89, 182, 0.4), 0 0 35px rgba(198, 155, 221, 0.2);
     }
 }
