@@ -1,0 +1,38 @@
+/* 11d. Волновое свечение */
+.divider-glow-wave {
+    width: 70%;
+    height: 3px;
+    background: var(--btn-gradient);
+    border: none;
+    margin: 40px 0;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.divider-glow-wave::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(142, 68, 173, 0.8) 0%,
+        rgba(155, 89, 182, 0.6) 30%,
+        transparent 70%
+    );
+    animation: glowWave 4s linear infinite;
+}
+
+@keyframes glowWave {
+    0% {
+        transform: translateX(-100%) rotate(0deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(360deg);
+    }
+}
