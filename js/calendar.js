@@ -49,8 +49,8 @@ const UPDATE_INTERVAL = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 const tripDates = {
     cityRussian: 'Вильнюс',
     cityLithuanian: 'Vilnius',
-    start: '2025-06-01',
-    end: '2025-06-13',
+    start: '2025-07-25',
+    end: '2025-08-01',
 };
 
 // ------------------------------------------------------------------
