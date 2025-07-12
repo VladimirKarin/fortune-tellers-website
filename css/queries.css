@@ -4,19 +4,19 @@
 @media (min-width: 1201px) {
 }
 
-/* Styles for laptops and large tablets */
+/* LARGE DESKTOP (992px – 1200px) */
 @media (min-width: 992px) and (max-width: 1200px) {
     .hero__heading-primary {
         font-size: 3.2rem;
-        margin-top: 4.8rem 0 0 0;
+        margin: 4rem 0 1rem 0;
     }
-
     .hero__text {
         font-size: 1.8rem;
+        max-width: 70%;
+        padding: 0 2rem;
     }
-
     .hero__buttons {
-        padding: 3.2rem 6.4rem;
+        gap: 2rem;
     }
 
     .main-nav__list__link:link,
@@ -52,21 +52,23 @@
     }
 }
 
-/* Adjust further for larger devices */
+/* TABLET LANDSCAPE (768px – 991px) */
 @media (min-width: 768px) and (max-width: 991px) {
+    .hero-section {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
     .hero__heading-primary {
-        font-size: 3.2rem;
-        margin: 6.4rem 0 1.6rem 3.2rem;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
     }
-
     .hero__text {
-        width: 60%;
-        font-size: 1.8rem;
-        padding: 3.2rem;
+        font-size: 2rem;
+        max-width: 80%;
+        padding: 0 1.5rem;
     }
-
     .hero__buttons {
-        padding: 3.2rem;
+        gap: 1.5rem;
     }
 
     header {
@@ -93,20 +95,22 @@
         height: 1.2px; /* Adjust the thickness if necessary */
     }
 }
-/* Styles for tablets */
+/* TABLET PORTRAIT (600px – 767px) */
 @media (min-width: 600px) and (max-width: 767px) {
     .hero__heading-primary {
-        font-size: 2.4rem;
+        font-size: 2.6rem;
+        text-align: left;
     }
-
+    .hero__content {
+        text-align: left;
+        padding: 0 1rem;
+    }
     .hero__text {
-        width: 70%;
         font-size: 1.6rem;
-        padding: 3.2rem;
+        margin-bottom: 2rem;
     }
-
     .hero__buttons {
-        padding: 3.2rem;
+        justify-content: left;
     }
 
     .hero__button {
@@ -171,25 +175,39 @@
     }
 }
 
-/* Styles for small screens */
+/* LARGE MOBILE (450px – 599px) */
 @media (min-width: 450px) and (max-width: 599px) {
     .hero__heading-primary {
-        margin-bottom: 0;
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     .hero__text {
-        width: 80%;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
     }
-
     .hero__buttons {
-        padding: 1.6rem 0 3.2rem 2.4rem;
+        flex-direction: column;
+        gap: 1rem;
     }
     .hero__button {
         font-size: 1.2rem;
         padding: 1.2rem 1.6rem;
     }
 }
-/* Styles smalles screens */
+
+/* SMALL MOBILE (<= 449px) */
 @media (min-width: 320px) and (max-width: 449px) {
+    .hero__heading-primary {
+        font-size: 1.8rem;
+    }
+    .hero__text {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    .hero__buttons {
+        gap: 0.8rem;
+    }
+    .hero__button {
+        padding: 0.8rem 1.2rem;
+        font-size: 1.6rem;
+    }
 }
