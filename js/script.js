@@ -7,38 +7,28 @@ import { renderCalendar, startAutoUpdate } from './calendar.js';
 // MOBILE NAVIGATION FUNCTIONALITY
 // ------------------------------------------------------------------
 
-// Toggle mobile navigation menu visibility
-const toggleMobileNav = () => {
-    const headerElement = document.querySelector('header');
-    headerElement.classList.toggle('nav-open');
-};
-
-// Add click event to the mobile navigation button
+const headerElement = document.querySelector('.header');
 const navigationButtonElement = document.querySelector('.btn-mobile-nav');
-navigationButtonElement.addEventListener('click', toggleMobileNav);
+const navList = document.querySelector('.nav-list');
 
-// Show/hide mobile navigation and toggle between open/close icons
-document
-    .querySelector('.btn-mobile-nav')
-    .addEventListener('click', function () {
-        const nav = document.querySelector('.main-nav');
-        const openIcon = document.querySelector(
-            ".icon-mobile-nav[name='color-wand']"
-        );
-        const closeIcon = document.querySelector(
-            ".icon-mobile-nav[name='close']"
-        );
+navigationButtonElement.addEventListener('click', () => {
+    // toggle aria-expanded
+    const isExpanded =
+        navigationButtonElement.getAttribute('aria-expanded') === 'true';
+    navigationButtonElement.setAttribute('aria-expanded', String(!isExpanded));
 
-        if (nav.style.display === 'block') {
-            nav.style.display = 'none';
-            openIcon.style.display = 'block';
-            closeIcon.style.display = 'none';
-        } else {
-            nav.style.display = 'block';
-            openIcon.style.display = 'none';
-            closeIcon.style.display = 'block';
+    // toggle class
+    headerElement.classList.toggle('nav-open');
+});
+
+navList.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+        if (headerElement.classList.contains('nav-open')) {
+            headerElement.classList.remove('nav-open');
+            navigationButtonElement.setAttribute('aria-expanded', 'false');
         }
     });
+});
 
 // ------------------------------------------------------------------
 // UNIFIED POPUP FUNCTIONALITY

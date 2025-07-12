@@ -36,10 +36,36 @@
 <body>
     <main>
         <!-- Header + NavMenu -->
-        <header class="header sticky">
-            <div class="header__left-side">
+        <header class="header">
+            <a href="#hero" class="logo" aria-label="Перейти на главную страницу">
+                <img src="./img/logoCrop2.png" alt="Логотип" class="logo__img" />
+            </a>
+
+            <nav class="main-nav" aria-label="Основное навигационное меню">
+                <ul class="nav-list">
+                    <li><a href="#hero">Главная</a></li>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#prices">Цены</a></li>
+                    <li><a href="#moon">Фаза Луны</a></li>
+                    <li><a href="#calendar">Календарь</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <button class="btn-mobile-nav" aria-label="Открыть меню" aria-expanded="false" aria-controls="primary-navigation">
+                <ion-icon name="color-wand" class="icon-mobile-nav open-icon"></ion-icon>
+                <ion-icon name="close" class="icon-mobile-nav close-icon"></ion-icon>
+            </button>
+        </header>
+
+
+
+
+        <!-- <div class="header__left-side">
                 <a href="#">
-                    <img src="./img/logoCrop2.png" class="logo" alt="The logo of the fortune teller">
+                                    <img src="./img/logoCrop2.png" class="logo" alt="The logo of the fortune teller">
+
                 </a>
                 <p class="header__left-side__text">Гадалкина Избушка</p>
             </div>
@@ -50,7 +76,6 @@
                     <li><a href="#services" class="main-nav__list__link" aria-label="Services">Услуги</a></li>
                     <li><a href="#prices" class="main-nav__list__link" aria-label="Prices">Цены</a></li>
                     <li><a href="#moon" class="main-nav__list__link" aria-label="Moon">Лунная фаза</a>
-                        <!-- <li><a href="#testimonials" class="main-nav__list__link" aria-label="Testimonials">Отзывы</a></li> -->
                     <li><a href="#calendar" class="main-nav__list__link" aria-label="Calendar">Календарь</a></li>
                     <li><a href="#contacts" class="main-nav__list__link" aria-label="Contacts">Контакты</a></li>
                 </ul>
@@ -59,8 +84,8 @@
             <button class="btn-mobile-nav" aria-label="Open navigation menu">
                 <ion-icon class="icon-mobile-nav" name="color-wand"></ion-icon>
                 <ion-icon class="icon-mobile-nav" name="close"></ion-icon>
-            </button>
-        </header>
+            </button> -->
+
 
         <!-- Hero Section -->
         <section class="hero-section">
