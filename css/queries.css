@@ -54,6 +54,7 @@
 
 /* TABLET LANDSCAPE (768px – 991px) */
 @media (min-width: 768px) and (max-width: 991px) {
+    /* HERO SECTION */
     .hero-section {
         padding-top: 6rem;
         padding-bottom: 4rem;
@@ -71,6 +72,7 @@
         gap: 1.5rem;
     }
 
+    /* HEADER + NAV */
     header {
         padding: 0 1.2rem;
         gap: 1rem;
@@ -94,9 +96,28 @@
     .main-nav__list__link::after {
         height: 1.2px; /* Adjust the thickness if necessary */
     }
+
+    /* ABOUT ME SECTION */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(2rem, 5vw, 6.4rem);
+    }
+
+    /* Третья карточка будет на отдельной строке и по центру */
+    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
+        /* Занять обе колонки */
+        grid-column: 1 / -1;
+        /* Саму себя выровнять по центру */
+        justify-self: center;
+        /* Опционально: ограничить ширину чуть уже, чем две колонки */
+        max-width: clamp(30rem, 70%, 40rem);
+        min-width: 0; /* защита от «раздувания» при центровке */
+    }
 }
+
 /* TABLET PORTRAIT (600px – 767px) */
 @media (min-width: 600px) and (max-width: 767px) {
+    /* HERO SECTION */
     .hero__heading-primary {
         font-size: 2.6rem;
         text-align: left;
@@ -173,10 +194,17 @@
         width: 100%;
         position: relative;
     }
+
+    /* ABOUT ME SECTION */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(2rem, 5vw, 6.4rem);
+    }
 }
 
 /* LARGE MOBILE (450px – 599px) */
 @media (min-width: 450px) and (max-width: 599px) {
+    /* HERO SECTION */
     .hero__heading-primary {
         font-size: 2.2rem;
     }
@@ -191,6 +219,12 @@
     .hero__button {
         font-size: 1.2rem;
         padding: 1.2rem 1.6rem;
+    }
+
+    /*ABOUT ME SECTION*/
+    .about-me-section .grid--3-cols {
+        grid-template-columns: 1fr;
+        gap: clamp(2rem, 5vw, 4rem);
     }
 }
 
