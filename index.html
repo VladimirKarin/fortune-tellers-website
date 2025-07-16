@@ -128,29 +128,34 @@
             <hr class="divider-glow-wave">
 
             <!-- Countdown Component-->
-            <section class="countdown-section section-padding">
+            <section class="countdown-section section-padding" role="region" aria-labelledby="countdown-heading">
                 <div class="container grid--center-v">
-                    <h2 class="heading-secondary">Бесплатные вопросы через:</h2>
-                    <div class="timebox">
-                        <div class="time">
-                            <h3 id="days">00</h3>
-                            <p>дн.</p>
+                    <h2 id="countdown-heading" class="heading-secondary">Бесплатные вопросы через:</h2>
+                    <div class="timebox" role="timer" aria-live="polite" aria-atomic="true">
+                        <div class="time" role="presentation">
+                            <h3 id="days" aria-label="days remaining">00</h3>
+                            <p aria-hidden="true">дн.</p>
                         </div>
 
-                        <div class="time">
-                            <h3 id="hours">00</h3>
-                            <p>ч.</p>
+                        <div class="time" role="presentation">
+                            <h3 id="hours" aria-label="hours remaining">00</h3>
+                            <p aria-hidden="true">ч.</p>
                         </div>
 
-                        <div class="time">
-                            <h3 id="minutes">00</h3>
-                            <p>мин.</p>
+                        <div class="time" role="presentation">
+                            <h3 id="minutes" aria-label="minutes remaining">00</h3>
+                            <p aria-hidden="true">мин.</p>
                         </div>
 
-                        <div class="time">
-                            <h3 id="seconds">00</h3>
-                            <p>с.</p>
+                        <div class="time" role="presentation">
+                            <h3 id="seconds" aria-label="seconds remaining">00</h3>
+                            <p aria-hidden="true">с.</p>
                         </div>
+                    </div>
+
+                    <!-- Screen reader friendly summary -->
+                    <div class="sr-only" aria-live="polite" id="countdown-summary">
+                        <!-- This will be updated by JavaScript for screen readers -->
                     </div>
                 </div>
             </section>

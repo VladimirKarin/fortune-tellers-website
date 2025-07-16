@@ -14,6 +14,16 @@
         justify-self: initial;
         max-width: clamp(30rem, 90%, 40rem);
     }
+
+    /*COUNTDOWN SECTION*/
+    .timebox {
+        gap: clamp(7rem, 10vw, 12rem);
+        max-width: 1200px; /* Prevent overly wide spacing */
+    }
+
+    .time h3 {
+        font-size: clamp(6rem, 8vw, 8rem);
+    }
 }
 
 /* LARGE DESKTOP (992px – 1200px) */
@@ -75,6 +85,15 @@
         justify-self: initial;
         max-width: clamp(30rem, 90%, 40rem);
     }
+
+    /*COUNTDOWN SECTION*/
+    .timebox {
+        gap: clamp(4rem, 8vw, 8rem);
+    }
+
+    .time h3 {
+        font-size: clamp(5rem, 7vw, 7rem);
+    }
 }
 
 /* TABLET LANDSCAPE (768px – 991px) */
@@ -134,6 +153,19 @@
         justify-self: center;
         max-width: clamp(30rem, 70%, 40rem);
         min-width: 0;
+    }
+
+    /*COUNTDOWN SECTION*/
+    .timebox {
+        gap: clamp(2rem, 6vw, 5rem);
+    }
+
+    .time h3 {
+        font-size: clamp(3.5rem, 8vw, 5.5rem);
+    }
+
+    .time p {
+        font-size: clamp(1.1rem, 2vw, 1.3rem);
     }
 }
 
@@ -229,6 +261,23 @@
         max-width: clamp(30rem, 70%, 40rem);
         min-width: 0;
     }
+
+    /*COUNTDOWN SECTION*/
+    .countdown-section {
+        padding: clamp(1.5rem, 4vw, 3rem) 1rem;
+    }
+
+    .timebox {
+        gap: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .time h3 {
+        font-size: clamp(3rem, 10vw, 4.5rem);
+    }
+
+    .time p {
+        font-size: clamp(1rem, 2.2vw, 1.2rem);
+    }
 }
 
 /* LARGE MOBILE (450px – 599px) */
@@ -262,6 +311,49 @@
         justify-self: initial;
         max-width: clamp(30rem, 90%, 40rem);
     }
+
+    /*COUNTDOWN SECTION*/
+    .countdown-section {
+        padding: clamp(1.5rem, 4vw, 2.5rem) 0.5rem;
+    }
+
+    .timebox {
+        gap: clamp(1rem, 3vw, 2rem);
+    }
+
+    .time h3 {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+    }
+
+    .time p {
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    }
+}
+
+/* Additional mobile-specific improvements */
+@media (max-width: 599px) {
+    .countdown-section h2 {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        text-align: center;
+        margin-bottom: clamp(1rem, 3vw, 2rem);
+    }
+
+    /* Ensure countdown doesn't break on very small screens */
+    .timebox {
+        min-width: 280px; /* Minimum width to prevent extreme compression */
+    }
+
+    /* Better touch targets for mobile */
+    .time {
+        padding: clamp(0.5rem, 2vw, 1rem);
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
+    }
+
+    /* Optional: Add subtle hover effect for better UX */
+    .time:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
 }
 
 /* SMALL MOBILE (<= 449px) */
@@ -292,5 +384,60 @@
         grid-column: initial;
         justify-self: initial;
         max-width: clamp(30rem, 90%, 40rem);
+    }
+
+    /*COUNTDOWN SECTION*/
+    .countdown-section {
+        padding: clamp(1rem, 3vw, 2rem) 0.5rem;
+    }
+
+    .timebox {
+        gap: clamp(0.5rem, 2vw, 1.5rem);
+    }
+
+    .time h3 {
+        font-size: clamp(2rem, 15vw, 3.5rem);
+        letter-spacing: -0.05em; /* Tighter spacing for small screens */
+    }
+
+    .time p {
+        font-size: clamp(0.8rem, 3vw, 1rem);
+        margin-top: clamp(0.3rem, 1vw, 0.8rem);
+    }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .time h3 {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .time {
+        transition: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .countdown-section {
+        color: black;
+        background: white;
+    }
+
+    .timebox {
+        gap: 2rem;
+    }
+
+    .time h3 {
+        font-size: 2rem;
+    }
+
+    .time p {
+        font-size: 1rem;
     }
 }

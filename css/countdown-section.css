@@ -1,27 +1,42 @@
-/* Countdown Section */
+/* Countdown Section - Responsive Improvements */
 .countdown-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: var(--color-light-text);
+    padding: clamp(2rem, 5vw, 4rem) 1rem; /* Added horizontal padding for mobile */
 }
 
 .timebox {
-    display: flex;
-    gap: 9rem;
-    margin-top: 3.2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1rem, 8vw, 9rem);
+    margin-top: clamp(1.6rem, 4vw, 3.2rem);
+    width: 100%;
+    max-width: 100%;
+    justify-items: center; /* Center grid items */
 }
 
 .time {
     text-align: center;
+    min-width: 0; /* Allows grid items to shrink below content size */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .time h3 {
-    font-size: 7.4rem;
+    font-size: clamp(2.4rem, 8vw, 7.4rem);
     font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.02em; /* Tighter letter spacing for better readability */
 }
 
 .time p {
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    margin: clamp(0.5rem, 1vw, 1rem) 0 0 0;
+    opacity: 0.9; /* Slightly muted for better hierarchy */
 }
