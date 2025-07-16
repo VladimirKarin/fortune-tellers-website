@@ -1,7 +1,19 @@
-/* RESPONSIVE STYLES */
+/* RESPONSIVE STYLES - FIXED VERSION */
 
 /* Styles for ultra-wide screens */
 @media (min-width: 1201px) {
+    /* Keep 3-column layout for large screens */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6.4rem;
+    }
+
+    /* Reset any special positioning */
+    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
+        grid-column: initial;
+        justify-self: initial;
+        max-width: clamp(30rem, 90%, 40rem);
+    }
 }
 
 /* LARGE DESKTOP (992px – 1200px) */
@@ -50,6 +62,19 @@
     .main-nav__list {
         gap: 1.2rem;
     }
+
+    /* FIX: Keep 3-column layout for large desktop */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(2rem, 5vw, 6.4rem);
+    }
+
+    /* Reset any special positioning for 3rd card */
+    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
+        grid-column: initial;
+        justify-self: initial;
+        max-width: clamp(30rem, 90%, 40rem);
+    }
 }
 
 /* TABLET LANDSCAPE (768px – 991px) */
@@ -94,7 +119,7 @@
     }
 
     .main-nav__list__link::after {
-        height: 1.2px; /* Adjust the thickness if necessary */
+        height: 1.2px;
     }
 
     /* ABOUT ME SECTION */
@@ -103,15 +128,12 @@
         gap: clamp(2rem, 5vw, 6.4rem);
     }
 
-    /* Третья карточка будет на отдельной строке и по центру */
+    /* Third card spans both columns and centers */
     .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        /* Занять обе колонки */
         grid-column: 1 / -1;
-        /* Саму себя выровнять по центру */
         justify-self: center;
-        /* Опционально: ограничить ширину чуть уже, чем две колонки */
         max-width: clamp(30rem, 70%, 40rem);
-        min-width: 0; /* защита от «раздувания» при центровке */
+        min-width: 0;
     }
 }
 
@@ -139,7 +161,6 @@
     }
 
     /* MOBILE NAV */
-
     .btn-mobile-nav {
         display: block;
         z-index: 9999;
@@ -200,6 +221,14 @@
         grid-template-columns: repeat(2, 1fr);
         gap: clamp(2rem, 5vw, 6.4rem);
     }
+
+    /* Third card spans both columns and centers */
+    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        max-width: clamp(30rem, 70%, 40rem);
+        min-width: 0;
+    }
 }
 
 /* LARGE MOBILE (450px – 599px) */
@@ -221,10 +250,17 @@
         padding: 1.2rem 1.6rem;
     }
 
-    /*ABOUT ME SECTION*/
+    /* ABOUT ME SECTION */
     .about-me-section .grid--3-cols {
         grid-template-columns: 1fr;
         gap: clamp(2rem, 5vw, 4rem);
+    }
+
+    /* Reset third card positioning for single column */
+    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
+        grid-column: initial;
+        justify-self: initial;
+        max-width: clamp(30rem, 90%, 40rem);
     }
 }
 
@@ -243,5 +279,18 @@
     .hero__button {
         padding: 0.8rem 1.2rem;
         font-size: 1.6rem;
+    }
+
+    /* ABOUT ME SECTION */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: 1fr;
+        gap: clamp(2rem, 5vw, 4rem);
+    }
+
+    /* Reset third card positioning for single column */
+    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
+        grid-column: initial;
+        justify-self: initial;
+        max-width: clamp(30rem, 90%, 40rem);
     }
 }
