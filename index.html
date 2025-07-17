@@ -347,47 +347,59 @@
             <hr class="divider-glow-wave">
 
             <!-- Prices Section -->
-            <section class="prices-section section-padding" id="prices">
-                <div class="container grid--center-v">
-                    <h2 class="prices-section__heading heading-secondary">
+            <section class="prices-section section-padding" id="prices" aria-labelledby="prices-heading">
+                <div class="container">
+                    <h2 id="prices-heading" class="prices-section__heading heading-secondary">
                         Цены
                     </h2>
-                    <div class="prices-grid grid grid--2-cols collapsed ">
-                        <div class="prices-card">
-                            <h3 class="prices-card__title subheading">Гадание на картах</h3>
-                            <p class="prices-card__text">Цена: 50€</p>
-                        </div>
 
-                        <div class="prices-card">
-                            <h3 class="prices-card__title subheading">Гадание на картах</h3>
-                            <p class="prices-card__text">Цена: 50€</p>
-                        </div>
+                    <!-- Prices Grid - Hidden by default -->
+                    <div id="prices-grid" class="prices-grid" role="region" aria-hidden="true" aria-label="Список цен на услуги">
 
-                        <div class="prices-card">
-                            <h3 class="prices-card__title subheading">Гадание на картах</h3>
+                        <!-- Price Cards -->
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title">Гадание на картах Таро</h3>
                             <p class="prices-card__text">Цена: 50€</p>
-                        </div>
+                        </article>
 
-                        <div class="prices-card">
-                            <h3 class="prices-card__title subheading">Гадание на картах</h3>
-                            <p class="prices-card__text">Цена: 50€</p>
-                        </div>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title">Натальная карта</h3>
+                            <p class="prices-card__text">Цена: 75€</p>
+                        </article>
 
-                        <div class="prices-card">
-                            <h3 class="prices-card__title subheading">Гадание на картах</h3>
-                            <p class="prices-card__text">Цена: 50€</p>
-                        </div>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title">Руническое гадание</h3>
+                            <p class="prices-card__text">Цена: 60€</p>
+                        </article>
 
-                        <div class="prices-card">
-                            <h3 class="prices-card__title subheading">Гадание на картах</h3>
-                            <p class="prices-card__text">Цена: 50€</p>
-                        </div>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title">Любовное гадание</h3>
+                            <p class="prices-card__text">Цена: 55€</p>
+                        </article>
 
-                        <div class="prices-explanation-card">
-                            <p class="prices__text">Цены указаны в евро. Возможна оплата в рублях, точная цена будет указана после работы по курсу на тот момент.</p>
-                        </div>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title">Гадание на будущее</h3>
+                            <p class="prices-card__text">Цена: 65€</p>
+                        </article>
+
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title">Снятие негатива</h3>
+                            <p class="prices-card__text">Цена: 80€</p>
+                        </article>
+
+                        <!-- Explanation Card -->
+                        <aside class="prices-card prices-explanation-card" role="note">
+                            <p class="prices__text">
+                                Цены указаны в евро. Возможна оплата в рублях, точная цена будет указана после работы по курсу на тот момент.
+                            </p>
+                        </aside>
                     </div>
-                    <button class="button prices__button" aria-label="Prices">Показать цены</button>
+
+                    <!-- Toggle Button -->
+                    <button class="prices__button" type="button" aria-expanded="false" aria-controls="prices-grid" aria-label="Показать список цен на услуги">
+                        Показать цены
+                    </button>
+                </div>
             </section>
 
             <hr class="divider-glow-wave">

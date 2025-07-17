@@ -1,36 +1,40 @@
-/* RESPONSIVE STYLES - FIXED VERSION */
+/* RESPONSIVE STYLES - CLEANED VERSION */
 
-/* Styles for ultra-wide screens */
+/* Ultra-wide screens */
 @media (min-width: 1201px) {
-    /* Keep 3-column layout for large screens */
+    /* About Me: 3 columns */
     .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 6.4rem;
     }
 
-    /* Reset any special positioning */
-    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        grid-column: initial;
-        justify-self: initial;
-        max-width: clamp(30rem, 90%, 40rem);
-    }
-
-    /*COUNTDOWN SECTION*/
+    /* Countdown */
     .timebox {
         gap: clamp(7rem, 10vw, 12rem);
-        max-width: 1200px; /* Prevent overly wide spacing */
+        max-width: 1200px;
     }
-
     .time h3 {
         font-size: clamp(6rem, 8vw, 8rem);
     }
+
+    /* PRICE SECTION */
+
+    .prices-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(3.2rem, 4vw, 4.8rem);
+    }
+
+    .prices-card {
+        min-width: 35rem;
+    }
 }
 
-/* LARGE DESKTOP (992px – 1200px) */
+/* Large desktop */
 @media (min-width: 992px) and (max-width: 1200px) {
+    /* Hero */
     .hero__heading-primary {
         font-size: 3.2rem;
-        margin: 4rem 0 1rem 0;
+        margin: 4rem 0 1rem;
     }
     .hero__text {
         font-size: 1.8rem;
@@ -41,71 +45,55 @@
         gap: 2rem;
     }
 
-    .main-nav__list__link:link,
-    .main-nav__list__link:visited {
-        font-size: 1.6rem;
-    }
-
-    .hero__button {
-        padding: 1rem 2rem;
-        font-size: 1.6rem;
-    }
-
-    .hero__text {
-        width: 65%;
-    }
-
+    /* Header */
     header {
         height: 6.4rem;
         padding: 0 2.4rem;
     }
-
-    .main-nav__list__link:link,
-    .main-nav__list__link:visited {
-        font-size: 1.4rem;
-    }
-
     .logo {
         height: 6rem;
     }
-
     .main-nav__list {
         gap: 1.2rem;
     }
+    .main-nav__list__link {
+        font-size: 1.4rem;
+    }
 
-    /* FIX: Keep 3-column layout for large desktop */
+    /* About Me: 3 columns */
     .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: clamp(2rem, 5vw, 6.4rem);
     }
 
-    /* Reset any special positioning for 3rd card */
-    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        grid-column: initial;
-        justify-self: initial;
-        max-width: clamp(30rem, 90%, 40rem);
-    }
-
-    /*COUNTDOWN SECTION*/
+    /* Countdown */
     .timebox {
         gap: clamp(4rem, 8vw, 8rem);
     }
-
     .time h3 {
         font-size: clamp(5rem, 7vw, 7rem);
     }
+
+    /*Price Section*/
+
+    .prices-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(2.4rem, 3vw, 3.2rem);
+    }
+
+    .prices-card {
+        min-width: 32rem;
+    }
 }
 
-/* TABLET LANDSCAPE (768px – 991px) */
-@media (min-width: 768px) and (max-width: 991px) {
-    /* HERO SECTION */
+/* Tablet landscape (≤ 991px) */
+@media (max-width: 991px) {
+    /* Hero */
     .hero-section {
-        padding-top: 6rem;
-        padding-bottom: 4rem;
+        padding: 6rem 0 4rem;
     }
     .hero__heading-primary {
         font-size: 3rem;
-        margin-bottom: 1.5rem;
     }
     .hero__text {
         font-size: 2rem;
@@ -116,38 +104,27 @@
         gap: 1.5rem;
     }
 
-    /* HEADER + NAV */
+    /* Header */
     header {
-        padding: 0 1.2rem;
-        gap: 1rem;
         height: 4.8rem;
+        padding: 0 1.2rem;
     }
-
     .logo {
         height: 4rem;
     }
-
     .main-nav__list {
         gap: 0.8rem;
     }
-
-    .main-nav__list__link:link,
-    .main-nav__list__link:visited {
+    .main-nav__list__link {
         font-size: 1.2rem;
         padding: 0.5rem 1rem;
     }
 
-    .main-nav__list__link::after {
-        height: 1.2px;
-    }
-
-    /* ABOUT ME SECTION */
+    /* About Me: 2 columns, center 3rd */
     .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: clamp(2rem, 5vw, 6.4rem);
     }
-
-    /* Third card spans both columns and centers */
     .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
         grid-column: 1 / -1;
         justify-self: center;
@@ -155,29 +132,51 @@
         min-width: 0;
     }
 
-    /*COUNTDOWN SECTION*/
+    /* Countdown */
     .timebox {
         gap: clamp(2rem, 6vw, 5rem);
     }
-
     .time h3 {
         font-size: clamp(3.5rem, 8vw, 5.5rem);
     }
-
     .time p {
         font-size: clamp(1.1rem, 2vw, 1.3rem);
     }
+
+    /* Prices: 1 column */
+    .prices-section .prices-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(2rem, 4vw, 3rem);
+    }
+
+    .prices-section .prices-grid.visible .prices-card {
+        max-width: 100%;
+    }
+
+    .prices-section .prices-explanation-card {
+        grid-column: 1 / -1;
+    }
+
+    /* Price Section */
+
+    .prices-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(2rem, 3vw, 2.4rem);
+    }
+
+    .prices-card {
+        min-width: 30rem;
+        padding: clamp(1.4rem, 2.5vw, 1.8rem);
+    }
 }
 
-/* TABLET PORTRAIT (600px – 767px) */
-@media (min-width: 600px) and (max-width: 767px) {
-    /* HERO SECTION */
+/* Tablet portrait (≤ 767px) */
+@media (max-width: 767px) {
+    /* Hero */
     .hero__heading-primary {
         font-size: 2.6rem;
-        text-align: left;
     }
     .hero__content {
-        text-align: left;
         padding: 0 1rem;
     }
     .hero__text {
@@ -185,76 +184,17 @@
         margin-bottom: 2rem;
     }
     .hero__buttons {
-        justify-content: left;
+        justify-content: flex-start;
     }
-
     .hero__button {
         font-size: 1.4rem;
     }
 
-    /* MOBILE NAV */
-    .btn-mobile-nav {
-        display: block;
-        z-index: 9999;
-    }
-
-    .main-nav {
-        background-color: rgba(238, 201, 204, 0.8);
-        -webkit-backdrop-filter: blur(5px);
-        backdrop-filter: blur(5px);
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 40%;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transform: translateX(100%);
-        transition: transform 0.5s ease-in, opacity 0.5s ease-in;
-        opacity: 0;
-        pointer-events: none;
-        visibility: hidden;
-    }
-
-    .nav-open .main-nav {
-        transform: translateX(0);
-        opacity: 1;
-        pointer-events: auto;
-        visibility: visible;
-    }
-
-    .icon-mobile-nav[name='close'] {
-        display: block;
-    }
-
-    .icon-mobile-nav[name='color-wand'] {
-        display: none;
-    }
-
-    .main-nav__list {
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 2rem;
-        width: 100%;
-        margin: 10rem 0 0 0;
-    }
-
-    .main-nav__list__link {
-        font-size: 3rem;
-        padding: 1rem 2rem;
-        width: 100%;
-        position: relative;
-    }
-
-    /* ABOUT ME SECTION */
+    /* About Me: 2 columns */
     .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: clamp(2rem, 5vw, 6.4rem);
     }
-
-    /* Third card spans both columns and centers */
     .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
         grid-column: 1 / -1;
         justify-self: center;
@@ -262,27 +202,37 @@
         min-width: 0;
     }
 
-    /*COUNTDOWN SECTION*/
+    /* Countdown */
     .countdown-section {
         padding: clamp(1.5rem, 4vw, 3rem) 1rem;
     }
-
     .timebox {
         gap: clamp(1.5rem, 4vw, 3rem);
     }
-
     .time h3 {
         font-size: clamp(3rem, 10vw, 4.5rem);
     }
-
     .time p {
         font-size: clamp(1rem, 2.2vw, 1.2rem);
     }
+
+    /* Price Section */
+    .prices-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(1.6rem, 3vw, 2rem);
+        padding: 0 clamp(1.6rem, 4vw, 2.4rem);
+    }
+
+    .prices-card {
+        min-width: 100%;
+        max-width: 50rem;
+        margin: 0 auto;
+    }
 }
 
-/* LARGE MOBILE (450px – 599px) */
-@media (min-width: 450px) and (max-width: 599px) {
-    /* HERO SECTION */
+/* Mobile (≤ 599px) */
+@media (max-width: 599px) {
+    /* Hero */
     .hero__heading-primary {
         font-size: 2.2rem;
     }
@@ -299,65 +249,58 @@
         padding: 1.2rem 1.6rem;
     }
 
-    /* ABOUT ME SECTION */
+    /* About Me: 1 column */
     .about-me-section .grid--3-cols {
         grid-template-columns: 1fr;
         gap: clamp(2rem, 5vw, 4rem);
     }
-
-    /* Reset third card positioning for single column */
     .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
         grid-column: initial;
         justify-self: initial;
         max-width: clamp(30rem, 90%, 40rem);
     }
 
-    /*COUNTDOWN SECTION*/
+    /* Countdown */
     .countdown-section {
-        padding: clamp(1.5rem, 4vw, 2.5rem) 0.5rem;
+        padding: clamp(1rem, 3vw, 2rem) 0.5rem;
     }
-
     .timebox {
         gap: clamp(1rem, 3vw, 2rem);
     }
-
     .time h3 {
         font-size: clamp(2.5rem, 12vw, 4rem);
     }
-
     .time p {
         font-size: clamp(0.9rem, 2.5vw, 1.1rem);
     }
-}
 
-/* Additional mobile-specific improvements */
-@media (max-width: 599px) {
-    .countdown-section h2 {
-        font-size: clamp(1.8rem, 6vw, 2.5rem);
-        text-align: center;
-        margin-bottom: clamp(1rem, 3vw, 2rem);
+    /* Prices Section */
+    .prices-section {
+        margin-top: clamp(2.4rem, 4vw, 3.2rem);
     }
 
-    /* Ensure countdown doesn't break on very small screens */
-    .timebox {
-        min-width: 280px; /* Minimum width to prevent extreme compression */
+    .prices-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(1.6rem, 3vw, 2rem);
+        padding: 0 clamp(1.6rem, 4vw, 2rem);
     }
 
-    /* Better touch targets for mobile */
-    .time {
-        padding: clamp(0.5rem, 2vw, 1rem);
-        border-radius: 8px;
-        transition: background-color 0.2s ease;
+    .prices-card {
+        min-width: 100%;
+        padding: clamp(1.4rem, 3vw, 1.8rem);
     }
 
-    /* Optional: Add subtle hover effect for better UX */
-    .time:hover {
-        background-color: rgba(255, 255, 255, 0.05);
+    .prices-card__title {
+        font-size: clamp(1.6rem, 3.5vw, 1.8rem);
+    }
+
+    .prices-card__text {
+        font-size: clamp(1.4rem, 3vw, 1.5rem);
     }
 }
 
-/* SMALL MOBILE (<= 449px) */
-@media (min-width: 320px) and (max-width: 449px) {
+/* Very small screens (≤ 449px) */
+@media (max-width: 449px) {
     .hero__heading-primary {
         font-size: 1.8rem;
     }
@@ -370,43 +313,122 @@
     }
     .hero__button {
         padding: 0.8rem 1.2rem;
-        font-size: 1.6rem;
+        font-size: 1rem;
     }
 
-    /* ABOUT ME SECTION */
-    .about-me-section .grid--3-cols {
-        grid-template-columns: 1fr;
-        gap: clamp(2rem, 5vw, 4rem);
-    }
-
-    /* Reset third card positioning for single column */
-    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        grid-column: initial;
-        justify-self: initial;
-        max-width: clamp(30rem, 90%, 40rem);
-    }
-
-    /*COUNTDOWN SECTION*/
+    /* About Me: 1 column (already applied above) */
+    /* Countdown */
     .countdown-section {
         padding: clamp(1rem, 3vw, 2rem) 0.5rem;
     }
-
     .timebox {
         gap: clamp(0.5rem, 2vw, 1.5rem);
     }
-
     .time h3 {
         font-size: clamp(2rem, 15vw, 3.5rem);
-        letter-spacing: -0.05em; /* Tighter spacing for small screens */
+        letter-spacing: -0.05em;
     }
-
     .time p {
         font-size: clamp(0.8rem, 3vw, 1rem);
         margin-top: clamp(0.3rem, 1vw, 0.8rem);
     }
+
+    /* Price Section */
+    .prices-section {
+        margin-top: clamp(2rem, 4vw, 2.4rem);
+    }
+
+    .prices-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(1.4rem, 3vw, 1.6rem);
+        padding: 0 clamp(1.2rem, 3vw, 1.6rem);
+    }
+
+    .prices-card {
+        min-width: 100%;
+        padding: clamp(1.2rem, 3vw, 1.6rem);
+    }
+
+    .prices-card__title {
+        font-size: clamp(1.4rem, 4vw, 1.6rem);
+        margin-bottom: clamp(0.6rem, 2vw, 1rem);
+    }
+
+    .prices-card__text {
+        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    }
+
+    .prices__text {
+        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    }
+
+    .prices-explanation-card {
+        padding: clamp(1.2rem, 3vw, 1.6rem);
+        margin-top: clamp(1.2rem, 3vw, 1.6rem);
+    }
 }
 
-/* High DPI display optimizations */
+/* ====================
+   ACCESSIBILITY & UX IMPROVEMENTS
+   ==================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .prices-card {
+        border: 2px solid var(--color-text);
+    }
+
+    .prices__button {
+        border-width: 3px;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .prices-card,
+    .prices__button,
+    .prices-grid {
+        transition: none;
+    }
+
+    .prices-card:hover,
+    .prices__button:hover {
+        transform: none;
+    }
+}
+
+/* Focus management for keyboard users */
+.prices-card:focus-within {
+    outline: 2px solid var(--color-highlight);
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .prices-section {
+        margin-top: 2rem;
+        break-inside: avoid;
+    }
+
+    .prices-grid {
+        height: auto !important;
+        opacity: 1 !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .prices-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+
+    .prices__button {
+        display: none;
+    }
+}
+
+/* High DPI */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .time h3 {
         text-rendering: optimizeLegibility;
@@ -415,28 +437,26 @@
     }
 }
 
-/* Reduced motion preference */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    .time {
-        transition: none;
+    * {
+        transition: none !important;
+        animation: none !important;
     }
 }
 
-/* Print styles */
+/* Print */
 @media print {
     .countdown-section {
-        color: black;
-        background: white;
+        color: #000;
+        background: #fff;
     }
-
     .timebox {
         gap: 2rem;
     }
-
     .time h3 {
         font-size: 2rem;
     }
-
     .time p {
         font-size: 1rem;
     }

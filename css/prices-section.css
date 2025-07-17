@@ -1,3 +1,7 @@
+/* ====================
+   PRICES SECTION - RESPONSIVE
+   ==================== */
+
 .prices-section {
     background-color: var(--color-main-background);
     display: flex;
@@ -5,75 +9,323 @@
     align-items: center;
     justify-content: center;
     margin-top: 3.2rem;
+    position: relative;
 }
+
 .prices-section__heading {
     text-align: center;
+    font-size: clamp(2.4rem, 4vw, 3rem);
+    margin-bottom: clamp(2rem, 4vw, 2.4rem);
 }
 
 .prices__button {
     display: block;
     margin: 0 auto;
-    margin-top: 3.2rem;
+    margin-top: clamp(2.4rem, 4vw, 3.2rem);
+    padding: clamp(1rem, 2.5vw, 1.2rem) clamp(2rem, 4vw, 2.4rem);
 
     background: var(--color-highlight);
     color: var(--color-card-bg);
-    transition: all 0.8s;
+    transition: all 0.3s ease;
     border: 3px solid var(--color-footer-bg);
+
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 500;
+    min-height: 44px; /* Accessibility: minimum touch target */
+    cursor: pointer;
+
+    /* Focus styles for accessibility */
+    outline: none;
+    position: relative;
+}
+
+.prices__button:focus-visible {
+    outline: 3px solid var(--color-highlight);
+    outline-offset: 2px;
 }
 
 .prices__button:hover {
     background: var(--color-footer-bg);
     border: 2px solid var(--color-highlight);
     background-image: var(--btn-gradient);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* When not visible */
+.prices__button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ====================
+   PRICES GRID - RESPONSIVE
+   ==================== */
+
 .prices-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(25rem, 1fr));
-    gap: 3.2rem;
-    max-width: 110rem;
+    gap: clamp(2rem, 4vw, 3.2rem);
+    max-width: 120rem;
     margin: 0 auto;
-    padding: 0 3.2rem;
+    padding: 0 clamp(1.6rem, 3vw, 3.2rem);
+    width: 100%;
 
+    /* Animation states */
     height: 0;
     overflow: hidden;
-    transition: height 1s ease-in-out, opacity 0.75s ease;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
     opacity: 0;
 }
 
-/* When visible */
+/* Grid layouts for different screen sizes */
+.prices-grid {
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(clamp(28rem, 45vw, 40rem), 1fr)
+    );
+}
+
 .prices-grid.visible {
     opacity: 1;
 }
 
+/* ====================
+   PRICE CARDS - RESPONSIVE
+   ==================== */
+
 .prices-card {
-    min-width: 40rem;
-    padding: 2rem;
+    width: 100%;
+    min-width: clamp(28rem, 90vw, 40rem);
+    max-width: 100%;
+    padding: clamp(1.6rem, 3vw, 2rem);
     border-radius: 2rem 0 1.5rem 0;
     background-color: var(--color-card-bg);
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease;
+
+    /* Ensure proper content flow */
+    overflow: hidden;
+    position: relative;
+}
+
+.prices-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.2);
 }
 
 .prices-card__title {
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
     color: var(--color-text);
     font-weight: 600;
+    margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem);
+    line-height: 1.2;
 }
 
 .prices-card__text {
-    font-size: 1.6rem;
+    font-size: clamp(1.4rem, 2vw, 1.6rem);
     line-height: 1.6;
     color: var(--color-text);
+    margin: 0;
 }
 
+/* ====================
+   EXPLANATION CARD
+   ==================== */
+
 .prices-explanation-card {
-    grid-column: span 2;
+    background-color: rgba(155, 91, 182, 0.1);
+    border: 2px solid var(--color-highlight);
+    padding: clamp(1.6rem, 3vw, 2.4rem);
+    border-radius: 1.5rem;
+    margin-top: clamp(1.6rem, 3vw, 2.4rem);
+
+    /* Make it span full width in all layouts */
+    grid-column: 1 / -1;
+    max-width: 100%;
 }
 
 .prices__text {
     text-align: center;
-    font-size: 1.6rem;
+    font-size: clamp(1.4rem, 2vw, 1.6rem);
     line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ====================
+   RESPONSIVE BREAKPOINTS
+   ==================== */
+
+/* Ultra-wide screens (1201px+) */
+@media (min-width: 1201px) {
+    .prices-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(3.2rem, 4vw, 4.8rem);
+    }
+
+    .prices-card {
+        min-width: 35rem;
+    }
+}
+
+/* Large desktop (992px – 1200px) */
+@media (min-width: 992px) and (max-width: 1200px) {
+    .prices-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(2.4rem, 3vw, 3.2rem);
+    }
+
+    .prices-card {
+        min-width: 32rem;
+    }
+}
+
+/* Tablet landscape (768px – 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .prices-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(2rem, 3vw, 2.4rem);
+    }
+
+    .prices-card {
+        min-width: 30rem;
+        padding: clamp(1.4rem, 2.5vw, 1.8rem);
+    }
+}
+
+/* Tablet portrait (600px – 767px) */
+@media (min-width: 600px) and (max-width: 767px) {
+    .prices-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(1.6rem, 3vw, 2rem);
+        padding: 0 clamp(1.6rem, 4vw, 2.4rem);
+    }
+
+    .prices-card {
+        min-width: 100%;
+        max-width: 50rem;
+        margin: 0 auto;
+    }
+}
+
+/* Large mobile (450px – 599px) */
+@media (min-width: 450px) and (max-width: 599px) {
+    .prices-section {
+        margin-top: clamp(2.4rem, 4vw, 3.2rem);
+    }
+
+    .prices-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(1.6rem, 3vw, 2rem);
+        padding: 0 clamp(1.6rem, 4vw, 2rem);
+    }
+
+    .prices-card {
+        min-width: 100%;
+        padding: clamp(1.4rem, 3vw, 1.8rem);
+    }
+
+    .prices-card__title {
+        font-size: clamp(1.6rem, 3.5vw, 1.8rem);
+    }
+
+    .prices-card__text {
+        font-size: clamp(1.4rem, 3vw, 1.5rem);
+    }
+}
+
+/* Small mobile (320px – 449px) */
+@media (min-width: 320px) and (max-width: 449px) {
+    .prices-section {
+        margin-top: clamp(2rem, 4vw, 2.4rem);
+    }
+
+    .prices-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(1.4rem, 3vw, 1.6rem);
+        padding: 0 clamp(1.2rem, 3vw, 1.6rem);
+    }
+
+    .prices-card {
+        min-width: 100%;
+        padding: clamp(1.2rem, 3vw, 1.6rem);
+    }
+
+    .prices-card__title {
+        font-size: clamp(1.4rem, 4vw, 1.6rem);
+        margin-bottom: clamp(0.6rem, 2vw, 1rem);
+    }
+
+    .prices-card__text {
+        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    }
+
+    .prices__text {
+        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    }
+
+    .prices-explanation-card {
+        padding: clamp(1.2rem, 3vw, 1.6rem);
+        margin-top: clamp(1.2rem, 3vw, 1.6rem);
+    }
+}
+
+/* ====================
+   ACCESSIBILITY & UX IMPROVEMENTS
+   ==================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .prices-card {
+        border: 2px solid var(--color-text);
+    }
+
+    .prices__button {
+        border-width: 3px;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .prices-card,
+    .prices__button,
+    .prices-grid {
+        transition: none;
+    }
+
+    .prices-card:hover,
+    .prices__button:hover {
+        transform: none;
+    }
+}
+
+/* Focus management for keyboard users */
+.prices-card:focus-within {
+    outline: 2px solid var(--color-highlight);
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .prices-section {
+        margin-top: 2rem;
+        break-inside: avoid;
+    }
+
+    .prices-grid {
+        height: auto !important;
+        opacity: 1 !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .prices-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+
+    .prices__button {
+        display: none;
+    }
 }
