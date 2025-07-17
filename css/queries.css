@@ -168,6 +168,11 @@
         min-width: 30rem;
         padding: clamp(1.4rem, 2.5vw, 1.8rem);
     }
+
+    /* Moon Component*/
+    .moon-information-section__component {
+        grid-template-columns: repeat(1fr);
+    }
 }
 
 /* Tablet portrait (≤ 767px) */
