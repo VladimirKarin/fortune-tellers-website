@@ -6,35 +6,36 @@ const moonPhaseInformation = {
         moonPhaseNameLithuanian: 'Jaunatis',
         moonPhaseImage:
             './img/moon-information-pictures/moon-phase-1-new-moon.png',
-        moonPhaseRitualsRussian: ['Первый', 'Второй', 'Третий'],
-        moonPhaseRitualsLithuanian: ['Pirmas', 'Antras', 'Trecias'],
+        moonPhaseRitualsRussian: [
+            'Очищение',
+            'Новые начинания',
+            'Планирование',
+        ],
+        moonPhaseRitualsLithuanian: ['Valymas', 'Nauji pradžia', 'Planavimas'],
     },
-
     waxingMoon: {
         moonPhaseNameRussian: 'Растущая луна',
         moonPhaseNameLithuanian: 'Augantis mėnulis',
         moonPhaseImage:
             './img/moon-information-pictures/moon-phase-2-waxing-moon.png',
-        moonPhaseRitualsRussian: ['Четвёртый', 'Пятый', 'Шестой'],
-        moonPhaseRitualsLithuanian: ['Ketvirtas', 'Penktas', 'Šestas'],
+        moonPhaseRitualsRussian: ['Рост', 'Развитие', 'Привлечение'],
+        moonPhaseRitualsLithuanian: ['Augimas', 'Plėtra', 'Patraukimas'],
     },
-
     fullMoon: {
         moonPhaseNameRussian: 'Полная луна',
         moonPhaseNameLithuanian: 'Pilnatis',
         moonPhaseImage:
             './img/moon-information-pictures/moon-phase-3-full-moon.png',
-        moonPhaseRitualsRussian: ['Седьмой', 'Восьмой', 'Девятый'],
-        moonPhaseRitualsLithuanian: ['Septintas', 'Aštuntas', 'Devyntas'],
+        moonPhaseRitualsRussian: ['Завершение', 'Благодарность', 'Энергия'],
+        moonPhaseRitualsLithuanian: ['Užbaigimas', 'Padėka', 'Energija'],
     },
-
     waningMoon: {
         moonPhaseNameRussian: 'Убывающая луна',
         moonPhaseNameLithuanian: 'Delčia',
         moonPhaseImage:
             './img/moon-information-pictures/moon-phase-4-waning-moon.png',
-        moonPhaseRitualsRussian: ['Десятый', 'Одиннадцатый', 'Двенадцатый'],
-        moonPhaseRitualsLithuanian: ['Dešimtas', 'Vienuoliktas', 'Dviliktas'],
+        moonPhaseRitualsRussian: ['Освобождение', 'Очищение', 'Прощение'],
+        moonPhaseRitualsLithuanian: ['Išlaisvinimas', 'Valymas', 'Atleidimas'],
     },
 };
 
