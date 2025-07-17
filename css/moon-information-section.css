@@ -238,6 +238,7 @@
 /* Tablet Landscape: 768px - 991px */
 @media (min-width: 768px) {
     .moon-information-section__component {
+        grid-template-columns: 1fr;
         flex-direction: row;
         align-items: center;
         justify-content: center;

@@ -29,7 +29,7 @@
     }
 }
 
-/* Large desktop */
+/* Desktop: 992px - 1200px */
 @media (min-width: 992px) and (max-width: 1200px) {
     /* Hero */
     .hero__heading-primary {
@@ -84,9 +84,30 @@
     .prices-card {
         min-width: 32rem;
     }
+
+    /* Moon Information Section */
+
+    .moon-information-section__component {
+        gap: clamp(3.2rem, 4vw, 4.8rem);
+        max-width: 110rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .moon-information-section__component__information {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .moon-information-section__component__information__content {
+        min-width: 28rem;
+    }
+
+    .moon-information-section__component__picture__img {
+        max-width: min(25vw, 28rem);
+    }
 }
 
-/* Tablet landscape (≤ 991px) */
+/* Desktop: 992px - 1200px */
 @media (max-width: 991px) {
     /* Hero */
     .hero-section {
@@ -171,11 +192,28 @@
 
     /* Moon Component*/
     .moon-information-section__component {
-        grid-template-columns: repeat(1fr);
+        grid-template-columns: 1fr;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(3rem, 5vw, 4.8rem);
+    }
+
+    .moon-information-section__component__picture {
+        flex: 0 0 auto;
+    }
+
+    .moon-information-section__component__information {
+        flex: 1;
+        max-width: none;
+    }
+
+    .moon-information-section__component__picture__img {
+        max-width: min(30vw, 25rem);
     }
 }
 
-/* Tablet portrait (≤ 767px) */
+/* Tablet Portrait: 600px - 767px */
 @media (max-width: 767px) {
     /* Hero */
     .hero__heading-primary {
@@ -232,6 +270,20 @@
         min-width: 100%;
         max-width: 50rem;
         margin: 0 auto;
+    }
+
+    /* Moon Information Section*/
+    .moon-information-section__component {
+        gap: clamp(3.2rem, 5vw, 4.8rem);
+    }
+
+    .moon-information-section__component__information {
+        max-width: 50rem;
+        gap: clamp(2.4rem, 4vw, 3.2rem);
+    }
+
+    .moon-information-section__component__information__content {
+        padding: clamp(1.8rem, 3vw, 2.4rem);
     }
 }
 
@@ -302,9 +354,22 @@
     .prices-card__text {
         font-size: clamp(1.4rem, 3vw, 1.5rem);
     }
+
+    /*Moon Information Section*/
+    .moon-information-section__component {
+        gap: clamp(2.4rem, 4vw, 3.2rem);
+    }
+
+    .moon-information-section__component__information {
+        max-width: 45rem;
+    }
+
+    .moon-information-section__component__picture__img {
+        max-width: min(80vw, 28rem);
+    }
 }
 
-/* Very small screens (≤ 449px) */
+/* Small Mobile: 320px - 449px */
 @media (max-width: 449px) {
     .hero__heading-primary {
         font-size: 1.8rem;
@@ -370,6 +435,24 @@
     .prices-explanation-card {
         padding: clamp(1.2rem, 3vw, 1.6rem);
         margin-top: clamp(1.2rem, 3vw, 1.6rem);
+    }
+
+    /*Moon Information Section*/
+    .moon-information-section__component {
+        gap: clamp(2rem, 4vw, 2.4rem);
+    }
+
+    .moon-information-section__component__information {
+        gap: clamp(1.6rem, 3vw, 2rem);
+        padding: 0 1rem;
+    }
+
+    .moon-information-section__component__information__content {
+        padding: clamp(1.2rem, 3vw, 1.6rem);
+    }
+
+    .moon-information-section__component__picture__img {
+        max-width: min(85vw, 25rem);
     }
 }
 
