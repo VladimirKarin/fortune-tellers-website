@@ -18,7 +18,6 @@
     }
 
     /* PRICE SECTION */
-
     .prices-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: clamp(3.2rem, 4vw, 4.8rem);
@@ -74,8 +73,7 @@
         font-size: clamp(5rem, 7vw, 7rem);
     }
 
-    /*Price Section*/
-
+    /* Price Section */
     .prices-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: clamp(2.4rem, 3vw, 3.2rem);
@@ -84,30 +82,9 @@
     .prices-card {
         min-width: 32rem;
     }
-
-    /* Moon Information Section */
-
-    .moon-information-section__component {
-        gap: clamp(3.2rem, 4vw, 4.8rem);
-        max-width: 110rem;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .moon-information-section__component__information {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .moon-information-section__component__information__content {
-        min-width: 28rem;
-    }
-
-    .moon-information-section__component__picture__img {
-        max-width: min(25vw, 28rem);
-    }
 }
 
-/* Desktop: 992px - 1200px */
+/* Tablet and Mobile: ≤ 991px */
 @media (max-width: 991px) {
     /* Hero */
     .hero-section {
@@ -164,10 +141,10 @@
         font-size: clamp(1.1rem, 2vw, 1.3rem);
     }
 
-    /* Prices: 1 column */
+    /* Prices: 2 columns */
     .prices-section .prices-grid {
-        grid-template-columns: 1fr;
-        gap: clamp(2rem, 4vw, 3rem);
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(2rem, 3vw, 2.4rem);
     }
 
     .prices-section .prices-grid.visible .prices-card {
@@ -178,38 +155,9 @@
         grid-column: 1 / -1;
     }
 
-    /* Price Section */
-
-    .prices-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: clamp(2rem, 3vw, 2.4rem);
-    }
-
     .prices-card {
         min-width: 30rem;
         padding: clamp(1.4rem, 2.5vw, 1.8rem);
-    }
-
-    /* Moon Component*/
-    .moon-information-section__component {
-        grid-template-columns: 1fr;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: clamp(3rem, 5vw, 4.8rem);
-    }
-
-    .moon-information-section__component__picture {
-        flex: 0 0 auto;
-    }
-
-    .moon-information-section__component__information {
-        flex: 1;
-        max-width: none;
-    }
-
-    .moon-information-section__component__picture__img {
-        max-width: min(30vw, 25rem);
     }
 }
 
@@ -270,20 +218,6 @@
         min-width: 100%;
         max-width: 50rem;
         margin: 0 auto;
-    }
-
-    /* Moon Information Section*/
-    .moon-information-section__component {
-        gap: clamp(3.2rem, 5vw, 4.8rem);
-    }
-
-    .moon-information-section__component__information {
-        max-width: 50rem;
-        gap: clamp(2.4rem, 4vw, 3.2rem);
-    }
-
-    .moon-information-section__component__information__content {
-        padding: clamp(1.8rem, 3vw, 2.4rem);
     }
 }
 
@@ -354,19 +288,6 @@
     .prices-card__text {
         font-size: clamp(1.4rem, 3vw, 1.5rem);
     }
-
-    /*Moon Information Section*/
-    .moon-information-section__component {
-        gap: clamp(2.4rem, 4vw, 3.2rem);
-    }
-
-    .moon-information-section__component__information {
-        max-width: 45rem;
-    }
-
-    .moon-information-section__component__picture__img {
-        max-width: min(80vw, 28rem);
-    }
 }
 
 /* Small Mobile: 320px - 449px */
@@ -386,7 +307,6 @@
         font-size: 1rem;
     }
 
-    /* About Me: 1 column (already applied above) */
     /* Countdown */
     .countdown-section {
         padding: clamp(1rem, 3vw, 2rem) 0.5rem;
@@ -435,24 +355,6 @@
     .prices-explanation-card {
         padding: clamp(1.2rem, 3vw, 1.6rem);
         margin-top: clamp(1.2rem, 3vw, 1.6rem);
-    }
-
-    /*Moon Information Section*/
-    .moon-information-section__component {
-        gap: clamp(2rem, 4vw, 2.4rem);
-    }
-
-    .moon-information-section__component__information {
-        gap: clamp(1.6rem, 3vw, 2rem);
-        padding: 0 1rem;
-    }
-
-    .moon-information-section__component__information__content {
-        padding: clamp(1.2rem, 3vw, 1.6rem);
-    }
-
-    .moon-information-section__component__picture__img {
-        max-width: min(85vw, 25rem);
     }
 }
 

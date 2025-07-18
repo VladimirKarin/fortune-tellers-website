@@ -1,3 +1,8 @@
+/* ====================
+   MOON INFORMATION SECTION
+   Complete CSS with all responsive breakpoints
+   ==================== */
+
 /* Main Section */
 .moon-information-section__text {
     text-align: center;
@@ -25,7 +30,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25%;
+    width: 100%;
+    max-width: 40rem;
 }
 
 .moon-information-section__component__picture__img {
@@ -236,39 +242,50 @@
 }
 
 /* Tablet Landscape: 768px - 991px */
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991px) {
     .moon-information-section__component {
-        grid-template-columns: 1fr;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
         gap: clamp(3rem, 5vw, 4.8rem);
     }
 
     .moon-information-section__component__picture {
-        flex: 0 0 auto;
+        width: 100%;
+        max-width: 35rem;
     }
 
     .moon-information-section__component__information {
-        flex: 1;
-        max-width: none;
+        width: 100%;
+        max-width: 60rem;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .moon-information-section__component__picture__img {
-        max-width: min(30vw, 25rem);
+        max-width: min(60vw, 30rem);
     }
 }
 
 /* Desktop: 992px - 1200px */
-@media (min-width: 992px) {
+@media (min-width: 992px) and (max-width: 1200px) {
     .moon-information-section__component {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
         gap: clamp(3.2rem, 4vw, 4.8rem);
         max-width: 110rem;
         margin-left: auto;
         margin-right: auto;
     }
 
+    .moon-information-section__component__picture {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none;
+    }
+
     .moon-information-section__component__information {
+        flex: 1;
+        max-width: none;
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -284,11 +301,23 @@
 /* Large Desktop: 1201px+ */
 @media (min-width: 1201px) {
     .moon-information-section__component {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
         gap: clamp(4rem, 5vw, 6.4rem);
         max-width: 120rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .moon-information-section__component__picture {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none;
     }
 
     .moon-information-section__component__information {
+        flex: 1;
         grid-template-columns: repeat(2, minmax(30rem, 1fr));
         max-width: 70rem;
     }

@@ -52,6 +52,32 @@ const phaseKeyMap = {
     'Waning Crescent': 'waningMoon',
 };
 
+// ------------------ Loading State Management ------------------
+
+function setLoadingState(isLoading) {
+    const moonSection = document.querySelector(
+        '.moon-information-section__component'
+    );
+    const moonPhaseName = document.querySelector(
+        '.moon-information-section__component__information__content__moon-phase'
+    );
+    const moonRituals = document.querySelector(
+        '.moon-information-section__component__information__content__moon-phase-rituals'
+    );
+    const moonCountdown = document.querySelector(
+        '.moon-information-section__component__information__content__moon-phase-countdown'
+    );
+
+    if (isLoading) {
+        moonSection?.classList.add('loading');
+        if (moonPhaseName) moonPhaseName.textContent = 'Загрузка...';
+        if (moonRituals) moonRituals.textContent = 'Загрузка...';
+        if (moonCountdown) moonCountdown.textContent = 'Загрузка...';
+    } else {
+        moonSection?.classList.remove('loading');
+    }
+}
+
 // ------------------ Update UI Function ------------------
 
 function updateMoonUI(moonData) {
@@ -63,6 +89,11 @@ function updateMoonUI(moonData) {
         if (moonImage) {
             moonImage.src = moonData.moonPhaseImage;
             moonImage.alt = `Picture of ${moonData.moonPhaseNameRussian}`;
+            // Add loading transition
+            moonImage.style.opacity = '0';
+            moonImage.onload = () => {
+                moonImage.style.opacity = '1';
+            };
         }
 
         // Update moon phase name
@@ -85,26 +116,37 @@ function updateMoonUI(moonData) {
         console.log(`✅ Moon UI updated successfully`);
     } catch (error) {
         console.error('Error updating moon UI:', error);
+        showMoonError('Ошибка при обновлении интерфейса');
     }
 }
 
-// ------------------ Calculate Next Phase (Optional Enhancement) ------------------
+// ------------------ Calculate Next Phase (Enhanced) ------------------
 
 function calculateNextPhaseCountdown() {
-    // This is a simplified calculation - for more accuracy, you'd need a proper lunar calendar library
-    const lunarCycle = 29.53; // days
-    const phaseLength = lunarCycle / 4; // ~7.38 days per phase
+    try {
+        // This is a simplified calculation - for more accuracy, you'd need a proper lunar calendar library
+        const lunarCycle = 29.53; // days
+        const phaseLength = lunarCycle / 4; // ~7.38 days per phase
 
-    // This is placeholder logic - replace with actual calculation
-    const randomDays = Math.floor(Math.random() * 7) + 1;
-    const randomHours = Math.floor(Math.random() * 24);
-    const randomMinutes = Math.floor(Math.random() * 60);
+        // This is placeholder logic - replace with actual calculation
+        const randomDays = Math.floor(Math.random() * 7) + 1;
+        const randomHours = Math.floor(Math.random() * 24);
+        const randomMinutes = Math.floor(Math.random() * 60);
 
-    const countdownElement = document.querySelector(
-        '.moon-information-section__component__information__content__moon-phase-countdown'
-    );
-    if (countdownElement) {
-        countdownElement.textContent = `${randomDays} дн. ${randomHours} ч. ${randomMinutes} мин`;
+        const countdownElement = document.querySelector(
+            '.moon-information-section__component__information__content__moon-phase-countdown'
+        );
+        if (countdownElement) {
+            countdownElement.textContent = `${randomDays} дн. ${randomHours} ч. ${randomMinutes} мин`;
+        }
+    } catch (error) {
+        console.error('Error calculating countdown:', error);
+        const countdownElement = document.querySelector(
+            '.moon-information-section__component__information__content__moon-phase-countdown'
+        );
+        if (countdownElement) {
+            countdownElement.textContent = 'Недоступно';
+        }
     }
 }
 
@@ -118,6 +160,8 @@ async function fetchMoonPhase() {
     const url = `https://api.weatherapi.com/v1/astronomy.json?key=${apiKey}&q=${location}&dt=${date}`;
 
     try {
+        setLoadingState(true);
+
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(
@@ -135,92 +179,117 @@ async function fetchMoonPhase() {
         const internalKey = phaseKeyMap[moonPhase];
         if (!internalKey) {
             console.error(`❌ Unknown moon phase: "${moonPhase}"`);
-            showMoonError(`Unknown moon phase: "${moonPhase}"`);
-            return;
+            throw new Error(`Unknown moon phase: "${moonPhase}"`);
         }
 
         const moonData = moonPhaseInformation[internalKey];
         updateMoonUI(moonData);
         calculateNextPhaseCountdown();
+
+        // Hide any previous error messages
+        hideMoonError();
     } catch (error) {
         console.error('Error fetching moon phase data:', error);
         showMoonError(
-            'Unable to fetch moon phase data. Please try again later.'
+            'Не удалось загрузить данные о фазе луны. Попробуйте позже.'
         );
+        // Try fallback
+        getLocalMoonPhase();
+    } finally {
+        setLoadingState(false);
     }
 }
 
 // ------------------ Error Handling ------------------
 
 function showMoonError(message) {
-    // You can either add this element to your HTML or create it dynamically
-    let errorElement = document.querySelector('.moon-phase-error');
+    const errorElement = document.querySelector('.moon-phase-error');
 
-    if (!errorElement) {
-        // Create error element if it doesn't exist
-        errorElement = document.createElement('div');
-        errorElement.className = 'moon-phase-error';
-        errorElement.style.cssText = `
-            color: #ff6b6b;
-            background: #ffe0e0;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
-            text-align: center;
-        `;
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.classList.add('show');
 
-        const moonSection = document.querySelector(
-            '.moon-information-section__component'
-        );
-        if (moonSection) {
-            moonSection.appendChild(errorElement);
-        }
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            hideMoonError();
+        }, 5000);
     }
+}
 
-    errorElement.textContent = message;
-    errorElement.style.display = 'block';
+function hideMoonError() {
+    const errorElement = document.querySelector('.moon-phase-error');
+    if (errorElement) {
+        errorElement.classList.remove('show');
+    }
 }
 
 // ------------------ Alternative: Local Moon Phase Calculation ------------------
 
 function getLocalMoonPhase() {
-    // Simple local calculation as fallback (less accurate but works offline)
-    const today = new Date();
-    const knownNewMoon = new Date('2025-05-27'); // Known new moon date
-    const lunarCycle = 29.53058867; // days
+    try {
+        // Simple local calculation as fallback (less accurate but works offline)
+        const today = new Date();
+        const knownNewMoon = new Date('2025-05-27'); // Known new moon date
+        const lunarCycle = 29.53058867; // days
 
-    const daysSinceNewMoon = (today - knownNewMoon) / (1000 * 60 * 60 * 24);
-    const currentCycle = daysSinceNewMoon % lunarCycle;
+        const daysSinceNewMoon = (today - knownNewMoon) / (1000 * 60 * 60 * 24);
+        const currentCycle = daysSinceNewMoon % lunarCycle;
 
-    let phase, internalKey;
+        let phase, internalKey;
 
-    if (currentCycle < 1) {
-        phase = 'New Moon';
-        internalKey = 'newMoon';
-    } else if (currentCycle < 7.38) {
-        phase = 'Waxing Crescent';
-        internalKey = 'waxingMoon';
-    } else if (currentCycle < 14.77) {
-        phase = 'Full Moon';
-        internalKey = 'fullMoon';
-    } else if (currentCycle < 22.15) {
-        phase = 'Waning Gibbous';
-        internalKey = 'waningMoon';
-    } else {
-        phase = 'Waning Crescent';
-        internalKey = 'waningMoon';
+        if (currentCycle < 1) {
+            phase = 'New Moon';
+            internalKey = 'newMoon';
+        } else if (currentCycle < 7.38) {
+            phase = 'Waxing Crescent';
+            internalKey = 'waxingMoon';
+        } else if (currentCycle < 14.77) {
+            phase = 'Full Moon';
+            internalKey = 'fullMoon';
+        } else if (currentCycle < 22.15) {
+            phase = 'Waning Gibbous';
+            internalKey = 'waningMoon';
+        } else {
+            phase = 'Waning Crescent';
+            internalKey = 'waningMoon';
+        }
+
+        console.log(`🌙 Local Moon Phase: ${phase}`);
+        const moonData = moonPhaseInformation[internalKey];
+        updateMoonUI(moonData);
+        calculateNextPhaseCountdown();
+
+        // Show info that we're using local calculation
+        const errorElement = document.querySelector('.moon-phase-error');
+        if (errorElement) {
+            errorElement.textContent =
+                'Используется локальный расчет фазы луны';
+            errorElement.style.background = '#e7f3ff';
+            errorElement.style.color = '#0066cc';
+            errorElement.style.borderColor = '#99ccff';
+            errorElement.classList.add('show');
+
+            setTimeout(() => {
+                hideMoonError();
+            }, 3000);
+        }
+    } catch (error) {
+        console.error('Error in local moon phase calculation:', error);
+        showMoonError('Ошибка при расчете фазы луны');
     }
-
-    console.log(`🌙 Local Moon Phase: ${phase}`);
-    const moonData = moonPhaseInformation[internalKey];
-    updateMoonUI(moonData);
-    calculateNextPhaseCountdown();
 }
 
-// ------------------ Main Function with Fallback ------------------
+// ------------------ Main Function with Enhanced Error Handling ------------------
 
 async function initializeMoonPhase() {
     try {
+        // Check if we're online
+        if (!navigator.onLine) {
+            console.log('Offline detected, using local calculation');
+            getLocalMoonPhase();
+            return;
+        }
+
         await fetchMoonPhase();
     } catch (error) {
         console.log('API failed, using local calculation as fallback');
@@ -228,4 +297,26 @@ async function initializeMoonPhase() {
     }
 }
 
-export { initializeMoonPhase };
+// ------------------ Network Status Monitoring ------------------
+
+function setupNetworkMonitoring() {
+    window.addEventListener('online', () => {
+        console.log('Connection restored, refreshing moon data');
+        initializeMoonPhase();
+    });
+
+    window.addEventListener('offline', () => {
+        console.log('Connection lost, using local calculation');
+        getLocalMoonPhase();
+    });
+}
+
+// ------------------ Initialize when DOM is ready ------------------
+
+document.addEventListener('DOMContentLoaded', () => {
+    initializeMoonPhase();
+    setupNetworkMonitoring();
+});
+
+// Export for module usage
+export { initializeMoonPhase, getLocalMoonPhase, updateMoonUI };
