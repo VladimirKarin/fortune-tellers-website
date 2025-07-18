@@ -462,6 +462,39 @@
                     <p class="section-calendar__description">Даты, когда я бываю в других городах.</p>
 
                     <div class="calendar-component">
+                        <div class="calendar-header">
+                            <button class="calendar-button calendar-button--previous" aria-label="Предыдущий месяц" tabindex="0" type="button">
+                                <ion-icon name="arrow-round-back" aria-hidden="true"></ion-icon>
+                            </button>
+
+                            <h3 class="calendar-month" id="calendar-month-label">
+                                <span class="month-name"></span> <span class="month-year"></span>
+                            </h3>
+
+                            <button class="calendar-button calendar-button--next" aria-label="Следующий месяц" tabindex="0" type="button">
+                                <ion-icon name="arrow-round-forward" aria-hidden="true"></ion-icon>
+                            </button>
+                        </div>
+
+                        <div class="calendar-grid" role="grid" aria-labelledby="calendar-month-label" aria-live="polite">
+
+                            <div class="calendar-weekdays" role="row">
+                                <!-- Weekdays will be populated by JavaScript -->
+                            </div>
+
+                            <div class="calendar-days" role="rowgroup">
+                                <!-- Calendar days will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- <section class="section-calendar" id="calendar">
+                <div class="container">
+                    <h2 class="heading-secondary">Календарь</h2>
+                    <p class="section-calendar__description">Даты, когда я бываю в других городах.</p>
+
+                    <div class="calendar-component">
 
                         <div class="calendar-header">
                             <button class="calendar-button calendar-button--previous" aria-label="Предыдущий месяц">
@@ -486,7 +519,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
 
             <hr class="divider-glow-wave">
 

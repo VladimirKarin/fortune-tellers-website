@@ -1,19 +1,20 @@
 // ------------------------------------------------------------------
-// Utility functions (moved up for better organization)
+// Utility functions (centralized date logic)
 // ------------------------------------------------------------------
-
-// Get structured date details (centralized date logic)
 export function getCurrentDate() {
     const currentDate = new Date();
     const currentDateISO = currentDate.toISOString().split('T')[0];
     const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; // Convert 0-based to 1-based
+    const month = currentDate.getMonth() + 1;
     const dayOfTheWeek = currentDate.getDay();
     const dayOfTheMonth = currentDate.getDate();
-    const localeDate = currentDate.toLocaleDateString();
     const weekdayName = currentDate.toLocaleDateString('ru-RU', {
         weekday: 'long',
     });
+    // Build local ISO string to reflect local date, not UTC
+    const monthPadded = String(month).padStart(2, '0');
+    const dayPadded = String(dayOfTheMonth).padStart(2, '0');
+    const currentDateISOPadded = `${year}-${monthPadded}-${dayPadded}`;
 
     return {
         currentDate,
@@ -22,143 +23,97 @@ export function getCurrentDate() {
         month,
         dayOfTheWeek,
         dayOfTheMonth,
-        localeDate,
         weekdayName,
         isWeekend: isWeekend(dayOfTheWeek),
     };
 }
 
-//Using getCurrentDate() as the single source of truth
+// Initial date info and viewed state
 let todayDateInfo = getCurrentDate();
-
-// Initialize state: these will change when navigating months
 let viewedYear = todayDateInfo.year;
 let viewedMonth = todayDateInfo.month;
 
 // Auto-update system variables
 let autoUpdateInterval;
-const UPDATE_INTERVAL = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
-// Alternative options:
-// const UPDATE_INTERVAL = 1 * 60 * 60 * 1000; // 1 hour
-// const UPDATE_INTERVAL = 12 * 60 * 60 * 1000; // 12 hours
+const UPDATE_INTERVAL = 6 * 60 * 60 * 1000; // 6 hours
 
-// ------------------------------------------------------------------
-// Trip data (used in highlight travel dates)
-// ------------------------------------------------------------------
-
+// Trip dates for highlighting
 const tripDates = {
     cityRussian: 'Вильнюс',
-    cityLithuanian: 'Vilnius',
     start: '2025-07-25',
     end: '2025-08-01',
 };
 
 // ------------------------------------------------------------------
-// Utility functions
+// Helper functions
 // ------------------------------------------------------------------
-
-// Check if a day is Saturday (6) or Sunday (0)
 function isWeekend(dayOfWeek) {
     return dayOfWeek === 6 || dayOfWeek === 0;
 }
 
-// Using todayDateInfo.currentDateISO instead of recalculating
+// function isToday(day) {
+//     return day.toISOString().split('T')[0] === todayDateInfo.currentDateISO;
+// }
+
 function isToday(day) {
-    return day.toISOString().split('T')[0] === todayDateInfo.currentDateISO;
+    // Compare local dates rather than UTC
+    return (
+        day.getFullYear() === todayDateInfo.year &&
+        day.getMonth() + 1 === todayDateInfo.month &&
+        day.getDate() === todayDateInfo.dayOfTheMonth
+    );
 }
 
-// Check if a day is within trip period
 function isTrip(day) {
     const formatted = day.toISOString().split('T')[0];
     return formatted >= tripDates.start && formatted <= tripDates.end;
 }
 
-// Check if the day is in the viewed month/year (to fade others)
 function isViewedMonth(day, year, month) {
     return day.getMonth() === month - 1 && day.getFullYear() === year;
 }
 
-// Added helper function to format date consistently
 function formatDateISO(date) {
     return date.toISOString().split('T')[0];
 }
 
-//Check if we need to update the calendar
 function shouldUpdateCalendar() {
-    const newDateInfo = getCurrentDate();
-
-    // Check if month or year has changed
-    const monthChanged = newDateInfo.month !== todayDateInfo.month;
-    const yearChanged = newDateInfo.year !== todayDateInfo.year;
-
-    return monthChanged || yearChanged;
-}
-
-//Update calendar to current month/year
-function updateToCurrentMonth() {
-    console.log('🔄 Checking for calendar updates...');
-
-    if (shouldUpdateCalendar()) {
-        console.log('📅 Date changed! Updating calendar...');
-
-        // Update our stored date info
-        todayDateInfo = getCurrentDate();
-
-        // Reset viewed month/year to current
-        viewedYear = todayDateInfo.year;
-        viewedMonth = todayDateInfo.month;
-
-        // Re-render calendar
-        renderCalendar();
-
-        console.log(
-            `✅ Calendar updated to ${
-                months.russian[todayDateInfo.month - 1]
-            } ${todayDateInfo.year}`
-        );
-    } else {
-        console.log('✅ Calendar is up to date');
-    }
-}
-
-//Start auto-update system
-export function startAutoUpdate() {
-    // Clear any existing interval
-    if (autoUpdateInterval) {
-        clearInterval(autoUpdateInterval);
-    }
-
-    // Set up new interval
-    autoUpdateInterval = setInterval(() => {
-        updateToCurrentMonth();
-    }, UPDATE_INTERVAL);
-
-    console.log(
-        `🚀 Auto-update started (checking every ${
-            UPDATE_INTERVAL / (60 * 60 * 1000)
-        } hours)`
+    const newInfo = getCurrentDate();
+    return (
+        newInfo.month !== todayDateInfo.month ||
+        newInfo.year !== todayDateInfo.year
     );
 }
 
-//Stop auto-update system (useful for cleanup)
+function updateToCurrentMonth() {
+    if (shouldUpdateCalendar()) {
+        todayDateInfo = getCurrentDate();
+        viewedYear = todayDateInfo.year;
+        viewedMonth = todayDateInfo.month;
+        renderCalendar();
+    }
+}
+
+// Start auto-update
+export function startAutoUpdate() {
+    if (autoUpdateInterval) clearInterval(autoUpdateInterval);
+    autoUpdateInterval = setInterval(updateToCurrentMonth, UPDATE_INTERVAL);
+}
+
+// Stop auto-update
 export function stopAutoUpdate() {
     if (autoUpdateInterval) {
         clearInterval(autoUpdateInterval);
         autoUpdateInterval = null;
-        console.log('⏹️ Auto-update stopped');
     }
 }
 
-//Manual update function (for testing or user-triggered updates)
+// Manual update trigger
 export function forceUpdateCalendar() {
     updateToCurrentMonth();
 }
 
-// ------------------------------------------------------------------
-// Month and Weekday Translations
-// ------------------------------------------------------------------
-
-// Translated month names
+// Month and weekday translations
 const months = {
     russian: [
         'Январь',
@@ -174,23 +129,7 @@ const months = {
         'Ноябрь',
         'Декабрь',
     ],
-    lithuanian: [
-        'Sausis',
-        'Vasaris',
-        'Kovas',
-        'Balandis',
-        'Gegužė',
-        'Birželis',
-        'Liepa',
-        'Rugpjūtis',
-        'Rugsėjis',
-        'Spalis',
-        'Lapkritis',
-        'Gruodis',
-    ],
 };
-
-// Translated weekday names
 const weekdays = {
     russian: [
         'Понедельник',
@@ -201,125 +140,95 @@ const weekdays = {
         'Суббота',
         'Воскресенье',
     ],
-    lithuanian: [
-        'Pirmadienis',
-        'Antradienis',
-        'Treciadienis',
-        'Ketvirtadienis',
-        'Penktadienis',
-        'Sestadienis',
-        'Sekmadienis',
-    ],
 };
 
 // ------------------------------------------------------------------
-// Rendering Calendar UI
+// Render Calendar
 // ------------------------------------------------------------------
-
 export function renderCalendar() {
-    const calendarWeekdays = document.querySelector('.calendar-weekdays');
-    const calendarDays = document.querySelector('.calendar-days');
+    const weekContainer = document.querySelector('.calendar-weekdays');
+    const dayContainer = document.querySelector('.calendar-days');
+    weekContainer.innerHTML = '';
+    dayContainer.innerHTML = '';
 
-    calendarWeekdays.innerHTML = '';
-    calendarDays.innerHTML = '';
-
-    // Render weekday labels in Russian
-    weekdays.russian.forEach((weekday) => {
-        const weekdayElement = document.createElement('div');
-        weekdayElement.className = 'calendar-weekday';
-        weekdayElement.textContent = weekday;
-        calendarWeekdays.appendChild(weekdayElement);
+    // Render weekdays
+    weekdays.russian.forEach((wd) => {
+        const el = document.createElement('div');
+        el.className = 'calendar-weekday';
+        el.textContent = wd;
+        weekContainer.appendChild(el);
     });
 
-    // ----------- Date Grid Calculation -----------
-
-    const firstDayOfMonth = new Date(viewedYear, viewedMonth - 1, 1).getDay();
-
-    // Shift so that Monday is 0, Sunday is 6
-    const correctedStartWeekday =
-        firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
-
+    // Calculate days for 6-week view
+    const first = new Date(viewedYear, viewedMonth - 1, 1).getDay();
+    const startIndex = first === 0 ? 6 : first - 1;
     const daysInMonth = new Date(viewedYear, viewedMonth, 0).getDate();
-
     const days = [];
 
-    // Step 1: Fill in previous month's days (if month doesn't start on Monday)
-    for (let i = correctedStartWeekday - 1; i >= 0; i--) {
-        days.push(new Date(viewedYear, viewedMonth - 1, 0 - i));
+    // Previous month's tail
+    for (let i = startIndex - 1; i >= 0; i--) {
+        days.push(new Date(viewedYear, viewedMonth - 1, -i));
     }
-
-    // Step 2: Current month's days
+    // Current month
     for (let i = 1; i <= daysInMonth; i++) {
         days.push(new Date(viewedYear, viewedMonth - 1, i));
     }
-
-    // Step 3: Fill up to 42 days total (6 weeks)
-    const nextMonthDays = 42 - days.length;
-    for (let i = 1; i <= nextMonthDays; i++) {
+    // Next month's head
+    const fillCount = 42 - days.length;
+    for (let i = 1; i <= fillCount; i++) {
         days.push(new Date(viewedYear, viewedMonth, i));
     }
 
-    // ----------- Create Metadata for Each Day -----------
-    const modifiedDays = days.map((day) => {
-        const formatted = formatDateISO(day);
+    // Render each day
+    days.forEach((dt) => {
+        const formatted = formatDateISO(dt);
+        const isTodayFlag = isToday(dt);
+        const isTripFlag = isTrip(dt);
+        const cell = document.createElement('div');
+        cell.className = 'calendar-day';
+        cell.setAttribute('role', 'gridcell');
+        cell.setAttribute('tabindex', '0');
+        cell.setAttribute(
+            'aria-selected',
+            (isTodayFlag || isTripFlag).toString()
+        );
 
-        return {
-            date: formatted,
-            day: day.getDate(),
-            weekend: isWeekend(day.getDay()) ? 'calendar-day--weekend' : '',
-            today: isToday(day) ? 'calendar-day--today' : '',
-            trip: isTrip(day) ? 'calendar-day--travel' : '',
-            tripCity: isTrip(day) ? tripDates.cityRussian : '',
-            otherMonth: !isViewedMonth(day, viewedYear, viewedMonth)
-                ? 'calendar-day--other-month'
-                : '',
-        };
-    });
+        // Apply classes
+        if (isWeekend(dt.getDay())) cell.classList.add('calendar-day--weekend');
+        if (isTodayFlag) cell.classList.add('calendar-day--today');
+        if (isTripFlag) cell.classList.add('calendar-day--travel');
+        if (!isViewedMonth(dt, viewedYear, viewedMonth))
+            cell.classList.add('calendar-day--other-month');
 
-    // ----------- Render Calendar Cells -----------
+        // Number label
+        const num = document.createElement('div');
+        num.className = 'calendar-day__number';
+        num.textContent = dt.getDate();
+        cell.appendChild(num);
 
-    modifiedDays.forEach((day) => {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day';
-
-        // Add modifiers
-        if (day.today) dayElement.classList.add(day.today);
-        if (day.weekend) dayElement.classList.add(day.weekend);
-        if (day.trip) dayElement.classList.add(day.trip);
-        if (day.otherMonth) dayElement.classList.add(day.otherMonth);
-
-        // Add date number
-        const dayNumber = document.createElement('div');
-        dayNumber.className = 'calendar-day__number';
-        dayNumber.textContent = day.day;
-        dayElement.appendChild(dayNumber);
-
-        // Add city label if it's a trip day
-        if (day.trip) {
-            const cityLabel = document.createElement('div');
-            cityLabel.className = 'calendar-day__city';
-            cityLabel.textContent = day.tripCity;
-            dayElement.appendChild(cityLabel);
+        // Trip city label
+        if (isTripFlag) {
+            const city = document.createElement('div');
+            city.className = 'calendar-day__city';
+            city.textContent = tripDates.cityRussian;
+            cell.appendChild(city);
         }
 
-        calendarDays.appendChild(dayElement);
+        dayContainer.appendChild(cell);
     });
 
-    // Update calendar header
+    // Update header labels
     document.querySelector('.month-name').textContent =
         months.russian[viewedMonth - 1];
     document.querySelector('.month-year').textContent = viewedYear;
 }
 
 // ------------------------------------------------------------------
-// Calendar Navigation Buttons
+// Navigation & Page Visibility
 // ------------------------------------------------------------------
-
-const previousButton = document.querySelector('.calendar-button--previous');
-const nextButton = document.querySelector('.calendar-button--next');
-
-// Previous month
-previousButton.addEventListener('click', () => {
+const prevBtn = document.querySelector('.calendar-button--previous');
+const nextBtn = document.querySelector('.calendar-button--next');
+prevBtn.addEventListener('click', () => {
     viewedMonth--;
     if (viewedMonth < 1) {
         viewedMonth = 12;
@@ -327,9 +236,7 @@ previousButton.addEventListener('click', () => {
     }
     renderCalendar();
 });
-
-// Next month
-nextButton.addEventListener('click', () => {
+nextBtn.addEventListener('click', () => {
     viewedMonth++;
     if (viewedMonth > 12) {
         viewedMonth = 1;
@@ -337,35 +244,13 @@ nextButton.addEventListener('click', () => {
     }
     renderCalendar();
 });
-
-// ------------------------------------------------------------------
-//Page Visibility API for smart updates
-// ------------------------------------------------------------------
-
-// Update when user returns to the tab (in addition to timer)
 document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
-        // Page became visible - check for updates
-        setTimeout(() => {
-            updateToCurrentMonth();
-        }, 1000); // Small delay to ensure page is fully loaded
-    }
+    if (!document.hidden) setTimeout(updateToCurrentMonth, 1000);
 });
 
-// ------------------------------------------------------------------
-// Initialization
-// ------------------------------------------------------------------
+// Initialize calendar on load
+renderCalendar();
+startAutoUpdate();
 
-// ------------------------------------------------------------------
-//  Global functions for debugging/manual control
-// ------------------------------------------------------------------
-// window.calendarDebug = {
-//     forceUpdate: forceUpdateCalendar,
-//     shouldUpdate: shouldUpdateCalendar,
-//     currentInfo: () => todayDateInfo,
-//     stopAutoUpdate: stopAutoUpdate,
-//     startAutoUpdate: startAutoUpdate,
-// };
-
-// console.log('📅 Calendar initialized with auto-update system');
-// console.log('🛠️ Debug functions available: window.calendarDebug');
+// Optional debug API
+// window.calendarDebug = { forceUpdate: forceUpdateCalendar, stopAutoUpdate, startAutoUpdate };
