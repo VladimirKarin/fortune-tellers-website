@@ -23,6 +23,43 @@
     border-radius: 2rem 0 1.5rem 0;
     overflow: hidden;
     margin: 0 auto; /* центрируем при одной колонке */
+
+    /* АНИМАЦИЯ: Начальное состояние - невидимые карточки */
+    opacity: 0;
+    transform: translateY(50px); /* НАСТРОЙКА: расстояние движения - 50px */
+    transition: all 0.75s ease-out; /* НАСТРОЙКА: продолжительность анимации - 0.75s, тип easing - ease-out */
+}
+
+/* АНИМАЦИЯ: Состояния для разных направлений появления */
+.about-me-card.animate-from-bottom-left {
+    transform: translate(-30px, 50px);
+}
+
+.about-me-card.animate-from-bottom {
+    transform: translateY(50px);
+}
+
+.about-me-card.animate-from-bottom-right {
+    transform: translate(30px, 50px);
+}
+
+/* АНИМАЦИЯ: Финальное состояние - видимые карточки */
+.about-me-card.animate-in {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* АНИМАЦИЯ: Задержки для staggered эффекта */
+.about-me-card:nth-child(1).animate-in {
+    transition-delay: 0s; /* НАСТРОЙКА: первый блок без задержки */
+}
+
+.about-me-card:nth-child(2).animate-in {
+    transition-delay: 0.3s; /* НАСТРОЙКА: задержка между блоками - 0.3s */
+}
+
+.about-me-card:nth-child(3).animate-in {
+    transition-delay: 0.6s; /* НАСТРОЙКА: задержка для третьего блока - 0.6s */
 }
 
 /* Изображение */
