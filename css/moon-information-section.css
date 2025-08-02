@@ -96,10 +96,12 @@
 }
 
 .moon-information-section__component__information__content__title {
+    color: var(--color-light-text);
     margin-bottom: clamp(0.8rem, 2vw, 1.2rem);
 }
 
 .moon-information-section__component__information__content p {
+    color: var(--color-light-text);
     font-size: clamp(1.6rem, 3vw, 2rem);
     line-height: 1.4;
     word-wrap: break-word;
