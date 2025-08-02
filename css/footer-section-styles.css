@@ -3,7 +3,7 @@
 .footer-section {
     padding: var(--moon-section-gap) 0 0 0;
     width: 100%;
-    margin: var(--moon-section-gap) auto 0 auto;
+    margin: 3.2rem auto 0 auto;
 }
 
 .footer_header {
@@ -54,7 +54,7 @@
 .footer__list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
-    gap: clamp(1.2rem, 3vw, 2rem);
+    gap: clamp(1.2rem, 3vw, 6.4rem);
     justify-content: center;
     place-items: center;
     list-style: none;
