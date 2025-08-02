@@ -83,7 +83,7 @@
 
     /* Responsive spacing for moon section - scales with viewport */
     --moon-section-gap: clamp(2.4rem, 5vw, 6.4rem); /* Gap between moon cards */
-    --moon-card-padding: clamp(1.6rem, 3vw, 2.4rem); /* Internal card padding */
+    --moon-card-padding: clamp(0.8rem, 3vw, 1.6rem); /* Internal card padding */
     --moon-card-gap: clamp(
         2.4rem,
         4vw,
@@ -224,7 +224,7 @@ p {
     font-family: var(--font-primary); /* Montserrat for all text elements */
     line-height: 1.6; /* Comfortable reading line height */
     font-size: var(--font-size-base); /* Default to 16px */
-    margin-bottom: var(--spacing-sm); /* Consistent bottom spacing */
+    /*  margin-bottom: var(--spacing-sm); Consistent bottom spacing */
 }
 
 /* Paragraph-specific styling */
@@ -308,7 +308,7 @@ button:active {
     font-size: var(--font-size-xxl); /* 30px for prominent sections */
     line-height: 1.2; /* Tighter line height for headings */
     text-transform: uppercase; /* Bold, uppercase styling */
-    margin-bottom: var(--spacing-md); /* Space before content */
+    /*margin-bottom: var(--spacing-md);  Space before content */
     font-weight: 700; /* Bold weight */
     color: var(--color-light-text); /* Light text for dark backgrounds */
     letter-spacing: 1px; /* Subtle letter spacing */
@@ -320,7 +320,7 @@ button:active {
     font-size: var(--font-size-base); /* 16px base size */
     font-weight: 500; /* Medium weight */
     text-transform: uppercase; /* Consistent with secondary headings */
-    margin-bottom: var(--spacing-sm); /* Space before content */
+    /* margin-bottom: var(--spacing-sm); Space before content */
     letter-spacing: 0.75px; /* Subtle character spacing */
     color: var(--color-secondary); /* Secondary brand color */
 }
