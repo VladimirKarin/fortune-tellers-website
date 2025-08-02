@@ -8,15 +8,6 @@
         gap: 6.4rem;
     }
 
-    /* Countdown */
-    .timebox {
-        gap: clamp(7rem, 10vw, 12rem);
-        max-width: 1200px;
-    }
-    .time h3 {
-        font-size: clamp(6rem, 8vw, 8rem);
-    }
-
     /* PRICE SECTION */
     .prices-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -63,14 +54,6 @@
     .about-me-section .grid--3-cols {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: clamp(2rem, 5vw, 6.4rem);
-    }
-
-    /* Countdown */
-    .timebox {
-        gap: clamp(4rem, 8vw, 8rem);
-    }
-    .time h3 {
-        font-size: clamp(5rem, 7vw, 7rem);
     }
 
     /* Price Section */
@@ -130,17 +113,6 @@
         min-width: 0;
     }
 
-    /* Countdown */
-    .timebox {
-        gap: clamp(2rem, 6vw, 5rem);
-    }
-    .time h3 {
-        font-size: clamp(3.5rem, 8vw, 5.5rem);
-    }
-    .time p {
-        font-size: clamp(1.1rem, 2vw, 1.3rem);
-    }
-
     /* Prices: 2 columns */
     .prices-section .prices-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -193,20 +165,6 @@
         min-width: 0;
     }
 
-    /* Countdown */
-    .countdown-section {
-        padding: clamp(1.5rem, 4vw, 3rem) 1rem;
-    }
-    .timebox {
-        gap: clamp(1.5rem, 4vw, 3rem);
-    }
-    .time h3 {
-        font-size: clamp(3rem, 10vw, 4.5rem);
-    }
-    .time p {
-        font-size: clamp(1rem, 2.2vw, 1.2rem);
-    }
-
     /* Price Section */
     .prices-grid {
         grid-template-columns: 1fr;
@@ -251,20 +209,6 @@
         max-width: clamp(30rem, 90%, 40rem);
     }
 
-    /* Countdown */
-    .countdown-section {
-        padding: clamp(1rem, 3vw, 2rem) 0.5rem;
-    }
-    .timebox {
-        gap: clamp(1rem, 3vw, 2rem);
-    }
-    .time h3 {
-        font-size: clamp(2.5rem, 12vw, 4rem);
-    }
-    .time p {
-        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-    }
-
     /* Prices Section */
     .prices-section {
         margin-top: clamp(2.4rem, 4vw, 3.2rem);
@@ -305,22 +249,6 @@
     .hero__button {
         padding: 0.8rem 1.2rem;
         font-size: 1rem;
-    }
-
-    /* Countdown */
-    .countdown-section {
-        padding: clamp(1rem, 3vw, 2rem) 0.5rem;
-    }
-    .timebox {
-        gap: clamp(0.5rem, 2vw, 1.5rem);
-    }
-    .time h3 {
-        font-size: clamp(2rem, 15vw, 3.5rem);
-        letter-spacing: -0.05em;
-    }
-    .time p {
-        font-size: clamp(0.8rem, 3vw, 1rem);
-        margin-top: clamp(0.3rem, 1vw, 0.8rem);
     }
 
     /* Price Section */
@@ -424,30 +352,5 @@
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-    }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        transition: none !important;
-        animation: none !important;
-    }
-}
-
-/* Print */
-@media print {
-    .countdown-section {
-        color: #000;
-        background: #fff;
-    }
-    .timebox {
-        gap: 2rem;
-    }
-    .time h3 {
-        font-size: 2rem;
-    }
-    .time p {
-        font-size: 1rem;
     }
 }
