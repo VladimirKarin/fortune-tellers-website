@@ -275,7 +275,7 @@
 }
 
 .popup-title {
-    font-family: var(--font-primary);
+    font-family: var(--font-text);
     font-size: 2.4rem;
     color: var(--color-highlight);
     margin-bottom: 2rem;

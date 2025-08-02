@@ -10,7 +10,7 @@
 
 .section-calendar__description {
     font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-    color: var(--color-text);
+    color: var(--color-light-text);
     margin-bottom: clamp(2.4rem, 4vw, 3.2rem);
 }
 

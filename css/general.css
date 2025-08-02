@@ -1,20 +1,16 @@
 :root {
     /* Colors */
-    /* Background Colors */
-    /* --color-main-background: #ece5f5; */
-    /* --color-main-background: #9b7bbf; */
     --color-header-bg: rgba(249, 248, 252, 0.7);
     --color-section-bg: #f2b4b4;
     --color-card-bg: #f4f3f2;
     --color-footer-bg: #9b59b6;
-    --color-primary: #4a3f70;
+    /* --color-primary: #4a3f70; */
     --color-secondary: #6b5b95;
-    --color-light-text: #333;
-    --color-highlight: #8a7ca8;
     --color-background: #f4f3f2;
     --color-error: #ff6b6b;
     --color-error-bg: #ffe0e0;
 
+    /* Moon Section Variables*/
     --moon-section-gap: clamp(2.4rem, 5vw, 6.4rem);
     --moon-card-padding: clamp(1.6rem, 3vw, 2.4rem);
     --moon-card-gap: clamp(2.4rem, 4vw, 4.8rem);
@@ -68,8 +64,14 @@
     box-sizing: border-box;
 }
 
+*:focus-visible {
+    outline: 2px solid var(--color-highlight);
+    outline-offset: 3px;
+}
+
 html {
-    font-size: 62.5%;
+    font-size: 62.5%; /*1rem = 10px*/
+    scroll-behavior: smooth;
 }
 
 body {
@@ -82,14 +84,17 @@ body {
     color: var(--color-light-text);
 }
 
-.backgroud-gradient-container {
+.background-gradient-container {
     background-image: var(--main-background-gradient);
 }
 
 h1,
 h2,
-h3 {
+h3,
+p {
     font-family: var(--font-primary);
+    line-height: 1.6;
+    font-size: 1.6rem;
 }
 
 p {
@@ -99,6 +104,14 @@ p {
 .section-padding {
     padding: 6.4rem 0;
     text-align: center;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+    transition: all var(--transition-fast);
 }
 
 /* Reusable Classes */
@@ -128,7 +141,6 @@ button:hover {
     display: block;
     font-size: 1.6rem;
     font-weight: 500;
-    color: var(--main-orange-shade);
     text-transform: uppercase;
     margin-bottom: 1.6rem;
     letter-spacing: 0.75px;
