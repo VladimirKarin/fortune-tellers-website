@@ -58,7 +58,7 @@
 }
 
 /* ====================
-   PRICES GRID - RESPONSIVE
+   PRICES GRID - ИСПРАВЛЕННАЯ АНИМАЦИЯ
    ==================== */
 
 .prices-grid {
@@ -69,19 +69,19 @@
     padding: 0 clamp(1.6rem, 3vw, 3.2rem);
     width: 100%;
 
-    /* Animation states */
-    height: 0;
-    overflow: hidden;
-    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-    opacity: 0;
-}
-
-/* Grid layouts for different screen sizes */
-.prices-grid {
+    /* Grid layouts for different screen sizes */
     grid-template-columns: repeat(
         auto-fit,
         minmax(clamp(28rem, 45vw, 40rem), 1fr)
     );
+
+    /* Начальное состояние - полностью скрыто */
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+
+    /* Анимация только для контейнера */
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease 0.1s; /* opacity с небольшой задержкой */
 }
 
 .prices-grid.visible {
@@ -89,7 +89,7 @@
 }
 
 /* ====================
-   PRICE CARDS - RESPONSIVE
+   PRICE CARDS - УПРОЩЕННАЯ АНИМАЦИЯ
    ==================== */
 
 .prices-card {
@@ -100,11 +100,56 @@
     border-radius: 2rem 0 1.5rem 0;
     background-color: var(--color-card-bg);
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
 
-    /* Ensure proper content flow */
+    /* Начальное состояние карточек - ТОЛЬКО когда контейнер скрыт */
+    transform: translateY(0); /* Убираем начальный сдвиг */
+    opacity: 1; /* Убираем начальную прозрачность */
+
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.3s ease;
+
     overflow: hidden;
     position: relative;
+}
+
+/* Анимация при появлении - применяется через JavaScript */
+.prices-card.animate-in {
+    animation: slideInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Keyframe для анимации появления */
+@keyframes slideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Задержки для поочередного появления */
+.prices-card:nth-child(1).animate-in {
+    animation-delay: 0.1s;
+}
+.prices-card:nth-child(2).animate-in {
+    animation-delay: 0.2s;
+}
+.prices-card:nth-child(3).animate-in {
+    animation-delay: 0.3s;
+}
+.prices-card:nth-child(4).animate-in {
+    animation-delay: 0.4s;
+}
+.prices-card:nth-child(5).animate-in {
+    animation-delay: 0.5s;
+}
+.prices-card:nth-child(6).animate-in {
+    animation-delay: 0.6s;
+}
+.prices-explanation-card.animate-in {
+    animation-delay: 0.7s;
 }
 
 .prices-card:hover {
@@ -150,4 +195,20 @@
     color: var(--color-text);
     margin: 0;
     font-weight: 500;
+}
+
+/* ====================
+   ОТЛАДОЧНЫЕ СТИЛИ (можно удалить после проверки)
+   ==================== */
+
+/* Временный стиль для отладки - добавьте этот класс чтобы увидеть карточки */
+.prices-grid.debug {
+    height: auto !important;
+    opacity: 1 !important;
+    border: 2px solid red;
+}
+
+.prices-grid.debug .prices-card {
+    border: 1px solid blue;
+    background-color: lightblue !important;
 }
