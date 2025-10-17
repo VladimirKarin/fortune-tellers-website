@@ -25,7 +25,7 @@ const moonPhaseInformation = {
         moonPhaseNameRussian: 'Полная луна',
         moonPhaseNameLithuanian: 'Pilnatis',
         moonPhaseImage:
-            './img/05-moon-information-section/moon-phase-3-full-moon.png',
+            './img/05-moon-information-section/moon-phase-4-full-moon.png',
         moonPhaseRitualsRussian: ['Завершение', 'Благодарность', 'Энергия'],
         moonPhaseRitualsLithuanian: ['Užbaigimas', 'Padėka', 'Energija'],
     },
@@ -33,7 +33,7 @@ const moonPhaseInformation = {
         moonPhaseNameRussian: 'Убывающая луна',
         moonPhaseNameLithuanian: 'Delčia',
         moonPhaseImage:
-            './img/05-moon-information-section/moon-phase-4-waning-moon.png',
+            './img/05-moon-information-section/moon-phase-3-waning-moon.png',
         moonPhaseRitualsRussian: ['Освобождение', 'Очищение', 'Прощение'],
         moonPhaseRitualsLithuanian: ['Išlaisvinimas', 'Valymas', 'Atleidimas'],
     },
