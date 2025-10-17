@@ -11,7 +11,7 @@ export function timer() {
         return;
     }
 
-    const targetDate = new Date('August 31 2025 00:00:00').getTime();
+    const targetDate = new Date('October 31 2025 00:00:00').getTime();
     const currentDate = new Date().getTime();
     const timeDifference = targetDate - currentDate;
 

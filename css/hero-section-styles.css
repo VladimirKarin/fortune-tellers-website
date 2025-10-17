@@ -10,7 +10,7 @@
     margin: 0 auto;
     padding: clamp(4rem, 8vw, 8rem) 0; /* адаптивные отступы сверху/снизу */
     background-color: var(--color-section-bg); /* fallback-цвет */
-    background-image: url(../img/hero-img-2.jpeg);
+    background-image: url(../img/hero-section/hero-img-2.jpeg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
