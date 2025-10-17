@@ -5,7 +5,7 @@ const moonPhaseInformation = {
         moonPhaseNameRussian: 'Новолуние',
         moonPhaseNameLithuanian: 'Jaunatis',
         moonPhaseImage:
-            './img/moon-information-pictures/moon-phase-1-new-moon.png',
+            './img/05-moon-information-section/moon-phase-1-new-moon.png',
         moonPhaseRitualsRussian: [
             'Очищение',
             'Новые начинания',
@@ -17,7 +17,7 @@ const moonPhaseInformation = {
         moonPhaseNameRussian: 'Растущая луна',
         moonPhaseNameLithuanian: 'Augantis mėnulis',
         moonPhaseImage:
-            './img/moon-information-pictures/moon-phase-2-waxing-moon.png',
+            './img/05-moon-information-section/moon-phase-2-waxing-moon.png',
         moonPhaseRitualsRussian: ['Рост', 'Развитие', 'Привлечение'],
         moonPhaseRitualsLithuanian: ['Augimas', 'Plėtra', 'Patraukimas'],
     },
@@ -25,7 +25,7 @@ const moonPhaseInformation = {
         moonPhaseNameRussian: 'Полная луна',
         moonPhaseNameLithuanian: 'Pilnatis',
         moonPhaseImage:
-            './img/moon-information-pictures/moon-phase-3-full-moon.png',
+            './img/05-moon-information-section/moon-phase-3-full-moon.png',
         moonPhaseRitualsRussian: ['Завершение', 'Благодарность', 'Энергия'],
         moonPhaseRitualsLithuanian: ['Užbaigimas', 'Padėka', 'Energija'],
     },
@@ -33,7 +33,7 @@ const moonPhaseInformation = {
         moonPhaseNameRussian: 'Убывающая луна',
         moonPhaseNameLithuanian: 'Delčia',
         moonPhaseImage:
-            './img/moon-information-pictures/moon-phase-4-waning-moon.png',
+            './img/05-moon-information-section/moon-phase-4-waning-moon.png',
         moonPhaseRitualsRussian: ['Освобождение', 'Очищение', 'Прощение'],
         moonPhaseRitualsLithuanian: ['Išlaisvinimas', 'Valymas', 'Atleidimas'],
     },
