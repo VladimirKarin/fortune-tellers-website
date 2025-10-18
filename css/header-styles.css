@@ -107,12 +107,6 @@
     .logo {
         height: 6rem;
     }
-    .main-nav__list {
-        gap: 1.2rem;
-    }
-    .main-nav__list__link {
-        font-size: 1.4rem;
-    }
 }
 
 /* Tablet landscape (≤ 991px) */
@@ -130,15 +124,6 @@
 
     .logo__img {
         height: 4rem;
-    }
-
-    .main-nav__list {
-        gap: 0.8rem;
-    }
-
-    .main-nav__list__link {
-        font-size: 1.2rem;
-        padding: 0.5rem 1rem;
     }
 
     .nav-list {
