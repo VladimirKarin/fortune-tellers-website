@@ -2,7 +2,7 @@
 .about-me-section .grid--3-cols {
     /* Равномерно по 3 столбца, без «раздувания» контентом */
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6.4rem; /* пусть остаётся твой оригинальный gap */
+    gap: var(--spacing-xxl); /* пусть остаётся твой оригинальный gap */
 }
 
 /* Обязательно добавляем, чтобы карточки не «расширялись» под содержимое */
@@ -79,7 +79,7 @@
 .about-me-card__title {
     font-size: clamp(1.8rem, 2vw, 2rem);
     font-weight: 600;
-    margin-bottom: 3.2rem;
+    margin-bottom: var(--spacing-lg);
 }
 
 .about-me-card__text {
