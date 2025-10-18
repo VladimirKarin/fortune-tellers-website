@@ -1,102 +1,155 @@
 /* ===========================
    HEADER + NAVIGATION STYLES
-   =========================== */
+   (Rewritten — same class names)
+   ===========================
+   RU: Обновлённый CSS для .header/.logo/.nav-list и т.д.
+   EN: Updated CSS keeping original class names (no renaming).
+*/
 
-/* --- БАЗОВЫЕ СТИЛИ ДЛЯ БОЛЬШИХ ЭКРАНОВ --- */
-
-.header {
-    background-color: var(--color-header-bg);
-    width: 100%;
-    position: fixed;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: var(--spacing-xxxl);
-    z-index: 1000;
-    backdrop-filter: blur(5px);
+/* ---------------------
+   Helpful local variables (can be adjusted)
+   --------------------- */
+:root {
+    --header-height: var(--spacing-xxxl, 6.4rem); /* fallback */
+    --logo-default: 5.2rem;
+    --nav-font: 1.4rem;
+    --nav-gap: 2rem;
+    --mobile-panel-width: 60%;
+    --header-z: 1000;
 }
 
+/* =========================
+   BASE - header area
+   ========================= */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.4rem;
+    box-sizing: border-box;
+    background-color: var(--color-header-bg);
+    z-index: var(--header-z);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    /* Safe-area support for iOS notch */
+    padding-top: calc(env(safe-area-inset-top, 0px));
+}
+
+/* logo */
 .logo {
     display: flex;
     align-items: center;
-    margin-left: 4.8rem;
+    margin-left: 4.8rem; /* оставлено как в оригинале */
 }
 
 .logo__img {
-    height: 5.2rem; /* оригинальный размер логотипа */
+    height: var(--logo-default);
+    width: auto;
+    display: block;
+    object-fit: contain;
+    /* Responsive fallback: scale down on small screens */
+    max-height: 6.2rem;
 }
 
-/* Navigation */
-
+/* Navigation container */
 .main-nav {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: var(--nav-gap);
 }
 
+/* nav list (desktop inline, mobile off-canvas) */
 .nav-list {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: var(--nav-gap);
     margin: 0 4.8rem 0 0;
     padding: 0;
+    align-items: center;
+    /* For off-canvas behaviour on mobile we will override in media queries */
 }
 
+/* links inside nav */
 .nav-list li a {
-    font-size: 1.4rem; /* оригинальный размер текста */
+    display: inline-block;
+    font-size: var(--nav-font);
     font-weight: 700;
     color: var(--color-text);
     text-transform: uppercase;
     padding: 0.5rem 1.3rem;
     text-decoration: none;
     position: relative;
+    line-height: 1;
+    transition: color 160ms ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Hover underline effect (остается как было) */
+/* performant underline effect: use transform: scaleX */
 .nav-list li a::after {
     content: '';
     position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
     left: 0;
-    background-image: var(--btn-gradient);
-    transition: width 0.75s ease;
-}
-
-.nav-list li a:hover::after,
-.nav-list li a:focus::after {
+    bottom: -2px;
+    height: 2px;
     width: 100%;
+    background-image: var(--btn-gradient);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 260ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    will-change: transform;
 }
 
-/* MOBILE NAV BUTTON (скрытый на больших) */
+/* hover + focus-visible expands underline */
+.nav-list li a:hover::after,
+.nav-list li a:focus::after,
+.nav-list li a:focus-visible::after {
+    transform: scaleX(1);
+}
 
+/* keyboard-visible focus ring for accessibility */
+.nav-list li a:focus-visible {
+    outline: 3px solid rgba(0, 0, 0, 0.12);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* =========================
+   MOBILE NAV BUTTON
+   ========================= */
 .btn-mobile-nav {
-    display: none;
+    display: none; /* shown on mobile via media queries */
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 1001;
+    z-index: calc(var(--header-z) + 10); /* above header */
+    padding: 0.4rem;
 }
 
+/* icon sizes */
 .icon-mobile-nav {
     height: 3.2rem;
     width: 3.2rem;
+    display: block;
     color: var(--color-text);
 }
 
+/* default icon visibility */
 .open-icon {
     display: block;
 }
-
 .close-icon {
     display: none;
 }
 
-/* ===========================
-   АДАПТИВ ДЛЯ УМЕНЬШЕНИЯ
-   =========================== */
+/* =========================
+   RESPONSIVE / ADAPTIVE
+   ========================= */
 
 /* Desktop: 992px - 1200px */
 @media (min-width: 992px) and (max-width: 1200px) {
@@ -105,15 +158,22 @@
         padding: 0 2.4rem;
     }
     .logo {
+        /* preserve layout; if you used height here previously, keep it */
         height: 6rem;
+    }
+    /* slight tighten of nav gap on medium desktop */
+    .nav-list {
+        gap: 1.2rem;
+    }
+    .nav-list li a {
+        font-size: 1.4rem;
     }
 }
 
-/* Tablet landscape (≤ 991px) */
+/* Tablet landscape and below: make nav off-canvas
+   Use transform (GPU accelerated) to slide panel in/out. */
 @media (max-width: 991px) {
     .header {
-        /* padding: 0 2.4rem;
-        height: 6.4rem; */
         height: 4.8rem;
         padding: 0 1.2rem;
     }
@@ -121,48 +181,57 @@
     .logo {
         height: 4rem;
     }
-
     .logo__img {
         height: 4rem;
     }
 
+    /* Off-canvas panel behaviour: switch .nav-list to column and position fixed */
     .nav-list {
         position: fixed;
         top: 0;
         right: 0;
-        background-color: var(--color-header-bg);
+        height: 100vh;
+        width: var(--mobile-panel-width);
+        display: flex;
         flex-direction: column;
         align-items: flex-end;
-        width: 60%;
-        height: 100vh;
-        padding-top: 6.4rem;
+        background-color: var(--color-header-bg);
+        padding-top: 6.4rem; /* space under header */
+        box-sizing: border-box;
+
+        /* Hidden by default: move outside of viewport */
         transform: translateX(100%);
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        opacity: 0;
+        transition: transform 320ms cubic-bezier(0.2, 0.9, 0.2, 1);
+        will-change: transform;
+        /* keep it non-interactive while hidden */
         pointer-events: none;
         visibility: hidden;
     }
 
+    /* When menu open: .header.nav-open should be added by JS */
     .header.nav-open .nav-list {
         transform: translateX(0);
-        opacity: 1;
         pointer-events: auto;
         visibility: visible;
     }
 
+    /* panel links: larger tappable area */
     .nav-list li a {
         font-size: 1.2rem;
         padding: 1rem 2rem;
+        text-align: right;
+        width: 100%;
     }
 
+    /* show mobile toggle */
     .btn-mobile-nav {
         display: block;
     }
 
+    /* toggle icon swapping when header has nav-open */
     .header.nav-open .open-icon {
         display: none;
     }
-
     .header.nav-open .close-icon {
         display: block;
     }
@@ -174,7 +243,6 @@
         padding: 0 1.2rem;
         height: 4.8rem;
     }
-
     .logo__img {
         height: 3.2rem;
     }
@@ -193,7 +261,7 @@
 @media (max-width: 599px) {
     .nav-list {
         width: 100%;
-    }
+    } /* full width panel on smallest phones */
     .nav-list li a {
         font-size: 1.4rem;
     }
@@ -205,4 +273,53 @@
         font-size: 1.2rem;
         padding: 1rem;
     }
+    .header {
+        padding: 0 0.8rem;
+    }
 }
+
+/* =========================
+   Accessibility & reduced motion
+   ========================= */
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .nav-list,
+    .nav-list li a::after,
+    .btn-mobile-nav {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Utility for locking scroll when menu open (toggle via JS) */
+/* .u-no-scroll { overflow: hidden; height: 100vh; }  — enable in JS if needed */
+
+/* Small helpers to ensure keyboard outlines visible even if browser reset applied */
+:focus {
+    outline: none;
+}
+:focus-visible {
+    outline: none;
+}
+
+/* ======== End of header/nav styles ======== */
+
+/* ======== JS hint (RU / EN) ========
+RU:
+- Для открытия/закрытия меню JS должен переключать класс `.nav-open` на .header.
+- Кнопке .btn-mobile-nav полезно ставить aria-expanded="true|false".
+Пример:
+  const btn = document.querySelector('.btn-mobile-nav');
+  const header = document.querySelector('.header');
+  btn.addEventListener('click', () => {
+    const open = header.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', String(open));
+    // при открытии можно блокировать скролл:
+    // document.body.classList.toggle('u-no-scroll', open);
+  });
+
+EN:
+- Toggle the mobile menu by adding/removing `.nav-open` on the .header.
+- Keep aria-expanded on the toggle button and manage body scroll + focus trap in JS if desired.
+=========================================== */
