@@ -228,3 +228,12 @@ document.querySelectorAll('.time h3').forEach((el, i) => {
         transform: none;
     }
 }
+
+/* High DPI */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .time h3 {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}

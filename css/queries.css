@@ -1,18 +1,5 @@
 /* RESPONSIVE STYLES - CLEANED VERSION */
 
-/* Ultra-wide screens */
-@media (min-width: 1201px) {
-    /* PRICE SECTION */
-    .prices-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: clamp(3.2rem, 4vw, 4.8rem);
-    }
-
-    .prices-card {
-        min-width: 35rem;
-    }
-}
-
 /* Desktop: 992px - 1200px */
 @media (min-width: 992px) and (max-width: 1200px) {
     /* Hero */
@@ -42,16 +29,6 @@
     }
     .main-nav__list__link {
         font-size: 1.4rem;
-    }
-
-    /* Price Section */
-    .prices-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: clamp(2.4rem, 3vw, 3.2rem);
-    }
-
-    .prices-card {
-        min-width: 32rem;
     }
 }
 
@@ -88,25 +65,6 @@
         font-size: 1.2rem;
         padding: 0.5rem 1rem;
     }
-
-    /* Prices: 2 columns */
-    .prices-section .prices-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: clamp(2rem, 3vw, 2.4rem);
-    }
-
-    .prices-section .prices-grid.visible .prices-card {
-        max-width: 100%;
-    }
-
-    .prices-section .prices-explanation-card {
-        grid-column: 1 / -1;
-    }
-
-    .prices-card {
-        min-width: 30rem;
-        padding: clamp(1.4rem, 2.5vw, 1.8rem);
-    }
 }
 
 /* Tablet Portrait: 600px - 767px */
@@ -128,19 +86,6 @@
     .hero__button {
         font-size: 1.4rem;
     }
-
-    /* Price Section */
-    .prices-grid {
-        grid-template-columns: 1fr;
-        gap: clamp(1.6rem, 3vw, 2rem);
-        padding: 0 clamp(1.6rem, 4vw, 2.4rem);
-    }
-
-    .prices-card {
-        min-width: 100%;
-        max-width: 50rem;
-        margin: 0 auto;
-    }
 }
 
 /* Mobile (≤ 599px) */
@@ -161,30 +106,6 @@
         font-size: 1.2rem;
         padding: 1.2rem 1.6rem;
     }
-
-    /* Prices Section */
-    .prices-section {
-        margin-top: clamp(2.4rem, 4vw, 3.2rem);
-    }
-
-    .prices-grid {
-        grid-template-columns: 1fr;
-        gap: clamp(1.6rem, 3vw, 2rem);
-        padding: 0 clamp(1.6rem, 4vw, 2rem);
-    }
-
-    .prices-card {
-        min-width: 100%;
-        padding: clamp(1.4rem, 3vw, 1.8rem);
-    }
-
-    .prices-card__title {
-        font-size: clamp(1.6rem, 3.5vw, 1.8rem);
-    }
-
-    .prices-card__text {
-        font-size: clamp(1.4rem, 3vw, 1.5rem);
-    }
 }
 
 /* Small Mobile: 320px - 449px */
@@ -202,108 +123,5 @@
     .hero__button {
         padding: 0.8rem 1.2rem;
         font-size: 1rem;
-    }
-
-    /* Price Section */
-    .prices-section {
-        margin-top: clamp(2rem, 4vw, 2.4rem);
-    }
-
-    .prices-grid {
-        grid-template-columns: 1fr;
-        gap: clamp(1.4rem, 3vw, 1.6rem);
-        padding: 0 clamp(1.2rem, 3vw, 1.6rem);
-    }
-
-    .prices-card {
-        min-width: 100%;
-        padding: clamp(1.2rem, 3vw, 1.6rem);
-    }
-
-    .prices-card__title {
-        font-size: clamp(1.4rem, 4vw, 1.6rem);
-        margin-bottom: clamp(0.6rem, 2vw, 1rem);
-    }
-
-    .prices-card__text {
-        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
-    }
-
-    .prices__text {
-        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
-    }
-
-    .prices-explanation-card {
-        padding: clamp(1.2rem, 3vw, 1.6rem);
-        margin-top: clamp(1.2rem, 3vw, 1.6rem);
-    }
-}
-
-/* ====================
-   ACCESSIBILITY & UX IMPROVEMENTS
-   ==================== */
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .prices-card {
-        border: 2px solid var(--color-text);
-    }
-
-    .prices__button {
-        border-width: 3px;
-    }
-}
-
-/* Reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-    .prices-card,
-    .prices__button,
-    .prices-grid {
-        transition: none;
-    }
-
-    .prices-card:hover,
-    .prices__button:hover {
-        transform: none;
-    }
-}
-
-/* Focus management for keyboard users */
-.prices-card:focus-within {
-    outline: 2px solid var(--color-highlight);
-    outline-offset: 2px;
-}
-
-/* Print styles */
-@media print {
-    .prices-section {
-        margin-top: 2rem;
-        break-inside: avoid;
-    }
-
-    .prices-grid {
-        height: auto !important;
-        opacity: 1 !important;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-    }
-
-    .prices-card {
-        box-shadow: none;
-        border: 1px solid #ccc;
-        break-inside: avoid;
-    }
-
-    .prices__button {
-        display: none;
-    }
-}
-
-/* High DPI */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .time h3 {
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
     }
 }
