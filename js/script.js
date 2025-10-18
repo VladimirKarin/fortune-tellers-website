@@ -2,29 +2,16 @@ import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';
 import { initializeMoonPhase } from './moon-phase.js';
 import Carousel from './carousel.js';
 import { renderCalendar, startAutoUpdate } from './calendar.js';
+import { initNav, destroyNav } from './nav.js';
 
 // ------------------------------------------------------------------
 // MOBILE NAVIGATION FUNCTIONALITY
 // ------------------------------------------------------------------
 
 // script.js
-let navModulePromise = null;
-
 document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.querySelector('.btn-mobile-nav');
-    if (!btn) return;
-
-    btn.addEventListener('click', async function onFirstClick(e) {
-        // при первом клике — динамически импортируем nav.js и инициализируем
-        if (!navModulePromise) {
-            navModulePromise = import('./nav.js');
-            const navModule = await navModulePromise;
-            navModule.initNav();
-        }
-        // после первого раза поведение уже внутри nav.js (toggle обрабатывается там)
-        // можно удалить этот временный обработчик, если он больше не нужен
-        btn.removeEventListener('click', onFirstClick);
-    });
+    initNav();
+    // ... остальная инициализация
 });
 
 // const headerElement = document.querySelector('.header');
