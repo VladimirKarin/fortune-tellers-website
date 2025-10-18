@@ -8,34 +8,9 @@ import { initNav, destroyNav } from './nav.js';
 // MOBILE NAVIGATION FUNCTIONALITY
 // ------------------------------------------------------------------
 
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
     initNav();
-    // ... остальная инициализация
 });
-
-// const headerElement = document.querySelector('.header');
-// const navigationButtonElement = document.querySelector('.btn-mobile-nav');
-// const navList = document.querySelector('.nav-list');
-
-// navigationButtonElement.addEventListener('click', () => {
-//     // toggle aria-expanded
-//     const isExpanded =
-//         navigationButtonElement.getAttribute('aria-expanded') === 'true';
-//     navigationButtonElement.setAttribute('aria-expanded', String(!isExpanded));
-
-//     // toggle class
-//     headerElement.classList.toggle('nav-open');
-// });
-
-// navList.querySelectorAll('a').forEach((link) => {
-//     link.addEventListener('click', () => {
-//         if (headerElement.classList.contains('nav-open')) {
-//             headerElement.classList.remove('nav-open');
-//             navigationButtonElement.setAttribute('aria-expanded', 'false');
-//         }
-//     });
-// });
 
 // ------------------------------------------------------------------
 // ABOUT ME SECTION ANIMATION FUNCTIONALITY
