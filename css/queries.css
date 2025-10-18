@@ -2,12 +2,6 @@
 
 /* Ultra-wide screens */
 @media (min-width: 1201px) {
-    /* About Me: 3 columns */
-    .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 6.4rem;
-    }
-
     /* PRICE SECTION */
     .prices-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -48,12 +42,6 @@
     }
     .main-nav__list__link {
         font-size: 1.4rem;
-    }
-
-    /* About Me: 3 columns */
-    .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: clamp(2rem, 5vw, 6.4rem);
     }
 
     /* Price Section */
@@ -101,18 +89,6 @@
         padding: 0.5rem 1rem;
     }
 
-    /* About Me: 2 columns, center 3rd */
-    .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: clamp(2rem, 5vw, 6.4rem);
-    }
-    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        grid-column: 1 / -1;
-        justify-self: center;
-        max-width: clamp(30rem, 70%, 40rem);
-        min-width: 0;
-    }
-
     /* Prices: 2 columns */
     .prices-section .prices-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -153,18 +129,6 @@
         font-size: 1.4rem;
     }
 
-    /* About Me: 2 columns */
-    .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: clamp(2rem, 5vw, 6.4rem);
-    }
-    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        grid-column: 1 / -1;
-        justify-self: center;
-        max-width: clamp(30rem, 70%, 40rem);
-        min-width: 0;
-    }
-
     /* Price Section */
     .prices-grid {
         grid-template-columns: 1fr;
@@ -196,17 +160,6 @@
     .hero__button {
         font-size: 1.2rem;
         padding: 1.2rem 1.6rem;
-    }
-
-    /* About Me: 1 column */
-    .about-me-section .grid--3-cols {
-        grid-template-columns: 1fr;
-        gap: clamp(2rem, 5vw, 4rem);
-    }
-    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        grid-column: initial;
-        justify-self: initial;
-        max-width: clamp(30rem, 90%, 40rem);
     }
 
     /* Prices Section */

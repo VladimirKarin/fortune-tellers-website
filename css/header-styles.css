@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 7.4rem;
+    height: var(--spacing-xxxl);
     z-index: 1000;
     backdrop-filter: blur(5px);
 }
