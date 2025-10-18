@@ -7,28 +7,48 @@ import { renderCalendar, startAutoUpdate } from './calendar.js';
 // MOBILE NAVIGATION FUNCTIONALITY
 // ------------------------------------------------------------------
 
-const headerElement = document.querySelector('.header');
-const navigationButtonElement = document.querySelector('.btn-mobile-nav');
-const navList = document.querySelector('.nav-list');
+// script.js
+let navModulePromise = null;
 
-navigationButtonElement.addEventListener('click', () => {
-    // toggle aria-expanded
-    const isExpanded =
-        navigationButtonElement.getAttribute('aria-expanded') === 'true';
-    navigationButtonElement.setAttribute('aria-expanded', String(!isExpanded));
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.btn-mobile-nav');
+    if (!btn) return;
 
-    // toggle class
-    headerElement.classList.toggle('nav-open');
-});
-
-navList.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-        if (headerElement.classList.contains('nav-open')) {
-            headerElement.classList.remove('nav-open');
-            navigationButtonElement.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', async function onFirstClick(e) {
+        // при первом клике — динамически импортируем nav.js и инициализируем
+        if (!navModulePromise) {
+            navModulePromise = import('./nav.js');
+            const navModule = await navModulePromise;
+            navModule.initNav();
         }
+        // после первого раза поведение уже внутри nav.js (toggle обрабатывается там)
+        // можно удалить этот временный обработчик, если он больше не нужен
+        btn.removeEventListener('click', onFirstClick);
     });
 });
+
+// const headerElement = document.querySelector('.header');
+// const navigationButtonElement = document.querySelector('.btn-mobile-nav');
+// const navList = document.querySelector('.nav-list');
+
+// navigationButtonElement.addEventListener('click', () => {
+//     // toggle aria-expanded
+//     const isExpanded =
+//         navigationButtonElement.getAttribute('aria-expanded') === 'true';
+//     navigationButtonElement.setAttribute('aria-expanded', String(!isExpanded));
+
+//     // toggle class
+//     headerElement.classList.toggle('nav-open');
+// });
+
+// navList.querySelectorAll('a').forEach((link) => {
+//     link.addEventListener('click', () => {
+//         if (headerElement.classList.contains('nav-open')) {
+//             headerElement.classList.remove('nav-open');
+//             navigationButtonElement.setAttribute('aria-expanded', 'false');
+//         }
+//     });
+// });
 
 // ------------------------------------------------------------------
 // ABOUT ME SECTION ANIMATION FUNCTIONALITY
