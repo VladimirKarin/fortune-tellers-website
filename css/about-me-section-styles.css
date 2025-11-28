@@ -1,165 +1,472 @@
-/* About Me Section */
+/* ================================================
+   👤 ABOUT ME SECTION - Responsive Card Layout with Animations
+   ================================================
+   
+   📋 TABLE OF CONTENTS:
+   1. CSS Variables (Animation Configuration)
+   2. Grid Layout System
+   3. Card Base Styles
+   4. Animation System
+   5. Content Styling
+   6. Responsive Breakpoints (Simplified)
+   7. Debug Utilities
+*/
+
+/* ===================================
+   1️⃣ CSS VARIABLES - ANIMATION CONFIGURATION
+   =================================== */
+
+:root {
+    /* 🎬 Animation timing controls - adjust these to change all animations at once */
+    --about-animation-distance: 50px; /* How far cards move during entrance */
+    --about-animation-duration: 0.75s; /* Speed of card entrance animation */
+    --about-animation-easing: ease-out; /* Animation curve */
+    --about-animation-stagger-delay: 0.3s; /* Delay between each card animation */
+
+    /* 🎯 Card sizing controls */
+    --about-card-max-width: 40rem; /* Maximum card width */
+    --about-card-min-width: 30rem; /* Minimum card width */
+}
+
+/* ===================================
+   2️⃣ GRID LAYOUT SYSTEM
+   =================================== */
+
+/* 
+   🔄 TRANSLATED: Grid system override for About Me section
+   Original: "Равномерно по 3 столбца, без «раздувания» контентом"
+   Creates 3 equal columns without content-based expansion
+*/
 .about-me-section .grid--3-cols {
-    /* Равномерно по 3 столбца, без «раздувания» контентом */
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--spacing-xxl); /* пусть остаётся твой оригинальный gap */
+    grid-template-columns: repeat(
+        3,
+        minmax(0, 1fr)
+    ); /* minmax(0, 1fr) prevents overflow */
+    gap: var(--spacing-xxl); /* 64px gap between cards */
 }
 
-/* Обязательно добавляем, чтобы карточки не «расширялись» под содержимое */
+/* 
+   🔄 TRANSLATED: Prevent cards from expanding beyond grid constraints
+   Original: "Обязательно добавляем, чтобы карточки не «расширялись» под содержимое"
+*/
 .about-me-section .grid--3-cols > .about-me-card {
-    min-width: 0;
+    min-width: 0; /* Critical for proper grid behavior with long content */
 }
 
+/* Section heading alignment */
 .about-me-section__heading {
-    text-align: left;
+    text-align: left; /* Left-align section title */
+    margin-bottom: var(--spacing-lg); /* Space before cards grid */
 }
 
-/* Карточки */
+/* ===================================
+   3️⃣ CARD BASE STYLES
+   =================================== */
+
+/* 
+   🔄 TRANSLATED: Individual card container
+   Original: "Карточки"
+*/
 .about-me-card {
-    max-width: clamp(30rem, 90%, 40rem); /* ограничиваем ширину */
-    width: 100%;
-    color: var(--color-text);
-    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
-    border-radius: 2rem 0 1.5rem 0;
-    overflow: hidden;
-    margin: 0 auto; /* центрируем при одной колонке */
+    /* Size constraints */
+    max-width: clamp(
+        var(--about-card-min-width),
+        90%,
+        var(--about-card-max-width)
+    ); /* Responsive width limits */
+    width: 100%; /* Fill available space */
+    margin: 0 auto; /* Center cards when in single column */
 
-    /* АНИМАЦИЯ: Начальное состояние - невидимые карточки */
+    /* Visual styling */
+    color: var(--color-text); /* Dark purple text from general.css */
+    box-shadow: var(--shadow-light); /* Subtle depth shadow */
+    border-radius: var(
+        --border-radius-button
+    ); /* Unique asymmetrical corners */
+    overflow: hidden; /* Clip image to border radius */
+
+    /* 🎬 ANIMATION: Initial hidden state - cards invisible before scroll trigger */
     opacity: 0;
-    transform: translateY(50px); /* НАСТРОЙКА: расстояние движения - 50px */
-    transition: all 0.75s ease-out; /* НАСТРОЙКА: продолжительность анимации - 0.75s, тип easing - ease-out */
+    transform: translateY(
+        var(--about-animation-distance)
+    ); /* Default downward entrance */
+    transition: all var(--about-animation-duration)
+        var(--about-animation-easing); /* Smooth entrance */
+
+    /* Interaction feedback */
+    cursor: default; /* Reset cursor */
 }
 
-/* АНИМАЦИЯ: Состояния для разных направлений появления */
+/* Optional hover effect for cards */
+.about-me-card:hover {
+    box-shadow: var(--shadow-hover); /* Elevated shadow on hover */
+    transform: translateY(-4px); /* Slight lift effect */
+}
+
+/* ===================================
+   4️⃣ ANIMATION SYSTEM
+   =================================== */
+
+/* 
+   🎬 ANIMATION: Directional entrance variations
+   🔄 TRANSLATED: "Состояния для разных направлений появления"
+   Cards can slide in from different angles based on screen layout
+*/
+
+/* Enter from bottom-left diagonal */
 .about-me-card.animate-from-bottom-left {
-    transform: translate(-30px, 50px);
+    transform: translate(
+        -30px,
+        var(--about-animation-distance)
+    ); /* Diagonal slide */
 }
 
+/* Enter from straight bottom (default) */
 .about-me-card.animate-from-bottom {
-    transform: translateY(50px);
+    transform: translateY(var(--about-animation-distance)); /* Vertical slide */
 }
 
+/* Enter from bottom-right diagonal */
 .about-me-card.animate-from-bottom-right {
-    transform: translate(30px, 50px);
+    transform: translate(
+        30px,
+        var(--about-animation-distance)
+    ); /* Diagonal slide */
 }
 
-/* АНИМАЦИЯ: Финальное состояние - видимые карточки */
+/* 
+   🎬 ANIMATION: Final visible state
+   🔄 TRANSLATED: "Финальное состояние - видимые карточки"
+   This class is added by JavaScript when cards enter viewport
+*/
 .about-me-card.animate-in {
-    opacity: 1;
-    transform: translate(0, 0);
+    opacity: 1; /* Fully visible */
+    transform: translate(0, 0); /* Reset to natural position */
 }
 
-/* АНИМАЦИЯ: Задержки для staggered эффекта */
+/* 
+   🎬 ANIMATION: Staggered entrance delays
+   🔄 TRANSLATED: "Задержки для staggered эффекта"
+   Creates waterfall effect - cards appear one after another
+*/
 .about-me-card:nth-child(1).animate-in {
-    transition-delay: 0s; /* НАСТРОЙКА: первый блок без задержки */
+    transition-delay: 0s; /* First card appears immediately */
 }
 
 .about-me-card:nth-child(2).animate-in {
-    transition-delay: 0.3s; /* НАСТРОЙКА: задержка между блоками - 0.3s */
+    transition-delay: var(
+        --about-animation-stagger-delay
+    ); /* Second card delayed by 0.3s */
 }
 
 .about-me-card:nth-child(3).animate-in {
-    transition-delay: 0.6s; /* НАСТРОЙКА: задержка для третьего блока - 0.6s */
+    transition-delay: calc(
+        var(--about-animation-stagger-delay) * 2
+    ); /* Third card delayed by 0.6s */
 }
 
-/* Изображение */
+/* ===================================
+   5️⃣ CONTENT STYLING
+   =================================== */
+
+/* 
+   🔄 TRANSLATED: Card image styling
+   Original: "Изображение"
+*/
 .about-me-card__img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
+    width: 100%; /* Full card width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove inline spacing */
+    object-fit: cover; /* Crop image to fill space */
 }
 
-/* Контент карточки */
+/* 
+   🔄 TRANSLATED: Card content container
+   Original: "Контент карточки"
+*/
 .about-me-card__content {
-    background-color: var(--color-card-bg);
-    padding: 2.4rem 3.6rem 3.6rem;
+    background-color: var(--color-card-bg); /* Light purple background */
+    padding: 2.4rem 3.6rem 3.6rem; /* Asymmetrical padding (top smaller) */
 }
 
+/* Card title styling */
 .about-me-card__title {
-    font-size: clamp(1.8rem, 2vw, 2rem);
-    font-weight: 600;
-    margin-bottom: var(--spacing-lg);
+    font-size: clamp(1.8rem, 2vw, 2rem); /* Responsive title size */
+    font-weight: 600; /* Semi-bold */
+    margin-bottom: var(--spacing-lg); /* Space before text */
+    color: var(--color-primary); /* Brand purple */
 }
 
+/* Card body text */
 .about-me-card__text {
-    text-align: center;
-    font-size: clamp(1.4rem, 2vw, 1.8rem);
-    line-height: 1.6;
+    text-align: center; /* Center-align paragraph text */
+    font-size: clamp(1.4rem, 2vw, 1.8rem); /* Responsive body text */
+    line-height: 1.6; /* Comfortable reading line height */
+    color: var(--color-text); /* Dark purple for readability */
 }
 
-/* Убираем абсолютные позиционирования старых стрелок/лого */
+/* ===================================
+   6️⃣ RESPONSIVE BREAKPOINTS (SIMPLIFIED)
+   =================================== */
 
-.about-me-img {
-    display: none !important;
-    position: relative;
-    width: 75%;
-    height: 75%;
-}
+/* 
+   🎯 OPTIMIZED: Reduced from 6 breakpoints to 4 for easier maintenance
+   Aligns with site standard: 1200px, 768px, 480px + default
+*/
 
-/* RESPONSIVE STYLES */
-
-/* Ultra-wide screens */
-@media (min-width: 1201px) {
-    /* About Me: 3 columns */
+/* 📱 LARGE TABLET / SMALL DESKTOP (≤1200px) */
+@media (max-width: 1200px) {
     .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 6.4rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr)); /* Keep 3 columns */
+        gap: clamp(2rem, 5vw, 6.4rem); /* Responsive gap scaling */
     }
 }
 
-/* Desktop: 992px - 1200px */
-@media (min-width: 992px) and (max-width: 1200px) {
-    /* About Me: 3 columns */
-    .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: clamp(2rem, 5vw, 6.4rem);
-    }
-}
-
-/* Tablet and Mobile: ≤ 991px */
+/* 📱 TABLET (≤991px) - Switch to 2-column layout */
 @media (max-width: 991px) {
-    /* About Me: 2 columns, center 3rd */
     .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: clamp(2rem, 5vw, 6.4rem);
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 equal columns */
+        gap: clamp(2rem, 5vw, 6.4rem); /* Consistent gap */
     }
 
+    /* Third card spans both columns and centers */
     .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        grid-column: 1 / -1;
-        justify-self: center;
-        max-width: clamp(30rem, 70%, 40rem);
-        min-width: 0;
+        grid-column: 1 / -1; /* Span full width */
+        justify-self: center; /* Center horizontally */
+        max-width: clamp(
+            var(--about-card-min-width),
+            70%,
+            var(--about-card-max-width)
+        ); /* Narrower when alone */
+        min-width: 0; /* Reset min-width */
     }
 }
 
-/* Tablet Portrait: 600px - 767px */
-@media (max-width: 767px) {
-    /* About Me: 2 columns */
+/* 📱 TABLET PORTRAIT (≤768px) - Maintain 2-column layout */
+@media (max-width: 768px) {
     .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: clamp(2rem, 5vw, 6.4rem);
+        gap: clamp(1.5rem, 4vw, 4rem); /* Tighter gaps */
     }
 
-    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        grid-column: 1 / -1;
-        justify-self: center;
-        max-width: clamp(30rem, 70%, 40rem);
-        min-width: 0;
+    /* Reduce card padding for smaller screens */
+    .about-me-card__content {
+        padding: 2rem 2.4rem 2.4rem; /* Smaller padding */
     }
 }
 
-/* Mobile (≤ 599px) */
+/* 📱 MOBILE (≤599px) - Single column layout */
 @media (max-width: 599px) {
-    /* About Me: 1 column */
     .about-me-section .grid--3-cols {
-        grid-template-columns: 1fr;
-        gap: clamp(2rem, 5vw, 4rem);
+        grid-template-columns: 1fr; /* Single column */
+        gap: clamp(2rem, 5vw, 4rem); /* Vertical spacing between cards */
     }
 
+    /* Reset third card special styling */
     .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
-        grid-column: initial;
-        justify-self: initial;
-        max-width: clamp(30rem, 90%, 40rem);
+        grid-column: initial; /* Reset grid span */
+        justify-self: initial; /* Reset alignment */
+        max-width: clamp(
+            var(--about-card-min-width),
+            90%,
+            var(--about-card-max-width)
+        ); /* Match other cards */
+    }
+
+    /* Adjust typography for mobile */
+    .about-me-card__title {
+        font-size: clamp(1.6rem, 3vw, 1.8rem); /* Smaller titles */
+        margin-bottom: var(--spacing-md); /* Less spacing */
+    }
+
+    .about-me-card__text {
+        font-size: clamp(1.3rem, 2.5vw, 1.6rem); /* Smaller body text */
     }
 }
+
+/* 📱 SMALL MOBILE (≤480px) - Further refinements */
+@media (max-width: 480px) {
+    .about-me-card__content {
+        padding: 1.6rem 2rem 2rem; /* Minimal padding for small screens */
+    }
+}
+
+/* ===================================
+   ♿ ACCESSIBILITY ENHANCEMENTS
+   =================================== */
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .about-me-card {
+        transition: opacity 0.01ms !important; /* Nearly instant fade */
+        transform: none !important; /* Disable movement animations */
+    }
+
+    .about-me-card.animate-in {
+        transition-delay: 0s !important; /* No stagger delays */
+    }
+
+    .about-me-card:hover {
+        transform: none; /* Disable hover lift */
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .about-me-card {
+        border: 2px solid var(--color-primary); /* Add visible border */
+    }
+
+    .about-me-card__title {
+        font-weight: 700; /* Bolder text */
+    }
+}
+
+/* ================================================
+   7️⃣ DEBUG UTILITIES SECTION
+   ================================================
+   
+   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
+*/
+
+/* ─────────────────────────────────────────────
+   VISUAL LAYOUT DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎨 Layout Boundaries Visualization:
+Uncomment to see colored borders around section elements
+
+.about-me-section { 
+    border: 3px solid red !important; 
+    background: rgba(255,0,0,0.05) !important;
+}
+
+.about-me-section .grid--3-cols { 
+    border: 2px solid blue !important; 
+    background: rgba(0,0,255,0.05) !important;
+}
+
+.about-me-card { 
+    border: 1px solid green !important; 
+    background: rgba(0,255,0,0.05) !important;
+}
+
+.about-me-card__content { 
+    outline: 1px dashed purple !important; 
+}
+*/
+
+/* ─────────────────────────────────────────────
+   ANIMATION DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎬 Animation State Visualization:
+Uncomment to see which animation states are active
+
+.about-me-card.animate-from-bottom-left::before {
+    content: "↙️ Bottom Left";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: red;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    z-index: 1000;
+}
+
+.about-me-card.animate-from-bottom::before {
+    content: "⬇️ Bottom";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: blue;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    z-index: 1000;
+}
+
+.about-me-card.animate-from-bottom-right::before {
+    content: "↘️ Bottom Right";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: green;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    z-index: 1000;
+}
+
+.about-me-card.animate-in::after {
+    content: "✅ Animated In";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: purple;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    z-index: 1000;
+}
+*/
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE BREAKPOINT TESTING
+   ───────────────────────────────────────────── */
+
+/*
+📐 Breakpoint Indicator:
+Copy this to console to see current layout mode:
+
+const width = window.innerWidth;
+const layout = 
+    width <= 599 ? 'Mobile (1 column)' :
+    width <= 991 ? 'Tablet (2 columns, 3rd centered)' :
+    width <= 1200 ? 'Desktop (3 columns)' :
+    'Large Desktop (3 columns)';
+console.log('Current layout:', layout, `(${width}px)`);
+*/
+
+/* ─────────────────────────────────────────────
+   GRID DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+📊 Grid Column Visualization:
+Uncomment to see grid column boundaries
+
+.about-me-section .grid--3-cols {
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(255,0,0,0.1) 0px,
+        rgba(255,0,0,0.1) 1px,
+        transparent 1px,
+        transparent calc((100% - var(--spacing-xxl) * 2) / 3)
+    );
+}
+*/
+
+/* ─────────────────────────────────────────────
+   CSS VARIABLE TESTING
+   ───────────────────────────────────────────── */
+
+/*
+🎛️ Test Different Animation Timings:
+Copy these to console to experiment with animation values:
+
+document.documentElement.style.setProperty('--about-animation-duration', '2s');
+document.documentElement.style.setProperty('--about-animation-distance', '100px');
+document.documentElement.style.setProperty('--about-animation-stagger-delay', '0.5s');
+
+// Reset to defaults:
+document.documentElement.style.setProperty('--about-animation-duration', '0.75s');
+document.documentElement.style.setProperty('--about-animation-distance', '50px');
+document.documentElement.style.setProperty('--about-animation-stagger-delay', '0.3s');
+*/
+
+/* ─────────────────────────────────────────────
+   END OF DEBUG UTILITIES
+   ───────────────────────────────────────────── */
