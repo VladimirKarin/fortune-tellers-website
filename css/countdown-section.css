@@ -64,9 +64,10 @@
 }
 
 /* Optional hover effect for interactive feel */
-.time:hover {
-    transform: translateY(-2px); /* Subtle lift on hover */
-}
+/* Subtle lift on hover */
+/* .time:hover {
+    transform: translateY(-2px); 
+} */
 
 /* ===================================
    4️⃣ NUMBER & LABEL TYPOGRAPHY
