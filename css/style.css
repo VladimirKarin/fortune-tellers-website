@@ -1,12 +1,12 @@
 @import url(./00-general.css);
 
-@import url(./01-deviding-lines.css);
+@import url(./01-deviding-lines-styles.css);
 @import url(./02-header-styles.css);
-@import url(./hero-section-styles.css);
-@import url(./about-me-section-styles.css);
-@import url(./services-section-styles.css);
-@import url(./prices-section.css);
-@import url(./countdown-section.css);
-@import url(./moon-information-section.css);
-@import url(./calendar-section.css);
-@import url(./footer-section-styles.css);
+@import url(./03-hero-section-styles.css);
+@import url(./04-about-me-section-styles.css);
+@import url(./05-countdown-section-styles.css);
+@import url(./06-services-section-styles.css);
+@import url(./07-prices-section-styles.css);
+@import url(./08-moon-information-section-styles.css);
+@import url(./09-calendar-section-styles.css);
+@import url(./010-footer-section-styles.css);
