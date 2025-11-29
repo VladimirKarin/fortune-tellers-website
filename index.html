@@ -60,12 +60,15 @@
         </header>
 
         <!-- Hero Section -->
-        <section class="hero-section">
+        <section class="hero-section" id="hero">
             <div class="hero__content">
                 <h1 class="hero__heading-primary">Уголок Доброй Феи</h1>
                 <p class="hero__text">Мур мяу, мои дорогие! Нагадаю, обласкаю, всю правду скажу и расскажу, от беды уберегу, денег наколдую. За сметану</p>
                 <div class="hero__buttons">
-                    <button class=" button hero__button" onclick="window.location.href = '#contacts';" aria-label="Contact me">Связаться со мной</button>
+                    <!-- 🎯 OPTIMIZED: Removed inline onclick handler -->
+                    <button class="button hero__button" data-scroll-to="contacts" aria-label="Связаться со мной - переход к форме контактов">
+                        Связаться со мной
+                    </button>
                 </div>
             </div>
         </section>
