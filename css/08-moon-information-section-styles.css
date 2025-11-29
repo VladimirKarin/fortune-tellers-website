@@ -115,10 +115,10 @@
 }
 
 /* Hover and Focus Effects */
-.moon-information-section__component__information__content:hover {
+/* .moon-information-section__component__information__content:hover {
     transform: translateY(-0.5rem);
     box-shadow: var(--shadow-hover);
-}
+} */
 
 .moon-information-section__component__information__content:focus-within {
     outline: 2px solid var(--color-highlight);
