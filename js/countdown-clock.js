@@ -308,22 +308,26 @@ export function cleanupCountdown() {
 }
 
 /* ===================================
-   🎬 AUTO-INITIALIZATION
+   🎬 MODULE INITIALIZATION NOTES
    =================================== */
 
-// Auto-initialize when DOM is ready
-if (typeof document !== 'undefined') {
-    if (document.readyState === 'loading') {
-        // DOM still loading - wait for DOMContentLoaded event
-        document.addEventListener('DOMContentLoaded', initializeCountdown);
-    } else {
-        // DOM already loaded - initialize immediately
-        initializeCountdown();
-    }
-
-    // Cleanup on page unload to prevent memory leaks
-    window.addEventListener('beforeunload', cleanupCountdown);
-}
+/*
+   ⚠️ INITIALIZATION REMINDER:
+   This module does NOT auto-initialize to prevent duplicate instances.
+   
+   ✅ CORRECT USAGE:
+   Import and initialize in script.js:
+   
+   import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';
+   
+   document.addEventListener('DOMContentLoaded', initializeCountdown);
+   window.addEventListener('beforeunload', cleanupCountdown);
+   
+   ❌ DO NOT:
+   - Initialize multiple times
+   - Import without calling initializeCountdown()
+   - Call initializeCountdown() more than once
+*/
 
 /* ================================================
    🔧 DEBUG UTILITIES

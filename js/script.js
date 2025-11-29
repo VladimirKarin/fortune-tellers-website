@@ -510,18 +510,43 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ------------------------------------------------------------------
-// COUNTDOWN CLOCK
+// ⏰ COUNTDOWN CLOCK - SINGLE INITIALIZATION POINT
 // ------------------------------------------------------------------
 
-// Initialize countdown when DOM is ready
+/**
+ * Initialize countdown timer
+ * This is the ONLY place countdown should be initialized
+ */
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('🎯 Initializing countdown from script.js');
     initializeCountdown();
 });
 
-// Cleanup when leaving the page
+/**
+ * Cleanup countdown on page unload
+ * Prevents memory leaks
+ */
 window.addEventListener('beforeunload', function () {
+    console.log('🧹 Cleaning up countdown');
     cleanupCountdown();
 });
+
+/*
+## 🔍 VERIFICATION STEPS
+
+After making these changes:
+
+### **1. Clear Cache & Reload**
+- Press `Ctrl + Shift + R` (Windows/Linux)
+- Press `Cmd + Shift + R` (Mac)
+- Or manually clear cache in DevTools
+
+### **2. Check Console**
+You should now see:
+```
+✅ Countdown configured for: [date]
+✅ Countdown timer initialized successfully
+*/
 
 // ------------------------------------------------------------------
 // Moon Phase Section Logic
