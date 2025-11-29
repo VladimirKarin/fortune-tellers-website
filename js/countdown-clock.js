@@ -57,7 +57,7 @@ function getCountdownElements() {
 function getTargetDate() {
     const elements = getCountdownElements();
 
-    // 🎯 NEW: Read target date from HTML data attribute
+    // 🎯 Read target date from HTML data attribute
     const targetDateString = elements.section?.getAttribute('data-target-date');
 
     // Fallback to default date if attribute is missing
@@ -79,14 +79,7 @@ function getTargetDate() {
         return new Date(defaultDate).getTime();
     }
 
-    // Log successful configuration (helpful for debugging)
-    if (targetDateString) {
-        console.log(
-            '✅ Countdown configured for:',
-            new Date(targetDate).toLocaleString()
-        );
-    }
-
+    // 🔥 REMOVED: Logging moved to initializeCountdown() to prevent spam
     return targetDate;
 }
 
@@ -277,6 +270,17 @@ export function initializeCountdown() {
             '\n<h3 id="seconds">00</h3>'
         );
         return false;
+    }
+
+    // 🆕 NEW: Log configuration ONCE during initialization
+    const section = document.querySelector('.countdown-section');
+    const targetDateString = section?.getAttribute('data-target-date');
+    if (targetDateString) {
+        const targetDate = new Date(targetDateString);
+        console.log(
+            '✅ Countdown configured for:',
+            targetDate.toLocaleString()
+        );
     }
 
     // Initial call to display countdown immediately
