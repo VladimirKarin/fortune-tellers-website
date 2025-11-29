@@ -1,7 +1,7 @@
-@import url(./general.css);
+@import url(./00-general.css);
 
-@import url(./deviding-lines.css);
-@import url(./header-styles.css);
+@import url(./01-deviding-lines.css);
+@import url(./02-header-styles.css);
 @import url(./hero-section-styles.css);
 @import url(./about-me-section-styles.css);
 @import url(./services-section-styles.css);
