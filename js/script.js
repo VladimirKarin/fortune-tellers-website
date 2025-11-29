@@ -1,8 +1,13 @@
+// ================================================
+// 📦 MODULE IMPORTS
+// ================================================
+
 import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';
 import { initializeMoonPhase } from './moon-phase.js';
 import Carousel from './carousel.js';
 import { renderCalendar, startAutoUpdate } from './calendar.js';
 import { initNav, destroyNav } from './nav.js';
+import { initializeHeroButton, destroyHeroButton } from './hero-button.js'; // 🆕 NEW IMPORT
 
 // ------------------------------------------------------------------
 // MOBILE NAVIGATION FUNCTIONALITY
@@ -10,6 +15,20 @@ import { initNav, destroyNav } from './nav.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initNav();
+});
+
+// ------------------------------------------------------------------
+// 🦸 HERO BUTTON FUNCTIONALITY
+// ------------------------------------------------------------------
+
+// Initialize hero button smooth scroll
+document.addEventListener('DOMContentLoaded', () => {
+    initializeHeroButton();
+});
+
+// Optional: Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    destroyHeroButton();
 });
 
 /* ================================================
