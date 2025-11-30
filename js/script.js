@@ -4,7 +4,7 @@
 
 import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';
 import { initializeMoonPhase } from './moon-phase.js';
-import Carousel from './backup old files/carousel-OLD.js';
+import Carousel from './carousel.js';
 import { renderCalendar, startAutoUpdate } from './calendar.js';
 import { initNav, destroyNav } from './nav.js';
 import { initializeHeroButton, destroyHeroButton } from './hero-button.js';
