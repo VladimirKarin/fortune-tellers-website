@@ -2,12 +2,12 @@
 // 📦 MODULE IMPORTS
 // ================================================
 
-import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';
-import { initializeMoonPhase } from './moon-phase.js';
+import { initializeCountdown, cleanupCountdown } from '../countdown-clock.js';
+import { initializeMoonPhase } from '../moon-phase.js';
 import Carousel from './carousel-OLD.js';
-import { renderCalendar, startAutoUpdate } from './calendar.js';
-import { initNav, destroyNav } from './nav.js';
-import { initializeHeroButton, destroyHeroButton } from './hero-button.js'; // 🆕 NEW IMPORT
+import { renderCalendar, startAutoUpdate } from '../calendar.js';
+import { initNav, destroyNav } from '../nav.js';
+import { initializeHeroButton, destroyHeroButton } from '../hero-button.js'; // 🆕 NEW IMPORT
 
 // ------------------------------------------------------------------
 // MOBILE NAVIGATION FUNCTIONALITY
