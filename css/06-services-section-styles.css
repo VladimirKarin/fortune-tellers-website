@@ -1,321 +1,810 @@
-/* Services Section */
+/* ================================================
+   🎠 SERVICES SECTION - Interactive Carousel Gallery
+   ================================================
+   
+   📋 TABLE OF CONTENTS:
+   1. CSS Variables (Carousel Configuration)
+   2. Section Container & Layout
+   3. Carousel Base Styles
+   4. Gallery Item Cards (Base & Variants)
+   5. Card Content Styling
+   6. Carousel Navigation Controls
+   7. Position Indicators (Dots)
+   8. Popup Modal System
+   9. Responsive Breakpoints
+   10. Accessibility Enhancements
+   11. Debug Utilities
+*/
+
+/* ===================================
+   1️⃣ CSS VARIABLES - CAROUSEL CONFIGURATION
+   =================================== */
+
+:root {
+    /* 🎠 Carousel dimensions */
+    --carousel-height: 50rem; /* Total carousel container height */
+    --carousel-max-width: 100rem; /* Maximum carousel width */
+
+    /* 🎴 Card sizing - base dimensions */
+    --card-base-height: 32rem; /* Default card height */
+    --card-base-width: 33rem; /* Default card width */
+
+    /* 🎴 Card sizing - featured (center) card */
+    --card-featured-height: 44rem; /* Center card height (tallest) */
+    --card-featured-width: 40rem; /* Center card width (widest) */
+
+    /* 🎴 Card sizing - secondary cards */
+    --card-secondary-height: 38rem; /* Adjacent cards height */
+    --card-secondary-width: 36rem; /* Adjacent cards width */
+
+    /* 🖼️ Visual area (image) height */
+    --card-visual-height: 18rem; /* Image section at top of card */
+
+    /* 📦 Card content padding */
+    --card-content-padding: 2rem; /* Internal padding for card text area */
+
+    /* 🎬 Animation settings */
+    --carousel-transition-speed: 0.3s; /* Card movement animation duration */
+    --carousel-transition-easing: ease-in-out; /* Animation curve */
+
+    /* 🎯 Popup dimensions */
+    --popup-max-width: 60rem; /* Maximum popup dialog width */
+    --popup-padding: 3rem; /* Internal popup padding */
+}
+
+/* ===================================
+   2️⃣ SECTION CONTAINER & LAYOUT
+   =================================== */
+
+/* 
+   Main services section wrapper
+   Centers content and provides vertical spacing
+*/
 .services-section {
-    width: 100%;
+    width: 100%; /* Full viewport width */
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Stack heading and gallery vertically */
+    align-items: center; /* Center-align all children */
 }
 
+/* 
+   Gallery container - holds carousel and controls
+   Adds spacing between heading and carousel
+*/
 .gallery {
-    width: 100%;
-    margin-top: 3.2rem;
+    width: 100%; /* Full section width */
+    margin-top: var(--spacing-lg); /* 32px space from heading */
 }
 
+/* ===================================
+   3️⃣ CAROUSEL BASE STYLES
+   =================================== */
+
+/* 
+   Carousel viewport container
+   Creates 3D perspective space for card positioning
+*/
 .gallery-container {
     display: flex;
-    align-items: center;
-    height: 50rem;
-    margin: 0 auto;
-    max-width: 100rem;
-    position: relative;
+    align-items: center; /* Vertically center cards */
+    height: var(--carousel-height); /* Fixed height for consistent layout */
+    margin: 0 auto; /* Center carousel horizontally */
+    max-width: var(--carousel-max-width); /* Limit width on large screens */
+    position: relative; /* Positioning context for absolute cards */
+
+    /* 🔧 DEBUG: Uncomment to see carousel boundaries
+    border: 2px solid red;
+    background: rgba(255, 0, 0, 0.05);
+    */
 }
 
-/* Base styling for all gallery items */
+/* ===================================
+   4️⃣ GALLERY ITEM CARDS - BASE & VARIANTS
+   =================================== */
+
+/* 
+   🎴 BASE CARD STYLING
+   All carousel cards share these foundation styles
+*/
 .gallery-item {
-    height: 32rem;
-    opacity: 0;
-    position: absolute;
-    transition: all 0.3s ease-in-out;
-    width: 33rem;
-    z-index: 0;
-    border-radius: 2rem 0 1.5rem 0;
-    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    background-color: var(--color-card-bg);
+    /* Dimensions */
+    height: var(--card-base-height); /* Default height */
+    width: var(--card-base-width); /* Default width */
+
+    /* Positioning */
+    position: absolute; /* Allow free positioning within carousel */
+    left: 50%; /* Default center position (overridden by variants) */
+    transform: translateX(-50%); /* Center alignment correction */
+
+    /* Visibility */
+    opacity: 0; /* Hidden by default (shown by position classes) */
+    z-index: 0; /* Default layer (overridden by variants) */
+
+    /* Visual styling */
+    border-radius: var(
+        --border-radius-button
+    ); /* Asymmetrical rounded corners */
+    box-shadow: var(--shadow-light); /* Subtle depth shadow */
+    overflow: hidden; /* Clip content to border radius */
+    background-color: var(--color-card-bg); /* Light purple background */
+
+    /* Layout */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack image and content vertically */
+
+    /* Animation */
+    transition: all var(--carousel-transition-speed)
+        var(--carousel-transition-easing);
+
+    /* 🔧 DEBUG: Uncomment to see card boundaries
+    outline: 2px solid blue;
+    */
 }
 
-/* Card visual area (top section) */
+/* 
+   🎴 CARD POSITION VARIANTS
+   These classes are dynamically applied by carousel.js based on card position
+   
+   Layout (5 visible positions):
+   [1] ← [2] ← [3-CENTER] → [4] → [5]
+*/
+
+/* Position 1: Far left - smallest, faded */
+.gallery-item-1 {
+    left: 15%; /* Far left position */
+    opacity: 0.4; /* Semi-transparent */
+    transform: translateX(-50%); /* Center on position point */
+    z-index: 0; /* Behind other cards */
+}
+
+/* Position 2: Left-adjacent - medium size */
+.gallery-item-2 {
+    left: 30%; /* Left-center position */
+    height: var(--card-secondary-height); /* Taller than base */
+    width: var(--card-secondary-width); /* Wider than base */
+    opacity: 0.8; /* Slightly transparent */
+    transform: translateX(-50%); /* Center on position point */
+    z-index: 1; /* Above side cards */
+}
+
+/* Position 3: CENTER - largest, fully visible (FEATURED) */
+.gallery-item-3 {
+    left: 50%; /* Dead center */
+    height: var(--card-featured-height); /* Tallest card */
+    width: var(--card-featured-width); /* Widest card */
+    opacity: 1; /* Fully opaque */
+    transform: translateX(-50%); /* Perfect center alignment */
+    z-index: 2; /* Front layer */
+    box-shadow: -2px 5px 33px 6px rgba(0, 0, 0, 0.35); /* Dramatic shadow for emphasis */
+}
+
+/* Position 4: Right-adjacent - medium size */
+.gallery-item-4 {
+    left: 70%; /* Right-center position */
+    height: var(--card-secondary-height); /* Taller than base */
+    width: var(--card-secondary-width); /* Wider than base */
+    opacity: 0.8; /* Slightly transparent */
+    transform: translateX(-50%); /* Center on position point */
+    z-index: 1; /* Above side cards */
+}
+
+/* Position 5: Far right - smallest, faded */
+.gallery-item-5 {
+    left: 85%; /* Far right position */
+    opacity: 0.4; /* Semi-transparent */
+    transform: translateX(-50%); /* Center on position point */
+    z-index: 0; /* Behind other cards */
+}
+
+/* ===================================
+   5️⃣ CARD CONTENT STYLING
+   =================================== */
+
+/* 
+   🖼️ VISUAL AREA (IMAGE SECTION)
+   Top portion of card displaying service image
+*/
 .gallery-item-visual {
-    height: 18rem;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    overflow: hidden;
+    height: var(--card-visual-height); /* Fixed image area height */
+    width: 100%; /* Full card width */
+    background-size: cover; /* Fill area while maintaining aspect ratio */
+    background-position: center; /* Center image within area */
+    position: relative; /* Context for accent line */
+    overflow: hidden; /* Clip image overflow */
 }
 
+/* Decorative accent line at bottom of image */
 .gallery-item-visual::after {
-    content: '';
+    content: ''; /* Empty pseudo-element */
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: var(--btn-gradient);
+    height: 4px; /* Thin line */
+    background: var(--btn-gradient); /* Purple-to-pink gradient */
 }
 
-/* Card content (bottom section) */
+/* 
+   📝 CONTENT AREA (TEXT SECTION)
+   Bottom portion of card with title, description, and button
+*/
 .gallery-item-content {
-    padding: 2rem;
-    text-align: left;
-    flex-grow: 1;
+    padding: var(--card-content-padding); /* Consistent internal spacing */
+    text-align: left; /* Left-align text */
+    flex-grow: 1; /* Fill remaining card height */
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: space-between; /* Space out title, text, and button */
 }
 
+/* Card title styling */
 .gallery-item-title {
-    font-family: var(--font-primary);
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--color-highlight);
+    font-family: var(--font-primary); /* Montserrat for headings */
+    font-size: 2rem; /* Prominent title size */
+    margin-bottom: 1rem; /* Space before description */
+    color: var(--color-highlight); /* Bright purple for emphasis */
 }
 
+/* Card description text */
 .gallery-item-text {
-    font-family: var(--font-secondary);
-    font-size: 1.4rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+    font-family: var(--font-secondary); /* Roboto for body text */
+    font-size: 1.4rem; /* Readable size */
+    line-height: 1.6; /* Comfortable line spacing */
+    margin-bottom: 1.5rem; /* Space before button */
+    color: var(--color-text); /* Dark purple for readability */
+
+    /* Text truncation to 3 lines */
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 3; /* Limit to 3 visible lines */
     -webkit-box-orient: vertical;
-    box-orient: vertical;
-    overflow: hidden;
-    color: var(--color-text);
+    overflow: hidden; /* Hide overflow text */
 }
 
+/* "Learn More" button within card */
 .gallery-item-button {
-    align-self: flex-start;
-    padding: 1rem 1.5rem;
-    background: var(--btn-gradient);
-    border: none;
-    border-radius: 2rem 0 1.5rem 0;
-
-    color: white;
-    font-family: var(--font-secondary);
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    align-self: flex-start; /* Left-align button */
+    padding: 1rem 1.5rem; /* Comfortable button padding */
+    background: var(--btn-gradient); /* Purple-to-pink gradient */
+    border: none; /* Remove default border */
+    border-radius: var(--border-radius-button); /* Asymmetrical corners */
+    color: var(--color-light-text); /* White text for contrast */
+    font-family: var(--font-secondary); /* Roboto for consistency */
+    font-size: 1.4rem; /* Button text size */
+    cursor: pointer; /* Indicate interactivity */
+    transition: all 0.2s ease; /* Smooth hover transition */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle depth */
 }
 
+/* Button hover state */
 .gallery-item-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px); /* Lift button */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+    filter: brightness(1.1); /* Brighten gradient */
 }
 
+/* Button active/pressed state */
 .gallery-item-button:active {
-    transform: translateY(0);
+    transform: translateY(0); /* Return to original position */
 }
 
-/* Positioning for carousel items */
-.gallery-item-1 {
-    left: 15%;
-    opacity: 0.4;
-    transform: translateX(-50%);
-    z-index: 0;
-}
+/* ===================================
+   6️⃣ CAROUSEL NAVIGATION CONTROLS
+   =================================== */
 
-.gallery-item-2,
-.gallery-item-4 {
-    height: 38rem;
-    opacity: 0.8;
-    width: 36rem;
-    z-index: 1;
-}
-
-.gallery-item-2 {
-    left: 30%;
-    transform: translateX(-50%);
-}
-
-.gallery-item-3 {
-    box-shadow: -2px 5px 33px 6px rgba(0, 0, 0, 0.35);
-    height: 44rem;
-    opacity: 1;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40rem;
-    z-index: 2;
-}
-
-.gallery-item-4 {
-    left: 70%;
-    transform: translateX(-50%);
-}
-
-.gallery-item-5 {
-    left: 85%;
-    opacity: 0.4;
-    transform: translateX(-50%);
-    z-index: 0;
-}
-
-/* Controls section for navigation buttons */
+/* 
+   Controls container - holds previous/next buttons
+   Positioned below carousel with centered layout
+*/
 .gallery-controls {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 3rem 0;
-    gap: 2rem;
+    justify-content: center; /* Center buttons horizontally */
+    align-items: center; /* Align buttons vertically */
+    margin: var(--spacing-lg) 0; /* Vertical spacing around controls */
+    gap: var(--spacing-md); /* Space between buttons */
 }
 
-/* Base styling for control buttons */
+/* 
+   Navigation button base styling
+   Shared styles for both Previous and Next buttons
+*/
 .gallery-controls-button {
-    background-color: transparent;
-    border: 2px solid var(--color-light-text);
-    cursor: pointer;
-    font-size: 1.6rem;
-    font-family: var(--font-secondary);
-    padding: 1rem 1.8rem;
-    position: relative;
-    border-radius: 2rem 0 1.5rem 0;
-    color: var(--color-light-text);
-    transition: all 0.3s ease;
+    /* Reset default button styles */
+    background-color: transparent; /* No background */
+    border: 2px solid var(--color-light-text); /* Outlined style */
+    cursor: pointer; /* Indicate interactivity */
+
+    /* Typography */
+    font-size: var(--font-size-base); /* Standard text size */
+    font-family: var(--font-secondary); /* Roboto for consistency */
+
+    /* Spacing */
+    padding: 1rem 1.8rem; /* Comfortable touch target */
+
+    /* Visual styling */
+    border-radius: var(--border-radius-button); /* Asymmetrical corners */
+    color: var(--color-light-text); /* Light text color */
+
+    /* Layout */
     display: flex;
-    align-items: center;
-    gap: 0.8rem;
+    align-items: center; /* Vertically center icon and text */
+    gap: 0.8rem; /* Space between icon and text */
+
+    /* Animation */
+    transition: all var(--transition-smooth); /* Smooth hover effect */
 }
 
+/* Navigation button hover state */
 .gallery-controls-button:hover {
-    background-color: var(--btn-gradient);
-    color: white;
+    background: var(--btn-gradient); /* Fill with gradient */
+    color: white; /* Ensure text visibility */
+    border-color: transparent; /* Hide border when filled */
+    transform: translateY(-2px); /* Subtle lift */
 }
 
-/* Indicators for carousel position */
+/* Navigation button active state */
+.gallery-controls-button:active {
+    transform: translateY(0); /* Return to position */
+}
+
+/* ===================================
+   7️⃣ POSITION INDICATORS (DOTS)
+   =================================== */
+
+/* 
+   Indicators container - dots showing current carousel position
+   Positioned below navigation buttons
+*/
 .gallery-indicators {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
+    justify-content: center; /* Center dots horizontally */
+    gap: 1rem; /* Space between dots */
+    margin-top: var(--spacing-md); /* Space from controls */
 }
 
+/* 
+   Individual indicator dot
+   Clickable elements representing each carousel position
+*/
 .gallery-indicator {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 2rem 0 1.5rem 0;
-    background-color: rgba(74, 63, 112, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
+    width: 1rem; /* Dot size */
+    height: 1rem; /* Dot size */
+    border-radius: 50%; /* Perfect circle */
+    background-color: rgba(74, 63, 112, 0.3); /* Faded purple */
+    cursor: pointer; /* Indicate clickability */
+    transition: all var(--transition-smooth); /* Smooth state changes */
 }
 
+/* Active indicator (current position) */
 .gallery-indicator.active {
-    background-color: var(--color-highlight);
-    transform: scale(1.2);
+    background-color: var(--color-highlight); /* Bright purple */
+    transform: scale(1.2); /* Slightly larger */
 }
 
-/* Popup styles */
+/* Indicator hover state */
+.gallery-indicator:hover {
+    background-color: var(--color-secondary); /* Medium purple on hover */
+    transform: scale(1.1); /* Slight grow effect */
+}
+
+/* ===================================
+   8️⃣ POPUP MODAL SYSTEM
+   =================================== */
+
+/* 
+   🔄 TRANSLATED: Popup overlay - fullscreen darkened background
+   Original: "Затемнённый фон попапа"
+   Managed dynamically by PopupManager in script.js
+*/
 .popup-overlay {
+    /* Fullscreen positioning */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+
+    /* Visual styling */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    backdrop-filter: blur(5px); /* Blur background content */
+    -webkit-backdrop-filter: blur(5px); /* Safari support */
+
+    /* Layout */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    justify-content: center; /* Center popup horizontally */
+    align-items: center; /* Center popup vertically */
+
+    /* Layering */
+    z-index: 1000; /* Above all other content */
+
+    /* Initial hidden state */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+
+    /* Animation */
+    transition: all var(--transition-smooth);
 }
 
+/* Popup visible state (added by JavaScript) */
 .popup-overlay.active {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1; /* Fully visible */
+    visibility: visible; /* Enable interactions */
 }
 
+/* 
+   Popup content container - the actual dialog box
+   Contains title, text, and close button
+*/
 .popup-content {
-    background-color: white;
-    padding: 3rem;
-    border-radius: 2rem 0 1.5rem 0;
-    max-width: 60rem;
-    width: 90%;
-    max-height: 80vh;
-    position: relative;
-    overflow: auto;
-    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.2);
-    transform: translateY(20px);
-    opacity: 0;
-    transition: all 0.3s ease 0.1s;
+    /* Sizing */
+    max-width: var(--popup-max-width); /* Limit width on large screens */
+    width: 90%; /* Responsive width on small screens */
+    max-height: 80vh; /* Limit height to viewport */
+
+    /* Styling */
+    background-color: white; /* White dialog background */
+    padding: var(--popup-padding); /* Internal spacing */
+    border-radius: var(--border-radius-button); /* Asymmetrical corners */
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.2); /* Strong shadow */
+
+    /* Layout */
+    position: relative; /* Context for close button */
+    overflow: auto; /* Scroll if content exceeds max-height */
+
+    /* Initial animation state */
+    transform: translateY(20px); /* Start slightly below */
+    opacity: 0; /* Start invisible */
+    transition: all var(--transition-smooth) 0.1s; /* Delayed entrance */
 }
 
+/* Popup content visible state */
 .popup-overlay.active .popup-content {
-    transform: translateY(0);
-    opacity: 1;
+    transform: translateY(0); /* Move to final position */
+    opacity: 1; /* Fully visible */
 }
 
+/* 
+   Close button (×)
+   Positioned in top-right corner of popup
+*/
 .popup-close {
+    /* Positioning */
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
+
+    /* Reset button styles */
     background: none;
     border: none;
-    font-size: 2.4rem;
-    cursor: pointer;
-    color: var(--color-text);
+
+    /* Styling */
+    font-size: 2.4rem; /* Large × symbol */
+    cursor: pointer; /* Indicate clickability */
+    color: var(--color-text); /* Dark purple */
+
+    /* Size */
     width: 3rem;
     height: 3rem;
+
+    /* Layout */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 2rem 0 1.5rem 0;
-    transition: all 0.2s ease;
+    align-items: center; /* Center × vertically */
+    justify-content: center; /* Center × horizontally */
+
+    /* Visual */
+    border-radius: 50%; /* Circular button */
+    transition: all 0.2s ease; /* Smooth hover */
 }
 
+/* Close button hover state */
 .popup-close:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: rotate(90deg);
+    background-color: rgba(0, 0, 0, 0.1); /* Light gray background */
+    transform: rotate(90deg); /* Rotate × for visual interest */
 }
 
+/* Popup title */
 .popup-title {
-    font-family: var(--font-text);
-    font-size: 2.4rem;
-    color: var(--color-highlight);
-    margin-bottom: 2rem;
+    font-family: var(--font-primary); /* Montserrat for headings */
+    font-size: 2.4rem; /* Large title */
+    color: var(--color-highlight); /* Bright purple */
+    margin-bottom: var(--spacing-md); /* Space before content */
 }
 
+/* Popup body text container */
 .popup-text {
-    font-family: var(--font-secondary);
-    font-size: 1.6rem;
-    line-height: 1.6;
-    color: var(--color-text);
+    font-family: var(--font-secondary); /* Roboto for body text */
+    font-size: var(--font-size-base); /* Standard text size */
+    line-height: 1.6; /* Comfortable reading */
+    color: var(--color-text); /* Dark purple */
 }
 
-/* Responsive adjustments */
+/* Popup text paragraphs */
+.popup-text p {
+    margin-bottom: 1.5rem; /* Space between paragraphs */
+}
+
+/* Popup text lists */
+.popup-text ul,
+.popup-text ol {
+    margin-left: 2rem; /* Indent lists */
+    margin-bottom: 1.5rem; /* Space after list */
+}
+
+.popup-text li {
+    margin-bottom: 0.8rem; /* Space between list items */
+}
+
+/* ===================================
+   9️⃣ RESPONSIVE BREAKPOINTS
+   =================================== */
+
+/* 
+   🎯 RESPONSIVE DESIGN STRATEGY:
+   - 1200px+: Full 5-card carousel
+   - 900px-1199px: Hide far cards (3-card carousel)
+   - 600px-899px: Hide side cards (1-card view)
+   - 0px-599px: Mobile optimizations
+*/
+
+/* 📱 TABLET LANDSCAPE (≤991px) */
+@media (max-width: 991px) {
+    /* Maintain full carousel but adjust spacing */
+    .gallery-controls {
+        margin: var(--spacing-md) 0; /* Reduce vertical spacing */
+        gap: var(--spacing-sm); /* Tighter gap between buttons */
+    }
+
+    /* Adjust button text size */
+    .gallery-controls-button {
+        font-size: 1.4rem; /* Slightly smaller */
+        padding: 0.8rem 1.6rem; /* Smaller padding */
+    }
+}
+
+/* 📱 TABLET PORTRAIT (≤900px) - Hide outer cards */
 @media (max-width: 900px) {
+    /* Hide positions 1 and 5 (far left/right) */
     .gallery-item-1,
     .gallery-item-5 {
-        display: none;
+        display: none; /* Completely hidden */
     }
 
+    /* Adjust remaining card positions for 3-card layout */
     .gallery-item-2 {
-        left: 25%;
+        left: 25%; /* Move closer to center */
     }
 
     .gallery-item-4 {
-        left: 75%;
+        left: 75%; /* Move closer to center */
     }
 }
 
-@media (max-width: 600px) {
+/* 📱 MOBILE (≤599px) - Single card view */
+@media (max-width: 599px) {
+    /* Reduce carousel height for mobile */
     .gallery-container {
-        height: 42rem;
+        height: 42rem; /* Shorter container */
     }
 
+    /* Hide positions 2 and 4 (side cards) */
     .gallery-item-2,
     .gallery-item-4 {
-        display: none;
+        display: none; /* Only center card visible */
     }
 
+    /* Optimize center card for mobile */
     .gallery-item-3 {
-        width: 90%;
-        max-width: 36rem;
+        width: 90%; /* Nearly full width */
+        max-width: 36rem; /* Limit maximum width */
+        height: auto; /* Allow natural height */
+        min-height: 38rem; /* Ensure minimum height */
+    }
+
+    /* Adjust card visual area for mobile */
+    .gallery-item-visual {
+        height: 16rem; /* Shorter image area */
+    }
+
+    /* Optimize card content for mobile */
+    .gallery-item-content {
+        padding: 1.6rem; /* Smaller padding */
+    }
+
+    .gallery-item-title {
+        font-size: 1.8rem; /* Smaller title */
+    }
+
+    .gallery-item-text {
+        font-size: 1.3rem; /* Smaller text */
+        margin-bottom: 1rem; /* Less spacing */
+    }
+
+    /* Stack navigation buttons vertically on mobile */
+    .gallery-controls {
+        flex-direction: column; /* Vertical layout */
+        gap: 1rem; /* Space between buttons */
+    }
+
+    .gallery-controls-button {
+        width: 100%; /* Full-width buttons */
+        max-width: 30rem; /* Limit button width */
+        justify-content: center; /* Center button content */
+    }
+
+    /* Adjust popup for mobile */
+    .popup-content {
+        width: 95%; /* Nearly full width */
+        padding: 2rem; /* Smaller padding */
+        max-height: 85vh; /* More vertical space */
+    }
+
+    .popup-title {
+        font-size: 2rem; /* Smaller title */
+    }
+
+    .popup-text {
+        font-size: 1.4rem; /* Smaller text */
     }
 }
+
+/* 📱 SMALL MOBILE (≤480px) - Further optimizations */
+@media (max-width: 480px) {
+    .gallery-item-3 {
+        max-width: 32rem; /* Even smaller max width */
+    }
+
+    .gallery-item-title {
+        font-size: 1.6rem; /* Smaller title */
+    }
+
+    .popup-content {
+        padding: 1.5rem; /* Minimal padding */
+    }
+}
+
+/* ===================================
+   10️⃣ ACCESSIBILITY ENHANCEMENTS
+   =================================== */
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .gallery-item,
+    .gallery-controls-button,
+    .popup-overlay,
+    .popup-content,
+    .gallery-indicator {
+        transition: opacity 0.01ms !important; /* Nearly instant fade only */
+        transform: none !important; /* Disable movement */
+    }
+
+    .popup-close:hover {
+        transform: none !important; /* Disable rotation */
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .gallery-item {
+        border: 2px solid var(--color-primary); /* Add visible border */
+    }
+
+    .gallery-controls-button {
+        border-width: 3px; /* Thicker border */
+    }
+
+    .popup-overlay {
+        backdrop-filter: none; /* Remove blur */
+        background-color: rgba(0, 0, 0, 0.9); /* Darker background */
+    }
+}
+
+/* Focus visible styles for keyboard navigation */
+.gallery-controls-button:focus-visible,
+.gallery-item-button:focus-visible,
+.gallery-indicator:focus-visible,
+.popup-close:focus-visible {
+    outline: 3px solid var(--color-highlight); /* Bright purple outline */
+    outline-offset: 3px; /* Space from element */
+}
+
+/* ================================================
+   11️⃣ DEBUG UTILITIES SECTION
+   ================================================
+   
+   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
+*/
+
+/* ─────────────────────────────────────────────
+   CAROUSEL LAYOUT DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎨 Carousel Boundaries Visualization:
+Uncomment to see colored borders around carousel elements
+
+.gallery-container { 
+    border: 3px solid red !important; 
+    background: rgba(255,0,0,0.05) !important;
+}
+
+.gallery-item { 
+    outline: 2px solid blue !important; 
+}
+
+.gallery-item-3 { 
+    outline: 3px solid green !important; 
+}
+*/
+
+/* ─────────────────────────────────────────────
+   CARD POSITION DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎴 Position Labels:
+Uncomment to see which position each card is in
+
+.gallery-item-1::before { content: "Position 1"; position: absolute; top: 5px; left: 5px; background: red; color: white; padding: 5px; font-size: 12px; z-index: 1000; }
+.gallery-item-2::before { content: "Position 2"; position: absolute; top: 5px; left: 5px; background: orange; color: white; padding: 5px; font-size: 12px; z-index: 1000; }
+.gallery-item-3::before { content: "Position 3 (CENTER)"; position: absolute; top: 5px; left: 5px; background: green; color: white; padding: 5px; font-size: 12px; z-index: 1000; }
+.gallery-item-4::before { content: "Position 4"; position: absolute; top: 5px; left: 5px; background: orange; color: white; padding: 5px; font-size: 12px; z-index: 1000; }
+.gallery-item-5::before { content: "Position 5"; position: absolute; top: 5px; left: 5px; background: red; color: white; padding: 5px; font-size: 12px; z-index: 1000; }
+*/
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE BREAKPOINT TESTING
+   ───────────────────────────────────────────── */
+
+/*
+📐 Breakpoint Indicator:
+Copy this to console to see current carousel mode:
+
+const width = window.innerWidth;
+const layout = 
+    width <= 599 ? 'Mobile (1 card)' :
+    width <= 900 ? 'Tablet (3 cards)' :
+    'Desktop (5 cards)';
+console.log('Carousel layout:', layout, `(${width}px)`);
+*/
+
+/* ─────────────────────────────────────────────
+   CSS VARIABLE TESTING
+   ───────────────────────────────────────────── */
+
+/*
+🎛️ Test Different Carousel Timings:
+Copy these to console to experiment:
+
+// Slow motion carousel
+document.documentElement.style.setProperty('--carousel-transition-speed', '2s');
+
+// Fast carousel
+document.documentElement.style.setProperty('--carousel-transition-speed', '0.1s');
+
+// Reset to default
+document.documentElement.style.setProperty('--carousel-transition-speed', '0.3s');
+
+// Change card sizes
+document.documentElement.style.setProperty('--card-featured-width', '50rem');
+document.documentElement.style.setProperty('--card-featured-height', '55rem');
+*/
+
+/* ─────────────────────────────────────────────
+   POPUP DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🔍 Popup State Testing:
+Copy to console to manually test popup:
+
+// Show popup
+document.querySelector('.popup-overlay').classList.add('active');
+document.body.style.overflow = 'hidden';
+
+// Hide popup
+document.querySelector('.popup-overlay').classList.remove('active');
+document.body.style.overflow = '';
+*/
+
+/* ─────────────────────────────────────────────
+   END OF DEBUG UTILITIES
+   ───────────────────────────────────────────── */
