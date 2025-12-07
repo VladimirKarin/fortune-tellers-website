@@ -234,10 +234,11 @@
 }
 
 /* Card hover effect - lift on hover */
+/* 
 .prices-card:hover {
-    transform: translateY(-4px); /* Lift card slightly */
-    box-shadow: var(--shadow-hover); /* Deeper shadow for elevation */
-}
+    transform: translateY(-4px); /* Lift card slightly 
+    box-shadow: var(--shadow-hover); /* Deeper shadow for elevation 
+} */
 
 /* Card title (service name) */
 .prices-card__title {
@@ -267,10 +268,12 @@
    Applied by JavaScript when grid becomes visible
    Cards slide up from below with fade-in effect
 */
-.prices-card.prices-card-animate-in {
+
+/* Animation on all cards */
+/* .prices-card.prices-card-animate-in {
     animation: pricesSlideInUp var(--prices-card-animation-duration)
         var(--prices-animation-easing) forwards;
-}
+} */
 
 /* 
    Keyframe animation for card entrance
