@@ -1,73 +1,115 @@
+// ================================================
+// 💰 PRICES SECTION - Enhanced Toggle Controller
+// ================================================
+//
+// 📋 FEATURES:
+// - Smooth expand/collapse animation with height calculation
+// - Staggered card entrance animations
+// - Keyboard navigation support (Enter, Space, ESC)
+// - ARIA attributes for accessibility
+// - Responsive height recalculation on window resize
+// - Memory leak prevention with proper cleanup
+// - Comprehensive debugging tools
+//
+// 🔗 CSS INTEGRATION:
+// Works with 07-prices-section-styles.css
+// Uses unique class names to avoid conflicts with other sections
+
+/* ================================================
+   📋 TABLE OF CONTENTS
+   ================================================
+   1. Configuration Constants
+   2. CSS Class Names
+   3. DOM Element References
+   4. State Management
+   5. Debug Utilities
+   6. Accessibility Setup
+   7. Animation Functions
+   8. Show/Hide Logic
+   9. Event Handlers
+   10. Initialization
+   11. Global API
+*/
+
+// ================================================
+// 1️⃣ CONFIGURATION CONSTANTS
+// ================================================
+
 /**
- * ===================================================================
- * PRICES SECTION - ENHANCED VERSION WITH DEBUGGING & SMOOTH ANIMATIONS
- * ===================================================================
- *
- * Управляет показом/скрытием секции с ценами с плавной анимацией
- * Включает отладку, accessibility и гибкие настройки
- * ИСПРАВЛЕНО: Устранены конфликты CSS классов с другими компонентами
+ * Animation timing configuration
+ * 🔄 TRANSLATED: "Настройки анимации"
+ * Adjust these values to change animation behavior
  */
-
-// ===================================================================
-// НАСТРОЙКИ АНИМАЦИИ (можно изменять для тонкой настройки)
-// ===================================================================
-
 const ANIMATION_CONFIG = {
-    // НАСТРОЙКА: Основная скорость анимации высоты (мс)
-    MAIN_DURATION: 600,
+    // ⏱️ Main animation durations (milliseconds)
+    MAIN_DURATION: 600, // Container expand/collapse speed
+    CARDS_START_DELAY: 200, // Delay before cards start animating
+    CARDS_INTERVAL: 100, // Delay between each card animation
+    AUTO_HEIGHT_DELAY: 50, // Delay before setting height: auto
 
-    // НАСТРОЙКА: Задержка перед началом анимации карточек (мс)
-    CARDS_START_DELAY: 200,
-
-    // НАСТРОЙКА: Интервал между анимацией карточек (мс)
-    CARDS_INTERVAL: 100,
-
-    // НАСТРОЙКА: Задержка перед установкой height: auto (мс)
-    AUTO_HEIGHT_DELAY: 50,
-
-    // НАСТРОЙКА: Timeout для обработки изменения размера окна (мс)
-    RESIZE_DEBOUNCE: 150,
+    // 🎯 Performance optimization
+    RESIZE_DEBOUNCE: 150, // Debounce window resize events
 };
 
-// ===================================================================
-// УНИКАЛЬНЫЕ CSS КЛАССЫ (избегаем конфликтов с другими компонентами)
-// ===================================================================
-
-const CSS_CLASSES = {
-    // Основные классы секции
-    SECTION_VISIBLE: 'prices-section-visible',
-    SECTION_DEBUG: 'prices-debug-mode',
-
-    // Классы анимации карточек (УНИКАЛЬНЫЕ, избегаем конфликта с AboutMe)
-    CARD_ANIMATE_IN: 'prices-card-animate-in',
-    CARD_ANIMATE_OUT: 'prices-card-animate-out',
-
-    // Селекторы карточек
-    PRICE_CARD: '.prices-card',
-    EXPLANATION_CARD: '.prices-explanation-card',
-};
-
-// ===================================================================
-// ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ И DOM ЭЛЕМЕНТЫ
-// ===================================================================
-
-const priceSection = document.querySelector('.prices-grid');
-const priceSectionButton = document.querySelector('.prices__button');
-
-// Состояние компонента
-let isVisible = false;
-let isAnimating = false;
-
-// ===================================================================
-// ОТЛАДОЧНЫЕ ФУНКЦИИ
-// ===================================================================
+// ================================================
+// 2️⃣ CSS CLASS NAMES (Unique to avoid conflicts)
+// ================================================
 
 /**
- * Централизованная функция отладки
- * НАСТРОЙКА: Можно отключить логи, изменив на false
+ * CSS class constants
+ * ✅ FIXED: Using unique class names to avoid conflicts with AboutMe section
+ * All classes are prefixed with 'prices-' for namespace isolation
+ */
+const CSS_CLASSES = {
+    // Section visibility state
+    SECTION_VISIBLE: 'prices-section-visible', // Applied to .prices-grid when expanded
+
+    // Card animation states
+    CARD_ANIMATE_IN: 'prices-card-animate-in', // Applied to cards for entrance animation
+
+    // Selectors for querying DOM
+    PRICE_CARD: '.prices-card', // Individual price cards
+    EXPLANATION_CARD: '.prices-explanation-card', // Special explanation card
+};
+
+// ================================================
+// 3️⃣ DOM ELEMENT REFERENCES
+// ================================================
+
+/**
+ * Cache DOM elements for better performance
+ * Queried once during initialization
+ */
+const priceSection = document.querySelector('.prices-grid'); // Main grid container
+const priceSectionButton = document.querySelector('.prices__button'); // Toggle button
+
+// ================================================
+// 4️⃣ STATE MANAGEMENT
+// ================================================
+
+/**
+ * Component state tracking
+ * 🔄 TRANSLATED: "Состояние компонента"
+ */
+let isVisible = false; // Track whether prices are currently shown
+let isAnimating = false; // Prevent multiple simultaneous animations
+let resizeTimeout = null; // Store resize debounce timeout
+
+// ================================================
+// 5️⃣ DEBUG UTILITIES
+// ================================================
+
+/**
+ * Debug mode configuration
+ * Set to false in production to disable console logs
  */
 const DEBUG_ENABLED = true;
 
+/**
+ * Centralized debug logging
+ * @param {string} message - Log message
+ * @param {*} data - Optional data to log
+ */
 function debugLog(message, data = '') {
     if (DEBUG_ENABLED) {
         console.log(`[Prices Debug] ${message}`, data);
@@ -75,8 +117,10 @@ function debugLog(message, data = '') {
 }
 
 /**
- * Функция для тестирования видимости элементов
- * Вызывается через window.testPrices() в консоли
+ * Test visibility of prices section elements
+ * Call from browser console: testPrices()
+ *
+ * @public
  */
 function testVisibility() {
     debugLog('=== TESTING VISIBILITY ===');
@@ -84,14 +128,15 @@ function testVisibility() {
     debugLog('Button exists:', !!priceSectionButton);
 
     if (priceSection) {
-        debugLog('Section styles:', {
-            display: getComputedStyle(priceSection).display,
-            height: getComputedStyle(priceSection).height,
-            opacity: getComputedStyle(priceSection).opacity,
-            overflow: getComputedStyle(priceSection).overflow,
+        const styles = getComputedStyle(priceSection);
+        debugLog('Section computed styles:', {
+            display: styles.display,
+            height: styles.height,
+            opacity: styles.opacity,
+            overflow: styles.overflow,
         });
 
-        // Проверяем карточки цен
+        // Check cards
         const priceCards = priceSection.querySelectorAll(
             CSS_CLASSES.PRICE_CARD
         );
@@ -103,14 +148,15 @@ function testVisibility() {
         debugLog('Explanation cards found:', explanationCards.length);
 
         if (priceCards.length > 0) {
+            const firstCardStyles = getComputedStyle(priceCards[0]);
             debugLog('First price card styles:', {
-                display: getComputedStyle(priceCards[0]).display,
-                opacity: getComputedStyle(priceCards[0]).opacity,
-                transform: getComputedStyle(priceCards[0]).transform,
+                display: firstCardStyles.display,
+                opacity: firstCardStyles.opacity,
+                transform: firstCardStyles.transform,
             });
         }
 
-        // Проверяем текущие CSS классы
+        // Check CSS classes
         debugLog('Section CSS classes:', priceSection.className);
         debugLog(
             'Cards with animation class:',
@@ -122,12 +168,15 @@ function testVisibility() {
 }
 
 /**
- * Проверка конфликтов с другими компонентами
+ * Check for potential conflicts with other components
+ * Helps identify naming collisions
+ *
+ * @public
  */
 function checkForConflicts() {
     debugLog('=== CHECKING FOR CONFLICTS ===');
 
-    // Проверяем конфликт с AboutMe анимацией
+    // Check for AboutMe animation conflicts
     const aboutMeCards = document.querySelectorAll('.about-me-card.animate-in');
     if (aboutMeCards.length > 0) {
         debugLog(
@@ -137,7 +186,7 @@ function checkForConflicts() {
         debugLog('✅ Using unique class names to avoid conflicts');
     }
 
-    // Проверяем глобальные объекты
+    // Check global namespace
     const globalConflicts = [];
     if (window.pricesSection) globalConflicts.push('pricesSection');
     if (window.testPrices) globalConflicts.push('testPrices');
@@ -152,13 +201,16 @@ function checkForConflicts() {
     debugLog('=== END CONFLICT CHECK ===');
 }
 
-// ===================================================================
-// ACCESSIBILITY ИНИЦИАЛИЗАЦИЯ
-// ===================================================================
+// ================================================
+// 6️⃣ ACCESSIBILITY SETUP
+// ================================================
 
 /**
- * Настраивает ARIA атрибуты для доступности
- * Важно для screen readers и клавиатурной навигации
+ * Initialize ARIA attributes for screen readers
+ * Sets up proper semantic relationships between button and content
+ *
+ * @returns {boolean} Success status
+ * @private
  */
 function initializeAccessibility() {
     if (!priceSectionButton || !priceSection) {
@@ -169,29 +221,32 @@ function initializeAccessibility() {
         return false;
     }
 
-    // Настройка кнопки
-    priceSectionButton.setAttribute('aria-expanded', 'false');
-    priceSectionButton.setAttribute('aria-controls', 'prices-grid');
+    // Button ARIA attributes
+    priceSectionButton.setAttribute('aria-expanded', 'false'); // Initially collapsed
+    priceSectionButton.setAttribute('aria-controls', 'prices-grid'); // Links to controlled section
 
-    // Настройка секции
-    priceSection.setAttribute('id', 'prices-grid');
-    priceSection.setAttribute('aria-hidden', 'true');
-    priceSection.setAttribute('role', 'region');
-    priceSection.setAttribute('aria-label', 'Список цен на услуги');
+    // Section ARIA attributes
+    priceSection.setAttribute('id', 'prices-grid'); // Unique ID for aria-controls
+    priceSection.setAttribute('aria-hidden', 'true'); // Initially hidden from screen readers
+    priceSection.setAttribute('role', 'region'); // Define as content region
+    priceSection.setAttribute('aria-label', 'Список цен на услуги'); // 🔤 TRANSLATED: "Price list for services"
 
     debugLog('✅ Accessibility initialized successfully');
     return true;
 }
 
-// ===================================================================
-// АНИМАЦИЯ КАРТОЧЕК (с уникальными классами)
-// ===================================================================
+// ================================================
+// 7️⃣ ANIMATION FUNCTIONS
+// ================================================
 
 /**
- * Анимирует появление карточек цен
- * Использует уникальные CSS классы для избежания конфликтов
+ * Animate cards entrance with staggered timing
+ * Adds animation class to each card with progressive delays
+ *
+ * @private
  */
 function animateCardsIn() {
+    // Query all cards (both price cards and explanation card)
     const allCards = priceSection.querySelectorAll(
         `${CSS_CLASSES.PRICE_CARD}, ${CSS_CLASSES.EXPLANATION_CARD}`
     );
@@ -203,12 +258,11 @@ function animateCardsIn() {
         return;
     }
 
-    // Анимируем каждую карточку с интервалом
+    // 🔄 TRANSLATED: "Анимируем каждую карточку с интервалом"
+    // Animate each card with progressive delay
     allCards.forEach((card, index) => {
         setTimeout(() => {
-            // Убираем класс "выхода" если есть
-            card.classList.remove(CSS_CLASSES.CARD_ANIMATE_OUT);
-            // Добавляем уникальный класс анимации "входа"
+            // Add unique animation class (won't conflict with AboutMe)
             card.classList.add(CSS_CLASSES.CARD_ANIMATE_IN);
 
             debugLog(`Card ${index + 1} animated in`);
@@ -217,7 +271,10 @@ function animateCardsIn() {
 }
 
 /**
- * Анимирует исчезновение карточек цен
+ * Remove animation classes from cards
+ * Resets cards to initial state
+ *
+ * @private
  */
 function animateCardsOut() {
     const allCards = priceSection.querySelectorAll(
@@ -226,29 +283,24 @@ function animateCardsOut() {
 
     debugLog('Animating cards out:', allCards.length);
 
-    allCards.forEach((card, index) => {
-        // Убираем класс "входа"
+    allCards.forEach((card) => {
+        // Remove animation class
         card.classList.remove(CSS_CLASSES.CARD_ANIMATE_IN);
-        // Можно добавить класс "выхода" если нужна анимация исчезновения
-        card.classList.add(CSS_CLASSES.CARD_ANIMATE_OUT);
-
-        // Через короткое время убираем и класс выхода
-        setTimeout(() => {
-            card.classList.remove(CSS_CLASSES.CARD_ANIMATE_OUT);
-        }, 200);
     });
 }
 
-// ===================================================================
-// АНИМАЦИЯ ПОКАЗА СЕКЦИИ
-// ===================================================================
+// ================================================
+// 8️⃣ SHOW/HIDE LOGIC
+// ================================================
 
 /**
- * Показывает секцию цен с плавной анимацией
- * Упрощенная версия без сложных event listeners
+ * Show prices section with smooth animation
+ * Handles height calculation and staggered card entrance
+ *
+ * @public
  */
 function showPrices() {
-    // Проверка возможности выполнения анимации
+    // Guard: Prevent animation if already animating or elements missing
     if (isAnimating || !priceSection || !priceSectionButton) {
         debugLog('Show animation cancelled', {
             isAnimating,
@@ -261,80 +313,76 @@ function showPrices() {
     debugLog('🟢 Starting show animation');
     isAnimating = true;
 
-    // ===================================================================
-    // ОБНОВЛЕНИЕ ACCESSIBILITY АТРИБУТОВ
-    // ===================================================================
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 1️⃣ UPDATE ACCESSIBILITY ATTRIBUTES
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     priceSectionButton.setAttribute('aria-expanded', 'true');
     priceSection.setAttribute('aria-hidden', 'false');
 
-    // ===================================================================
-    // ПОДГОТОВКА К АНИМАЦИИ
-    // ===================================================================
-
-    // Делаем элемент видимым для расчета высоты
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 2️⃣ CALCULATE TARGET HEIGHT
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // Temporarily make visible to measure true height
     priceSection.style.display = 'grid';
     priceSection.style.height = 'auto';
-    priceSection.style.opacity = '0';
+    priceSection.style.opacity = '0'; // Keep invisible during measurement
 
-    // Получаем реальную высоту контента
+    // Get natural height of content
     const fullHeight = priceSection.scrollHeight;
     debugLog('Calculated section height:', fullHeight + 'px');
 
-    // Устанавливаем начальные значения для анимации
+    // Reset to collapsed state before animating
     priceSection.style.height = '0';
     priceSection.style.opacity = '0';
 
-    // Принудительный reflow для применения стилей
+    // Force reflow to ensure transition will work
     void priceSection.offsetHeight;
 
-    // Добавляем уникальный класс для CSS анимаций
+    // Add visibility class for CSS transitions
     priceSection.classList.add(CSS_CLASSES.SECTION_VISIBLE);
 
-    // ===================================================================
-    // ЗАПУСК ОСНОВНОЙ АНИМАЦИИ ВЫСОТЫ
-    // ===================================================================
-
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 3️⃣ START HEIGHT ANIMATION
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     setTimeout(() => {
         priceSection.style.height = fullHeight + 'px';
         priceSection.style.opacity = '1';
         debugLog('Height animation started');
     }, ANIMATION_CONFIG.AUTO_HEIGHT_DELAY);
 
-    // Обновляем текст кнопки
+    // Update button text
+    // 🔤 TRANSLATED: "Спрятать цены" = "Hide prices"
     priceSectionButton.textContent = 'Спрятать цены';
 
-    // ===================================================================
-    // АНИМАЦИЯ КАРТОЧЕК С ЗАДЕРЖКОЙ
-    // ===================================================================
-
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 4️⃣ START CARD ANIMATIONS
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     setTimeout(() => {
         animateCardsIn();
     }, ANIMATION_CONFIG.CARDS_START_DELAY);
 
-    // ===================================================================
-    // ЗАВЕРШЕНИЕ АНИМАЦИИ
-    // ===================================================================
-
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 5️⃣ FINALIZE ANIMATION
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     setTimeout(() => {
-        // Устанавливаем auto для responsive поведения
+        // Set height to auto for responsive behavior
         priceSection.style.height = 'auto';
         isAnimating = false;
         debugLog('✅ Show animation completed');
 
-        // Focus management для accessibility
+        // Focus management for accessibility
         handleFocusManagement();
     }, ANIMATION_CONFIG.MAIN_DURATION);
 }
 
-// ===================================================================
-// АНИМАЦИЯ СКРЫТИЯ СЕКЦИИ
-// ===================================================================
-
 /**
- * Скрывает секцию цен с плавной анимацией
+ * Hide prices section with smooth animation
+ * Collapses height to 0 and removes card animations
+ *
+ * @public
  */
 function hidePrices() {
-    // Проверка возможности выполнения анимации
+    // Guard: Prevent animation if already animating or elements missing
     if (isAnimating || !priceSection || !priceSectionButton) {
         debugLog('Hide animation cancelled', {
             isAnimating,
@@ -347,81 +395,57 @@ function hidePrices() {
     debugLog('🔴 Starting hide animation');
     isAnimating = true;
 
-    // ===================================================================
-    // ОБНОВЛЕНИЕ ACCESSIBILITY АТРИБУТОВ
-    // ===================================================================
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 1️⃣ UPDATE ACCESSIBILITY ATTRIBUTES
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     priceSectionButton.setAttribute('aria-expanded', 'false');
     priceSection.setAttribute('aria-hidden', 'true');
 
-    // ===================================================================
-    // АНИМАЦИЯ ИСЧЕЗНОВЕНИЯ КАРТОЧЕК
-    // ===================================================================
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 2️⃣ REMOVE CARD ANIMATIONS
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     animateCardsOut();
 
-    // ===================================================================
-    // ПОДГОТОВКА К АНИМАЦИИ СКРЫТИЯ
-    // ===================================================================
-
-    // Получаем текущую высоту для плавного сворачивания
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 3️⃣ PREPARE FOR COLLAPSE ANIMATION
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // Get current height for smooth collapse
     const currentHeight = priceSection.scrollHeight;
     priceSection.style.height = currentHeight + 'px';
 
-    // Принудительный reflow
+    // Force reflow
     void priceSection.offsetHeight;
 
-    // Убираем класс видимости
+    // Remove visibility class
     priceSection.classList.remove(CSS_CLASSES.SECTION_VISIBLE);
 
-    // ===================================================================
-    // ЗАПУСК АНИМАЦИИ СВОРАЧИВАНИЯ
-    // ===================================================================
-
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 4️⃣ START COLLAPSE ANIMATION
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     setTimeout(() => {
         priceSection.style.height = '0';
         priceSection.style.opacity = '0';
         debugLog('Collapse animation started');
     }, ANIMATION_CONFIG.AUTO_HEIGHT_DELAY);
 
-    // Обновляем текст кнопки
+    // Update button text
+    // 🔤 TRANSLATED: "Показать цены" = "Show prices"
     priceSectionButton.textContent = 'Показать цены';
 
-    // ===================================================================
-    // ЗАВЕРШЕНИЕ АНИМАЦИИ
-    // ===================================================================
-
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // 5️⃣ FINALIZE ANIMATION
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     setTimeout(() => {
         isAnimating = false;
         debugLog('✅ Hide animation completed');
     }, ANIMATION_CONFIG.MAIN_DURATION);
 }
 
-// ===================================================================
-// УПРАВЛЕНИЕ ФОКУСОМ (ACCESSIBILITY)
-// ===================================================================
-
 /**
- * Управляет фокусом для улучшения accessibility
- */
-function handleFocusManagement() {
-    if (document.activeElement === priceSectionButton) {
-        const firstCard = priceSection.querySelector(CSS_CLASSES.PRICE_CARD);
-        if (firstCard) {
-            firstCard.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-            });
-            debugLog('Focus scrolled to first card');
-        }
-    }
-}
-
-// ===================================================================
-// ОСНОВНАЯ ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ
-// ===================================================================
-
-/**
- * Переключает видимость секции цен
- * Главная функция, вызываемая при клике на кнопку
+ * Toggle prices visibility
+ * Main function called by button click
+ *
+ * @public
  */
 function togglePrices() {
     if (isAnimating) {
@@ -437,16 +461,36 @@ function togglePrices() {
         hidePrices();
     }
 
-    // Обновляем состояние
+    // Update state
     isVisible = !isVisible;
 }
 
-// ===================================================================
-// ОБРАБОТЧИКИ СОБЫТИЙ
-// ===================================================================
+// ================================================
+// 9️⃣ EVENT HANDLERS
+// ================================================
 
 /**
- * Обработка клика по кнопке
+ * Handle focus management for accessibility
+ * Scrolls first card into view when section opens
+ *
+ * @private
+ */
+function handleFocusManagement() {
+    if (document.activeElement === priceSectionButton) {
+        const firstCard = priceSection.querySelector(CSS_CLASSES.PRICE_CARD);
+        if (firstCard) {
+            firstCard.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+            });
+            debugLog('Focus scrolled to first card');
+        }
+    }
+}
+
+/**
+ * Handle button click event
+ * @private
  */
 function handleButtonClick() {
     debugLog('👆 Button clicked');
@@ -454,8 +498,11 @@ function handleButtonClick() {
 }
 
 /**
- * Обработка клавиатурной навигации
- * Enter и Space активируют переключение
+ * Handle keyboard navigation
+ * Enter and Space keys trigger toggle
+ *
+ * @param {KeyboardEvent} e - Keyboard event
+ * @private
  */
 function handleKeyDown(e) {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -466,26 +513,25 @@ function handleKeyDown(e) {
 }
 
 /**
- * Обработка клавиши Escape для закрытия
+ * Handle Escape key to close prices
+ * @param {KeyboardEvent} e - Keyboard event
+ * @private
  */
 function handleEscapeKey(e) {
     if (e.key === 'Escape' && isVisible && priceSectionButton) {
         debugLog('⎋ Escape key pressed - closing prices');
         hidePrices();
         isVisible = false;
-        priceSectionButton.focus(); // Возвращаем фокус на кнопку
+        priceSectionButton.focus(); // Return focus to button
     }
 }
 
-// ===================================================================
-// ОБРАБОТКА ИЗМЕНЕНИЯ РАЗМЕРА ОКНА
-// ===================================================================
-
 /**
- * Обрабатывает изменение размера окна для responsive поведения
- * НАСТРОЙКА: Debounce timeout можно изменить в ANIMATION_CONFIG
+ * Handle window resize with debouncing
+ * Recalculates section height when window size changes
+ *
+ * @private
  */
-let resizeTimeout;
 function handleResize() {
     if (!isVisible || isAnimating || !priceSection) return;
 
@@ -493,9 +539,9 @@ function handleResize() {
     resizeTimeout = setTimeout(() => {
         debugLog('📐 Handling window resize');
 
-        // Пересчитываем высоту только если секция открыта
+        // Recalculate height if section is open
         if (priceSection.style.height === 'auto') {
-            // Временно скрываем для точного расчета
+            // Temporarily hide for accurate measurement
             priceSection.style.visibility = 'hidden';
             const newHeight = priceSection.scrollHeight;
             priceSection.style.visibility = 'visible';
@@ -503,7 +549,7 @@ function handleResize() {
 
             debugLog('Recalculated height:', newHeight + 'px');
 
-            // Возвращаем auto после небольшой задержки
+            // Return to auto after brief delay
             setTimeout(() => {
                 if (priceSection) {
                     priceSection.style.height = 'auto';
@@ -513,13 +559,16 @@ function handleResize() {
     }, ANIMATION_CONFIG.RESIZE_DEBOUNCE);
 }
 
-// ===================================================================
-// ИНИЦИАЛИЗАЦИЯ СОБЫТИЙ
-// ===================================================================
+// ================================================
+// 🔟 INITIALIZATION
+// ================================================
 
 /**
- * Инициализирует все обработчики событий
- * Удаляет существующие для предотвращения дублирования
+ * Initialize all event listeners
+ * Removes existing listeners to prevent duplication
+ *
+ * @returns {boolean} Success status
+ * @private
  */
 function initializeEvents() {
     if (!priceSectionButton) {
@@ -527,13 +576,13 @@ function initializeEvents() {
         return false;
     }
 
-    // Удаляем существующие listeners для предотвращения дублирования
+    // Remove existing listeners to prevent duplication
     priceSectionButton.removeEventListener('click', handleButtonClick);
     priceSectionButton.removeEventListener('keydown', handleKeyDown);
     document.removeEventListener('keydown', handleEscapeKey);
     window.removeEventListener('resize', handleResize);
 
-    // Добавляем новые listeners
+    // Add event listeners
     priceSectionButton.addEventListener('click', handleButtonClick);
     priceSectionButton.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keydown', handleEscapeKey);
@@ -543,20 +592,19 @@ function initializeEvents() {
     return true;
 }
 
-// ===================================================================
-// ГЛАВНАЯ ФУНКЦИЯ ИНИЦИАЛИЗАЦИИ
-// ===================================================================
-
 /**
- * Главная функция инициализации компонента
- * Вызывается при загрузке DOM
+ * Main initialization function
+ * Called when DOM is ready
+ *
+ * @public
  */
 function initialize() {
     debugLog('🚀 Starting prices section initialization...');
 
-    // Проверяем конфликты перед инициализацией
+    // Check for potential conflicts with other components
     checkForConflicts();
 
+    // Initialize accessibility and events
     const accessibilityOk = initializeAccessibility();
     const eventsOk = initializeEvents();
 
@@ -564,35 +612,37 @@ function initialize() {
         debugLog('✅ Prices section initialized successfully');
         debugLog('🎨 Using unique CSS classes:', CSS_CLASSES);
 
-        // Добавляем глобальные функции для отладки
+        // Add global debug functions
         if (typeof window !== 'undefined') {
             window.testPrices = testVisibility;
             debugLog('🔧 Debug functions available:');
-            debugLog('  - testPrices() - диагностика элементов');
-            debugLog('  - pricesSection.debug() - режим отладки');
-            debugLog('  - pricesSection.config - настройки анимации');
+            debugLog('  - testPrices() - Diagnostic tool');
+            debugLog('  - pricesSection.debug() - Debug mode toggle');
+            debugLog('  - pricesSection.config - Animation settings');
         }
     } else {
         debugLog('❌ Initialization failed - some components missing');
     }
 }
 
-// ===================================================================
-// DOM ГОТОВНОСТЬ И ЗАПУСК
-// ===================================================================
+// ================================================
+// 1️⃣1️⃣ GLOBAL API & EXPORTS
+// ================================================
 
 /**
- * Проверка готовности DOM и инициализация
+ * Check DOM readiness and initialize
+ * Handles both loading and loaded states
  */
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initialize);
 } else {
+    // DOM already loaded
     initialize();
 }
 
 /**
- * Fallback инициализация с задержкой
- * На случай если элементы загружаются асинхронно
+ * Fallback initialization with delay
+ * In case elements are loaded asynchronously
  */
 setTimeout(() => {
     if (!priceSectionButton || !priceSection) {
@@ -601,50 +651,160 @@ setTimeout(() => {
     }
 }, 100);
 
-// ===================================================================
-// ЭКСПОРТ ДЛЯ ВНЕШНЕГО ИСПОЛЬЗОВАНИЯ И ОТЛАДКИ
-// ===================================================================
-
 /**
- * Глобальный объект для управления и отладки
- * Доступен через window.pricesSection
- * НЕ КОНФЛИКТУЕТ с другими компонентами благодаря уникальному имени
+ * Global API object for external control and debugging
+ * Available as window.pricesSection
+ *
+ * @public
  */
 if (typeof window !== 'undefined') {
     window.pricesSection = {
-        // Основные методы управления
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // PUBLIC METHODS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        /**
+         * Show prices section
+         * @public
+         */
         show: showPrices,
+
+        /**
+         * Hide prices section
+         * @public
+         */
         hide: hidePrices,
+
+        /**
+         * Toggle prices visibility
+         * @public
+         */
         toggle: togglePrices,
 
-        // Геттеры состояния
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // STATE GETTERS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        /**
+         * Check if prices are currently visible
+         * @returns {boolean}
+         * @public
+         */
         isVisible: () => isVisible,
+
+        /**
+         * Check if animation is in progress
+         * @returns {boolean}
+         * @public
+         */
         isAnimating: () => isAnimating,
 
-        // Отладочные методы
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // DEBUG METHODS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        /**
+         * Run visibility diagnostics
+         * @public
+         */
         test: testVisibility,
+
+        /**
+         * Check for component conflicts
+         * @public
+         */
         checkConflicts: checkForConflicts,
+
+        /**
+         * Toggle debug visualization mode
+         * Adds visual borders to elements
+         * @public
+         */
         debug: () => {
-            // Переключает отладочные стили с уникальным классом
-            priceSection?.classList.toggle(CSS_CLASSES.SECTION_DEBUG);
-            debugLog('🐛 Debug mode toggled');
+            if (priceSection) {
+                // Toggle debug class for visual debugging
+                priceSection.classList.toggle('debug-force-visible');
+                debugLog('🐛 Debug mode toggled');
+            }
         },
 
-        // Переинициализация (для разработки)
+        /**
+         * Re-initialize the component
+         * Useful for development and hot-reloading
+         * @public
+         */
         reinitialize: initialize,
 
-        // Доступ к конфигурации и классам
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // CONFIGURATION ACCESS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        /**
+         * Animation configuration object
+         * @readonly
+         * @public
+         */
         config: ANIMATION_CONFIG,
+
+        /**
+         * CSS class names used by component
+         * @readonly
+         * @public
+         */
         classes: CSS_CLASSES,
 
-        // Информация о версии и совместимости
-        version: '2.0.0',
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // METADATA
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        /**
+         * Component version
+         * @readonly
+         * @public
+         */
+        version: '3.0.0',
+
+        /**
+         * Compatibility information
+         * @readonly
+         * @public
+         */
         compatibility: {
-            aboutMeConflict: false, // Устранен благодаря уникальным классам
-            globalNamespace: 'pricesSection', // Уникальное имя в window
+            aboutMeConflict: false, // Resolved with unique class names
+            globalNamespace: 'pricesSection', // Unique namespace
+            cssClassPrefix: 'prices-', // All classes prefixed
         },
     };
 
     debugLog('🌐 Global pricesSection object created');
     debugLog('📋 Available methods:', Object.keys(window.pricesSection));
 }
+
+/* ================================================
+   🔧 DEVELOPER CONSOLE UTILITIES
+   ================================================
+   
+   Copy these commands to browser console for testing:
+   
+   // Test visibility
+   testPrices()
+   
+   // Control manually
+   pricesSection.show()
+   pricesSection.hide()
+   pricesSection.toggle()
+   
+   // Check state
+   pricesSection.isVisible()
+   pricesSection.isAnimating()
+   
+   // Debug mode
+   pricesSection.debug()
+   
+   // Check conflicts
+   pricesSection.checkConflicts()
+   
+   // View configuration
+   console.table(pricesSection.config)
+   console.table(pricesSection.classes)
+*/
