@@ -4,8 +4,7 @@ const moonPhaseInformation = {
     newMoon: {
         moonPhaseNameRussian: 'Новолуние',
         moonPhaseNameLithuanian: 'Jaunatis',
-        moonPhaseImage:
-            './img/05-moon-information-section/moon-phase-1-new-moon.png',
+        moonPhaseImage: './img/05-moon-section/moon-phase-1-new-moon.png',
         moonPhaseRitualsRussian: [
             'Очищение',
             'Новые начинания',
@@ -16,24 +15,21 @@ const moonPhaseInformation = {
     waxingMoon: {
         moonPhaseNameRussian: 'Растущая луна',
         moonPhaseNameLithuanian: 'Augantis mėnulis',
-        moonPhaseImage:
-            './img/05-moon-information-section/moon-phase-2-waxing-moon.png',
+        moonPhaseImage: './img/05-moon-section/moon-phase-2-waxing-moon.png',
         moonPhaseRitualsRussian: ['Рост', 'Развитие', 'Привлечение'],
         moonPhaseRitualsLithuanian: ['Augimas', 'Plėtra', 'Patraukimas'],
     },
     fullMoon: {
         moonPhaseNameRussian: 'Полная луна',
         moonPhaseNameLithuanian: 'Pilnatis',
-        moonPhaseImage:
-            './img/05-moon-information-section/moon-phase-4-full-moon.png',
+        moonPhaseImage: './img/05-moon-section/moon-phase-4-full-moon.png',
         moonPhaseRitualsRussian: ['Завершение', 'Благодарность', 'Энергия'],
         moonPhaseRitualsLithuanian: ['Užbaigimas', 'Padėka', 'Energija'],
     },
     waningMoon: {
         moonPhaseNameRussian: 'Убывающая луна',
         moonPhaseNameLithuanian: 'Delčia',
-        moonPhaseImage:
-            './img/05-moon-information-section/moon-phase-3-waning-moon.png',
+        moonPhaseImage: './img/05-moon-section/moon-phase-3-waning-moon.png',
         moonPhaseRitualsRussian: ['Освобождение', 'Очищение', 'Прощение'],
         moonPhaseRitualsLithuanian: ['Išlaisvinimas', 'Valymas', 'Atleidimas'],
     },
@@ -58,15 +54,9 @@ function setLoadingState(isLoading) {
     const moonSection = document.querySelector(
         '.moon-information-section__component'
     );
-    const moonPhaseName = document.querySelector(
-        '.moon-information-section__component__information__content__moon-phase'
-    );
-    const moonRituals = document.querySelector(
-        '.moon-information-section__component__information__content__moon-phase-rituals'
-    );
-    const moonCountdown = document.querySelector(
-        '.moon-information-section__component__information__content__moon-phase-countdown'
-    );
+    const moonPhaseName = document.querySelector('.moon-section__card-text');
+    const moonRituals = document.querySelector('.moon-section__card-text');
+    const moonCountdown = document.querySelector('.moon-section__card-text');
 
     if (isLoading) {
         moonSection?.classList.add('loading');
@@ -83,9 +73,7 @@ function setLoadingState(isLoading) {
 function updateMoonUI(moonData) {
     try {
         // Update moon phase image
-        const moonImage = document.querySelector(
-            '.moon-information-section__component__picture__img'
-        );
+        const moonImage = document.querySelector('.moon-section__image');
         if (moonImage) {
             moonImage.src = moonData.moonPhaseImage;
             moonImage.alt = `Picture of ${moonData.moonPhaseNameRussian}`;
@@ -98,16 +86,14 @@ function updateMoonUI(moonData) {
 
         // Update moon phase name
         const moonPhaseName = document.querySelector(
-            '.moon-information-section__component__information__content__moon-phase'
+            '.moon-section__card-text'
         );
         if (moonPhaseName) {
             moonPhaseName.textContent = moonData.moonPhaseNameRussian;
         }
 
         // Update rituals list
-        const moonRituals = document.querySelector(
-            '.moon-information-section__component__information__content__moon-phase-rituals'
-        );
+        const moonRituals = document.querySelector('.moon-section__card-text');
         if (moonRituals) {
             moonRituals.textContent =
                 moonData.moonPhaseRitualsRussian.join(', ');
@@ -134,7 +120,7 @@ function calculateNextPhaseCountdown() {
         const randomMinutes = Math.floor(Math.random() * 60);
 
         const countdownElement = document.querySelector(
-            '.moon-information-section__component__information__content__moon-phase-countdown'
+            '.moon-section__card-text'
         );
         if (countdownElement) {
             countdownElement.textContent = `${randomDays} дн. ${randomHours} ч. ${randomMinutes} мин`;
@@ -142,7 +128,7 @@ function calculateNextPhaseCountdown() {
     } catch (error) {
         console.error('Error calculating countdown:', error);
         const countdownElement = document.querySelector(
-            '.moon-information-section__component__information__content__moon-phase-countdown'
+            '.moon-section__card-text'
         );
         if (countdownElement) {
             countdownElement.textContent = 'Недоступно';
@@ -203,7 +189,7 @@ async function fetchMoonPhase() {
 // ------------------ Error Handling ------------------
 
 function showMoonError(message) {
-    const errorElement = document.querySelector('.moon-phase-error');
+    const errorElement = document.querySelector('.moon-section__error');
 
     if (errorElement) {
         errorElement.textContent = message;
@@ -217,7 +203,7 @@ function showMoonError(message) {
 }
 
 function hideMoonError() {
-    const errorElement = document.querySelector('.moon-phase-error');
+    const errorElement = document.querySelector('.moon-section__error');
     if (errorElement) {
         errorElement.classList.remove('show');
     }
@@ -260,7 +246,7 @@ function getLocalMoonPhase() {
         calculateNextPhaseCountdown();
 
         // Show info that we're using local calculation
-        const errorElement = document.querySelector('.moon-phase-error');
+        const errorElement = document.querySelector('.moon-section__error');
         if (errorElement) {
             errorElement.textContent =
                 'Используется локальный расчет фазы луны';
