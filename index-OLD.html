@@ -65,6 +65,7 @@
                 <h1 class="hero__heading-primary">Уголок Доброй Феи</h1>
                 <p class="hero__text">Мур мяу, мои дорогие! Нагадаю, обласкаю, всю правду скажу и расскажу, от беды уберегу, денег наколдую. За сметану</p>
                 <div class="hero__buttons">
+                    <!-- 🎯 OPTIMIZED: Removed inline onclick handler -->
                     <button class="button hero__button" data-scroll-to="contacts" aria-label="Связаться со мной - переход к форме контактов">
                         Связаться со мной
                     </button>
@@ -240,6 +241,25 @@
                         <span class="gallery-indicator" data-index="5" role="button" tabindex="0" aria-label="Перейти к услуге 5"></span>
                     </div>
                 </div>
+
+                <!-- 
+            ================================================
+            🎭 POPUP SYSTEM NOTE
+            ================================================
+            
+            Popups are now dynamically created by PopupManager in script.js
+            Service content is stored in SERVICE_DATA object
+            
+            NO HTML popup divs needed here - they're created on-demand!
+            
+            This approach provides:
+            ✅ Cleaner HTML (less code)
+            ✅ Single source of truth for service data
+            ✅ Easier content updates (edit JS object only)
+            ✅ Better performance (no hidden HTML in DOM)
+            ================================================
+            -->
+
             </section>
 
             <hr class="divider-glow-wave">
@@ -304,7 +324,7 @@
 
             <hr class="divider-glow-wave">
 
-            <!-- Moon Information Section -->
+            <!-- Moon Information Component-->
             <section class="moon-section section-padding" id="moon">
                 <div class="container">
                     <div class="moon-section__text">
@@ -314,21 +334,16 @@
                         </p>
                     </div>
 
-                    <!-- Error message container - shown by JavaScript when API fails -->
                     <div class="moon-section__error" id="moonError" role="alert" aria-live="polite">
-                        <!-- Error messages will appear here dynamically -->
+                        <!-- Error messages will appear here -->
                     </div>
 
-                    <!-- Main moon information layout - image + info cards -->
                     <div class="moon-section__layout">
-                        <!-- Moon phase image container -->
                         <div class="moon-section__image-wrapper">
                             <img class="moon-section__image" src="./img/05-moon-information-section/moon-phase-1-new-moon.png" alt="Picture of the moon phase" loading="lazy">
                         </div>
 
-                        <!-- Information cards grid -->
                         <div class="moon-section__grid">
-                            <!-- Card 1: Current moon phase name -->
                             <div class="moon-section__card">
                                 <h3 class="moon-section__card-title subheading">
                                     Лунная фаза:
@@ -338,22 +353,20 @@
                                 </p>
                             </div>
 
-                            <!-- Card 2: Time until next phase -->
                             <div class="moon-section__card">
                                 <h3 class="moon-section__card-title subheading">
                                     До следующей фазы:
                                 </h3>
-                                <p class="moon-section__card-text">
+                                <p class="moon-section__card-text-countdown">
                                     Загрузка...
                                 </p>
                             </div>
 
-                            <!-- Card 3: Recommended rituals - spans full width -->
                             <div class="moon-section__card moon-section__card--full">
                                 <h3 class="moon-section__card-title subheading">
                                     Какие обряды сейчас проводятся:
                                 </h3>
-                                <p class="moon-section__card-text">
+                                <p class="moon-section__card-text-rituals">
                                     Загрузка...
                                 </p>
                             </div>
