@@ -1,0 +1,811 @@
+/* ================================================
+   🌙 MOON INFORMATION SECTION - Responsive Layout with Dynamic Data
+   ================================================
+   
+   📋 TABLE OF CONTENTS:
+   1. CSS Variables (Sizing & Spacing Configuration)
+   2. Main Section Structure
+   3. Image Container & Styling
+   4. Information Grid System
+   5. Card Components
+   6. Error & Loading States
+   7. Hover & Focus Effects
+   8. Responsive Breakpoints (4 Standard Breakpoints)
+   9. Accessibility Enhancements
+   10. Print & High-DPI Styles
+   11. Debug Utilities
+   
+   🔗 DEPENDENCIES:
+   - 00-general.css (CSS variables, utility classes)
+   - moon-phase.js (dynamic content updates, loading states)
+   
+   ⚡ KEY FEATURES:
+   - Fetches live moon phase data from WeatherAPI
+   - Responsive image and grid layout
+   - Loading states with spinner animation
+   - Error handling with visual feedback
+   - Glassmorphism card design
+   - Full accessibility support
+*/
+
+/* ===================================
+   1️⃣ CSS VARIABLES - SIZING & SPACING CONFIGURATION
+   =================================== */
+
+:root {
+    /* 📐 Layout constraints - control max widths for different sections */
+    --moon-layout-max-width: 120rem; /* Maximum width for entire moon section layout */
+    --moon-description-max-width: 60ch; /* Max width for intro text (optimal reading length) */
+    --moon-image-max-width: 35rem; /* Maximum moon image size */
+    --moon-grid-max-width: 70rem; /* Maximum width for info card grid */
+
+    /* 🎯 Responsive spacing - scales smoothly across viewport sizes */
+    --moon-section-gap: clamp(
+        2.4rem,
+        5vw,
+        6.4rem
+    ); /* Space between image and grid */
+    --moon-card-padding: clamp(0.8rem, 3vw, 2.4rem); /* Internal card padding */
+    --moon-card-gap: clamp(
+        2.4rem,
+        4vw,
+        4.8rem
+    ); /* Space between cards in grid */
+
+    /* 🖼️ Image sizing - responsive height limits */
+    --moon-image-max-height: clamp(
+        20rem,
+        30vw,
+        35rem
+    ); /* Moon image height constraints */
+
+    /* 🎨 Visual effects */
+    --moon-card-blur: 10px; /* Glassmorphism backdrop blur strength */
+    --moon-border-opacity: 0.2; /* Card border transparency */
+    --moon-accent-height: 3px; /* Top accent line height on cards */
+}
+
+/* ===================================
+   2️⃣ MAIN SECTION STRUCTURE
+   =================================== */
+
+/* Section introduction text container */
+.moon-section__text {
+    text-align: center;
+    margin-bottom: 4rem; /* Space before main content */
+}
+
+/* 
+   📝 Section description paragraph
+   Introduces the moon phase information feature
+*/
+.moon-section__description {
+    font-size: clamp(1.4rem, 2.5vw, 1.6rem); /* Responsive font scaling */
+    line-height: 1.6; /* Comfortable reading line height */
+    color: var(--color-light-text); /* Light text for dark background */
+    margin: 0 auto; /* Center align */
+    max-width: var(--moon-description-max-width); /* Optimal reading width */
+}
+
+/* 
+   🏗️ Main component layout container
+   Flexbox layout that switches between row/column based on screen size
+*/
+.moon-section__layout {
+    display: flex;
+    flex-direction: column; /* Stack vertically by default (mobile-first) */
+    align-items: center; /* Center all items horizontally */
+    gap: var(--moon-section-gap); /* Responsive spacing between elements */
+    margin-top: 2rem; /* Space below section description */
+}
+
+/* ===================================
+   3️⃣ IMAGE CONTAINER & STYLING
+   =================================== */
+
+/* 
+   🖼️ Moon phase image wrapper
+   Centers image and constrains its size
+*/
+.moon-section__image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Full width of container */
+    max-width: 40rem; /* Reasonable max size for image container */
+}
+
+/* 
+   🌕 Moon phase image
+   Displays current moon phase (updated by JavaScript)
+*/
+.moon-section__image {
+    width: auto; /* Maintain aspect ratio */
+    max-width: min(
+        90vw,
+        30rem
+    ); /* Responsive width: never exceeds 90% viewport or 30rem */
+    max-height: var(
+        --moon-image-max-height
+    ); /* Constrain height responsively */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Preserve image proportions */
+    filter: drop-shadow(
+        0 1rem 2rem rgba(0, 0, 0, 0.1)
+    ); /* Subtle depth shadow */
+    border-radius: var(--border-radius-small); /* Rounded corners */
+    transition: var(--transition-smooth); /* Smooth hover transitions */
+}
+
+/* Image hover effect - subtle zoom */
+.moon-section__image:hover {
+    transform: scale(1.05); /* 5% scale increase */
+}
+
+/* ===================================
+   4️⃣ INFORMATION GRID SYSTEM
+   =================================== */
+
+/* 
+   📊 Information card grid container
+   Single column by default (mobile-first approach)
+   Switches to 2-column layout on larger screens
+*/
+.moon-section__grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column by default */
+    gap: var(--moon-card-gap); /* Responsive spacing between cards */
+    width: 100%; /* Full width of parent */
+    max-width: 50rem; /* Constrain width on mobile/tablet */
+}
+
+/* ===================================
+   5️⃣ CARD COMPONENTS
+   =================================== */
+
+/* 
+   🎴 Individual information card
+   Glassmorphism design with backdrop blur and semi-transparent background
+*/
+.moon-section__card {
+    min-width: 0; /* Allow flex items to shrink below content size - prevents overflow */
+    padding: var(--moon-card-padding); /* Responsive internal spacing */
+    border-radius: var(--border-radius) 0 1.5rem 0; /* Unique asymmetrical corners (matches site style) */
+    background: rgba(
+        244,
+        243,
+        242,
+        0.8
+    ); /* Semi-transparent light background */
+    backdrop-filter: blur(
+        var(--moon-card-blur)
+    ); /* Glassmorphism blur effect */
+    box-shadow: var(--shadow-light); /* Subtle depth shadow */
+    transition: var(--transition-smooth); /* Smooth hover/focus transitions */
+    display: flex;
+    flex-direction: column; /* Stack title and content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center-align text */
+    border: 1px solid rgba(255, 255, 255, var(--moon-border-opacity)); /* Subtle border for definition */
+    position: relative; /* For ::before pseudo-element positioning */
+    overflow: hidden; /* Clip ::before pseudo-element to border-radius */
+}
+
+/* 
+   🎨 Decorative top accent line
+   Appears on card hover as a gradient bar
+*/
+.moon-section__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--moon-accent-height); /* Thin accent line */
+    background: linear-gradient(
+        90deg,
+        var(--color-primary),
+        var(--color-secondary)
+    ); /* Purple gradient accent */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Fade in on hover */
+}
+
+/* Show accent line on card hover */
+.moon-section__card:hover::before {
+    opacity: 1; /* Fade in gradient line */
+}
+
+/* 
+   📌 Card title/label
+   Small uppercase label for each data point (e.g., "Лунная фаза:")
+*/
+.moon-section__card-title {
+    color: var(--color-light-text); /* Light text for readability */
+    margin-bottom: clamp(
+        0.8rem,
+        2vw,
+        1.2rem
+    ); /* Responsive spacing below title */
+}
+
+/* 
+   📝 Card content/value
+   Main content area - displays dynamic data from API
+   JavaScript updates these elements with moon phase information
+*/
+.moon-section__card-text {
+    color: var(--color-light-text); /* Light text color */
+    font-size: clamp(1.6rem, 3vw, 2rem); /* Responsive font size */
+    line-height: 1.4; /* Comfortable line spacing */
+    word-wrap: break-word; /* Prevent text overflow */
+    hyphens: auto; /* Enable automatic hyphenation for long words */
+    margin: 0; /* Remove default paragraph margin */
+}
+
+/* 
+   🎯 Full-width card variant
+   Used for ritual recommendations card that spans all columns
+*/
+.moon-section__card--full {
+    grid-column: 1 / -1; /* Span all grid columns */
+}
+
+/* ===================================
+   6️⃣ ERROR & LOADING STATES
+   =================================== */
+
+/* 
+   ❌ Error message container
+   Displays API errors or connection issues
+   Hidden by default, shown with .show class (added by JavaScript)
+*/
+.moon-section__error {
+    color: var(--color-error); /* Red error text */
+    background: var(--color-error-bg); /* Light red background */
+    padding: clamp(1rem, 2vw, 1.5rem); /* Responsive padding */
+    border-radius: var(--border-radius-small); /* Rounded corners */
+    margin: 1rem 0; /* Vertical spacing */
+    text-align: center; /* Center-align error text */
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem); /* Responsive font size */
+    border: 1px solid #ff9999; /* Subtle red border */
+    backdrop-filter: blur(var(--moon-card-blur)); /* Match card blur */
+    display: none; /* Hidden by default */
+    animation: fadeIn 0.3s ease; /* Smooth entrance animation */
+}
+
+/* Show error state - JavaScript adds this class */
+.moon-section__error.show {
+    display: block; /* Make visible */
+}
+
+/* 
+   ⏳ Loading state container
+   Applied to .moon-section__layout while fetching data
+   Dims content and shows spinner
+*/
+.loading {
+    opacity: 0.7; /* Reduce opacity during loading */
+    position: relative; /* For ::after pseudo-element positioning */
+    pointer-events: none; /* Disable interactions during loading */
+}
+
+/* 
+   🔄 Loading spinner
+   Animated circular spinner shown during API requests
+*/
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center spinner */
+    width: 3rem; /* Spinner size */
+    height: 3rem;
+    border: 3px solid var(--color-highlight); /* Purple spinner color */
+    border-top: 3px solid transparent; /* Create gap for rotation effect */
+    border-radius: 50%; /* Make circular */
+    animation: spin 1s linear infinite; /* Continuous rotation */
+    z-index: 100; /* Ensure spinner appears above content */
+}
+
+/* Fade-in animation for error messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); /* Slide down slightly */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* End at natural position */
+    }
+}
+
+/* Spinner rotation animation */
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* ===================================
+   7️⃣ HOVER & FOCUS EFFECTS
+   =================================== */
+
+/* 
+   🎯 Focus state for keyboard navigation
+   Ensures cards are accessible via keyboard
+*/
+.moon-section__card:focus-within {
+    outline: 2px solid var(--color-highlight); /* Purple focus outline */
+    outline-offset: 2px; /* Space between card and outline */
+    transform: translateY(-0.5rem); /* Slight lift effect */
+    z-index: 10; /* Bring focused card forward */
+}
+
+/* ===================================
+   8️⃣ RESPONSIVE BREAKPOINTS (4 STANDARD BREAKPOINTS)
+   =================================== */
+
+/* 
+   📱 SMALL MOBILE (≤480px)
+   Optimized for smallest screens (iPhone SE, etc.)
+*/
+@media (max-width: 480px) {
+    .moon-section__layout {
+        gap: clamp(2rem, 4vw, 2.4rem); /* Tighter spacing */
+    }
+
+    .moon-section__grid {
+        gap: clamp(1.6rem, 3vw, 2rem); /* Reduce grid gaps */
+        padding: 0 1rem; /* Add horizontal padding */
+    }
+
+    .moon-section__card {
+        padding: clamp(1.2rem, 3vw, 1.6rem); /* Smaller card padding */
+    }
+
+    .moon-section__image {
+        max-width: min(85vw, 25rem); /* Smaller image on tiny screens */
+    }
+}
+
+/* 
+   📱 TABLET (481px - 768px)
+   Larger mobile devices and small tablets
+*/
+@media (min-width: 481px) and (max-width: 768px) {
+    .moon-section__layout {
+        gap: clamp(2.4rem, 4vw, 3.2rem); /* Moderate spacing */
+    }
+
+    .moon-section__grid {
+        max-width: 50rem; /* Slightly wider grid */
+    }
+
+    .moon-section__image {
+        max-width: min(80vw, 28rem); /* Balanced image size */
+    }
+}
+
+/* 
+   💻 DESKTOP (769px - 1200px)
+   Standard desktop screens - switch to horizontal layout
+*/
+@media (min-width: 769px) and (max-width: 1200px) {
+    /* Switch to horizontal layout */
+    .moon-section__layout {
+        flex-direction: row; /* Side-by-side layout */
+        align-items: center; /* Vertically center items */
+        justify-content: center; /* Horizontally center layout */
+        gap: clamp(3.2rem, 4vw, 4.8rem); /* Generous spacing */
+        max-width: var(--moon-layout-max-width); /* Constrain total width */
+        margin-left: auto; /* Center layout */
+        margin-right: auto;
+    }
+
+    /* Image container sizing */
+    .moon-section__image-wrapper {
+        flex: 0 0 auto; /* Don't grow/shrink, use natural size */
+        width: auto;
+        max-width: none; /* Remove width constraint */
+    }
+
+    /* Grid expands to fill available space */
+    .moon-section__grid {
+        flex: 1; /* Take remaining space */
+        max-width: var(--moon-grid-max-width); /* But don't exceed max */
+        grid-template-columns: repeat(2, 1fr); /* 2-column layout */
+    }
+
+    /* Ensure cards have minimum width */
+    .moon-section__card {
+        min-width: 28rem;
+    }
+
+    /* Optimize image size for desktop */
+    .moon-section__image {
+        max-width: min(25vw, 28rem);
+    }
+}
+
+/* 
+   🖥️ LARGE DESKTOP (≥1201px)
+   Large monitors and high-resolution displays
+*/
+@media (min-width: 1201px) {
+    /* Horizontal layout with optimal spacing */
+    .moon-section__layout {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(4rem, 5vw, 6.4rem); /* Generous spacing */
+        max-width: var(--moon-layout-max-width);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Fixed image container */
+    .moon-section__image-wrapper {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: none;
+    }
+
+    /* Optimal grid layout */
+    .moon-section__grid {
+        flex: 1;
+        grid-template-columns: repeat(
+            2,
+            minmax(30rem, 1fr)
+        ); /* 2 balanced columns */
+        max-width: var(--moon-grid-max-width);
+    }
+
+    /* Card sizing for large screens */
+    .moon-section__card {
+        min-width: 30rem; /* Comfortable minimum width */
+        padding: 2.4rem; /* Fixed padding on large screens */
+    }
+
+    /* Larger image on big screens */
+    .moon-section__image {
+        max-width: min(25vw, var(--moon-image-max-width));
+    }
+}
+
+/* ===================================
+   9️⃣ ACCESSIBILITY ENHANCEMENTS
+   =================================== */
+
+/* 
+   ♿ High contrast mode support
+   Improves visibility for users with vision impairments
+*/
+@media (prefers-contrast: high) {
+    .moon-section__card {
+        border: 2px solid var(--color-primary); /* Stronger border */
+        background-color: rgba(
+            244,
+            243,
+            242,
+            0.95
+        ); /* More opaque background */
+    }
+}
+
+/* 
+   🎬 Reduced motion preference
+   Respects user's OS-level motion reduction setting
+*/
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important; /* Nearly instant animations */
+        animation-iteration-count: 1 !important; /* Single iteration only */
+        transition-duration: 0.01ms !important; /* Nearly instant transitions */
+    }
+
+    /* Disable hover transforms */
+    .moon-section__card:focus-within,
+    .moon-section__image:hover {
+        transform: none; /* No movement animations */
+    }
+}
+
+/* 
+   🌙 Dark mode support
+   Automatic color scheme adaptation for dark mode users
+*/
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Override colors for dark mode */
+        --color-light-text: #e0e0e0;
+        --color-background: #1a1a1a;
+        --color-primary: #8a7ca8;
+        --color-secondary: #9b8bc4;
+        --color-error-bg: #3d1f1f;
+    }
+
+    .moon-section__card {
+        background: rgba(
+            74,
+            63,
+            112,
+            0.3
+        ); /* Darker semi-transparent background */
+        backdrop-filter: blur(15px); /* Stronger blur for depth */
+        border-color: rgba(255, 255, 255, 0.1); /* Subtle border */
+    }
+
+    .moon-section__error {
+        background: var(--color-error-bg); /* Dark error background */
+        border-color: #cc5555; /* Muted red border */
+    }
+}
+
+/* ===================================
+   🔟 PRINT & HIGH-DPI STYLES
+   =================================== */
+
+/* 
+   🖨️ Print stylesheet optimization
+   Ensures moon section prints cleanly on paper
+*/
+@media print {
+    .moon-section__layout {
+        flex-direction: column; /* Stack vertically for print */
+        gap: 2rem;
+        break-inside: avoid; /* Prevent page breaks inside section */
+    }
+
+    .moon-section__grid {
+        grid-template-columns: 1fr; /* Single column for print */
+        gap: 1.5rem;
+    }
+
+    .moon-section__card {
+        box-shadow: none; /* Remove shadows for print */
+        border: 1px solid #ccc; /* Simple border */
+        background-color: transparent; /* Solid background */
+        break-inside: avoid; /* Keep cards intact */
+    }
+
+    .moon-section__image {
+        max-width: 15rem; /* Smaller image for print */
+        max-height: 15rem;
+    }
+
+    /* Hide error messages in print */
+    .moon-section__error {
+        display: none;
+    }
+}
+
+/* 
+   📱 High DPI displays (Retina, 4K, etc.)
+   Improves text rendering on high-resolution screens
+*/
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .moon-section__card-text {
+        text-rendering: optimizeLegibility; /* Better text rendering */
+        -webkit-font-smoothing: antialiased; /* Smoother fonts on WebKit */
+        -moz-osx-font-smoothing: grayscale; /* Smoother fonts on Firefox/Mac */
+    }
+}
+
+/* ================================================
+   1️⃣1️⃣ DEBUG UTILITIES SECTION
+   ================================================
+   
+   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
+*/
+
+/* ─────────────────────────────────────────────
+   VISUAL LAYOUT DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎨 Layout Boundaries Visualization:
+Uncomment to see colored borders around section elements
+
+.moon-section { 
+    border: 3px solid red !important; 
+    background: rgba(255,0,0,0.05) !important;
+}
+
+.moon-section__layout { 
+    border: 2px solid blue !important; 
+    background: rgba(0,0,255,0.05) !important;
+}
+
+.moon-section__grid { 
+    border: 2px solid green !important; 
+    background: rgba(0,255,0,0.05) !important;
+}
+
+.moon-section__card { 
+    border: 1px solid purple !important; 
+    background: rgba(128,0,128,0.1) !important;
+}
+
+.moon-section__image-wrapper {
+    border: 2px dashed orange !important;
+}
+*/
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE BREAKPOINT TESTING
+   ───────────────────────────────────────────── */
+
+/*
+📐 Breakpoint Indicator:
+Copy this to console to see current layout mode:
+
+const width = window.innerWidth;
+const layout = 
+    width <= 480 ? 'Small Mobile (≤480px)' :
+    width <= 768 ? 'Tablet (481-768px)' :
+    width <= 1200 ? 'Desktop (769-1200px)' :
+    'Large Desktop (≥1201px)';
+console.log('🌙 Moon Section Layout:', layout, `(${width}px)`);
+
+// Test grid layout
+const grid = document.querySelector('.moon-section__grid');
+const gridCols = window.getComputedStyle(grid).gridTemplateColumns;
+console.log('📊 Grid columns:', gridCols);
+*/
+
+/* ─────────────────────────────────────────────
+   LOADING STATE TESTING
+   ───────────────────────────────────────────── */
+
+/*
+⏳ Test Loading State:
+Copy to console to manually trigger loading state:
+
+const layout = document.querySelector('.moon-section__layout');
+layout.classList.add('loading');
+
+// Remove after 3 seconds
+setTimeout(() => {
+    layout.classList.remove('loading');
+}, 3000);
+*/
+
+/* ─────────────────────────────────────────────
+   ERROR STATE TESTING
+   ───────────────────────────────────────────── */
+
+/*
+❌ Test Error Display:
+Copy to console to show/hide error message:
+
+const errorEl = document.querySelector('.moon-section__error');
+errorEl.textContent = 'Test error message';
+errorEl.classList.add('show');
+
+// Hide after 5 seconds
+setTimeout(() => {
+    errorEl.classList.remove('show');
+}, 5000);
+*/
+
+/* ─────────────────────────────────────────────
+   HOVER EFFECT TOGGLE (Optional Feature)
+   ───────────────────────────────────────────── */
+
+/*
+🎯 OPTIONAL HOVER EFFECT
+⚠️ DELETE IF NOT USED - Currently disabled by default
+
+Adds elevation effect when hovering over cards.
+To enable, uncomment the code below:
+
+.moon-section__card:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: var(--shadow-hover);
+}
+
+Why disabled:
+- Focus state already provides elevation
+- Reduces visual noise for some users
+- Can be distracting on touch devices
+
+If you decide this effect is unwanted, DELETE THIS ENTIRE COMMENT BLOCK.
+*/
+
+/* ─────────────────────────────────────────────
+   CSS VARIABLE TESTING
+   ───────────────────────────────────────────── */
+
+/*
+🎛️ Test Different Spacing Values:
+Copy these to console to experiment with layout spacing:
+
+document.documentElement.style.setProperty('--moon-section-gap', '8rem');
+document.documentElement.style.setProperty('--moon-card-gap', '6rem');
+document.documentElement.style.setProperty('--moon-card-padding', '3rem');
+
+// Reset to defaults:
+document.documentElement.style.setProperty('--moon-section-gap', 'clamp(2.4rem, 5vw, 6.4rem)');
+document.documentElement.style.setProperty('--moon-card-gap', 'clamp(2.4rem, 4vw, 4.8rem)');
+document.documentElement.style.setProperty('--moon-card-padding', 'clamp(0.8rem, 3vw, 2.4rem)');
+*/
+
+/* ─────────────────────────────────────────────
+   GRID DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+📊 Visualize Grid Structure:
+Uncomment to see grid column boundaries:
+
+.moon-section__grid {
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(255,0,0,0.1) 0px,
+        rgba(255,0,0,0.1) 1px,
+        transparent 1px,
+        transparent calc(50% - var(--moon-card-gap) / 2)
+    );
+}
+*/
+
+/* ─────────────────────────────────────────────
+   API DATA INSPECTION
+   ───────────────────────────────────────────── */
+
+/*
+🌙 Monitor Moon Phase Updates:
+Copy to console to track data changes:
+
+// Watch for DOM changes
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.target.classList.contains('moon-section__card-text')) {
+            console.log('🌙 Moon data updated:', mutation.target.textContent);
+        }
+    });
+});
+
+const cards = document.querySelectorAll('.moon-section__card-text');
+cards.forEach(card => {
+    observer.observe(card, { 
+        childList: true, 
+        characterData: true, 
+        subtree: true 
+    });
+});
+
+console.log('👀 Watching moon data changes...');
+*/
+
+/* ─────────────────────────────────────────────
+   PERFORMANCE MONITORING
+   ───────────────────────────────────────────── */
+
+/*
+⚡ Check Layout Performance:
+Copy to console to measure render performance:
+
+// Measure layout shift
+let cls = 0;
+new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+        if (!entry.hadRecentInput) {
+            cls += entry.value;
+            console.log('📊 Cumulative Layout Shift:', cls.toFixed(4));
+        }
+    }
+}).observe({type: 'layout-shift', buffered: true});
+
+// Monitor repaints
+console.log('🎨 Paint timing:', performance.getEntriesByType('paint'));
+*/
+
+/* ─────────────────────────────────────────────
+   END OF DEBUG UTILITIES
+   ───────────────────────────────────────────── */
