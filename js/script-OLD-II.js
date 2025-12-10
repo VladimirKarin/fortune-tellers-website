@@ -3,6 +3,7 @@
 // ================================================
 
 import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';
+import { initializeMoonPhase } from './moon-phase.js';
 import Carousel from './carousel.js';
 import { renderCalendar, startAutoUpdate } from './calendar.js';
 import { initNav, destroyNav } from './nav.js';
@@ -117,10 +118,10 @@ window.addEventListener('beforeunload', () => {
     destroyHeroButton();
 });
 
-//   ================================================
-//    👤 ABOUT ME SECTION - ANIMATION CONTROLLER
-//   ================================================
-/*  
+/* ================================================
+   👤 ABOUT ME SECTION - ANIMATION CONTROLLER
+   ================================================
+   
    📋 FEATURES:
    - Scroll-triggered entrance animations using IntersectionObserver
    - Responsive animation directions based on screen layout
@@ -138,9 +139,9 @@ window.addEventListener('beforeunload', () => {
    Works with animate-from-* classes in about-me-section-styles.css
 */
 
-//   ===================================
-//    📱 RESPONSIVE BREAKPOINT CONSTANTS
-//   ===================================
+/* ===================================
+   📱 RESPONSIVE BREAKPOINT CONSTANTS
+   =================================== */
 
 const BREAKPOINTS = {
     MOBILE: 599, // ≤599px: Single column layout
@@ -148,9 +149,9 @@ const BREAKPOINTS = {
     DESKTOP: Infinity, // >991px: Three column layout
 };
 
-//   ===================================
-//    ⏱️ ANIMATION TIMING CONSTANTS
-//   ===================================
+/* ===================================
+   ⏱️ ANIMATION TIMING CONSTANTS
+   =================================== */
 
 const ANIMATION_CONFIG = {
     // IntersectionObserver thresholds
@@ -164,9 +165,9 @@ const ANIMATION_CONFIG = {
     RESIZE_DEBOUNCE_DELAY: 250, // Wait 250ms after last resize before updating (ms)
 };
 
-//  ===================================
-//   🎬 ANIMATION DIRECTION CONFIGURATIONS
-//  ===================================
+/* ===================================
+   🎬 ANIMATION DIRECTION CONFIGURATIONS
+   =================================== */
 
 /*
    🔄 TRANSLATED: Animation direction patterns for different screen sizes
@@ -195,9 +196,9 @@ const ANIMATION_DIRECTIONS = {
     ],
 };
 
-//  ===================================
-//   📦 ABOUT ME ANIMATION CLASS
-//  ====================================
+/* ===================================
+   📦 ABOUT ME ANIMATION CLASS
+   =================================== */
 
 /**
  * Manages scroll-triggered entrance animations for About Me section cards
@@ -431,9 +432,9 @@ class AboutMeAnimation {
     }
 }
 
-//   ===================================
-//    🔧 DEBUG UTILITIES
-//   ===================================
+/* ===================================
+   🔧 DEBUG UTILITIES
+   =================================== */
 
 /*
 📊 Test Animation System:
@@ -671,36 +672,11 @@ You should now see:
 ✅ Countdown timer initialized successfully
 */
 
-// ================================================
-// 🌙 MOON PHASE SECTION
-// ================================================
-//
-// ✅ FIXED: Removed duplicate initialization
-// Moon phase now self-initializes via moon-phase.js
-//
-// 📋 OLD CODE (REMOVED):
-// import { initializeMoonPhase } from './moon-phase.js';
-// initializeMoonPhase();
-//
-// 📋 NEW BEHAVIOR:
-// - moon-phase.js has its own DOMContentLoaded listener
-// - Automatically initializes when loaded
-// - No manual initialization needed here
-//
-// 🔗 DEPENDENCIES:
-// - moon-phase.js (self-initializing module)
-// - 08-moon-information-section-styles.css
-// - index.html (moon section markup)
-//
-// 🎯 BENEFITS:
-// - No duplicate initialization
-// - Cleaner separation of concerns
-// - Moon module is fully self-contained
-//
-// 🔧 DEBUG:
-// To verify moon phase is loading correctly, check console for:
-// "🚀 Initializing Moon Phase Module..."
-// "✅ Moon Phase Module initialized"
+// ------------------------------------------------------------------
+// Moon Phase Section Logic
+// ------------------------------------------------------------------
+
+initializeMoonPhase();
 
 // ------------------------------------------------------------------
 // Calendar Section Logic with Auto-Update
