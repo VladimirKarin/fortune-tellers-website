@@ -110,11 +110,11 @@ const DEBUG_ENABLED = true;
  * @param {string} message - Log message
  * @param {*} data - Optional data to log
  */
-// function debugLog(message, data = '') {
-//     if (DEBUG_ENABLED) {
-//         console.log(`[Prices Debug] ${message}`, data);
-//     }
-// }
+function debugLog(message, data = '') {
+    if (DEBUG_ENABLED) {
+        console.log(`[Prices Debug] ${message}`, data);
+    }
+}
 
 /**
  * Test visibility of prices section elements
