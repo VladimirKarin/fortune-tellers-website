@@ -667,7 +667,7 @@ function testErrorDisplay() {
 
 // RUN TESTS:
 debugMoonDOM();
-// testMoonAPI();
-// testLocalCalculation();
-// testShowPhase('fullMoon');
-// testErrorDisplay();
+testMoonAPI();
+testLocalCalculation();
+testShowPhase('fullMoon');
+testErrorDisplay();
