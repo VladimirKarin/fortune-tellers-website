@@ -627,8 +627,7 @@ export { initializeMoonPhase, getLocalMoonPhase, updateMoonUI };
    1️⃣3️⃣ DEBUG UTILITIES
    ================================================ */
 
-/*
-📊 TESTING FUNCTIONS - Copy to console:
+//📊 TESTING FUNCTIONS - Copy to console:
 
 // 1. Check if DOM elements are found correctly
 function debugMoonDOM() {
@@ -672,4 +671,3 @@ debugMoonDOM();
 // testLocalCalculation();
 // testShowPhase('fullMoon');
 // testErrorDisplay();
-*/
