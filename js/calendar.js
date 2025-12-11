@@ -40,8 +40,8 @@ const UPDATE_INTERVAL = 6 * 60 * 60 * 1000; // 6 hours
 // Trip dates for highlighting
 const tripDates = {
     cityRussian: 'Вильнюс',
-    start: '2025-11-18',
-    end: '2025-12-01',
+    start: '2025-12-18',
+    end: '2025-12-24',
 };
 
 // ------------------------------------------------------------------
