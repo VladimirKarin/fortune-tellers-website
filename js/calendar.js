@@ -1,5 +1,5 @@
 // ================================================
-// 📅 CALENDAR MODULE - Interactive Travel Schedule
+// 📅 CALENDAR MODULE - Business Interactive Travel Schedule
 // ================================================
 //
 // 📋 MODULE PURPOSE:
