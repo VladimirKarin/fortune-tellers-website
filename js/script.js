@@ -2,6 +2,7 @@
 // 📦 MODULE IMPORTS
 // ================================================
 import './moon-phase.js';
+import './price-section.js';
 import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';
 import Carousel from './carousel.js';
 import { renderCalendar, startAutoUpdate } from './calendar.js';
