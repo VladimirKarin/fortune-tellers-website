@@ -103,7 +103,7 @@ let resizeTimeout = null; // Store resize debounce timeout
  * Debug mode configuration
  * Set to false in production to disable console logs
  */
-const DEBUG_ENABLED = true;
+const DEBUG_ENABLED = false;
 
 /**
  * Centralized debug logging
