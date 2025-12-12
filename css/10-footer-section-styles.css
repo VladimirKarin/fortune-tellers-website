@@ -186,7 +186,8 @@
 /* Copyright container */
 .footer-copyright-info {
     text-align: center; /* Center-align copyright text */
-    margin: var(--spacing-sm) 0; /* 1.6rem space above and beyond copyright */
+    margin-top: var(--spacing-sm); /* 1.6rem space above copyright */
+    padding-bottom: var(--spacing-sm); /* 1.6rem space beyond copyright */
 }
 
 /* Copyright text styling */
