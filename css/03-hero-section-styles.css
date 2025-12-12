@@ -27,7 +27,7 @@
     --hero-overlay-opacity: 0.3; /* Optional: for background overlay */
 
     /* 📐 Hero content spacing */
-    --hero-content-margin-top: var(--spacing-xxl); /* Top spacing (64px) */
+    --hero-content-margin-top: var(--spacing-huge); /* Top spacing (64px) */
     --hero-content-margin-left: var(--spacing-xl); /* Left spacing (48px) */
     --hero-content-max-width: 60rem; /* Maximum content width */
     --hero-content-padding-x: clamp(
