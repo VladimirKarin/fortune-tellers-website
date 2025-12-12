@@ -56,8 +56,8 @@ const UPDATE_INTERVAL = 6 * 60 * 60 * 1000;
  */
 const tripDates = {
     cityRussian: 'Вильнюс', // Vilnius in Russian
-    start: '2025-12-17',
-    end: '2025-12-25',
+    start: '2025-12-16',
+    end: '2025-12-26',
 };
 
 /**
@@ -245,7 +245,10 @@ function isViewedMonth(day, year, month) {
  * @private
  */
 function formatDateISO(date) {
-    return date.toISOString().split('T')[0];
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
 
 /**
