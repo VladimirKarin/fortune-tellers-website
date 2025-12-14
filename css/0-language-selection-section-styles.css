@@ -1,0 +1,269 @@
+/* ===================================
+           RESET & BASE STYLES
+           =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===================================
+           ANIMATED BACKGROUND
+           =================================== */
+.background-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* ===================================
+           MAIN CONTAINER
+           =================================== */
+.language-selector {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    animation: fadeInScale 0.8s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===================================
+           LOGO
+           =================================== */
+.logo-container {
+    margin-bottom: 2rem;
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+/* ===================================
+           HEADING
+           =================================== */
+.heading {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subheading {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+}
+
+/* ===================================
+           LANGUAGE BUTTONS
+           =================================== */
+.language-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.language-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.5rem 2rem;
+    background: white;
+    border: 3px solid #e0e0e0;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #333;
+    min-width: 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+.language-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(102, 126, 234, 0.1),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.language-btn:hover::before {
+    left: 100%;
+}
+
+.language-btn:hover {
+    transform: translateY(-5px);
+    border-color: #667eea;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.language-btn:active {
+    transform: translateY(-2px);
+}
+
+.flag {
+    font-size: 4rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.language-btn:hover .flag {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.language-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* ===================================
+           LOADING STATE
+           =================================== */
+.language-btn.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.language-btn.loading .flag {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* ===================================
+           FOOTER
+           =================================== */
+.footer-text {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* ===================================
+           MOBILE RESPONSIVE
+           =================================== */
+@media (max-width: 600px) {
+    .language-selector {
+        padding: 2rem 1.5rem;
+    }
+
+    .heading {
+        font-size: 1.5rem;
+    }
+
+    .subheading {
+        font-size: 1rem;
+    }
+
+    .language-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .language-btn {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .flag {
+        font-size: 3rem;
+    }
+}
