@@ -56,7 +56,7 @@ body {
     position: relative;
     z-index: 10;
     text-align: center;
-    background: rgba(255, 255, 255, 0.95);
+    background: #f2f2f2;
     padding: 3rem 2rem;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -81,6 +81,9 @@ body {
            LOGO - WITH FLOATING ANIMATION
            =================================== */
 .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 2rem;
     animation: floatAnimation 3s ease-in-out infinite;
 }
@@ -96,7 +99,7 @@ body {
     }
 }
 
-.logo {
+.logo-lang {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -250,7 +253,7 @@ body {
         padding: 2rem 1.5rem;
     }
 
-    .logo {
+    .logo-lang {
         width: 100px;
         height: 100px;
     }
