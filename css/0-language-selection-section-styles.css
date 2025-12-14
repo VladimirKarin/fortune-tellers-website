@@ -51,7 +51,7 @@ body {
 
 /* ===================================
            MAIN CONTAINER
-           =================================== */
+    =================================== */
 .language-selector {
     position: relative;
     z-index: 10;
@@ -101,7 +101,7 @@ body {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.2);
 }
 
 /* ===================================
@@ -112,7 +112,7 @@ body {
     color: #333;
     margin-bottom: 1rem;
     font-weight: 600;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4a206f 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -120,7 +120,7 @@ body {
 
 .subheading {
     font-size: 1.1rem;
-    color: #666;
+    color: #333;
     margin-bottom: 2.5rem;
     font-weight: 400;
 }
@@ -175,8 +175,8 @@ body {
 
 .language-btn:hover {
     transform: translateY(-5px);
-    border-color: #667eea;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    border-color: #4a206f;
+    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.302);
 }
 
 .language-btn:active {
@@ -196,7 +196,7 @@ body {
 
 .language-btn:hover .flag {
     transform: scale(1.1);
-    filter: drop-shadow(0 6px 16px rgba(102, 126, 234, 0.4));
+    filter: drop-shadow(0 6px 16px rgba(74, 32, 111, 0.4));
 }
 
 .language-name {
@@ -207,7 +207,7 @@ body {
 }
 
 .language-btn:hover .language-name {
-    color: #667eea;
+    color: #713e92;
 }
 
 /* ===================================
@@ -238,8 +238,8 @@ body {
            =================================== */
 .footer-text {
     margin-top: 2rem;
-    font-size: 0.9rem;
-    color: #999;
+    font-size: 1.6rem;
+    color: #4a206f;
 }
 
 /* ===================================
