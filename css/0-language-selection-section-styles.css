@@ -78,7 +78,7 @@ body {
 }
 
 /* ===================================
-           LOGO
+           LOGO - WITH FLOATING ANIMATION
            =================================== */
 .logo-container {
     margin-bottom: 2rem;
@@ -99,13 +99,8 @@ body {
 .logo {
     width: 120px;
     height: 120px;
-    margin: 0 auto;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
+    object-fit: cover;
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
 }
 
@@ -144,8 +139,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
-    padding: 1.5rem 2rem;
+    gap: 1rem;
+    padding: 2rem 2.5rem;
     background: white;
     border: 3px solid #e0e0e0;
     border-radius: 15px;
@@ -153,7 +148,7 @@ body {
     transition: all 0.3s ease;
     text-decoration: none;
     color: #333;
-    min-width: 140px;
+    min-width: 160px;
     position: relative;
     overflow: hidden;
 }
@@ -188,21 +183,31 @@ body {
     transform: translateY(-2px);
 }
 
+/* ===================================
+           FLAG STYLES - FOR HEART-SHAPED IMAGES
+           =================================== */
 .flag {
-    font-size: 4rem;
-    line-height: 1;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-    transition: transform 0.3s ease;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+    transition: all 0.3s ease;
 }
 
 .language-btn:hover .flag {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.1);
+    filter: drop-shadow(0 6px 16px rgba(102, 126, 234, 0.4));
 }
 
 .language-name {
     font-size: 1.2rem;
     font-weight: 600;
     color: #333;
+    transition: color 0.3s ease;
+}
+
+.language-btn:hover .language-name {
+    color: #667eea;
 }
 
 /* ===================================
@@ -224,7 +229,7 @@ body {
     }
 
     50% {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
 
@@ -245,6 +250,11 @@ body {
         padding: 2rem 1.5rem;
     }
 
+    .logo {
+        width: 100px;
+        height: 100px;
+    }
+
     .heading {
         font-size: 1.5rem;
     }
@@ -261,9 +271,11 @@ body {
     .language-btn {
         width: 100%;
         min-width: unset;
+        padding: 1.5rem 2rem;
     }
 
     .flag {
-        font-size: 3rem;
+        width: 80px;
+        height: 80px;
     }
 }

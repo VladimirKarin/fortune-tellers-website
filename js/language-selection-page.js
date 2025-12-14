@@ -44,7 +44,7 @@ function checkSavedLanguage() {
 
             // Add small delay for smooth transition
             setTimeout(() => {
-                window.location.href = `./${savedLanguage}/`;
+                window.location.href = `./${savedLanguage}/index.html`;
             }, 500);
 
             return true;
