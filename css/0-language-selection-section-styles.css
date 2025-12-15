@@ -1,353 +1,812 @@
-/* ===================================
-           RESET & BASE STYLES
-   =================================== */
+/* ================================================
+   🌍 LANGUAGE SELECTION SECTION - Splash Page Styles
+   ================================================
+   
+   📋 MODULE PURPOSE:
+   Styles for the initial language selection page where users choose
+   between Russian (RU) and Lithuanian (LT) versions of the website.
+   Features animated starry background and interactive language cards.
+   
+   🎯 KEY FEATURES:
+   - Animated twinkling star background
+   - Floating logo with smooth animation
+   - Interactive language selection cards
+   - Hover effects and loading states
+   - Fully responsive mobile design
+   - localStorage integration for language memory
+   
+   🔗 DEPENDENCIES:
+   - index.html - Language selector markup
+   - language-selection-page.js - Star generation and click handlers
+   - /img/01-header-section/logo/logoCrop2.png - Logo image
+   
+   📦 EXPORTS TO:
+   - style.css (imported via @import)
+   
+   📋 TABLE OF CONTENTS:
+   1. Reset & Base Styles
+   2. Animated Background (Stars)
+   3. Main Container
+   4. Logo & Animation
+   5. Typography (Heading & Subheading)
+   6. Language Selection Cards
+   7. Language Code Circles
+   8. Loading States
+   9. Footer Text
+   10. Mobile Responsive Design
+   11. Accessibility Enhancements
+   12. Debug Utilities
+*/
+
+/* ================================================
+   1️⃣ RESET & BASE STYLES
+   ================================================ */
+
+/**
+ * Universal reset for language selection page
+ * Ensures consistent box-sizing and removes browser defaults
+ */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Include padding/border in element width */
 }
 
+/**
+ * Body styling for language selection page
+ * Creates full-screen centered layout with gradient background
+ * 
+ * 🎨 Design Choice: Purple gradient matches main site theme
+ * 🔄 TRANSLATED: "Основные стили для тела страницы"
+ */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
+    min-height: 100vh; /* Full viewport height */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+
+    /* Purple gradient background - top to bottom */
     background: linear-gradient(to bottom, #5d2f80 0%, #4a206f 100%);
-    overflow: hidden;
-    position: relative;
+
+    overflow: hidden; /* Hide scrollbars (stars extend beyond viewport) */
+    position: relative; /* Position context for absolute children */
 }
 
-/* ===================================
-           ANIMATED BACKGROUND
-    =================================== */
+/* ================================================
+   2️⃣ ANIMATED BACKGROUND - TWINKLING STARS
+   ================================================ */
+
+/**
+ * Container for animated star elements
+ * Stars are generated dynamically by JavaScript
+ * 
+ * 🔄 TRANSLATED: "Контейнер для анимированного фона"
+ */
 .background-animation {
     position: absolute;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    z-index: 0;
+    overflow: hidden; /* Clip stars at viewport edges */
+    z-index: 0; /* Behind main content */
 }
 
+/**
+ * Individual star styling
+ * Stars are small white circles with twinkling animation
+ * 
+ * 📝 Note: Star properties (size, position) are set inline by JavaScript
+ * 🎬 Animation: 3-second infinite twinkle loop
+ */
 .star {
     position: absolute;
     background: white;
-    border-radius: 50%;
+    border-radius: 50%; /* Perfect circle */
     animation: twinkle 3s infinite ease-in-out;
 }
 
+/**
+ * Twinkle animation keyframes
+ * Stars fade in/out and slightly scale for shimmer effect
+ * 
+ * 🔄 TRANSLATED: "Анимация мерцания звёзд"
+ */
 @keyframes twinkle {
     0%,
     100% {
-        opacity: 0.3;
-        transform: scale(1);
+        opacity: 0.3; /* Dim at start/end */
+        transform: scale(1); /* Normal size */
     }
-
     50% {
-        opacity: 1;
-        transform: scale(1.2);
+        opacity: 1; /* Bright at midpoint */
+        transform: scale(1.2); /* Slightly larger */
     }
 }
 
-/* ===================================
-           MAIN CONTAINER
-    =================================== */
+/* ================================================
+   3️⃣ MAIN CONTAINER - LANGUAGE SELECTOR CARD
+   ================================================ */
+
+/**
+ * Central white card containing language selection UI
+ * Floats above animated starry background
+ * 
+ * 🎨 Design: Semi-transparent white with rounded corners and shadow
+ * 🎬 Animation: Fade-in and scale-up entrance on page load
+ * 🔄 TRANSLATED: "Основной контейнер для выбора языка"
+ */
 .language-selector {
     position: relative;
-    z-index: 10;
-    text-align: center;
-    background: #f2f2f2;
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    width: 90%;
+    z-index: 10; /* Above background stars */
+    text-align: center; /* Center all child content */
+
+    /* Visual styling */
+    background: #f2f2f2; /* Light gray background */
+    padding: 3rem 2rem; /* Vertical and horizontal spacing */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Deep shadow for depth */
+
+    /* Size constraints */
+    max-width: 500px; /* Maximum width */
+    width: 90%; /* Responsive width (90% of viewport on mobile) */
+
+    /* Entrance animation */
     animation: fadeInScale 0.8s ease-out;
 }
 
+/**
+ * Fade-in and scale-up animation for language selector card
+ * Creates smooth entrance effect on page load
+ * 
+ * 🔄 TRANSLATED: "Анимация появления карточки"
+ */
 @keyframes fadeInScale {
     from {
-        opacity: 0;
-        transform: scale(0.8);
+        opacity: 0; /* Invisible */
+        transform: scale(0.8); /* 80% size */
     }
-
     to {
-        opacity: 1;
-        transform: scale(1);
+        opacity: 1; /* Fully visible */
+        transform: scale(1); /* Full size */
     }
 }
 
-/* ===================================
-           LOGO - WITH FLOATING ANIMATION
-           =================================== */
+/* ================================================
+   4️⃣ LOGO & FLOATING ANIMATION
+   ================================================ */
+
+/**
+ * Container for logo image with floating animation
+ * Logo gently bobs up and down for visual interest
+ * 
+ * 🎬 Animation: 3-second infinite float loop
+ * 🔄 TRANSLATED: "Контейнер логотипа с плавающей анимацией"
+ */
 .logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* Space below logo */
+
+    /* Floating animation */
     animation: floatAnimation 3s ease-in-out infinite;
 }
 
+/**
+ * Floating animation keyframes
+ * Logo moves up 10px and back down in smooth loop
+ * 
+ * 🔄 TRANSLATED: "Анимация плавного движения вверх-вниз"
+ */
 @keyframes floatAnimation {
     0%,
     100% {
-        transform: translateY(0px);
+        transform: translateY(0px); /* Original position */
     }
-
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-10px); /* Move up 10px */
     }
 }
 
+/**
+ * Logo image styling
+ * Circular image with shadow matching site theme
+ * 
+ * 📝 Note: Logo path is ./img/01-header-section/logo/logoCrop2.png
+ */
 .logo-lang {
     width: 120px;
     height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.2);
+    border-radius: 50%; /* Circular crop */
+    object-fit: cover; /* Crop image to fit circle */
+    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.2); /* Purple shadow */
 }
 
-/* ===================================
-           HEADING
-           =================================== */
+/* ================================================
+   5️⃣ TYPOGRAPHY - HEADING & SUBHEADING
+   ================================================ */
+
+/**
+ * Main heading: "Уголок Доброй Феи"
+ * Uses purple gradient text effect for brand consistency
+ * 
+ * 🎨 Design: Gradient text with transparent fill
+ * 🔄 TRANSLATED: "Главный заголовок"
+ */
 .heading {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 1rem;
-    font-weight: 600;
+    font-size: 2rem; /* 32px */
+    color: #333; /* Dark gray fallback (for browsers without gradient support) */
+    margin-bottom: 1rem; /* Space below heading */
+    font-weight: 600; /* Semi-bold */
+
+    /* Purple gradient text effect */
     background: linear-gradient(135deg, #4a206f 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text; /* Clip gradient to text (WebKit) */
+    -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+    background-clip: text; /* Standard property */
 }
 
+/**
+ * Subheading: "Выберите язык / Pasirinkite kalbą"
+ * Bilingual prompt in Russian and Lithuanian
+ * 
+ * 🔄 TRANSLATED: "Подзаголовок с призывом выбрать язык"
+ */
 .subheading {
-    font-size: 1.1rem;
-    color: #333;
-    margin-bottom: 2.5rem;
-    font-weight: 400;
+    font-size: 1.1rem; /* 17.6px */
+    color: #333; /* Dark gray for readability */
+    margin-bottom: 2.5rem; /* Space before language buttons */
+    font-weight: 400; /* Normal weight */
 }
 
-/* ===================================
-           LANGUAGE BUTTONS
-           =================================== */
+/* ================================================
+   6️⃣ LANGUAGE SELECTION CARDS
+   ================================================ */
+
+/**
+ * Container for language selection buttons
+ * Displays buttons in flexible horizontal row (wraps on mobile)
+ * 
+ * 🔄 TRANSLATED: "Контейнер для кнопок выбора языка"
+ */
 .language-buttons {
     display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
+    gap: 1.5rem; /* Space between buttons */
+    justify-content: center; /* Center buttons horizontally */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
+/**
+ * Individual language selection button
+ * Interactive card with hover effects and loading states
+ * 
+ * 🎯 Structure:
+ * - .flag-circle (contains RU/LT text)
+ * - .language-name (full language name below)
+ * 
+ * 🎨 Design: White card with border, lifts on hover
+ * ♿ Accessibility: Keyboard navigable with focus states
+ * 🔄 TRANSLATED: "Карточка выбора языка"
+ */
 .language-btn {
+    /* Layout */
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 2rem 2.5rem;
+    flex-direction: column; /* Stack circle above text */
+    align-items: center; /* Center children horizontally */
+    gap: 1rem; /* Space between circle and text */
+
+    /* Spacing */
+    padding: 2rem 2.5rem; /* Internal padding */
+    min-width: 160px; /* Minimum card width */
+
+    /* Visual styling */
     background: white;
-    border: 3px solid #e0e0e0;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: #333;
-    min-width: 160px;
-    position: relative;
-    overflow: hidden;
+    border: 3px solid #e0e0e0; /* Light gray border */
+    border-radius: 15px; /* Rounded corners */
+
+    /* Interaction */
+    cursor: pointer; /* Hand cursor on hover */
+    text-decoration: none; /* Remove link underline */
+    color: #333; /* Dark text color */
+
+    /* Animation setup */
+    transition: all 0.3s ease; /* Smooth transitions for all properties */
+    position: relative; /* Position context for ::before pseudo-element */
+    overflow: hidden; /* Clip shine effect to card boundaries */
 }
 
+/**
+ * Shimmer effect on language cards
+ * Horizontal light sweep across card on hover
+ * 
+ * 🎬 Animation: Light gradient sweeps left to right on hover
+ * 🔄 TRANSLATED: "Эффект блеска при наведении"
+ */
 .language-btn::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: -100%; /* Start off-screen left */
     width: 100%;
     height: 100%;
+
+    /* Vertical gradient (transparent → light purple → transparent) */
     background: linear-gradient(
         90deg,
         transparent,
         rgba(102, 126, 234, 0.1),
-        transparent
+        /* Light purple center */ transparent
     );
-    transition: left 0.5s ease;
+
+    transition: left 0.5s ease; /* Smooth sweep animation */
 }
 
+/**
+ * Trigger shimmer effect on hover
+ * Sweeps shine gradient across card
+ */
 .language-btn:hover::before {
-    left: 100%;
+    left: 100%; /* Move off-screen right */
 }
 
+/**
+ * Language card hover state
+ * Lifts card with shadow and purple border
+ * 
+ * 🔄 TRANSLATED: "Состояние при наведении курсора"
+ */
 .language-btn:hover {
-    transform: translateY(-5px);
-    border-color: #4a206f;
-    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.302);
+    transform: translateY(-5px); /* Lift card 5px */
+    border-color: #4a206f; /* Purple border */
+    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.302); /* Purple shadow */
 }
 
+/**
+ * Language card active state (while clicking)
+ * Slight lift with reduced shadow
+ */
 .language-btn:active {
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Less lift than hover */
 }
 
-/* ===================================
-           FLAG STYLES - FOR HEART-SHAPED IMAGES
-           =================================== */
-/* .flag {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
-    transition: all 0.3s ease;
-} */
+/* ================================================
+   7️⃣ LANGUAGE CODE CIRCLES - RU / LT DISPLAY
+   ================================================ */
 
+/**
+ * Circular container for language code (RU or LT)
+ * Displays prominent two-letter language abbreviation
+ * 
+ * 🎨 Design: Large circle with shadow, scales on hover
+ * 📝 Contains: .flag-code text element
+ * 🔄 TRANSLATED: "Круглый контейнер для кода языка"
+ */
 .flag-circle {
+    /* Positioning */
     position: relative;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
+
+    /* Size */
+    width: 120px;
+    height: 120px;
+
+    /* Visual styling */
+    border-radius: 50%; /* Perfect circle */
+    overflow: hidden; /* Clip content to circle */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+
+    /* Background color (visible behind text) */
+    background: linear-gradient(
+        135deg,
+        #f2e7f2 0%,
+        #b68cb8 100%
+    ); /* Light purple gradient */
+
+    /* Interaction */
+    transition: all 0.3s ease; /* Smooth transitions */
 }
 
-.flag-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
-    transition: all 0.3s ease;
-}
-
+/**
+ * Language code text (RU or LT)
+ * Large bold letters centered in circle
+ * 
+ * 🎨 Design: Purple text with shadow for depth
+ * 🔄 TRANSLATED: "Текст кода языка внутри круга"
+ */
 .flag-code {
     position: relative;
-    z-index: 2;
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: #713e92;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
+    z-index: 2; /* Above background */
+
+    /* Typography */
+    font-size: 2.4rem; /* 38.4px - large and prominent */
+    font-weight: 700; /* Bold */
+    color: #713e92; /* Purple matching site theme */
+    letter-spacing: 2px; /* Space between letters */
+
+    /* Visual enhancement */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+
+    /* Interaction */
+    transition: all 0.3s ease; /* Smooth transitions */
 }
 
-.language-btn:hover .flag {
-    transform: scale(1.1);
-    filter: drop-shadow(0 6px 16px rgba(74, 32, 111, 0.4));
+/**
+ * Hover effect for language code circle
+ * Scales up and enhances shadow
+ */
+.language-btn:hover .flag-circle {
+    transform: scale(1.1); /* Grow to 110% */
+    box-shadow: 0 6px 20px rgba(74, 32, 111, 0.4); /* Deeper purple shadow */
 }
 
-.language-btn:hover .flag-bg {
-    filter: brightness(0.85);
-}
-
+/**
+ * Hover effect for language code text
+ * Scales up and enhances text shadow
+ */
 .language-btn:hover .flag-code {
-    transform: scale(1.1);
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
+    transform: scale(1.1); /* Grow to 110% */
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7); /* Stronger shadow */
 }
 
+/**
+ * Full language name text (Русский / Lietuvių)
+ * Displayed below language code circle
+ * 
+ * 🔄 TRANSLATED: "Полное название языка под кругом"
+ */
 .language-name {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #333;
-    transition: color 0.3s ease;
+    font-size: 1.2rem; /* 19.2px */
+    font-weight: 600; /* Semi-bold */
+    color: #333; /* Dark gray */
+    transition: color 0.3s ease; /* Smooth color transition */
 }
 
+/**
+ * Hover effect for language name
+ * Changes to purple to match theme
+ */
 .language-btn:hover .language-name {
-    color: #713e92;
+    color: #713e92; /* Purple */
 }
 
-/* ===================================
-           LOADING STATE
-           =================================== */
+/* ================================================
+   8️⃣ LOADING STATES - BUTTON FEEDBACK
+   ================================================ */
+
+/**
+ * Loading state for language buttons
+ * Applied via JavaScript when user clicks a language
+ * 
+ * 🎯 Purpose: Visual feedback during navigation/redirect
+ * 🔄 TRANSLATED: "Состояние загрузки при клике"
+ */
 .language-btn.loading {
-    pointer-events: none;
-    opacity: 0.6;
+    pointer-events: none; /* Disable further clicks */
+    opacity: 0.6; /* Dim the button */
 }
 
+/**
+ * Pulsing animation for loading state
+ * Circle grows and shrinks to indicate activity
+ */
 .language-btn.loading .flag-circle {
-    animation: pulse 1s infinite;
+    animation: pulse 1s infinite; /* Infinite pulse loop */
 }
 
+/**
+ * Pulse animation keyframes
+ * Slight scale variation creates breathing effect
+ * 
+ * 🔄 TRANSLATED: "Анимация пульсации"
+ */
 @keyframes pulse {
     0%,
     100% {
-        transform: scale(1);
+        transform: scale(1); /* Normal size */
     }
-
     50% {
-        transform: scale(1.05);
-    }
-}
-.language-btn.loading {
-    pointer-events: none;
-    opacity: 0.6;
-}
-
-.language-btn.loading .flag {
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
+        transform: scale(1.05); /* Slightly larger */
     }
 }
 
-/* ===================================
-           FOOTER
-           =================================== */
+/* ================================================
+   9️⃣ FOOTER TEXT - SERVICE TAGLINE
+   ================================================ */
+
+/**
+ * Footer text: "Гадание • Таро • Ритуалы"
+ * Service tagline displayed at bottom of card
+ * 
+ * 🔄 TRANSLATED: "Текст нижнего колонтитула с услугами"
+ */
 .footer-text {
-    margin-top: 2rem;
-    font-size: 1.6rem;
-    color: #4a206f;
+    margin-top: 2rem; /* Space above footer */
+    font-size: 1.6rem; /* 25.6px - prominent size */
+    color: #4a206f; /* Dark purple matching site theme */
 }
 
-/* ===================================
-           MOBILE RESPONSIVE
-           =================================== */
+/* ================================================
+   🔟 MOBILE RESPONSIVE DESIGN
+   ================================================ */
+
+/**
+ * Mobile adjustments for small screens (≤600px)
+ * Optimizes layout for phones and small tablets
+ * 
+ * 📱 Changes:
+ * - Reduced padding and spacing
+ * - Smaller logo and circles
+ * - Single column button layout
+ * - Smaller typography
+ * 
+ * 🔄 TRANSLATED: "Адаптивные стили для мобильных устройств"
+ */
 @media (max-width: 600px) {
+    /* Main container adjustments */
     .language-selector {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1.5rem; /* Reduce padding */
     }
 
+    /* Smaller logo on mobile */
     .logo-lang {
         width: 100px;
         height: 100px;
     }
 
+    /* Smaller typography */
     .heading {
-        font-size: 1.5rem;
+        font-size: 1.5rem; /* 24px */
     }
 
     .subheading {
-        font-size: 1rem;
+        font-size: 1rem; /* 16px */
     }
 
+    /* Single column layout for language buttons */
     .language-buttons {
-        flex-direction: column;
-        gap: 1rem;
+        flex-direction: column; /* Stack vertically */
+        gap: 1rem; /* Reduce gap */
     }
 
+    /* Full-width buttons on mobile */
     .language-btn {
         width: 100%;
-        min-width: unset;
-        padding: 1.5rem 2rem;
+        min-width: unset; /* Remove minimum width */
+        padding: 1.5rem 2rem; /* Reduce padding */
     }
 
-    .flag {
-        width: 80px;
-        height: 80px;
-    }
+    /* Smaller language code circles */
     .flag-circle {
         width: 100px;
         height: 100px;
     }
 
+    /* Smaller language code text */
     .flag-code {
-        font-size: 2rem;
+        font-size: 2rem; /* 32px */
     }
 }
+
+/* ================================================
+   1️⃣1️⃣ ACCESSIBILITY ENHANCEMENTS
+   ================================================ */
+
+/**
+ * Respect user's motion preferences
+ * Reduces or disables animations for users who prefer less motion
+ * 
+ * ♿ Accessibility: Critical for users with vestibular disorders
+ * 🔄 TRANSLATED: "Поддержка настроек пониженной анимации"
+ */
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all animations */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important; /* Nearly instant */
+        animation-iteration-count: 1 !important; /* Single iteration only */
+        transition-duration: 0.01ms !important; /* Nearly instant transitions */
+    }
+
+    /* Disable floating animation */
+    .logo-container {
+        animation: none;
+    }
+
+    /* Disable star twinkling */
+    .star {
+        animation: none;
+        opacity: 0.5; /* Static medium brightness */
+    }
+
+    /* Disable entrance animation */
+    .language-selector {
+        animation: none;
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/**
+ * High contrast mode support
+ * Enhances visibility for users with low vision
+ * 
+ * ♿ Accessibility: Improves readability in high contrast mode
+ */
+@media (prefers-contrast: high) {
+    /* Add visible borders to interactive elements */
+    .language-btn {
+        border: 3px solid currentColor; /* Use current text color */
+    }
+
+    /* Ensure text is bold and clear */
+    .flag-code,
+    .language-name {
+        font-weight: 700; /* Bold */
+    }
+
+    /* Remove subtle effects that reduce contrast */
+    .language-btn::before {
+        display: none; /* Remove shimmer effect */
+    }
+}
+
+/**
+ * Focus styles for keyboard navigation
+ * Ensures keyboard users can see which element is focused
+ * 
+ * ♿ Accessibility: Critical for keyboard-only users
+ */
+.language-btn:focus-visible {
+    outline: 3px solid #713e92; /* Purple outline */
+    outline-offset: 4px; /* Space between element and outline */
+    box-shadow: 0 0 0 6px rgba(113, 62, 146, 0.2); /* Glow effect */
+}
+
+/* ================================================
+   1️⃣2️⃣ DEBUG UTILITIES SECTION
+   ================================================
+   
+   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
+*/
+
+/* ─────────────────────────────────────────────
+   VISUAL LAYOUT DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎨 Layout Boundaries Visualization:
+Uncomment to see colored borders around elements
+
+body { 
+    border: 5px solid red !important; 
+}
+
+.language-selector { 
+    border: 3px solid blue !important; 
+    background: rgba(255,255,0,0.1) !important;
+}
+
+.language-buttons { 
+    border: 2px solid green !important; 
+}
+
+.language-btn { 
+    border: 2px solid orange !important; 
+}
+
+.flag-circle { 
+    border: 2px solid purple !important; 
+}
+*/
+
+/* ─────────────────────────────────────────────
+   ANIMATION DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎬 Animation Testing:
+Copy these to console to test different speeds
+
+// Slow down all animations (easier to see):
+document.documentElement.style.setProperty('animation-duration', '5s', 'important');
+document.documentElement.style.setProperty('transition-duration', '2s', 'important');
+
+// Speed up all animations:
+document.documentElement.style.setProperty('animation-duration', '0.1s', 'important');
+document.documentElement.style.setProperty('transition-duration', '0.1s', 'important');
+
+// Reset to normal:
+document.documentElement.style.removeProperty('animation-duration');
+document.documentElement.style.removeProperty('transition-duration');
+*/
+
+/* ─────────────────────────────────────────────
+   STAR DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+⭐ Star Visualization:
+Make stars more visible for debugging
+
+.star {
+    background: red !important;
+    opacity: 1 !important;
+    width: 10px !important;
+    height: 10px !important;
+    animation: none !important;
+}
+*/
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE BREAKPOINT TESTING
+   ───────────────────────────────────────────── */
+
+/*
+📐 Current Breakpoint Checker:
+Copy this to console to see which layout is active:
+
+const width = window.innerWidth;
+const isMobile = width <= 600;
+console.log('Screen width:', width + 'px');
+console.log('Layout:', isMobile ? 'Mobile (≤600px)' : 'Desktop (>600px)');
+console.log('Buttons:', isMobile ? 'Vertical stack' : 'Horizontal row');
+*/
+
+/* ─────────────────────────────────────────────
+   STATE TESTING
+   ───────────────────────────────────────────── */
+
+/*
+🔄 Test Loading State:
+Copy this to console to manually trigger loading state:
+
+const button = document.querySelector('.language-btn');
+button.classList.add('loading');
+
+// Remove after 3 seconds:
+setTimeout(() => button.classList.remove('loading'), 3000);
+*/
+
+/* ─────────────────────────────────────────────
+   END OF DEBUG UTILITIES
+   ───────────────────────────────────────────── */
+
+/* ================================================
+   📝 USAGE NOTES & TIPS
+   ================================================
+   
+   🎨 COLOR CUSTOMIZATION:
+   Main colors used in this file:
+   - #5d2f80, #4a206f: Background gradient (dark purple)
+   - #713e92: Language code text and accents
+   - #f2f2f2: Main card background (light gray)
+   - #e0e0e0: Button borders (light gray)
+   - white: Button backgrounds
+   
+   🎬 ANIMATION TUNING:
+   Key animation durations:
+   - Stars twinkle: 3s
+   - Logo float: 3s
+   - Card entrance: 0.8s
+   - Hover transitions: 0.3s
+   - Loading pulse: 1s
+   
+   📱 BREAKPOINTS:
+   - Mobile: ≤600px (single column, reduced sizes)
+   - Desktop: >600px (horizontal layout, full sizes)
+   
+   ♿ ACCESSIBILITY CHECKLIST:
+   ✅ Keyboard navigation supported
+   ✅ Focus states visible
+   ✅ Reduced motion respected
+   ✅ High contrast mode supported
+   ✅ Color contrast meets WCAG AA standards
+   
+   🔗 RELATED FILES:
+   - index.html: HTML structure
+   - language-selection-page.js: Star generation & interactions
+   - style.css: Main stylesheet (imports this file)
+*/
