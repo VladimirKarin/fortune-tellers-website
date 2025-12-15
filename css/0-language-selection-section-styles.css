@@ -189,17 +189,59 @@ body {
 /* ===================================
            FLAG STYLES - FOR HEART-SHAPED IMAGES
            =================================== */
-.flag {
+/* .flag {
     width: 100px;
     height: 100px;
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+    transition: all 0.3s ease;
+} */
+
+.flag-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.flag-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+    transition: all 0.3s ease;
+}
+
+.flag-code {
+    position: relative;
+    z-index: 2;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #713e92;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
     transition: all 0.3s ease;
 }
 
 .language-btn:hover .flag {
     transform: scale(1.1);
     filter: drop-shadow(0 6px 16px rgba(74, 32, 111, 0.4));
+}
+
+.language-btn:hover .flag-bg {
+    filter: brightness(0.85);
+}
+
+.language-btn:hover .flag-code {
+    transform: scale(1.1);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
 }
 
 .language-name {
@@ -216,6 +258,25 @@ body {
 /* ===================================
            LOADING STATE
            =================================== */
+.language-btn.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.language-btn.loading .flag-circle {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
 .language-btn.loading {
     pointer-events: none;
     opacity: 0.6;
@@ -280,5 +341,13 @@ body {
     .flag {
         width: 80px;
         height: 80px;
+    }
+    .flag-circle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .flag-code {
+        font-size: 2rem;
     }
 }
