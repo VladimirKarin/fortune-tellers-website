@@ -2,667 +2,377 @@
    🌍 LANGUAGE SELECTION SECTION - Splash Page Styles
    ================================================
    
-   📋 MODULE PURPOSE:
-   Styles for the initial language selection page where users choose
-   between Russian (RU) and Lithuanian (LT) versions of the website.
-   Features animated starry background and interactive language cards.
-   
-   🎯 KEY FEATURES:
-   - Animated twinkling star background
-   - Floating logo with smooth animation
-   - Interactive language selection cards
-   - Hover effects and loading states
-   - Fully responsive mobile design
-   - localStorage integration for language memory
-   
-   🔗 DEPENDENCIES:
-   - index.html - Language selector markup
-   - language-selection-page.js - Star generation and click handlers
-   - /img/01-header-section/logo/logoCrop2.png - Logo image
-   
-   📦 EXPORTS TO:
-   - style.css (imported via @import)
-   
-   📋 TABLE OF CONTENTS:
-   1. Reset & Base Styles
-   2. Animated Background (Stars)
-   3. Main Container
-   4. Logo & Animation
-   5. Typography (Heading & Subheading)
-   6. Language Selection Cards
-   7. Language Code Circles
-   8. Loading States
-   9. Footer Text
-   10. Mobile Responsive Design
-   11. Accessibility Enhancements
-   12. Debug Utilities
+   ✅ FIXED: Scoped all styles to .language-selection-page
+   This prevents styles from affecting main site pages
 */
 
-/* ================================================
-   1️⃣ RESET & BASE STYLES
-   ================================================ */
+/* ===================================
+   1️⃣ RESET & BASE STYLES - SCOPED TO LANGUAGE PAGE ONLY
+   =================================== */
 
-/**
- * Universal reset for language selection page
- * Ensures consistent box-sizing and removes browser defaults
- */
-* {
+/* ✅ CRITICAL FIX: Only apply to language selection page */
+.language-selection-page * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Include padding/border in element width */
+    box-sizing: border-box;
 }
 
-/**
- * Body styling for language selection page
- * Creates full-screen centered layout with gradient background
- * 
- * 🎨 Design Choice: Purple gradient matches main site theme
- * 🔄 TRANSLATED: "Основные стили для тела страницы"
- */
-body {
+/* ✅ CRITICAL FIX: Scoped body styles */
+.language-selection-page {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh; /* Full viewport height */
+    min-height: 100vh;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-
-    /* Purple gradient background - top to bottom */
+    justify-content: center;
+    align-items: center;
     background: linear-gradient(to bottom, #5d2f80 0%, #4a206f 100%);
-
-    overflow: hidden; /* Hide scrollbars (stars extend beyond viewport) */
-    position: relative; /* Position context for absolute children */
+    overflow: hidden; /* ✅ Now only affects language page */
+    position: relative;
 }
 
-/* ================================================
+/* ===================================
    2️⃣ ANIMATED BACKGROUND - TWINKLING STARS
-   ================================================ */
+   =================================== */
 
-/**
- * Container for animated star elements
- * Stars are generated dynamically by JavaScript
- * 
- * 🔄 TRANSLATED: "Контейнер для анимированного фона"
- */
-.background-animation {
+.language-selection-page .background-animation {
     position: absolute;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Clip stars at viewport edges */
-    z-index: 0; /* Behind main content */
+    overflow: hidden;
+    z-index: 0;
 }
 
-/**
- * Individual star styling
- * Stars are small white circles with twinkling animation
- * 
- * 📝 Note: Star properties (size, position) are set inline by JavaScript
- * 🎬 Animation: 3-second infinite twinkle loop
- */
-.star {
+.language-selection-page .star {
     position: absolute;
     background: white;
-    border-radius: 50%; /* Perfect circle */
+    border-radius: 50%;
     animation: twinkle 3s infinite ease-in-out;
 }
 
-/**
- * Twinkle animation keyframes
- * Stars fade in/out and slightly scale for shimmer effect
- * 
- * 🔄 TRANSLATED: "Анимация мерцания звёзд"
- */
 @keyframes twinkle {
     0%,
     100% {
-        opacity: 0.3; /* Dim at start/end */
-        transform: scale(1); /* Normal size */
+        opacity: 0.3;
+        transform: scale(1);
     }
     50% {
-        opacity: 1; /* Bright at midpoint */
-        transform: scale(1.2); /* Slightly larger */
+        opacity: 1;
+        transform: scale(1.2);
     }
 }
 
-/* ================================================
+/* ===================================
    3️⃣ MAIN CONTAINER - LANGUAGE SELECTOR CARD
-   ================================================ */
+   =================================== */
 
-/**
- * Central white card containing language selection UI
- * Floats above animated starry background
- * 
- * 🎨 Design: Semi-transparent white with rounded corners and shadow
- * 🎬 Animation: Fade-in and scale-up entrance on page load
- * 🔄 TRANSLATED: "Основной контейнер для выбора языка"
- */
-.language-selector {
+.language-selection-page .language-selector {
     position: relative;
-    z-index: 10; /* Above background stars */
-    text-align: center; /* Center all child content */
-
-    /* Visual styling */
-    background: #f2f2f2; /* Light gray background */
-    padding: 3rem 2rem; /* Vertical and horizontal spacing */
-    border-radius: 20px; /* Rounded corners */
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Deep shadow for depth */
-
-    /* Size constraints */
-    max-width: 500px; /* Maximum width */
-    width: 90%; /* Responsive width (90% of viewport on mobile) */
-
-    /* Entrance animation */
+    z-index: 10;
+    text-align: center;
+    background: #f2f2f2;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
     animation: fadeInScale 0.8s ease-out;
 }
 
-/**
- * Fade-in and scale-up animation for language selector card
- * Creates smooth entrance effect on page load
- * 
- * 🔄 TRANSLATED: "Анимация появления карточки"
- */
 @keyframes fadeInScale {
     from {
-        opacity: 0; /* Invisible */
-        transform: scale(0.8); /* 80% size */
+        opacity: 0;
+        transform: scale(0.8);
     }
     to {
-        opacity: 1; /* Fully visible */
-        transform: scale(1); /* Full size */
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
-/* ================================================
+/* ===================================
    4️⃣ LOGO & FLOATING ANIMATION
-   ================================================ */
+   =================================== */
 
-/**
- * Container for logo image with floating animation
- * Logo gently bobs up and down for visual interest
- * 
- * 🎬 Animation: 3-second infinite float loop
- * 🔄 TRANSLATED: "Контейнер логотипа с плавающей анимацией"
- */
-.logo-container {
+.language-selection-page .logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2rem; /* Space below logo */
-
-    /* Floating animation */
+    margin-bottom: 2rem;
     animation: floatAnimation 3s ease-in-out infinite;
 }
 
-/**
- * Floating animation keyframes
- * Logo moves up 10px and back down in smooth loop
- * 
- * 🔄 TRANSLATED: "Анимация плавного движения вверх-вниз"
- */
 @keyframes floatAnimation {
     0%,
     100% {
-        transform: translateY(0px); /* Original position */
+        transform: translateY(0px);
     }
     50% {
-        transform: translateY(-10px); /* Move up 10px */
+        transform: translateY(-10px);
     }
 }
 
-/**
- * Logo image styling
- * Circular image with shadow matching site theme
- * 
- * 📝 Note: Logo path is ./img/01-header-section/logo/logoCrop2.png
- */
-.logo-lang {
+.language-selection-page .logo-lang {
     width: 120px;
     height: 120px;
-    border-radius: 50%; /* Circular crop */
-    object-fit: cover; /* Crop image to fit circle */
-    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.2); /* Purple shadow */
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.2);
 }
 
-/* ================================================
+/* ===================================
    5️⃣ TYPOGRAPHY - HEADING & SUBHEADING
-   ================================================ */
+   =================================== */
 
-/**
- * Main heading: "Уголок Доброй Феи"
- * Uses purple gradient text effect for brand consistency
- * 
- * 🎨 Design: Gradient text with transparent fill
- * 🔄 TRANSLATED: "Главный заголовок"
- */
-.heading {
-    font-size: 2rem; /* 32px */
-    color: #333; /* Dark gray fallback (for browsers without gradient support) */
-    margin-bottom: 1rem; /* Space below heading */
-    font-weight: 600; /* Semi-bold */
-
-    /* Purple gradient text effect */
+.language-selection-page .heading {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: 600;
     background: linear-gradient(135deg, #4a206f 0%, #764ba2 100%);
-    -webkit-background-clip: text; /* Clip gradient to text (WebKit) */
-    -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
-    background-clip: text; /* Standard property */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/**
- * Subheading: "Выберите язык / Pasirinkite kalbą"
- * Bilingual prompt in Russian and Lithuanian
- * 
- * 🔄 TRANSLATED: "Подзаголовок с призывом выбрать язык"
- */
-.subheading {
-    font-size: 1.1rem; /* 17.6px */
-    color: #333; /* Dark gray for readability */
-    margin-bottom: 2.5rem; /* Space before language buttons */
-    font-weight: 400; /* Normal weight */
+.language-selection-page .subheading {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
 }
 
-/* ================================================
+/* ===================================
    6️⃣ LANGUAGE SELECTION CARDS
-   ================================================ */
+   =================================== */
 
-/**
- * Container for language selection buttons
- * Displays buttons in flexible horizontal row (wraps on mobile)
- * 
- * 🔄 TRANSLATED: "Контейнер для кнопок выбора языка"
- */
-.language-buttons {
+.language-selection-page .language-buttons {
     display: flex;
-    gap: 1.5rem; /* Space between buttons */
-    justify-content: center; /* Center buttons horizontally */
-    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-/**
- * Individual language selection button
- * Interactive card with hover effects and loading states
- * 
- * 🎯 Structure:
- * - .flag-circle (contains RU/LT text)
- * - .language-name (full language name below)
- * 
- * 🎨 Design: White card with border, lifts on hover
- * ♿ Accessibility: Keyboard navigable with focus states
- * 🔄 TRANSLATED: "Карточка выбора языка"
- */
-.language-btn {
-    /* Layout */
+.language-selection-page .language-btn {
     display: flex;
-    flex-direction: column; /* Stack circle above text */
-    align-items: center; /* Center children horizontally */
-    gap: 1rem; /* Space between circle and text */
-
-    /* Spacing */
-    padding: 2rem 2.5rem; /* Internal padding */
-    min-width: 160px; /* Minimum card width */
-
-    /* Visual styling */
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 2.5rem;
+    min-width: 160px;
     background: white;
-    border: 3px solid #e0e0e0; /* Light gray border */
-    border-radius: 15px; /* Rounded corners */
-
-    /* Interaction */
-    cursor: pointer; /* Hand cursor on hover */
-    text-decoration: none; /* Remove link underline */
-    color: #333; /* Dark text color */
-
-    /* Animation setup */
-    transition: all 0.3s ease; /* Smooth transitions for all properties */
-    position: relative; /* Position context for ::before pseudo-element */
-    overflow: hidden; /* Clip shine effect to card boundaries */
+    border: 3px solid #e0e0e0;
+    border-radius: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-/**
- * Shimmer effect on language cards
- * Horizontal light sweep across card on hover
- * 
- * 🎬 Animation: Light gradient sweeps left to right on hover
- * 🔄 TRANSLATED: "Эффект блеска при наведении"
- */
-.language-btn::before {
+.language-selection-page .language-btn::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%; /* Start off-screen left */
+    left: -100%;
     width: 100%;
     height: 100%;
-
-    /* Vertical gradient (transparent → light purple → transparent) */
     background: linear-gradient(
         90deg,
         transparent,
         rgba(102, 126, 234, 0.1),
-        /* Light purple center */ transparent
+        transparent
     );
-
-    transition: left 0.5s ease; /* Smooth sweep animation */
+    transition: left 0.5s ease;
 }
 
-/**
- * Trigger shimmer effect on hover
- * Sweeps shine gradient across card
- */
-.language-btn:hover::before {
-    left: 100%; /* Move off-screen right */
+.language-selection-page .language-btn:hover::before {
+    left: 100%;
 }
 
-/**
- * Language card hover state
- * Lifts card with shadow and purple border
- * 
- * 🔄 TRANSLATED: "Состояние при наведении курсора"
- */
-.language-btn:hover {
-    transform: translateY(-5px); /* Lift card 5px */
-    border-color: #4a206f; /* Purple border */
-    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.302); /* Purple shadow */
+.language-selection-page .language-btn:hover {
+    transform: translateY(-5px);
+    border-color: #4a206f;
+    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.302);
 }
 
-/**
- * Language card active state (while clicking)
- * Slight lift with reduced shadow
- */
-.language-btn:active {
-    transform: translateY(-2px); /* Less lift than hover */
+.language-selection-page .language-btn:active {
+    transform: translateY(-2px);
 }
 
-/* ================================================
+/* ===================================
    7️⃣ LANGUAGE CODE CIRCLES - RU / LT DISPLAY
-   ================================================ */
+   =================================== */
 
-/**
- * Circular container for language code (RU or LT)
- * Displays prominent two-letter language abbreviation
- * 
- * 🎨 Design: Large circle with shadow, scales on hover
- * 📝 Contains: .flag-code text element
- * 🔄 TRANSLATED: "Круглый контейнер для кода языка"
- */
-.flag-circle {
-    /* Positioning */
+.language-selection-page .flag-circle {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* Size */
     width: 120px;
     height: 120px;
-
-    /* Visual styling */
-    border-radius: 50%; /* Perfect circle */
-    overflow: hidden; /* Clip content to circle */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
-
-    /* Background color (visible behind text) */
-    background: linear-gradient(
-        135deg,
-        #f2e7f2 0%,
-        #b68cb8 100%
-    ); /* Light purple gradient */
-
-    /* Interaction */
-    transition: all 0.3s ease; /* Smooth transitions */
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #f2e7f2 0%, #b68cb8 100%);
+    transition: all 0.3s ease;
 }
 
-/**
- * Language code text (RU or LT)
- * Large bold letters centered in circle
- * 
- * 🎨 Design: Purple text with shadow for depth
- * 🔄 TRANSLATED: "Текст кода языка внутри круга"
- */
-.flag-code {
+.language-selection-page .flag-code {
     position: relative;
-    z-index: 2; /* Above background */
-
-    /* Typography */
-    font-size: 2.4rem; /* 38.4px - large and prominent */
-    font-weight: 700; /* Bold */
-    color: #713e92; /* Purple matching site theme */
-    letter-spacing: 2px; /* Space between letters */
-
-    /* Visual enhancement */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
-
-    /* Interaction */
-    transition: all 0.3s ease; /* Smooth transitions */
+    z-index: 2;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #713e92;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
 }
 
-/**
- * Hover effect for language code circle
- * Scales up and enhances shadow
- */
-.language-btn:hover .flag-circle {
-    transform: scale(1.1); /* Grow to 110% */
-    box-shadow: 0 6px 20px rgba(74, 32, 111, 0.4); /* Deeper purple shadow */
+.language-selection-page .language-btn:hover .flag-circle {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(74, 32, 111, 0.4);
 }
 
-/**
- * Hover effect for language code text
- * Scales up and enhances text shadow
- */
-.language-btn:hover .flag-code {
-    transform: scale(1.1); /* Grow to 110% */
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+.language-selection-page .language-btn:hover .flag-code {
+    transform: scale(1.1);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
 }
 
-/**
- * Full language name text (Русский / Lietuvių)
- * Displayed below language code circle
- * 
- * 🔄 TRANSLATED: "Полное название языка под кругом"
- */
-.language-name {
-    font-size: 1.2rem; /* 19.2px */
-    font-weight: 600; /* Semi-bold */
-    color: #333; /* Dark gray */
-    transition: color 0.3s ease; /* Smooth color transition */
+.language-selection-page .language-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    transition: color 0.3s ease;
 }
 
-/**
- * Hover effect for language name
- * Changes to purple to match theme
- */
-.language-btn:hover .language-name {
-    color: #713e92; /* Purple */
+.language-selection-page .language-btn:hover .language-name {
+    color: #713e92;
 }
 
-/* ================================================
+/* ===================================
    8️⃣ LOADING STATES - BUTTON FEEDBACK
-   ================================================ */
+   =================================== */
 
-/**
- * Loading state for language buttons
- * Applied via JavaScript when user clicks a language
- * 
- * 🎯 Purpose: Visual feedback during navigation/redirect
- * 🔄 TRANSLATED: "Состояние загрузки при клике"
- */
-.language-btn.loading {
-    pointer-events: none; /* Disable further clicks */
-    opacity: 0.6; /* Dim the button */
+.language-selection-page .language-btn.loading {
+    pointer-events: none;
+    opacity: 0.6;
 }
 
-/**
- * Pulsing animation for loading state
- * Circle grows and shrinks to indicate activity
- */
-.language-btn.loading .flag-circle {
-    animation: pulse 1s infinite; /* Infinite pulse loop */
+.language-selection-page .language-btn.loading .flag-circle {
+    animation: pulse 1s infinite;
 }
 
-/**
- * Pulse animation keyframes
- * Slight scale variation creates breathing effect
- * 
- * 🔄 TRANSLATED: "Анимация пульсации"
- */
 @keyframes pulse {
     0%,
     100% {
-        transform: scale(1); /* Normal size */
+        transform: scale(1);
     }
     50% {
-        transform: scale(1.05); /* Slightly larger */
+        transform: scale(1.05);
     }
 }
 
-/* ================================================
+/* ===================================
    9️⃣ FOOTER TEXT - SERVICE TAGLINE
-   ================================================ */
+   =================================== */
 
-/**
- * Footer text: "Гадание • Таро • Ритуалы"
- * Service tagline displayed at bottom of card
- * 
- * 🔄 TRANSLATED: "Текст нижнего колонтитула с услугами"
- */
-.footer-text {
-    margin-top: 2rem; /* Space above footer */
-    font-size: 1.6rem; /* 25.6px - prominent size */
-    color: #4a206f; /* Dark purple matching site theme */
+.language-selection-page .footer-text {
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    color: #4a206f;
 }
 
-/* ================================================
+/* ===================================
    🔟 MOBILE RESPONSIVE DESIGN
-   ================================================ */
+   =================================== */
 
-/**
- * Mobile adjustments for small screens (≤600px)
- * Optimizes layout for phones and small tablets
- * 
- * 📱 Changes:
- * - Reduced padding and spacing
- * - Smaller logo and circles
- * - Single column button layout
- * - Smaller typography
- * 
- * 🔄 TRANSLATED: "Адаптивные стили для мобильных устройств"
- */
 @media (max-width: 600px) {
-    /* Main container adjustments */
-    .language-selector {
-        padding: 2rem 1.5rem; /* Reduce padding */
+    .language-selection-page .language-selector {
+        padding: 2rem 1.5rem;
     }
 
-    /* Smaller logo on mobile */
-    .logo-lang {
+    .language-selection-page .logo-lang {
         width: 100px;
         height: 100px;
     }
 
-    /* Smaller typography */
-    .heading {
-        font-size: 1.5rem; /* 24px */
+    .language-selection-page .heading {
+        font-size: 1.5rem;
     }
 
-    .subheading {
-        font-size: 1rem; /* 16px */
+    .language-selection-page .subheading {
+        font-size: 1rem;
     }
 
-    /* Single column layout for language buttons */
-    .language-buttons {
-        flex-direction: column; /* Stack vertically */
-        gap: 1rem; /* Reduce gap */
+    .language-selection-page .language-buttons {
+        flex-direction: column;
+        gap: 1rem;
     }
 
-    /* Full-width buttons on mobile */
-    .language-btn {
+    .language-selection-page .language-btn {
         width: 100%;
-        min-width: unset; /* Remove minimum width */
-        padding: 1.5rem 2rem; /* Reduce padding */
+        min-width: unset;
+        padding: 1.5rem 2rem;
     }
 
-    /* Smaller language code circles */
-    .flag-circle {
+    .language-selection-page .flag-circle {
         width: 100px;
         height: 100px;
     }
 
-    /* Smaller language code text */
-    .flag-code {
-        font-size: 2rem; /* 32px */
+    .language-selection-page .flag-code {
+        font-size: 2rem;
     }
 }
 
-/* ================================================
+/* ===================================
    1️⃣1️⃣ ACCESSIBILITY ENHANCEMENTS
-   ================================================ */
+   =================================== */
 
-/**
- * Respect user's motion preferences
- * Reduces or disables animations for users who prefer less motion
- * 
- * ♿ Accessibility: Critical for users with vestibular disorders
- * 🔄 TRANSLATED: "Поддержка настроек пониженной анимации"
- */
 @media (prefers-reduced-motion: reduce) {
-    /* Disable all animations */
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important; /* Nearly instant */
-        animation-iteration-count: 1 !important; /* Single iteration only */
-        transition-duration: 0.01ms !important; /* Nearly instant transitions */
+    .language-selection-page *,
+    .language-selection-page *::before,
+    .language-selection-page *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 
-    /* Disable floating animation */
-    .logo-container {
+    .language-selection-page .logo-container {
         animation: none;
     }
 
-    /* Disable star twinkling */
-    .star {
+    .language-selection-page .star {
         animation: none;
-        opacity: 0.5; /* Static medium brightness */
+        opacity: 0.5;
     }
 
-    /* Disable entrance animation */
-    .language-selector {
+    .language-selection-page .language-selector {
         animation: none;
         opacity: 1;
         transform: scale(1);
     }
 }
 
-/**
- * High contrast mode support
- * Enhances visibility for users with low vision
- * 
- * ♿ Accessibility: Improves readability in high contrast mode
- */
 @media (prefers-contrast: high) {
-    /* Add visible borders to interactive elements */
-    .language-btn {
-        border: 3px solid currentColor; /* Use current text color */
+    .language-selection-page .language-btn {
+        border: 3px solid currentColor;
     }
 
-    /* Ensure text is bold and clear */
-    .flag-code,
-    .language-name {
-        font-weight: 700; /* Bold */
+    .language-selection-page .flag-code,
+    .language-selection-page .language-name {
+        font-weight: 700;
     }
 
-    /* Remove subtle effects that reduce contrast */
-    .language-btn::before {
-        display: none; /* Remove shimmer effect */
+    .language-selection-page .language-btn::before {
+        display: none;
     }
 }
 
-/**
- * Focus styles for keyboard navigation
- * Ensures keyboard users can see which element is focused
- * 
- * ♿ Accessibility: Critical for keyboard-only users
- */
-.language-btn:focus-visible {
-    outline: 3px solid #713e92; /* Purple outline */
-    outline-offset: 4px; /* Space between element and outline */
-    box-shadow: 0 0 0 6px rgba(113, 62, 146, 0.2); /* Glow effect */
+.language-selection-page .language-btn:focus-visible {
+    outline: 3px solid #713e92;
+    outline-offset: 4px;
+    box-shadow: 0 0 0 6px rgba(113, 62, 146, 0.2);
 }
 
 /* ================================================
