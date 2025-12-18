@@ -1,34 +1,12 @@
 /* ================================================
    🎨 GENERAL STYLES - Main CSS Variables & Base Setup
-   ================================================
-   
-   📋 TABLE OF CONTENTS:
-   1. CSS Variables (Color System)
-   2. CSS Variables (Gradient System)
-   3. CSS Variables (Spacing System)
-   4. CSS Variables (Moon Section Variables)
-   5. CSS Variables (Border & Shadow System)
-   6. CSS Variables (Animation System)
-   7. CSS Variables (Typography System)
-   8. Accessibility & Motion Preferences
-   9. Global Reset & Base Styles
-   10. Background Gradient Container (Deprecated)
-   11. Typography Components
-   12. Reusable Utility Classes
-   13. Button Component System
-   14. Heading System
-   15. Grid Layout System
-   16. Moon Section Specific Styles
-   17. Responsive Design - Mobile Optimizations
-   18. Print Styles
-   19. Debug Utilities
-*/
-
-/* ===================================
-   1️⃣ CSS VARIABLES - COLOR SYSTEM
-   =================================== */
+   ================================================ */
 
 :root {
+    /* ===================================
+       🎨 COLOR SYSTEM
+       =================================== */
+
     /* Primary Brand Colors */
     --color-primary: #4a3f70; /* Main brand purple - use for headings and key elements */
     --color-secondary: #6b5b95; /* Secondary purple - for accents and highlights */
@@ -53,17 +31,12 @@
     /* Status Colors */
     --color-error: #ff6b6b; /* Error text color - bright red */
     --color-error-bg: #ffe0e0; /* Error background - light red */
-}
 
-/* ===================================
-   2️⃣ CSS VARIABLES - GRADIENT SYSTEM
-   =================================== */
+    /* ===================================
+       🌈 GRADIENT SYSTEM
+       =================================== */
 
-:root {
-    /* 
-       Main background gradient - 12-stop purple gradient for smooth transitions
-       Used for full-page backgrounds and major visual areas
-    */
+    /* Main background gradient - 12-stop purple gradient for smooth transitions */
     --main-background-gradient: linear-gradient(
         to bottom,
         #4a206f,
@@ -90,17 +63,12 @@
         hsla(279, 83%, 70%, 1) 0%,
         /* Purple start */ hsla(321, 90%, 70%, 1) 100% /* Pink end */
     );
-}
 
-/* ===================================
-   3️⃣ CSS VARIABLES - SPACING SYSTEM
-   =================================== */
+    /* ===================================
+       📏 SPACING SYSTEM
+       =================================== */
 
-:root {
-    /* 
-       Consistent spacing scale - based on 8px grid
-       Use these variables throughout the site for consistent spacing
-    */
+    /* Consistent spacing scale - based on 8px grid */
     --spacing-xs: 0.8rem; /* 8px - minimal spacing */
     --spacing-sm: 1.6rem; /* 16px - small spacing */
     --spacing-md: 2.4rem; /* 24px - medium spacing */
@@ -109,17 +77,12 @@
     --spacing-xxl: 6.4rem; /* 64px - section spacing */
     --spacing-xxxl: 7.4rem; /* 74px - section spacing */
     --spacing-huge: 9.6rem; /* 96px - major section gaps */
-}
 
-/* ===================================
-   4️⃣ CSS VARIABLES - MOON SECTION VARIABLES
-   =================================== */
+    /* ===================================
+       🌙 MOON SECTION VARIABLES
+       =================================== */
 
-:root {
-    /* 
-       Responsive spacing for moon section - scales with viewport
-       These are specific to the moon phase display component
-    */
+    /* Responsive spacing for moon section - scales with viewport */
     --moon-section-gap: clamp(2.4rem, 5vw, 6.4rem); /* Gap between moon cards */
     --moon-card-padding: clamp(0.8rem, 3vw, 1.6rem); /* Internal card padding */
     --moon-card-gap: clamp(
@@ -132,29 +95,25 @@
         30vw,
         25rem
     ); /* Moon image height limits */
-}
 
-/* ===================================
-   5️⃣ CSS VARIABLES - BORDER & SHADOW SYSTEM
-   =================================== */
+    /* ===================================
+       🎯 BORDER & SHADOW SYSTEM
+       =================================== */
 
-:root {
     /* Border radius scale */
     --border-radius: 2rem; /* Primary border radius - 20px */
     --border-radius-small: 1rem; /* Small border radius - 10px */
-    --border-radius-button: 2rem 0 1.5rem 0; /* Unique button shape - asymmetrical corners */
+    --border-radius-button: 2rem 0 1.5rem 0; /* Unique button shape */
 
     /* Shadow system for depth */
     --shadow-light: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.15); /* Subtle card shadow */
     --shadow-hover: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.2); /* Elevated hover shadow */
     --shadow-focus: 0 0 0 3px rgba(142, 68, 173, 0.3); /* Focus ring shadow */
-}
 
-/* ===================================
-   6️⃣ CSS VARIABLES - ANIMATION SYSTEM
-   =================================== */
+    /* ===================================
+       ⚡ ANIMATION SYSTEM
+       =================================== */
 
-:root {
     /* Transition speeds - consistent timing */
     --transition-fast: 0.15s ease-in-out; /* Quick micro-interactions */
     --transition-smooth: 0.3s ease-in-out; /* Standard smooth transitions */
@@ -167,13 +126,11 @@
         0.265,
         1.55
     ); /* Playful bounce effect */
-}
 
-/* ===================================
-   7️⃣ CSS VARIABLES - TYPOGRAPHY SYSTEM
-   =================================== */
+    /* ===================================
+       📝 TYPOGRAPHY SYSTEM
+       =================================== */
 
-:root {
     /* Font families - Google Fonts integration */
     --font-primary: 'Montserrat', sans-serif; /* Headings and brand text */
     --font-secondary: 'Roboto', sans-serif; /* Body text and UI elements */
@@ -187,14 +144,11 @@
     --font-size-xxl: 3rem; /* 30px - section headings */
 }
 
-/* ===================================
-   8️⃣ ACCESSIBILITY & MOTION PREFERENCES
-   =================================== */
+/* ================================================
+   🔄 ACCESSIBILITY & MOTION PREFERENCES
+   ================================================ */
 
-/* 
-   ♿ Respect user's motion preferences for accessibility
-   Disables animations for users who have set reduced motion in their OS
-*/
+/* Respect user's motion preferences for accessibility */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -206,43 +160,34 @@
     }
 }
 
-/* ===================================
-   9️⃣ GLOBAL RESET & BASE STYLES
-   =================================== */
+/* ================================================
+   🎯 GLOBAL RESET & BASE STYLES
+   ================================================ */
 
-/* 
-   Universal reset for consistent styling across browsers
-   Removes default padding and margins from all elements
-*/
+/* Universal reset for consistent styling across browsers */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box; /* Include padding/border in element width */
 }
 
-/* 
-   Enhanced focus styles for keyboard navigation accessibility
-   Provides clear visual feedback for keyboard users
-*/
+/* Enhanced focus styles for keyboard navigation accessibility */
 *:focus-visible {
     outline: 2px solid var(--color-highlight); /* Purple outline for visibility */
     outline-offset: 3px; /* Space between element and outline */
     box-shadow: var(--shadow-focus); /* Additional glow effect */
 }
 
-/* 
-   Root HTML setup - 62.5% = 10px base for easy rem calculations
-   This makes 1rem = 10px, simplifying responsive design math
-*/
+/* Root HTML setup - 62.5% = 10px base for easy rem calculations */
 html {
     font-size: 62.5%; /* 1rem = 10px for easy math */
     scroll-behavior: smooth; /* Smooth scrolling between sections */
+    /* 🔧 DEBUG: Uncomment to see base font size
+    border: 2px solid red;
+    */
 }
 
-/* 
-   Body foundation - flex layout for sticky footer with full-page gradient
-   Creates vertical layout structure for entire page
-*/
+/* Body foundation - flex layout for sticky footer with full-page gradient */
 body {
     width: 100%;
     min-height: 100vh; /* Full viewport height minimum */
@@ -255,32 +200,24 @@ body {
     font-size: var(--font-size-base); /* 16px base font size */
 }
 
-/* ===================================
-   🔟 BACKGROUND GRADIENT CONTAINER (DEPRECATED)
-   =================================== */
+/* ================================================
+   🌈 BACKGROUND GRADIENT CONTAINER (DEPRECATED)
+   ================================================ */
 
-/* 
-   ⚠️ DEPRECATED: Legacy gradient container
-   This class was used for full-page background gradients
-   Consider removing if not in use
-*/
 .background-gradient-container {
-    background-image: var(
-        --main-background-gradient
-    ); /* 12-stop purple gradient */
+    /* 🌈 FULL-PAGE BACKGROUND GRADIENT */
+    background-image: var(--main-background-gradient);
+    /* background-attachment: fixed;  Parallax effect on scroll */
     background-size: cover; /* Cover entire viewport */
     background-repeat: no-repeat; /* Don't repeat gradient */
     background-position: center; /* Center the gradient */
 }
 
-/* ===================================
-   1️⃣1️⃣ TYPOGRAPHY COMPONENTS
-   =================================== */
+/* ================================================
+   📝 TYPOGRAPHY COMPONENTS
+   ================================================ */
 
-/* 
-   Base typography elements with consistent styling
-   Sets default styles for all heading and paragraph elements
-*/
+/* Base typography elements with consistent styling */
 h1,
 h2,
 h3,
@@ -288,12 +225,10 @@ p {
     font-family: var(--font-primary); /* Montserrat for all text elements */
     line-height: 1.6; /* Comfortable reading line height */
     font-size: var(--font-size-base); /* Default to 16px */
+    /*  margin-bottom: var(--spacing-sm); Consistent bottom spacing */
 }
 
-/* 
-   Paragraph-specific styling
-   Uses Roboto font for better body text readability
-*/
+/* Paragraph-specific styling */
 p {
     font-family: var(
         --font-secondary
@@ -301,23 +236,17 @@ p {
     color: var(--color-text); /* Ensure good contrast */
 }
 
-/* ===================================
-   1️⃣2️⃣ REUSABLE UTILITY CLASSES
-   =================================== */
+/* ================================================
+   🎨 REUSABLE UTILITY CLASSES
+   ================================================ */
 
-/* 
-   Section padding utility - consistent vertical spacing
-   Apply to section containers for uniform spacing
-*/
+/* Section padding utility - consistent vertical spacing */
 .section-padding {
     padding: var(--spacing-xxl) 0; /* 64px top and bottom */
     text-align: center; /* Center-align section content */
 }
 
-/* 
-   Universal transition for interactive elements
-   Ensures smooth interactions across all interactive components
-*/
+/* Universal transition for interactive elements */
 a,
 button,
 input,
@@ -328,100 +257,80 @@ select {
     ); /* Smooth transitions for all interactions */
 }
 
-/* ===================================
-   1️⃣3️⃣ BUTTON COMPONENT SYSTEM
-   =================================== */
+/* ================================================
+   🔘 BUTTON COMPONENT SYSTEM
+   ================================================ */
 
-/* 
-   Base button styling with unique design
-   Provides foundation styles for all buttons site-wide
-*/
+/* Base button styling with unique design */
 button {
-    /* Sizing */
     padding: 1.2rem 2.4rem; /* Comfortable touch target */
-    min-height: 44px; /* iOS minimum touch target */
-
-    /* Reset defaults */
     border: none; /* Remove default border */
     cursor: pointer; /* Indicate interactivity */
-
-    /* Typography */
     font-family: var(--font-secondary); /* Roboto for UI consistency */
     font-size: var(--font-size-lg); /* Slightly larger text */
-    font-weight: 500; /* Medium weight for readability */
-
-    /* Visual styling */
     border-radius: var(--border-radius-button); /* Unique asymmetrical shape */
     background: var(--btn-gradient); /* Purple to pink gradient */
     color: var(--color-light-text); /* White text for contrast */
+    font-weight: 500; /* Medium weight for readability */
+
+    /* Ensure accessibility */
+    min-height: 44px; /* iOS minimum touch target */
+
+    /* 🔧 DEBUG: Uncomment to see button boundaries
+    border: 1px solid red;
+    */
 }
 
-/* 
-   Button hover state - elevation effect
-   Provides visual feedback on user interaction
-*/
+/* Button hover state - elevation effect */
 button:hover {
     transform: translateY(-2px); /* Lift button slightly */
     box-shadow: var(--shadow-hover); /* Deeper shadow for depth */
     filter: brightness(1.1); /* Slightly brighten gradient */
 }
 
-/* 
-   Button focus state for keyboard navigation
-   Ensures accessibility for keyboard users
-*/
+/* Button focus state for keyboard navigation */
 button:focus-visible {
     transform: translateY(-1px); /* Subtle lift */
     box-shadow: var(--shadow-focus); /* Focus ring */
 }
 
-/* 
-   Button active state
-   Provides feedback when button is pressed
-*/
+/* Button active state */
 button:active {
     transform: translateY(0); /* Return to original position */
     box-shadow: var(--shadow-light); /* Reduce shadow */
 }
 
-/* ===================================
-   1️⃣4️⃣ HEADING SYSTEM
-   =================================== */
+/* ================================================
+   📰 HEADING SYSTEM
+   ================================================ */
 
-/* 
-   Secondary heading style - for section titles
-   Used for main section headings throughout the site
-*/
+/* Secondary heading style - for section titles */
 .heading-secondary {
     font-size: var(--font-size-xxl); /* 30px for prominent sections */
     line-height: 1.2; /* Tighter line height for headings */
     text-transform: uppercase; /* Bold, uppercase styling */
+    /*margin-bottom: var(--spacing-md);  Space before content */
     font-weight: 700; /* Bold weight */
     color: var(--color-light-text); /* Light text for dark backgrounds */
     letter-spacing: 1px; /* Subtle letter spacing */
 }
 
-/* 
-   Subheading style - for section subtitles
-   Used for secondary text below main headings
-*/
+/* Subheading style - for section subtitles */
 .subheading {
     display: block;
     font-size: var(--font-size-base); /* 16px base size */
     font-weight: 500; /* Medium weight */
     text-transform: uppercase; /* Consistent with secondary headings */
+    /* margin-bottom: var(--spacing-sm); Space before content */
     letter-spacing: 0.75px; /* Subtle character spacing */
     color: var(--color-secondary); /* Secondary brand color */
 }
 
-/* ===================================
-   1️⃣5️⃣ GRID LAYOUT SYSTEM
-   =================================== */
+/* ================================================
+   📐 GRID LAYOUT SYSTEM
+   ================================================ */
 
-/* 
-   Container wrapper - centers content with max width
-   Provides consistent horizontal padding and centering
-*/
+/* Container wrapper - centers content with max width */
 .container {
     max-width: 140rem; /* 1400px maximum width */
     padding: 0 var(--spacing-lg); /* 32px horizontal padding */
@@ -429,10 +338,7 @@ button:active {
     width: 100%; /* Full width up to max-width */
 }
 
-/* 
-   Base grid setup
-   Foundation for all grid-based layouts
-*/
+/* Base grid setup */
 .grid {
     display: grid;
     row-gap: var(--spacing-huge); /* 96px between rows */
@@ -457,31 +363,22 @@ button:active {
     align-items: center; /* Vertically center grid items */
 }
 
-/* 
-   Footer-specific grid layout
-   Asymmetrical layout for footer content
-*/
+/* Footer-specific grid layout */
 .footer-grid {
     grid-template-columns: 30% 60%; /* Asymmetrical footer layout */
     gap: 10%; /* 10% gap between columns */
 }
 
-/* 
-   Grid span utility
-   Makes element span all columns
-*/
+/* Grid span utility */
 .span-all {
     grid-column: 1 / -1; /* Span all columns */
 }
 
-/* ===================================
-   1️⃣6️⃣ MOON SECTION SPECIFIC STYLES
-   =================================== */
+/* ================================================
+   🌙 MOON SECTION SPECIFIC STYLES
+   ================================================ */
 
-/* 
-   Moon section title styling
-   Specific typography for moon information cards
-*/
+/* Moon section title styling */
 .moon-information-section__component__information__content__title {
     font-size: var(--font-size-xl); /* 20px for moon card titles */
     font-weight: 600; /* Semi-bold weight */
@@ -489,14 +386,11 @@ button:active {
     margin-bottom: var(--spacing-sm); /* Space below title */
 }
 
-/* ===================================
-   1️⃣7️⃣ RESPONSIVE DESIGN - MOBILE OPTIMIZATIONS
-   =================================== */
+/* ================================================
+   📱 RESPONSIVE DESIGN - MOBILE OPTIMIZATIONS
+   ================================================ */
 
-/* 
-   📱 LARGE TABLET AND SMALL DESKTOP (≤1200px)
-   Adjustments for medium-sized screens
-*/
+/* Large tablet and small desktop adjustments */
 @media (max-width: 1200px) {
     /* Moon component responsive behavior */
     .moon-info__wrapper {
@@ -517,10 +411,7 @@ button:active {
     }
 }
 
-/* 
-   📱 TABLET AND MOBILE (≤768px)
-   Major layout changes for mobile devices
-*/
+/* Tablet and mobile adjustments */
 @media (max-width: 768px) {
     /* Switch to single column layout for moon section */
     .moon-info__wrapper {
@@ -560,10 +451,7 @@ button:active {
     }
 }
 
-/* 
-   📱 SMALL MOBILE (≤480px)
-   Final optimizations for smallest screens
-*/
+/* Small mobile adjustments */
 @media (max-width: 480px) {
     /* Further reduce container padding */
     .container {
@@ -582,16 +470,12 @@ button:active {
     }
 }
 
-/* ===================================
-   1️⃣8️⃣ PRINT STYLES
-   =================================== */
+/* ================================================
+   🎯 PRINT STYLES
+   ================================================ */
 
-/* 
-   🖨️ Optimize for printing
-   Ensures clean, readable printed pages
-*/
 @media print {
-    /* Remove backgrounds and shadows for print */
+    /* Optimize for printing */
     * {
         background: transparent !important; /* Remove backgrounds for print */
         color: black !important; /* Ensure text is black */
@@ -611,115 +495,17 @@ button:active {
 }
 
 /* ================================================
-   1️⃣9️⃣ DEBUG UTILITIES SECTION
-   ================================================
-   
-   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
-*/
-
-/* ─────────────────────────────────────────────
-   VISUAL LAYOUT DEBUGGING
-   ───────────────────────────────────────────── */
+   🔧 DEBUG UTILITIES (Commented Out)
+   ================================================ */
 
 /*
-🎨 Layout Boundaries Visualization:
-Uncomment to see colored borders around layout elements
+🔧 DEBUG: Uncomment the section below to visualize layout boundaries
 
-.container { 
-    border: 2px solid red !important; 
-}
+.container { border: 2px solid red; }
+.grid { border: 2px solid blue; }
+.grid > * { border: 1px solid green; }
+button { border: 1px solid orange; }
 
-.grid { 
-    border: 2px solid blue !important; 
-}
-
-.grid > * { 
-    border: 1px solid green !important; 
-}
-
-button { 
-    border: 1px solid orange !important; 
-}
-*/
-
-/* ─────────────────────────────────────────────
-   CSS VARIABLE INSPECTION
-   ───────────────────────────────────────────── */
-
-/*
-🎛️ Log CSS Variable Values:
-Copy this to console to see current variable values:
-
-const root = document.documentElement;
-const computedStyle = getComputedStyle(root);
-
-console.log('Color System:', {
-    primary: computedStyle.getPropertyValue('--color-primary'),
-    secondary: computedStyle.getPropertyValue('--color-secondary'),
-    highlight: computedStyle.getPropertyValue('--color-highlight')
-});
-
-console.log('Spacing System:', {
-    xs: computedStyle.getPropertyValue('--spacing-xs'),
-    sm: computedStyle.getPropertyValue('--spacing-sm'),
-    md: computedStyle.getPropertyValue('--spacing-md'),
-    lg: computedStyle.getPropertyValue('--spacing-lg')
-});
-
-console.log('Typography:', {
-    primary: computedStyle.getPropertyValue('--font-primary'),
-    secondary: computedStyle.getPropertyValue('--font-secondary'),
-    base: computedStyle.getPropertyValue('--font-size-base')
-});
-*/
-
-/* ─────────────────────────────────────────────
-   RESPONSIVE BREAKPOINT TESTING
-   ───────────────────────────────────────────── */
-
-/*
-📐 Current Breakpoint Checker:
-Copy this to console to see which layout is active:
-
-const width = window.innerWidth;
-const breakpoint = 
-    width <= 480 ? 'Small Mobile (≤480px)' :
-    width <= 768 ? 'Tablet/Mobile (≤768px)' :
-    width <= 1200 ? 'Desktop (≤1200px)' :
-    'Large Desktop (>1200px)';
-console.log('Current breakpoint:', breakpoint, `(${width}px)`);
-*/
-
-/* ─────────────────────────────────────────────
-   END OF DEBUG UTILITIES
-   ───────────────────────────────────────────── */
-
-/* ================================================
-   📝 USAGE NOTES & BEST PRACTICES
-   ================================================
-   
-   🎨 COLOR CUSTOMIZATION:
-   All colors are defined as CSS variables in :root
-   Modify variables to change site-wide color scheme
-   
-   📐 SPACING:
-   Use spacing variables (--spacing-*) for consistent margins/padding
-   Based on 8px grid system for visual harmony
-   
-   📝 TYPOGRAPHY:
-   Font sizes use rem units (1rem = 10px with 62.5% base)
-   Use --font-size-* variables for consistent scaling
-   
-   🎯 GRID SYSTEM:
-   .grid classes provide flexible layouts
-   Automatically responsive with mobile breakpoints
-   
-   ♿ ACCESSIBILITY:
-   All interactive elements have focus states
-   Motion preferences are respected
-   Minimum touch target sizes (44px) enforced
-   
-   🔗 RELATED FILES:
-   - All section CSS files import these base styles
-   - style.css is the main entry point
+🔧 DEBUG: Uncomment to log CSS variable values in console
+This requires JavaScript to read computed styles
 */
