@@ -1,34 +1,85 @@
-/* ================================================
-   ⏰ COUNTDOWN CLOCK - Configurable & Optimized
-   ================================================
-   
-   📋 FEATURES:
-   - Configurable target date via HTML data attribute
-   - Automatic countdown updates every second
-   - Expired state handling with visual feedback
-   - Screen reader accessibility support
-   - Memory leak prevention with cleanup functions
-   - Comprehensive error handling
-   
-   🔗 HTML INTEGRATION:
-   Add data-target-date to your countdown section:
-   <section class="countdown-section" data-target-date="2025-11-30T00:00:00">
-   
-   📅 DATE FORMAT:
-   Use ISO 8601 format: YYYY-MM-DDTHH:mm:ss
-   Example: "2025-12-31T23:59:59" for New Year's Eve
-*/
+// ================================================
+// ⏰ COUNTDOWN CLOCK - Configurable Timer System
+// ================================================
+//
+// 📋 MODULE PURPOSE:
+// Displays a countdown timer to a configurable target date/time.
+// Updates every second with days, hours, minutes, and seconds remaining.
+// Handles expired state gracefully and includes accessibility features.
+//
+// 🎬 TIMER FLOW:
+// 1. Read target date from HTML data attribute
+// 2. Calculate time difference from current date
+// 3. Update display every second
+// 4. Handle expiration with visual feedback
+// 5. Clean up on page unload to prevent memory leaks
+//
+// 🔗 DEPENDENCIES:
+// - HTML: .countdown-section with data-target-date attribute
+// - HTML: #days, #hours, #minutes, #seconds elements
+// - CSS: .countdown-expired class for expired state styling
+//
+// 📦 FEATURES:
+// - Configurable target date via HTML attribute
+// - Automatic countdown updates (every 1 second)
+// - Expired state handling with visual feedback
+// - Screen reader accessibility (ARIA labels)
+// - Memory leak prevention with cleanup functions
+// - Comprehensive error handling and validation
+//
+// 🗓️ DATE FORMAT:
+// Use ISO 8601 format in HTML: YYYY-MM-DDTHH:mm:ss
+// Example: <section data-target-date="2025-12-31T23:59:59">
+//
+// ⚠️ IMPORTANT NOTES:
+// - Initialized from script.js (not self-initializing)
+// - Must call initializeCountdown() exactly once
+// - Must call cleanupCountdown() on page unload
+// - Target date read from HTML data-target-date attribute
+
+/* ===================================
+   🔑 CONFIGURATION
+   =================================== */
+
+/**
+ * Default target date if data attribute is missing or invalid
+ * Used as fallback to ensure countdown always has a valid date
+ *
+ * @constant {string}
+ * @default '2025-11-30T00:00:00'
+ */
+const DEFAULT_TARGET_DATE = '2025-11-30T00:00:00';
 
 /* ===================================
    📦 CACHED DOM ELEMENTS
    =================================== */
 
-// Cache DOM elements to avoid repeated queries (performance optimization)
+/**
+ * Cached DOM elements for performance optimization
+ * Queried once during initialization and reused throughout
+ *
+ * @type {Object|null}
+ */
 let cachedElements = null;
 
 /**
  * Get and cache countdown DOM elements
- * @returns {Object|null} Object containing days, hours, minutes, seconds elements
+ * Queries DOM once and stores references for reuse
+ *
+ * @returns {Object|null} Object containing countdown elements or null if not found
+ * @returns {HTMLElement} return.days - Days display element
+ * @returns {HTMLElement} return.hours - Hours display element
+ * @returns {HTMLElement} return.minutes - Minutes display element
+ * @returns {HTMLElement} return.seconds - Seconds display element
+ * @returns {HTMLElement} return.section - Countdown section container
+ *
+ * @example
+ * const elements = getCountdownElements();
+ * if (elements) {
+ *     elements.days.textContent = '10';
+ * }
+ *
+ * @private
  */
 function getCountdownElements() {
     // Return cached elements if already queried
@@ -52,34 +103,46 @@ function getCountdownElements() {
 
 /**
  * Get target date from HTML data attribute or use default
+ *
+ * Reads target date from .countdown-section element's data-target-date
+ * attribute. Falls back to DEFAULT_TARGET_DATE if:
+ * - Attribute is missing
+ * - Attribute value is invalid
+ * - Date parsing fails
+ *
  * @returns {number} Target date timestamp in milliseconds
+ *
+ * @example
+ * // HTML: <section class="countdown-section" data-target-date="2025-12-31T23:59:59">
+ * const targetDate = getTargetDate();
+ * console.log(new Date(targetDate)); // Dec 31, 2025 23:59:59
+ *
+ * @private
  */
 function getTargetDate() {
     const elements = getCountdownElements();
 
-    // 🎯 Read target date from HTML data attribute
+    // Read target date from HTML data attribute
     const targetDateString = elements.section?.getAttribute('data-target-date');
 
-    // Fallback to default date if attribute is missing
-    const defaultDate = '2025-11-30T00:00:00';
-    const dateString = targetDateString || defaultDate;
+    // Use provided date or fall back to default
+    const dateString = targetDateString || DEFAULT_TARGET_DATE;
 
-    // Parse date and validate
+    // Parse date and convert to timestamp
     const targetDate = new Date(dateString).getTime();
 
-    // Validate the parsed date
+    // Validate parsed date
     if (isNaN(targetDate)) {
         console.error(
             '❌ Invalid target date format in data-target-date attribute.',
             '\n📅 Expected format: YYYY-MM-DDTHH:mm:ss (ISO 8601)',
             '\n📝 Example: "2025-12-31T23:59:59"',
             '\n🔧 Falling back to default date:',
-            defaultDate
+            DEFAULT_TARGET_DATE
         );
-        return new Date(defaultDate).getTime();
+        return new Date(DEFAULT_TARGET_DATE).getTime();
     }
 
-    // 🔥 REMOVED: Logging moved to initializeCountdown() to prevent spam
     return targetDate;
 }
 
@@ -89,7 +152,26 @@ function getTargetDate() {
 
 /**
  * Main timer function - calculates and updates countdown display
- * Called once immediately, then every second via setInterval
+ *
+ * Called once immediately upon initialization, then every second via
+ * setInterval. Calculates time remaining, updates display, and handles
+ * expired state.
+ *
+ * Process:
+ * 1. Validate DOM elements exist
+ * 2. Get target date from configuration
+ * 3. Calculate time difference
+ * 4. If expired → show zeros and expired state
+ * 5. If active → calculate time units and update display
+ * 6. Update ARIA labels for accessibility
+ *
+ * @returns {void}
+ *
+ * @example
+ * // Called automatically by initializeCountdown()
+ * timer();
+ *
+ * @public
  */
 export function timer() {
     const elements = getCountdownElements();
@@ -122,10 +204,10 @@ export function timer() {
     // Calculate time units
     const timeUnits = calculateTimeUnits(timeDifference);
 
-    // Format and update display
+    // Update display
     updateDisplay(elements, timeUnits);
 
-    // Update accessibility attributes for screen readers
+    // Update accessibility attributes
     updateAriaLabels(elements, timeUnits);
 }
 
@@ -135,8 +217,22 @@ export function timer() {
 
 /**
  * Calculate days, hours, minutes, seconds from milliseconds
+ *
+ * Converts millisecond time difference into human-readable units.
+ * Uses integer division and modulo operations for accuracy.
+ *
  * @param {number} timeDifference - Time difference in milliseconds
- * @returns {Object} Object containing days, hours, minutes, seconds
+ * @returns {Object} Object containing calculated time units
+ * @returns {number} return.days - Full days remaining
+ * @returns {number} return.hours - Hours remaining (0-23)
+ * @returns {number} return.minutes - Minutes remaining (0-59)
+ * @returns {number} return.seconds - Seconds remaining (0-59)
+ *
+ * @example
+ * const units = calculateTimeUnits(90061000); // 1 day, 1 hour, 1 minute, 1 second
+ * // Returns: { days: 1, hours: 1, minutes: 1, seconds: 1 }
+ *
+ * @private
  */
 function calculateTimeUnits(timeDifference) {
     return {
@@ -151,11 +247,20 @@ function calculateTimeUnits(timeDifference) {
 
 /**
  * Format time unit with leading zero if needed
- * @param {number} value - Time value to format
- * @returns {string} Formatted time string (e.g., "05" or "23")
+ *
+ * Ensures consistent two-digit display format (e.g., "05" instead of "5").
+ * Uses String.padStart() for clean implementation.
+ *
+ * @param {number} value - Time value to format (0-99)
+ * @returns {string} Formatted time string with leading zero
+ *
+ * @example
+ * formatTimeUnit(5);  // Returns: "05"
+ * formatTimeUnit(23); // Returns: "23"
+ *
+ * @private
  */
 function formatTimeUnit(value) {
-    // 🎯 OPTIMIZED: Use padStart for cleaner code
     return value.toString().padStart(2, '0');
 }
 
@@ -165,8 +270,25 @@ function formatTimeUnit(value) {
 
 /**
  * Update countdown display with new values
+ *
+ * Updates all four countdown elements (days, hours, minutes, seconds)
+ * with formatted time values. Uses formatTimeUnit() to ensure
+ * consistent two-digit display.
+ *
  * @param {Object} elements - Cached DOM elements
- * @param {Object} timeUnits - Calculated time units (days, hours, minutes, seconds)
+ * @param {Object} timeUnits - Calculated time units
+ * @param {number} timeUnits.days - Days remaining
+ * @param {number} timeUnits.hours - Hours remaining
+ * @param {number} timeUnits.minutes - Minutes remaining
+ * @param {number} timeUnits.seconds - Seconds remaining
+ * @returns {void}
+ *
+ * @example
+ * const elements = getCountdownElements();
+ * const timeUnits = { days: 10, hours: 5, minutes: 30, seconds: 15 };
+ * updateDisplay(elements, timeUnits);
+ *
+ * @private
  */
 function updateDisplay(elements, timeUnits) {
     elements.days.textContent = formatTimeUnit(timeUnits.days);
@@ -177,7 +299,19 @@ function updateDisplay(elements, timeUnits) {
 
 /**
  * Handle countdown expiration - display zeros and add expired styling
+ *
+ * Called when countdown reaches zero. Updates display to show all zeros,
+ * adds CSS class for visual feedback, updates accessibility labels,
+ * and stops the timer to prevent unnecessary processing.
+ *
  * @param {Object} elements - Cached DOM elements
+ * @returns {void}
+ *
+ * @example
+ * // Called automatically when timer reaches zero
+ * handleExpiredCountdown(elements);
+ *
+ * @private
  */
 function handleExpiredCountdown(elements) {
     // Set all displays to "00"
@@ -192,12 +326,7 @@ function handleExpiredCountdown(elements) {
     }
 
     // Update ARIA labels for screen readers
-    updateAriaLabels(elements, {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-    });
+    updateAriaLabels(elements, { days: 0, hours: 0, minutes: 0, seconds: 0 });
 
     // Log expiration (helpful for debugging)
     console.log('⏰ Countdown expired!');
@@ -212,11 +341,28 @@ function handleExpiredCountdown(elements) {
 
 /**
  * Update ARIA labels for screen reader accessibility
+ *
+ * Provides descriptive labels for visually impaired users.
+ * Updates each time unit with human-readable text indicating
+ * remaining time.
+ *
  * @param {Object} elements - Cached DOM elements
  * @param {Object} timeUnits - Current time unit values
+ * @param {number} timeUnits.days - Days remaining
+ * @param {number} timeUnits.hours - Hours remaining
+ * @param {number} timeUnits.minutes - Minutes remaining
+ * @param {number} timeUnits.seconds - Seconds remaining
+ * @returns {void}
+ *
+ * @example
+ * const elements = getCountdownElements();
+ * const timeUnits = { days: 5, hours: 10, minutes: 30, seconds: 45 };
+ * updateAriaLabels(elements, timeUnits);
+ * // Sets aria-label="5 days remaining" on days element, etc.
+ *
+ * @private
  */
 function updateAriaLabels(elements, timeUnits) {
-    // 🎯 OPTIMIZED: Reuse cached elements instead of re-querying DOM
     if (elements.days) {
         elements.days.setAttribute(
             'aria-label',
@@ -249,7 +395,22 @@ function updateAriaLabels(elements, timeUnits) {
 
 /**
  * Initialize countdown with comprehensive error handling
+ *
+ * Sets up countdown timer system:
+ * 1. Validates all required DOM elements exist
+ * 2. Logs configuration (target date) once during init
+ * 3. Calls timer() immediately for instant display
+ * 4. Sets up 1-second interval for continuous updates
+ * 5. Stores interval ID globally for cleanup
+ *
  * @returns {number|boolean} Interval ID if successful, false if failed
+ *
+ * @example
+ * // In script.js:
+ * import { initializeCountdown } from './countdown-clock.js';
+ * document.addEventListener('DOMContentLoaded', initializeCountdown);
+ *
+ * @public
  */
 export function initializeCountdown() {
     // Check if countdown elements exist before starting
@@ -272,7 +433,7 @@ export function initializeCountdown() {
         return false;
     }
 
-    // 🆕 NEW: Log configuration ONCE during initialization
+    // Log configuration ONCE during initialization
     const section = document.querySelector('.countdown-section');
     const targetDateString = section?.getAttribute('data-target-date');
     if (targetDateString) {
@@ -280,6 +441,11 @@ export function initializeCountdown() {
         console.log(
             '✅ Countdown configured for:',
             targetDate.toLocaleString()
+        );
+    } else {
+        console.log(
+            '⚠️ No target date specified, using default:',
+            DEFAULT_TARGET_DATE
         );
     }
 
@@ -300,7 +466,23 @@ export function initializeCountdown() {
 
 /**
  * Cleanup function - stops timer and prevents memory leaks
- * Called on page unload or when countdown expires
+ *
+ * Called on page unload or when countdown expires to:
+ * 1. Clear the setInterval timer
+ * 2. Remove global interval reference
+ * 3. Clear cached DOM elements
+ *
+ * Prevents memory leaks in single-page applications or when
+ * countdown component is dynamically removed.
+ *
+ * @returns {void}
+ *
+ * @example
+ * // In script.js:
+ * import { cleanupCountdown } from './countdown-clock.js';
+ * window.addEventListener('beforeunload', cleanupCountdown);
+ *
+ * @public
  */
 export function cleanupCountdown() {
     if (typeof window !== 'undefined' && window.countdownInterval) {
@@ -311,86 +493,334 @@ export function cleanupCountdown() {
     }
 }
 
-/* ===================================
-   🎬 MODULE INITIALIZATION NOTES
-   =================================== */
-
-/*
-   ⚠️ INITIALIZATION REMINDER:
-   This module does NOT auto-initialize to prevent duplicate instances.
+/* ================================================
+   🔧 DEBUG UTILITIES - MOVE TO DEV FILE LATER
+   ================================================
    
-   ✅ CORRECT USAGE:
-   Import and initialize in script.js:
+   📊 Console Testing Commands:
+   Copy these to browser console for debugging
    
-   import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';
+   ──────────────────────────────────────────────
+   CHECK CURRENT COUNTDOWN STATUS:
+   ──────────────────────────────────────────────
    
-   document.addEventListener('DOMContentLoaded', initializeCountdown);
-   window.addEventListener('beforeunload', cleanupCountdown);
+   // View all countdown information
+   function debugCountdown() {
+       const section = document.querySelector('.countdown-section');
+       const targetDate = section?.getAttribute('data-target-date');
+       
+       const elements = {
+           days: document.getElementById('days')?.textContent,
+           hours: document.getElementById('hours')?.textContent,
+           minutes: document.getElementById('minutes')?.textContent,
+           seconds: document.getElementById('seconds')?.textContent
+       };
+       
+       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+       console.log('⏰ COUNTDOWN STATUS');
+       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+       console.log('🎯 Target Date:', targetDate || 'Not set');
+       console.log('📅 Target Parsed:', targetDate ? new Date(targetDate) : 'N/A');
+       console.log('⏱️ Current Display:', elements);
+       
+       if (targetDate) {
+           const target = new Date(targetDate).getTime();
+           const now = Date.now();
+           const diff = target - now;
+           const isExpired = diff <= 0;
+           
+           console.log('🕐 Time Until:', isExpired ? 'EXPIRED' : `${Math.floor(diff / 1000)} seconds`);
+           console.log('📊 Status:', isExpired ? '❌ Expired' : '✅ Active');
+           
+           if (!isExpired) {
+               const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+               const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+               const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+               const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+               
+               console.log('📋 Breakdown:', `${days}d ${hours}h ${minutes}m ${seconds}s`);
+           }
+       }
+       
+       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+   }
    
-   ❌ DO NOT:
-   - Initialize multiple times
-   - Import without calling initializeCountdown()
-   - Call initializeCountdown() more than once
+   ──────────────────────────────────────────────
+   MANUALLY TRIGGER COUNTDOWN UPDATE:
+   ──────────────────────────────────────────────
+   
+   // Force immediate update of countdown display
+   function forceCountdownUpdate() {
+       console.log('🔄 Forcing countdown update...');
+       timer();
+       console.log('✅ Update complete');
+   }
+   
+   ──────────────────────────────────────────────
+   TEST EXPIRED STATE:
+   ──────────────────────────────────────────────
+   
+   // Set target date to past and reload to see expired state
+   function testExpiredState() {
+       const section = document.querySelector('.countdown-section');
+       if (!section) {
+           console.error('❌ Countdown section not found');
+           return;
+       }
+       
+       console.log('🧪 Setting target date to past...');
+       section.setAttribute('data-target-date', '2020-01-01T00:00:00');
+       console.log('🔄 Reload page to see expired state');
+       console.log('💡 Or run: forceCountdownUpdate()');
+   }
+   
+   ──────────────────────────────────────────────
+   CHANGE TARGET DATE DYNAMICALLY:
+   ──────────────────────────────────────────────
+   
+   // Update target date without page reload
+   function setCountdownDate(dateString) {
+       const section = document.querySelector('.countdown-section');
+       if (!section) {
+           console.error('❌ Countdown section not found');
+           return;
+       }
+       
+       // Validate date format
+       const testDate = new Date(dateString);
+       if (isNaN(testDate.getTime())) {
+           console.error('❌ Invalid date format');
+           console.log('📝 Use: YYYY-MM-DDTHH:mm:ss');
+           console.log('📝 Example: "2026-01-01T00:00:00"');
+           return;
+       }
+       
+       section.setAttribute('data-target-date', dateString);
+       console.log('✅ Target date updated to:', dateString);
+       console.log('📅 New target:', testDate.toLocaleString());
+       console.log('🔄 Updating display...');
+       
+       // Clear cache to force re-read of target date
+       cachedElements = null;
+       
+       // Force update
+       timer();
+   }
+   
+   // Usage examples:
+   setCountdownDate('2026-01-01T00:00:00');  // New Year 2026
+   setCountdownDate('2025-12-31T23:59:59');  // New Year's Eve 2025
+   setCountdownDate('2025-06-15T12:00:00');  // Specific date and time
+   
+   ──────────────────────────────────────────────
+   TEST TIME CALCULATION:
+   ──────────────────────────────────────────────
+   
+   // Test calculateTimeUnits with specific millisecond values
+   function testTimeCalculation() {
+       console.log('🧪 Testing time calculation:');
+       
+       const tests = [
+           { ms: 1000, label: '1 second' },
+           { ms: 60000, label: '1 minute' },
+           { ms: 3600000, label: '1 hour' },
+           { ms: 86400000, label: '1 day' },
+           { ms: 90061000, label: '1d 1h 1m 1s' },
+           { ms: 259200000, label: '3 days' },
+       ];
+       
+       tests.forEach(test => {
+           const units = calculateTimeUnits(test.ms);
+           console.log(`\n${test.label}:`);
+           console.log(`  Days: ${units.days}`);
+           console.log(`  Hours: ${units.hours}`);
+           console.log(`  Minutes: ${units.minutes}`);
+           console.log(`  Seconds: ${units.seconds}`);
+       });
+   }
+   
+   ──────────────────────────────────────────────
+   TEST FORMATTING:
+   ──────────────────────────────────────────────
+   
+   // Test formatTimeUnit function
+   function testFormatting() {
+       console.log('🧪 Testing time formatting:');
+       
+       const tests = [0, 1, 5, 9, 10, 23, 59, 99];
+       
+       tests.forEach(num => {
+           const formatted = formatTimeUnit(num);
+           console.log(`  ${num} → "${formatted}"`);
+       });
+   }
+   
+   ──────────────────────────────────────────────
+   CHECK DOM ELEMENTS:
+   ──────────────────────────────────────────────
+   
+   // Verify all required DOM elements exist
+   function checkCountdownDOM() {
+       const required = ['days', 'hours', 'minutes', 'seconds'];
+       const section = document.querySelector('.countdown-section');
+       
+       console.log('📦 DOM Element Check:');
+       console.log('  Section:', section ? '✅ Found' : '❌ Missing');
+       
+       required.forEach(id => {
+           const element = document.getElementById(id);
+           const status = element ? '✅' : '❌';
+           const text = element ? element.textContent : 'N/A';
+           console.log(`  #${id}:`, status, `(value: "${text}")`);
+       });
+   }
+   
+   ──────────────────────────────────────────────
+   SIMULATE COUNTDOWN:
+   ──────────────────────────────────────────────
+   
+   // Simulate countdown with custom time
+   function simulateCountdown(days, hours, minutes, seconds) {
+       const elements = getCountdownElements();
+       if (!elements || !elements.days) {
+           console.error('❌ Countdown elements not found');
+           return;
+       }
+       
+       console.log('🎬 Simulating countdown:', `${days}d ${hours}h ${minutes}m ${seconds}s`);
+       
+       const timeUnits = { days, hours, minutes, seconds };
+       updateDisplay(elements, timeUnits);
+       updateAriaLabels(elements, timeUnits);
+       
+       console.log('✅ Display updated');
+   }
+   
+   // Usage:
+   simulateCountdown(10, 5, 30, 45);  // 10d 5h 30m 45s
+   simulateCountdown(0, 0, 0, 10);    // 10 seconds
+   simulateCountdown(365, 0, 0, 0);   // 1 year
+   
+   ──────────────────────────────────────────────
+   FULL DIAGNOSTIC:
+   ──────────────────────────────────────────────
+   
+   // Run complete diagnostic
+   function fullCountdownDiagnostic() {
+       console.log('🔍 RUNNING FULL COUNTDOWN DIAGNOSTIC');
+       console.log('═══════════════════════════════════════\n');
+       
+       checkCountdownDOM();
+       console.log('\n───────────────────────────────────────\n');
+       
+       debugCountdown();
+       console.log('\n───────────────────────────────────────\n');
+       
+       console.log('🧪 Testing calculations:');
+       testTimeCalculation();
+       console.log('\n───────────────────────────────────────\n');
+       
+       console.log('🧪 Testing formatting:');
+       testFormatting();
+       
+       console.log('\n═══════════════════════════════════════');
+       console.log('✅ DIAGNOSTIC COMPLETE');
+   }
+   
+   ──────────────────────────────────────────────
+   USAGE:
+   ──────────────────────────────────────────────
+   
+   Copy and paste in browser console:
+   
+   fullCountdownDiagnostic()          // Complete diagnostic
+   debugCountdown()                    // Check current status
+   forceCountdownUpdate()              // Force update
+   testExpiredState()                  // Test expired state
+   setCountdownDate('2026-01-01T00:00:00')  // Change target
+   testTimeCalculation()               // Test calculations
+   testFormatting()                    // Test formatting
+   checkCountdownDOM()                 // Check DOM elements
+   simulateCountdown(10, 5, 30, 45)   // Simulate display
+   
 */
 
 /* ================================================
-   🔧 DEBUG UTILITIES
+   📝 TECHNICAL DOCUMENTATION
    ================================================
    
-   Copy these functions to browser console for debugging:
-*/
-
-/*
-📊 Check Current Countdown Status:
-────────────────────────────────────────────────
-function debugCountdown() {
-    const section = document.querySelector('.countdown-section');
-    const targetDate = section?.getAttribute('data-target-date');
-    const elements = {
-        days: document.getElementById('days')?.textContent,
-        hours: document.getElementById('hours')?.textContent,
-        minutes: document.getElementById('minutes')?.textContent,
-        seconds: document.getElementById('seconds')?.textContent
-    };
-    
-    console.log('🎯 Target Date:', targetDate);
-    console.log('⏰ Current Display:', elements);
-    console.log('📅 Target Parsed:', new Date(targetDate));
-    console.log('🕐 Time Until:', new Date(targetDate).getTime() - Date.now(), 'ms');
-}
-
-debugCountdown();
-*/
-
-/*
-🔄 Manually Trigger Countdown Update:
-────────────────────────────────────────────────
-import { timer } from './countdown-clock.js';
-timer();
-*/
-
-/*
-🧪 Test Expired State:
-────────────────────────────────────────────────
-function testExpiredState() {
-    const section = document.querySelector('.countdown-section');
-    section.setAttribute('data-target-date', '2020-01-01T00:00:00');
-    location.reload(); // Reload to see expired state
-}
-
-testExpiredState();
-*/
-
-/*
-📝 Change Target Date Dynamically:
-────────────────────────────────────────────────
-function setCountdownDate(dateString) {
-    const section = document.querySelector('.countdown-section');
-    section.setAttribute('data-target-date', dateString);
-    console.log('✅ Target date updated to:', dateString);
-    console.log('🔄 Reload page to apply changes');
-}
-
-// Example usage:
-setCountdownDate('2026-01-01T00:00:00'); // New Year 2026
-*/
+   ──────────────────────────────────────────────
+   TIME CALCULATION ALGORITHM:
+   ──────────────────────────────────────────────
+   
+   The countdown uses integer division and modulo operations
+   to extract time units from milliseconds:
+   
+   1. Days: 
+      timeDiff / (1000 * 60 * 60 * 24)
+      Divides by milliseconds in a day
+   
+   2. Hours (0-23):
+      (timeDiff % milliseconds_in_day) / milliseconds_in_hour
+      Gets remainder after days, divides by hour
+   
+   3. Minutes (0-59):
+      (timeDiff % milliseconds_in_hour) / milliseconds_in_minute
+      Gets remainder after hours, divides by minute
+   
+   4. Seconds (0-59):
+      (timeDiff % milliseconds_in_minute) / 1000
+      Gets remainder after minutes, divides by second
+   
+   This approach ensures accurate breakdown of time units
+   without floating point precision issues.
+   
+   ──────────────────────────────────────────────
+   DATE FORMAT SPECIFICATION:
+   ──────────────────────────────────────────────
+   
+   ISO 8601 Format: YYYY-MM-DDTHH:mm:ss
+   
+   Components:
+   - YYYY: 4-digit year (e.g., 2025)
+   - MM: 2-digit month (01-12)
+   - DD: 2-digit day (01-31)
+   - T: Separator between date and time
+   - HH: 2-digit hour (00-23, 24-hour format)
+   - mm: 2-digit minute (00-59)
+   - ss: 2-digit second (00-59)
+   
+   Examples:
+   ✅ "2025-12-31T23:59:59"  // New Year's Eve
+   ✅ "2025-06-15T12:00:00"  // Mid-year noon
+   ✅ "2026-01-01T00:00:00"  // New Year
+   
+   ❌ "2025-12-31"            // Missing time
+   ❌ "12/31/2025"            // Wrong format
+   ❌ "2025-12-31 23:59:59"   // Space instead of T
+   
+   ──────────────────────────────────────────────
+   MEMORY LEAK PREVENTION:
+   ──────────────────────────────────────────────
+   
+   setInterval creates a persistent timer that continues
+   running even after component removal unless explicitly
+   cleared. This causes memory leaks.
+   
+   Prevention strategy:
+   1. Store interval ID in global window object
+   2. Clear interval in cleanupCountdown()
+   3. Call cleanup on beforeunload event
+   4. Clear cached DOM references
+   
+   Without cleanup:
+   - Timer continues running = CPU usage
+   - DOM references held = memory leak
+   - Multiple initializations = duplicate timers
+   
+   With cleanup:
+   - Timer stopped = no CPU waste
+   - References cleared = memory freed
+   - Clean state for reinitialization
+   
+   ──*/
