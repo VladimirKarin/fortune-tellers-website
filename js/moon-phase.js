@@ -2,44 +2,56 @@
 // 🌙 MOON PHASE MODULE - Dynamic Moon Information Display
 // ================================================
 //
-// 📋 TABLE OF CONTENTS:
-// 1. Moon Phase Data (Localized Information)
-// 2. Phase Key Mapping (API to Internal)
-// 3. DOM Element Manager (Cached Selectors) ✅ FIXED
-// 4. Loading State Management ✅ IMPROVED
-// 5. UI Update Functions ✅ FIXED
-// 6. Countdown Calculation ✅ FIXED
-// 7. API Fetch Function ✅ IMPROVED
-// 8. Error Handling
-// 9. Local Calculation (Offline Fallback) ✅ IMPROVED
-// 10. Initialization & Network Monitoring
-// 11. Module Exports
-// 12. Debug Utilities
+// 📋 MODULE PURPOSE:
+// Displays current moon phase information with automatic updates from
+// WeatherAPI. Shows phase name, countdown to next phase, ritual
+// recommendations, and visual moon phase image. Falls back to local
+// calculation if API is unavailable.
+//
+// 🎬 DATA FLOW:
+// 1. Initialize DOM manager and validate elements
+// 2. Attempt to fetch data from WeatherAPI
+// 3. If successful → display API data
+// 4. If failed → fall back to local astronomical calculation
+// 5. Update UI with phase info, countdown, and rituals
 //
 // 🔗 DEPENDENCIES:
 // - WeatherAPI (https://api.weatherapi.com)
-// - HTML: Moon section with specific class structure
+// - HTML: .moon-section with specific card structure
 // - CSS: 08-moon-information-section-styles.css
+// - Images: Moon phase images in ../img/05-moon-information-section/
 //
-// ✅ CRITICAL FIX:
-// - DOM selector bug causing "Загрузка..." to never update
-// - Root cause: Index-based querySelectorAll fragile and order-dependent
-// - Solution: Parent-based traversal with cached selectors in MoonPhaseDOM class
+// 📦 FEATURES:
+// - Real-time moon phase from WeatherAPI
+// - Offline-capable with local calculation fallback
+// - Countdown timer to next moon phase
+// - Localized phase names (Russian/Lithuanian)
+// - Ritual recommendations for each phase
+// - Network status monitoring (online/offline detection)
+// - Loading states with minimum display time
+// - Comprehensive error handling
 //
-// ✅ OTHER IMPROVEMENTS:
-// - Cached selectors for better performance (no repeated DOM queries)
-// - Enhanced error handling with specific messages
-// - Updated reference date for better accuracy (2024-12-01)
-// - Minimum loading time for smoother UX (prevents flash)
-// - Proper null checks throughout
+// ⚠️ IMPORTANT NOTES:
+// - Self-initializing on DOMContentLoaded (no manual init needed)
+// - API key should be moved to backend in production
+// - Uses parent-based DOM traversal (not index-based)
+// - Reference date updated to Dec 2024 for better accuracy
 
 /* ===================================
-   1️⃣ MOON PHASE DATA - LOCALIZED INFORMATION
+   📊 MOON PHASE DATA - LOCALIZED INFORMATION
    =================================== */
 
 /**
  * Moon phase information database
- * Contains names, images, and ritual recommendations in multiple languages
+ * Contains localized names, images, and ritual recommendations
+ *
+ * @constant {Object.<string, {
+ *   moonPhaseNameRussian: string,
+ *   moonPhaseNameLithuanian: string,
+ *   moonPhaseImage: string,
+ *   moonPhaseRitualsRussian: Array<string>,
+ *   moonPhaseRitualsLithuanian: Array<string>
+ * }>}
  */
 const moonPhaseInformation = {
     newMoon: {
@@ -81,12 +93,14 @@ const moonPhaseInformation = {
 };
 
 /* ===================================
-   2️⃣ PHASE KEY MAPPING - API TO INTERNAL
+   🗺️ PHASE KEY MAPPING - API TO INTERNAL
    =================================== */
 
 /**
  * Maps WeatherAPI phase names to internal phase keys
  * Consolidates similar phases (e.g., all waxing phases → waxingMoon)
+ *
+ * @constant {Object.<string, string>}
  */
 const phaseKeyMap = {
     'New Moon': 'newMoon',
@@ -100,41 +114,40 @@ const phaseKeyMap = {
 };
 
 /* ===================================
-   3️⃣ DOM ELEMENT MANAGER - CACHED SELECTORS ✅ FIXED
+   🎨 DOM ELEMENT MANAGER - CACHED SELECTORS
    =================================== */
 
 /**
- * ✅ CRITICAL FIX: Centralized DOM element management with cached selectors
+ * Centralized DOM element management with cached selectors
  *
- * BEFORE (Broken):
- * const moonPhaseName = document.querySelectorAll('.moon-section__card-text')[0];
+ * Uses parent-based traversal instead of fragile index-based selection.
+ * Queries DOM once during initialization and reuses references throughout.
  *
- * PROBLEM:
- * - Index-based selection fragile and order-dependent
- * - No guarantee which card is at which index
- * - Failed silently when HTML structure changed
- * - Repeated DOM queries in every function (performance issue)
+ * Benefits:
+ * - More reliable (not order-dependent)
+ * - Better performance (no repeated queries)
+ * - Easier to debug (clear error messages)
+ * - Single source of truth for all DOM elements
  *
- * AFTER (Fixed):
- * - Parent-based traversal: Get cards first, then find text within each
- * - Cached references: Query DOM once, reuse throughout
- * - Proper validation: Check all elements exist on init
- * - Clear ownership: Each card element explicitly named
+ * @class MoonPhaseDOM
  *
- * BENEFITS:
- * - ✅ More reliable (not order-dependent)
- * - ✅ Faster (no repeated queries)
- * - ✅ Easier to debug (clear error messages)
- * - ✅ Maintainable (single source of truth)
+ * @example
+ * const moonDOM = new MoonPhaseDOM();
+ * if (moonDOM.isReady()) {
+ *     moonDOM.phaseName.textContent = 'Full Moon';
+ * }
  */
 class MoonPhaseDOM {
+    /**
+     * Initialize DOM manager and cache all element references
+     */
     constructor() {
-        // Cache parent container
+        // Cache parent containers
         this.layout = document.querySelector('.moon-section__layout');
         this.image = document.querySelector('.moon-section__image');
         this.error = document.querySelector('.moon-section__error');
 
-        // ✅ FIXED: Get cards by parent traversal, then find text elements within
+        // Get cards by parent traversal
         const cards = document.querySelectorAll('.moon-section__card');
 
         // Card 1: Moon phase name (Лунная фаза:)
@@ -149,13 +162,16 @@ class MoonPhaseDOM {
         this.ritualsCard = cards[2];
         this.rituals = cards[2]?.querySelector('.moon-section__card-text');
 
-        // Validation: Check if all required elements exist
+        // Validate all elements
         this.validateElements();
     }
 
     /**
      * Validate that all required DOM elements were found
      * Logs warnings for missing elements to aid debugging
+     *
+     * @returns {boolean} True if all elements found, false otherwise
+     * @private
      */
     validateElements() {
         const required = {
@@ -176,10 +192,10 @@ class MoonPhaseDOM {
         }
 
         if (allValid) {
-            console.log('✅ All moon section DOM elements found successfully');
+            console.log('✅ All moon section DOM elements found');
         } else {
             console.error(
-                '❌ Some moon section elements are missing. Check HTML structure.'
+                '❌ Some moon section elements missing. Check HTML structure.'
             );
         }
 
@@ -188,6 +204,9 @@ class MoonPhaseDOM {
 
     /**
      * Check if DOM is ready for updates
+     *
+     * @returns {boolean} True if all critical elements exist
+     * @public
      */
     isReady() {
         return !!(
@@ -199,22 +218,46 @@ class MoonPhaseDOM {
     }
 }
 
-// Global DOM manager instance
+/**
+ * Global DOM manager instance
+ * @type {MoonPhaseDOM|null}
+ */
 let moonDOM = null;
 
 /* ===================================
-   4️⃣ LOADING STATE MANAGEMENT ✅ IMPROVED
+   ⏳ LOADING STATE MANAGEMENT
    =================================== */
 
 /**
- * ✅ IMPROVED: Loading state with minimum display time for better UX
+ * Loading state configuration
+ * Minimum display time prevents loading flash on fast connections
  *
- * Prevents loading flash by enforcing minimum display time
- * Shows spinner for at least 500ms even if data loads instantly
+ * @constant {number}
  */
-const MIN_LOADING_TIME = 500; // Minimum loading display time in milliseconds
+const MIN_LOADING_TIME = 500; // milliseconds
+
+/**
+ * Loading start timestamp
+ * @type {number|null}
+ */
 let loadingStartTime = null;
 
+/**
+ * Set or clear loading state with minimum display time enforcement
+ *
+ * Shows spinner for at least MIN_LOADING_TIME even if data loads instantly.
+ * This prevents jarring loading flashes on fast connections.
+ *
+ * @param {boolean} isLoading - True to show loading, false to hide
+ * @returns {Promise<void>}
+ *
+ * @example
+ * await setLoadingState(true);  // Show spinner
+ * // ... fetch data ...
+ * await setLoadingState(false); // Hide spinner (waits if needed)
+ *
+ * @private
+ */
 async function setLoadingState(isLoading) {
     // Initialize DOM manager if needed
     if (!moonDOM) {
@@ -230,15 +273,15 @@ async function setLoadingState(isLoading) {
         // Record start time for minimum loading duration
         loadingStartTime = Date.now();
 
-        // Add loading class to show spinner (CSS handles animation)
+        // Add loading class (CSS handles spinner animation)
         moonDOM.layout?.classList.add('loading');
 
-        // ✅ FIXED: Update text with null-safe access
+        // Update text elements
         if (moonDOM.phaseName) moonDOM.phaseName.textContent = 'Загрузка...';
         if (moonDOM.rituals) moonDOM.rituals.textContent = 'Загрузка...';
         if (moonDOM.countdown) moonDOM.countdown.textContent = 'Загрузка...';
     } else {
-        // ✅ IMPROVED: Ensure minimum loading time for smooth UX
+        // Ensure minimum loading time for smooth UX
         if (loadingStartTime) {
             const elapsed = Date.now() - loadingStartTime;
             if (elapsed < MIN_LOADING_TIME) {
@@ -248,17 +291,36 @@ async function setLoadingState(isLoading) {
             }
         }
 
-        // Remove loading class to hide spinner
+        // Remove loading class
         moonDOM.layout?.classList.remove('loading');
     }
 }
 
 /* ===================================
-   5️⃣ UI UPDATE FUNCTIONS ✅ FIXED
+   🎨 UI UPDATE FUNCTIONS
    =================================== */
 
 /**
- * ✅ FIXED: Update UI with proper null checks and cached selectors
+ * Update moon section UI with new data
+ *
+ * Updates:
+ * - Moon phase image with fade transition
+ * - Phase name text
+ * - Rituals list
+ *
+ * Note: Countdown is updated separately via calculateNextPhaseCountdown()
+ *
+ * @param {Object} moonData - Moon phase data object
+ * @param {string} moonData.moonPhaseImage - Path to moon image
+ * @param {string} moonData.moonPhaseNameRussian - Phase name in Russian
+ * @param {Array<string>} moonData.moonPhaseRitualsRussian - Ritual recommendations
+ * @returns {void}
+ *
+ * @example
+ * const moonData = moonPhaseInformation.fullMoon;
+ * updateMoonUI(moonData);
+ *
+ * @private
  */
 function updateMoonUI(moonData) {
     try {
@@ -271,7 +333,7 @@ function updateMoonUI(moonData) {
             throw new Error('DOM elements not ready for update');
         }
 
-        // Update Moon Phase Image
+        // Update moon phase image with fade transition
         if (moonDOM.image) {
             moonDOM.image.style.opacity = '0';
             moonDOM.image.src = moonData.moonPhaseImage;
@@ -283,20 +345,18 @@ function updateMoonUI(moonData) {
             };
         }
 
-        // Update Moon Phase Name (Card 1)
+        // Update phase name
         if (moonDOM.phaseName) {
             moonDOM.phaseName.textContent = moonData.moonPhaseNameRussian;
         }
 
-        // Update Rituals List (Card 3)
+        // Update rituals list (comma-separated)
         if (moonDOM.rituals) {
             moonDOM.rituals.textContent =
                 moonData.moonPhaseRitualsRussian.join(', ');
         }
 
-        console.log(
-            `✅ Moon UI updated successfully: ${moonData.moonPhaseNameRussian}`
-        );
+        console.log(`✅ Moon UI updated: ${moonData.moonPhaseNameRussian}`);
     } catch (error) {
         console.error('❌ Error updating moon UI:', error);
         showMoonError('Ошибка при обновлении интерфейса');
@@ -304,11 +364,27 @@ function updateMoonUI(moonData) {
 }
 
 /* ===================================
-   6️⃣ COUNTDOWN CALCULATION ✅ FIXED
+   ⏰ COUNTDOWN CALCULATION
    =================================== */
 
 /**
- * ✅ FIXED: Countdown with proper null checks and updated reference date
+ * Calculate and display countdown to next moon phase
+ *
+ * Uses astronomical calculations based on lunar cycle (29.53 days).
+ * Determines which phase is next and calculates time remaining.
+ *
+ * @param {number|null} [currentCycle=null] - Current position in lunar cycle (0-29.53)
+ * @returns {void}
+ *
+ * @example
+ * // Calculate from current date
+ * calculateNextPhaseCountdown();
+ *
+ * @example
+ * // Calculate from specific cycle position
+ * calculateNextPhaseCountdown(14.5); // Mid-cycle
+ *
+ * @private
  */
 function calculateNextPhaseCountdown(currentCycle = null) {
     try {
@@ -316,19 +392,19 @@ function calculateNextPhaseCountdown(currentCycle = null) {
             moonDOM = new MoonPhaseDOM();
         }
 
-        const lunarCycle = 29.53058867;
+        // Length of complete lunar cycle
+        const lunarCycle = 29.53058867; // days
 
-        // If no cycle provided, calculate it
+        // Calculate current cycle position if not provided
         if (currentCycle === null) {
             const today = new Date();
-            // ✅ IMPROVED: Updated to December 2024 for better accuracy
-            const knownNewMoon = new Date('2024-12-01');
+            const knownNewMoon = new Date('2024-12-01'); // Reference new moon
             const daysSinceNewMoon =
                 (today - knownNewMoon) / (1000 * 60 * 60 * 24);
             currentCycle = daysSinceNewMoon % lunarCycle;
         }
 
-        // Define phase boundaries
+        // Define phase boundaries (in days since new moon)
         const phases = [
             { name: 'Waxing Crescent', end: 7.38 },
             { name: 'First Quarter', end: 9.23 },
@@ -352,7 +428,7 @@ function calculateNextPhaseCountdown(currentCycle = null) {
         const hours = Math.floor((daysUntilNext - days) * 24);
         const minutes = Math.floor(((daysUntilNext - days) * 24 - hours) * 60);
 
-        // ✅ FIXED: Update countdown with null check
+        // Update countdown display
         if (moonDOM.countdown) {
             moonDOM.countdown.textContent = `${days} дн. ${hours} ч. ${minutes} мин`;
         }
@@ -365,11 +441,28 @@ function calculateNextPhaseCountdown(currentCycle = null) {
 }
 
 /* ===================================
-   7️⃣ API FETCH FUNCTION ✅ IMPROVED
+   🌐 API FETCH FUNCTION
    =================================== */
 
 /**
- * ✅ IMPROVED: Enhanced error handling with specific messages
+ * Fetch moon phase data from WeatherAPI
+ *
+ * Retrieves current moon phase and illumination percentage for Klaipeda.
+ * Handles various error conditions with specific error messages.
+ * Falls back to local calculation on any failure.
+ *
+ * @returns {Promise<void>}
+ *
+ * @throws {Error} Various API errors (401, 403, 400, etc.)
+ *
+ * @example
+ * try {
+ *     await fetchMoonPhase();
+ * } catch (error) {
+ *     console.error('API fetch failed:', error);
+ * }
+ *
+ * @private
  */
 async function fetchMoonPhase() {
     // ⚠️ TODO: Move API key to backend or environment variables for production
@@ -383,7 +476,7 @@ async function fetchMoonPhase() {
 
         const response = await fetch(url);
 
-        // ✅ IMPROVED: Specific error messages for different HTTP statuses
+        // Handle HTTP errors with specific messages
         if (!response.ok) {
             if (response.status === 401) {
                 throw new Error('API_KEY_ERROR: Invalid API key');
@@ -411,6 +504,7 @@ async function fetchMoonPhase() {
         console.log(`🌙 Moon Phase: ${moonPhase}`);
         console.log(`💡 Illumination: ${moonIllumination}%`);
 
+        // Map API phase to internal key
         const internalKey = phaseKeyMap[moonPhase];
 
         if (!internalKey) {
@@ -419,15 +513,16 @@ async function fetchMoonPhase() {
 
         const moonData = moonPhaseInformation[internalKey];
 
+        // Update UI with API data
         updateMoonUI(moonData);
         calculateNextPhaseCountdown();
         hideMoonError();
 
-        console.log('✅ Moon phase data fetched successfully from API');
+        console.log('✅ Moon phase data fetched from API');
     } catch (error) {
-        console.error('❌ Error fetching moon phase data:', error);
+        console.error('❌ Error fetching moon phase:', error);
 
-        // ✅ IMPROVED: Show specific error messages
+        // Show specific error messages
         if (error.message.includes('API_KEY_ERROR')) {
             showMoonError('Ошибка API ключа. Проверьте настройки.');
         } else if (error.message.includes('PHASE_ERROR')) {
@@ -452,9 +547,23 @@ async function fetchMoonPhase() {
 }
 
 /* ===================================
-   8️⃣ ERROR HANDLING
+   ⚠️ ERROR HANDLING
    =================================== */
 
+/**
+ * Display error message to user
+ *
+ * Shows error message with auto-hide after 5 seconds.
+ * Styled as error notification.
+ *
+ * @param {string} message - Error message to display
+ * @returns {void}
+ *
+ * @example
+ * showMoonError('Failed to load moon data');
+ *
+ * @private
+ */
 function showMoonError(message) {
     if (!moonDOM) {
         moonDOM = new MoonPhaseDOM();
@@ -464,12 +573,19 @@ function showMoonError(message) {
         moonDOM.error.textContent = message;
         moonDOM.error.classList.add('show');
 
+        // Auto-hide after 5 seconds
         setTimeout(() => {
             hideMoonError();
         }, 5000);
     }
 }
 
+/**
+ * Hide error message
+ *
+ * @returns {void}
+ * @private
+ */
 function hideMoonError() {
     if (moonDOM?.error) {
         moonDOM.error.classList.remove('show');
@@ -477,22 +593,40 @@ function hideMoonError() {
 }
 
 /* ===================================
-   9️⃣ LOCAL CALCULATION ✅ IMPROVED
+   📐 LOCAL CALCULATION - OFFLINE FALLBACK
    =================================== */
 
 /**
- * ✅ IMPROVED: Updated reference date for better accuracy
+ * Calculate moon phase locally using astronomical formulas
+ *
+ * Uses a known new moon date as reference and calculates current
+ * position in lunar cycle. More recent reference date (Dec 2024)
+ * provides better accuracy than older dates.
+ *
+ * Algorithm:
+ * 1. Calculate days since known new moon
+ * 2. Find position in current lunar cycle (mod 29.53 days)
+ * 3. Determine phase based on cycle position
+ * 4. Calculate approximate illumination percentage
+ *
+ * @returns {void}
+ *
+ * @example
+ * getLocalMoonPhase(); // Calculate and display current phase
+ *
+ * @private
  */
 function getLocalMoonPhase() {
     try {
         const today = new Date();
-        // ✅ IMPROVED: More recent reference date (less accumulated error)
-        const knownNewMoon = new Date('2024-12-01');
-        const lunarCycle = 29.53058867;
+        const knownNewMoon = new Date('2024-12-01'); // Updated reference date
+        const lunarCycle = 29.53058867; // Synodic month in days
 
+        // Calculate position in current cycle
         const daysSinceNewMoon = (today - knownNewMoon) / (1000 * 60 * 60 * 24);
         const currentCycle = daysSinceNewMoon % lunarCycle;
 
+        // Determine phase based on cycle position
         let phase, internalKey;
 
         if (currentCycle < 1.84) {
@@ -531,7 +665,7 @@ function getLocalMoonPhase() {
         updateMoonUI(moonData);
         calculateNextPhaseCountdown(currentCycle);
 
-        // Show info message
+        // Show info message (styled differently from error)
         if (moonDOM?.error) {
             moonDOM.error.textContent =
                 'Используется локальный расчет фазы луны';
@@ -542,19 +676,35 @@ function getLocalMoonPhase() {
 
             setTimeout(() => {
                 hideMoonError();
+                // Reset styles
                 moonDOM.error.style.background = '';
                 moonDOM.error.style.color = '';
                 moonDOM.error.style.borderColor = '';
             }, 3000);
         }
 
-        console.log('✅ Local moon phase calculation completed successfully');
+        console.log('✅ Local moon phase calculation completed');
     } catch (error) {
         console.error('❌ Error in local moon phase calculation:', error);
         showMoonError('Ошибка при расчете фазы луны');
     }
 }
 
+/**
+ * Calculate moon illumination percentage from cycle position
+ *
+ * Uses cosine function to approximate illumination based on
+ * phase angle. 0° (new moon) = 0%, 180° (full moon) = 100%.
+ *
+ * @param {number} cycleDay - Current day in lunar cycle (0-29.53)
+ * @returns {number} Illumination percentage (0-100)
+ *
+ * @example
+ * const illum = calculateIllumination(14.77); // ~100% (full moon)
+ * const illum = calculateIllumination(0);     // ~0% (new moon)
+ *
+ * @private
+ */
 function calculateIllumination(cycleDay) {
     const lunarCycle = 29.53058867;
     const phaseAngle = (2 * Math.PI * cycleDay) / lunarCycle;
@@ -563,9 +713,21 @@ function calculateIllumination(cycleDay) {
 }
 
 /* ===================================
-   🔟 INITIALIZATION
+   🚀 INITIALIZATION
    =================================== */
 
+/**
+ * Initialize moon phase module
+ *
+ * Initialization sequence:
+ * 1. Create DOM manager and validate elements
+ * 2. Check network status (online/offline)
+ * 3. If online → fetch from API
+ * 4. If offline or API fails → use local calculation
+ *
+ * @returns {Promise<void>}
+ * @private
+ */
 async function initializeMoonPhase() {
     try {
         moonDOM = new MoonPhaseDOM();
@@ -592,6 +754,15 @@ async function initializeMoonPhase() {
     }
 }
 
+/**
+ * Setup network status monitoring
+ *
+ * Listens for online/offline events and refreshes moon data accordingly.
+ * When connection is restored, attempts to fetch fresh data from API.
+ *
+ * @returns {void}
+ * @private
+ */
 function setupNetworkMonitoring() {
     window.addEventListener('online', () => {
         console.log('✅ Connection restored, refreshing moon data');
@@ -607,9 +778,13 @@ function setupNetworkMonitoring() {
 }
 
 /* ===================================
-   1️⃣1️⃣ AUTO-START
+   🎬 AUTO-START
    =================================== */
 
+/**
+ * Start module when DOM is ready
+ * Self-initializing - no manual initialization needed
+ */
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Initializing Moon Phase Module...');
     initializeMoonPhase();
@@ -618,57 +793,52 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ===================================
-   1️⃣2️⃣ MODULE EXPORTS
+   📤 MODULE EXPORTS
    =================================== */
 
+/**
+ * Export functions for external use or testing
+ */
 export { initializeMoonPhase, getLocalMoonPhase, updateMoonUI };
 
 /* ================================================
-   1️⃣3️⃣ DEBUG UTILITIES
-   ================================================ */
-/*
-//📊 TESTING FUNCTIONS - Copy to console:
-
-// 1. Check if DOM elements are found correctly
-function debugMoonDOM() {
-    const dom = new MoonPhaseDOM();
-    console.log('Layout:', dom.layout);
-    console.log('Image:', dom.image);
-    console.log('Phase name:', dom.phaseName?.textContent);
-    console.log('Countdown:', dom.countdown?.textContent);
-    console.log('Rituals:', dom.rituals?.textContent);
-    console.log('Is Ready:', dom.isReady());
-}
-
-// 2. Test API fetch manually
-async function testMoonAPI() {
-    console.log('🧪 Testing API fetch...');
-    await fetchMoonPhase();
-}
-
-// 3. Test local calculation
-function testLocalCalculation() {
-    console.log('🧪 Testing local calculation...');
-    getLocalMoonPhase();
-}
-
-// 4. Force show specific phase
-function testShowPhase(phaseKey) {
-    console.log('🧪 Testing phase:', phaseKey);
-    const moonData = moonPhaseInformation[phaseKey];
-    updateMoonUI(moonData);
-}
-
-// 5. Test error display
-function testErrorDisplay() {
-    console.log('🧪 Testing error display...');
-    showMoonError('This is a test error message');
-}
-
-// RUN TESTS:
-debugMoonDOM();
-testMoonAPI();
-testLocalCalculation();
-testShowPhase('fullMoon');
-testErrorDisplay();
-*/
+   🔧 DEBUG UTILITIES - MOVE TO DEV FILE LATER
+   ================================================
+   
+   📊 Console Testing Commands:
+   Copy these to browser console for debugging
+   
+   ──────────────────────────────────────────────
+   CHECK DOM ELEMENTS:
+   ──────────────────────────────────────────────
+   
+   // Verify all DOM elements are found correctly
+   function debugMoonDOM() {
+       const dom = new MoonPhaseDOM();
+       console.log('📦 DOM Element Status:');
+       console.log('  Layout:', dom.layout ? '✅' : '❌');
+       console.log('  Image:', dom.image ? '✅' : '❌');
+       console.log('  Phase name:', dom.phaseName?.textContent || '❌');
+       console.log('  Countdown:', dom.countdown?.textContent || '❌');
+       console.log('  Rituals:', dom.rituals?.textContent || '❌');
+       console.log('  Is Ready:', dom.isReady() ? '✅' : '❌');
+   }
+   
+   ──────────────────────────────────────────────
+   TEST API FETCH:
+   ──────────────────────────────────────────────
+   
+   // Manually trigger API fetch
+   async function testMoonAPI() {
+       console.log('🧪 Testing API fetch...');
+       await fetchMoonPhase();
+   }
+   
+   ──────────────────────────────────────────────
+   TEST LOCAL CALCULATION:
+   ──────────────────────────────────────────────
+   
+   // Manually trigger local calculation
+   function testLocalCalculation() {
+       console.log('🧪 Testing local calculation...');
+       */
