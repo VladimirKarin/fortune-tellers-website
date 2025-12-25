@@ -2,113 +2,191 @@
 // 💰 PRICES SECTION - Enhanced Toggle Controller
 // ================================================
 //
-// 📋 FEATURES:
-// - Smooth expand/collapse animation with height calculation
+// 📋 MODULE PURPOSE:
+// Manages expandable/collapsible prices section with smooth animations
+// and staggered card entrance effects. Provides show/hide functionality
+// with proper height calculation and accessibility features.
+//
+// 🎬 USER INTERACTION FLOW:
+// 1. User clicks "Show prices" button
+// 2. Section smoothly expands with height animation
+// 3. Price cards enter with staggered timing
+// 4. Button text changes to "Hide prices"
+// 5. User clicks again to collapse section
+// 6. Cards fade out, section collapses
+//
+// 🔗 DEPENDENCIES:
+// - HTML: .prices-grid container
+// - HTML: .prices__button toggle button
+// - HTML: .prices-card individual price cards
+// - CSS: 07-prices-section-styles.css
+// - CSS: .prices-section-visible for expanded state
+// - CSS: .prices-card-animate-in for card animations
+//
+// 📦 FEATURES:
+// - Smooth expand/collapse animations with height calculation
 // - Staggered card entrance animations
-// - Keyboard navigation support (Enter, Space, ESC)
+// - Keyboard navigation support (Enter, Space, ESC keys)
 // - ARIA attributes for accessibility
 // - Responsive height recalculation on window resize
+// - Prevents animation interruption (isAnimating flag)
 // - Memory leak prevention with proper cleanup
-// - Comprehensive debugging tools
+// - Unique class names to avoid conflicts with other sections
 //
-// 🔗 CSS INTEGRATION:
-// Works with 07-prices-section-styles.css
-// Uses unique class names to avoid conflicts with other sections
+// 🎨 ANIMATION SEQUENCE:
+// Expand: Height 0→auto (600ms) → Cards fade in staggered (100ms each)
+// Collapse: Cards fade out → Height auto→0 (600ms)
+//
+// ⚠️ IMPORTANT NOTES:
+// - Self-initializing on DOMContentLoaded (no manual init needed)
+// - Uses unique class prefix 'prices-' to avoid conflicts
+// - Different from about-me section (separate animation system)
+// - Window resize recalculates height if section is open
 
-/* ================================================
-   📋 TABLE OF CONTENTS
-   ================================================
-   1. Configuration Constants
-   2. CSS Class Names
-   3. DOM Element References
-   4. State Management
-   5. Debug Utilities
-   6. Accessibility Setup
-   7. Animation Functions
-   8. Show/Hide Logic
-   9. Event Handlers
-   10. Initialization
-   11. Global API
-*/
-
-// ================================================
-// 1️⃣ CONFIGURATION CONSTANTS
-// ================================================
+/* ===================================
+   ⏱️ CONFIGURATION CONSTANTS
+   =================================== */
 
 /**
  * Animation timing configuration
- * 🔄 TRANSLATED: "Настройки анимации"
  * Adjust these values to change animation behavior
+ *
+ * @constant {Object}
  */
 const ANIMATION_CONFIG = {
-    // ⏱️ Main animation durations (milliseconds)
-    MAIN_DURATION: 600, // Container expand/collapse speed
-    CARDS_START_DELAY: 200, // Delay before cards start animating
-    CARDS_INTERVAL: 100, // Delay between each card animation
-    AUTO_HEIGHT_DELAY: 50, // Delay before setting height: auto
+    /**
+     * Main container expand/collapse duration
+     * @type {number}
+     * @default 600
+     */
+    MAIN_DURATION: 600, // milliseconds
 
-    // 🎯 Performance optimization
-    RESIZE_DEBOUNCE: 150, // Debounce window resize events
+    /**
+     * Delay before cards start animating after container expands
+     * @type {number}
+     * @default 200
+     */
+    CARDS_START_DELAY: 200, // milliseconds
+
+    /**
+     * Interval between each card animation
+     * @type {number}
+     * @default 100
+     */
+    CARDS_INTERVAL: 100, // milliseconds
+
+    /**
+     * Delay before setting height to 'auto' for responsive behavior
+     * @type {number}
+     * @default 50
+     */
+    AUTO_HEIGHT_DELAY: 50, // milliseconds
+
+    /**
+     * Window resize debounce delay
+     * @type {number}
+     * @default 150
+     */
+    RESIZE_DEBOUNCE: 150, // milliseconds
 };
 
-// ================================================
-// 2️⃣ CSS CLASS NAMES (Unique to avoid conflicts)
-// ================================================
+/* ===================================
+   🎨 CSS CLASS NAMES
+   =================================== */
 
 /**
  * CSS class constants
- * ✅ FIXED: Using unique class names to avoid conflicts with AboutMe section
- * All classes are prefixed with 'prices-' for namespace isolation
+ * Using unique 'prices-' prefix to avoid conflicts with other sections
+ *
+ * @constant {Object}
  */
 const CSS_CLASSES = {
-    // Section visibility state
-    SECTION_VISIBLE: 'prices-section-visible', // Applied to .prices-grid when expanded
+    /**
+     * Applied to .prices-grid when expanded
+     * @type {string}
+     */
+    SECTION_VISIBLE: 'prices-section-visible',
 
-    // Card animation states
-    CARD_ANIMATE_IN: 'prices-card-animate-in', // Applied to cards for entrance animation
+    /**
+     * Applied to cards for entrance animation
+     * @type {string}
+     */
+    CARD_ANIMATE_IN: 'prices-card-animate-in',
 
-    // Selectors for querying DOM
-    PRICE_CARD: '.prices-card', // Individual price cards
-    EXPLANATION_CARD: '.prices-explanation-card', // Special explanation card
+    /**
+     * Selector for individual price cards
+     * @type {string}
+     */
+    PRICE_CARD: '.prices-card',
+
+    /**
+     * Selector for explanation card
+     * @type {string}
+     */
+    EXPLANATION_CARD: '.prices-explanation-card',
 };
 
-// ================================================
-// 3️⃣ DOM ELEMENT REFERENCES
-// ================================================
+/* ===================================
+   📦 DOM ELEMENT REFERENCES
+   =================================== */
 
 /**
- * Cache DOM elements for better performance
- * Queried once during initialization
+ * Cached DOM element references
+ * @type {HTMLElement|null}
  */
-const priceSection = document.querySelector('.prices-grid'); // Main grid container
-const priceSectionButton = document.querySelector('.prices__button'); // Toggle button
+const priceSection = document.querySelector('.prices-grid');
+const priceSectionButton = document.querySelector('.prices__button');
 
-// ================================================
-// 4️⃣ STATE MANAGEMENT
-// ================================================
+/* ===================================
+   🎯 STATE MANAGEMENT
+   =================================== */
 
 /**
  * Component state tracking
- * 🔄 TRANSLATED: "Состояние компонента"
+ * @type {Object}
  */
-let isVisible = false; // Track whether prices are currently shown
-let isAnimating = false; // Prevent multiple simultaneous animations
-let resizeTimeout = null; // Store resize debounce timeout
+let state = {
+    /**
+     * Whether prices are currently visible
+     * @type {boolean}
+     */
+    isVisible: false,
 
-// ================================================
-// 5️⃣ DEBUG UTILITIES
-// ================================================
+    /**
+     * Whether animation is currently in progress
+     * @type {boolean}
+     */
+    isAnimating: false,
+
+    /**
+     * Resize debounce timeout reference
+     * @type {number|null}
+     */
+    resizeTimeout: null,
+};
+
+/* ===================================
+   🔧 DEBUG UTILITIES
+   =================================== */
 
 /**
  * Debug mode configuration
  * Set to false in production to disable console logs
+ *
+ * @constant {boolean}
+ * @default false
  */
 const DEBUG_ENABLED = false;
 
 /**
  * Centralized debug logging
+ * Only logs when DEBUG_ENABLED is true
+ *
  * @param {string} message - Log message
- * @param {*} data - Optional data to log
+ * @param {*} [data=''] - Optional data to log
+ * @returns {void}
+ *
+ * @private
  */
 function debugLog(message, data = '') {
     if (DEBUG_ENABLED) {
@@ -116,100 +194,22 @@ function debugLog(message, data = '') {
     }
 }
 
-/**
- * Test visibility of prices section elements
- * Call from browser console: testPrices()
- *
- * @public
- */
-function testVisibility() {
-    debugLog('=== TESTING VISIBILITY ===');
-    debugLog('Section exists:', !!priceSection);
-    debugLog('Button exists:', !!priceSectionButton);
-
-    if (priceSection) {
-        const styles = getComputedStyle(priceSection);
-        debugLog('Section computed styles:', {
-            display: styles.display,
-            height: styles.height,
-            opacity: styles.opacity,
-            overflow: styles.overflow,
-        });
-
-        // Check cards
-        const priceCards = priceSection.querySelectorAll(
-            CSS_CLASSES.PRICE_CARD
-        );
-        const explanationCards = priceSection.querySelectorAll(
-            CSS_CLASSES.EXPLANATION_CARD
-        );
-
-        debugLog('Price cards found:', priceCards.length);
-        debugLog('Explanation cards found:', explanationCards.length);
-
-        if (priceCards.length > 0) {
-            const firstCardStyles = getComputedStyle(priceCards[0]);
-            debugLog('First price card styles:', {
-                display: firstCardStyles.display,
-                opacity: firstCardStyles.opacity,
-                transform: firstCardStyles.transform,
-            });
-        }
-
-        // Check CSS classes
-        debugLog('Section CSS classes:', priceSection.className);
-        debugLog(
-            'Cards with animation class:',
-            priceSection.querySelectorAll(`.${CSS_CLASSES.CARD_ANIMATE_IN}`)
-                .length
-        );
-    }
-    debugLog('=== END TEST ===');
-}
-
-/**
- * Check for potential conflicts with other components
- * Helps identify naming collisions
- *
- * @public
- */
-function checkForConflicts() {
-    debugLog('=== CHECKING FOR CONFLICTS ===');
-
-    // Check for AboutMe animation conflicts
-    const aboutMeCards = document.querySelectorAll('.about-me-card.animate-in');
-    if (aboutMeCards.length > 0) {
-        debugLog(
-            '⚠️ Found AboutMe cards with animate-in class:',
-            aboutMeCards.length
-        );
-        debugLog('✅ Using unique class names to avoid conflicts');
-    }
-
-    // Check global namespace
-    const globalConflicts = [];
-    if (window.pricesSection) globalConflicts.push('pricesSection');
-    if (window.testPrices) globalConflicts.push('testPrices');
-
-    debugLog(
-        'Global objects status:',
-        globalConflicts.length > 0
-            ? `Will override: ${globalConflicts.join(', ')}`
-            : 'No conflicts'
-    );
-
-    debugLog('=== END CONFLICT CHECK ===');
-}
-
-// ================================================
-// 6️⃣ ACCESSIBILITY SETUP
-// ================================================
+/* ===================================
+   ♿ ACCESSIBILITY SETUP
+   =================================== */
 
 /**
  * Initialize ARIA attributes for screen readers
- * Sets up proper semantic relationships between button and content
+ *
+ * Sets up proper semantic relationships between button and content.
+ * Ensures screen readers can understand and announce the expandable section.
  *
  * @returns {boolean} Success status
+ *
+ * @example
+ * const success = initializeAccessibility();
+ * if (success) console.log('ARIA attributes set');
+ *
  * @private
  */
 function initializeAccessibility() {
@@ -229,19 +229,26 @@ function initializeAccessibility() {
     priceSection.setAttribute('id', 'prices-grid'); // Unique ID for aria-controls
     priceSection.setAttribute('aria-hidden', 'true'); // Initially hidden from screen readers
     priceSection.setAttribute('role', 'region'); // Define as content region
-    priceSection.setAttribute('aria-label', 'Список цен на услуги'); // 🔤 TRANSLATED: "Price list for services"
+    priceSection.setAttribute('aria-label', 'Список цен на услуги'); // Russian: "Price list for services"
 
     debugLog('✅ Accessibility initialized successfully');
     return true;
 }
 
-// ================================================
-// 7️⃣ ANIMATION FUNCTIONS
-// ================================================
+/* ===================================
+   🎬 ANIMATION FUNCTIONS
+   =================================== */
 
 /**
  * Animate cards entrance with staggered timing
- * Adds animation class to each card with progressive delays
+ *
+ * Adds animation class to each card with progressive delays.
+ * Creates a cascading entrance effect for visual interest.
+ *
+ * @returns {void}
+ *
+ * @example
+ * animateCardsIn(); // Cards fade in one by one
  *
  * @private
  */
@@ -258,13 +265,11 @@ function animateCardsIn() {
         return;
     }
 
-    // 🔄 TRANSLATED: "Анимируем каждую карточку с интервалом"
     // Animate each card with progressive delay
     allCards.forEach((card, index) => {
         setTimeout(() => {
             // Add unique animation class (won't conflict with AboutMe)
             card.classList.add(CSS_CLASSES.CARD_ANIMATE_IN);
-
             debugLog(`Card ${index + 1} animated in`);
         }, index * ANIMATION_CONFIG.CARDS_INTERVAL);
     });
@@ -272,7 +277,12 @@ function animateCardsIn() {
 
 /**
  * Remove animation classes from cards
- * Resets cards to initial state
+ * Resets cards to initial state for next animation
+ *
+ * @returns {void}
+ *
+ * @example
+ * animateCardsOut(); // Remove animation classes
  *
  * @private
  */
@@ -289,39 +299,25 @@ function animateCardsOut() {
     });
 }
 
-// ================================================
-// 8️⃣ SHOW/HIDE LOGIC
-// ================================================
+/* ===================================
+   📐 HEIGHT CALCULATION
+   =================================== */
 
 /**
- * Show prices section with smooth animation
- * Handles height calculation and staggered card entrance
+ * Calculate natural height of prices section
  *
- * @public
+ * Temporarily displays section to measure its natural height,
+ * then returns it to initial state.
+ *
+ * @returns {number} Height in pixels
+ *
+ * @example
+ * const height = calculateSectionHeight();
+ * console.log('Section height:', height + 'px');
+ *
+ * @private
  */
-function showPrices() {
-    // Guard: Prevent animation if already animating or elements missing
-    if (isAnimating || !priceSection || !priceSectionButton) {
-        debugLog('Show animation cancelled', {
-            isAnimating,
-            hasSection: !!priceSection,
-            hasButton: !!priceSectionButton,
-        });
-        return;
-    }
-
-    debugLog('🟢 Starting show animation');
-    isAnimating = true;
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 1️⃣ UPDATE ACCESSIBILITY ATTRIBUTES
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    priceSectionButton.setAttribute('aria-expanded', 'true');
-    priceSection.setAttribute('aria-hidden', 'false');
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 2️⃣ CALCULATE TARGET HEIGHT
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function calculateSectionHeight() {
     // Temporarily make visible to measure true height
     priceSection.style.display = 'grid';
     priceSection.style.height = 'auto';
@@ -331,9 +327,55 @@ function showPrices() {
     const fullHeight = priceSection.scrollHeight;
     debugLog('Calculated section height:', fullHeight + 'px');
 
-    // Reset to collapsed state before animating
+    // Reset to collapsed state
     priceSection.style.height = '0';
     priceSection.style.opacity = '0';
+
+    return fullHeight;
+}
+
+/* ===================================
+   🎨 SHOW/HIDE LOGIC
+   =================================== */
+
+/**
+ * Show prices section with smooth animation
+ *
+ * Handles complete show sequence:
+ * 1. Calculate target height
+ * 2. Update ARIA attributes
+ * 3. Start height expansion animation
+ * 4. Trigger staggered card entrance
+ * 5. Set height to 'auto' for responsive behavior
+ * 6. Manage focus for accessibility
+ *
+ * @returns {void}
+ *
+ * @example
+ * showPrices(); // Expand prices section
+ *
+ * @public
+ */
+function showPrices() {
+    // Guard: Prevent animation if already animating or elements missing
+    if (state.isAnimating || !priceSection || !priceSectionButton) {
+        debugLog('Show animation cancelled', {
+            isAnimating: state.isAnimating,
+            hasSection: !!priceSection,
+            hasButton: !!priceSectionButton,
+        });
+        return;
+    }
+
+    debugLog('🟢 Starting show animation');
+    state.isAnimating = true;
+
+    // Update ARIA attributes
+    priceSectionButton.setAttribute('aria-expanded', 'true');
+    priceSection.setAttribute('aria-hidden', 'false');
+
+    // Calculate target height
+    const fullHeight = calculateSectionHeight();
 
     // Force reflow to ensure transition will work
     void priceSection.offsetHeight;
@@ -341,33 +383,26 @@ function showPrices() {
     // Add visibility class for CSS transitions
     priceSection.classList.add(CSS_CLASSES.SECTION_VISIBLE);
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 3️⃣ START HEIGHT ANIMATION
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // Start height animation
     setTimeout(() => {
         priceSection.style.height = fullHeight + 'px';
         priceSection.style.opacity = '1';
         debugLog('Height animation started');
     }, ANIMATION_CONFIG.AUTO_HEIGHT_DELAY);
 
-    // Update button text
-    // 🔤 TRANSLATED: "Спрятать цены" = "Hide prices"
+    // Update button text (Russian: "Hide prices")
     priceSectionButton.textContent = 'Спрятать цены';
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 4️⃣ START CARD ANIMATIONS
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // Start card animations
     setTimeout(() => {
         animateCardsIn();
     }, ANIMATION_CONFIG.CARDS_START_DELAY);
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 5️⃣ FINALIZE ANIMATION
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // Finalize animation
     setTimeout(() => {
         // Set height to auto for responsive behavior
         priceSection.style.height = 'auto';
-        isAnimating = false;
+        state.isAnimating = false;
         debugLog('✅ Show animation completed');
 
         // Focus management for accessibility
@@ -377,15 +412,26 @@ function showPrices() {
 
 /**
  * Hide prices section with smooth animation
- * Collapses height to 0 and removes card animations
+ *
+ * Handles complete hide sequence:
+ * 1. Update ARIA attributes
+ * 2. Remove card animations
+ * 3. Calculate current height
+ * 4. Start height collapse animation
+ * 5. Reset all styles
+ *
+ * @returns {void}
+ *
+ * @example
+ * hidePrices(); // Collapse prices section
  *
  * @public
  */
 function hidePrices() {
     // Guard: Prevent animation if already animating or elements missing
-    if (isAnimating || !priceSection || !priceSectionButton) {
+    if (state.isAnimating || !priceSection || !priceSectionButton) {
         debugLog('Hide animation cancelled', {
-            isAnimating,
+            isAnimating: state.isAnimating,
             hasSection: !!priceSection,
             hasButton: !!priceSectionButton,
         });
@@ -393,22 +439,15 @@ function hidePrices() {
     }
 
     debugLog('🔴 Starting hide animation');
-    isAnimating = true;
+    state.isAnimating = true;
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 1️⃣ UPDATE ACCESSIBILITY ATTRIBUTES
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // Update ARIA attributes
     priceSectionButton.setAttribute('aria-expanded', 'false');
     priceSection.setAttribute('aria-hidden', 'true');
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 2️⃣ REMOVE CARD ANIMATIONS
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // Remove card animations
     animateCardsOut();
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 3️⃣ PREPARE FOR COLLAPSE ANIMATION
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // Get current height for smooth collapse
     const currentHeight = priceSection.scrollHeight;
     priceSection.style.height = currentHeight + 'px';
@@ -419,24 +458,19 @@ function hidePrices() {
     // Remove visibility class
     priceSection.classList.remove(CSS_CLASSES.SECTION_VISIBLE);
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 4️⃣ START COLLAPSE ANIMATION
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // Start collapse animation
     setTimeout(() => {
         priceSection.style.height = '0';
         priceSection.style.opacity = '0';
         debugLog('Collapse animation started');
     }, ANIMATION_CONFIG.AUTO_HEIGHT_DELAY);
 
-    // Update button text
-    // 🔤 TRANSLATED: "Показать цены" = "Show prices"
+    // Update button text (Russian: "Show prices")
     priceSectionButton.textContent = 'Показать цены';
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // 5️⃣ FINALIZE ANIMATION
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // Finalize animation
     setTimeout(() => {
-        isAnimating = false;
+        state.isAnimating = false;
         debugLog('✅ Hide animation completed');
     }, ANIMATION_CONFIG.MAIN_DURATION);
 }
@@ -445,34 +479,42 @@ function hidePrices() {
  * Toggle prices visibility
  * Main function called by button click
  *
+ * @returns {void}
+ *
+ * @example
+ * togglePrices(); // Opens if closed, closes if open
+ *
  * @public
  */
 function togglePrices() {
-    if (isAnimating) {
+    if (state.isAnimating) {
         debugLog('⏸️ Toggle cancelled - animation in progress');
         return;
     }
 
-    debugLog('🔄 Toggling prices section', { currentState: isVisible });
+    debugLog('🔄 Toggling prices section', { currentState: state.isVisible });
 
-    if (!isVisible) {
+    if (!state.isVisible) {
         showPrices();
     } else {
         hidePrices();
     }
 
     // Update state
-    isVisible = !isVisible;
+    state.isVisible = !state.isVisible;
 }
 
-// ================================================
-// 9️⃣ EVENT HANDLERS
-// ================================================
+/* ===================================
+   🎯 EVENT HANDLERS
+   =================================== */
 
 /**
  * Handle focus management for accessibility
- * Scrolls first card into view when section opens
  *
+ * Scrolls first card into view when section opens and
+ * button was the active element.
+ *
+ * @returns {void}
  * @private
  */
 function handleFocusManagement() {
@@ -490,6 +532,8 @@ function handleFocusManagement() {
 
 /**
  * Handle button click event
+ *
+ * @returns {void}
  * @private
  */
 function handleButtonClick() {
@@ -502,6 +546,7 @@ function handleButtonClick() {
  * Enter and Space keys trigger toggle
  *
  * @param {KeyboardEvent} e - Keyboard event
+ * @returns {void}
  * @private
  */
 function handleKeyDown(e) {
@@ -514,29 +559,34 @@ function handleKeyDown(e) {
 
 /**
  * Handle Escape key to close prices
+ *
  * @param {KeyboardEvent} e - Keyboard event
+ * @returns {void}
  * @private
  */
 function handleEscapeKey(e) {
-    if (e.key === 'Escape' && isVisible && priceSectionButton) {
+    if (e.key === 'Escape' && state.isVisible && priceSectionButton) {
         debugLog('⎋ Escape key pressed - closing prices');
         hidePrices();
-        isVisible = false;
+        state.isVisible = false;
         priceSectionButton.focus(); // Return focus to button
     }
 }
 
 /**
  * Handle window resize with debouncing
- * Recalculates section height when window size changes
  *
+ * Recalculates section height when window size changes to ensure
+ * proper display of expanded section.
+ *
+ * @returns {void}
  * @private
  */
 function handleResize() {
-    if (!isVisible || isAnimating || !priceSection) return;
+    if (!state.isVisible || state.isAnimating || !priceSection) return;
 
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
+    clearTimeout(state.resizeTimeout);
+    state.resizeTimeout = setTimeout(() => {
         debugLog('📐 Handling window resize');
 
         // Recalculate height if section is open
@@ -559,13 +609,15 @@ function handleResize() {
     }, ANIMATION_CONFIG.RESIZE_DEBOUNCE);
 }
 
-// ================================================
-// 🔟 INITIALIZATION
-// ================================================
+/* ===================================
+   🚀 INITIALIZATION
+   =================================== */
 
 /**
  * Initialize all event listeners
- * Removes existing listeners to prevent duplication
+ *
+ * Removes existing listeners to prevent duplication,
+ * then attaches all necessary event handlers.
  *
  * @returns {boolean} Success status
  * @private
@@ -596,13 +648,11 @@ function initializeEvents() {
  * Main initialization function
  * Called when DOM is ready
  *
+ * @returns {void}
  * @public
  */
 function initialize() {
     debugLog('🚀 Starting prices section initialization...');
-
-    // Check for potential conflicts with other components
-    checkForConflicts();
 
     // Initialize accessibility and events
     const accessibilityOk = initializeAccessibility();
@@ -611,27 +661,18 @@ function initialize() {
     if (accessibilityOk && eventsOk) {
         debugLog('✅ Prices section initialized successfully');
         debugLog('🎨 Using unique CSS classes:', CSS_CLASSES);
-
-        // Add global debug functions
-        if (typeof window !== 'undefined') {
-            window.testPrices = testVisibility;
-            debugLog('🔧 Debug functions available:');
-            debugLog('  - testPrices() - Diagnostic tool');
-            debugLog('  - pricesSection.debug() - Debug mode toggle');
-            debugLog('  - pricesSection.config - Animation settings');
-        }
     } else {
         debugLog('❌ Initialization failed - some components missing');
     }
 }
 
-// ================================================
-// 1️⃣1️⃣ GLOBAL API & EXPORTS
-// ================================================
+/* ===================================
+   🎬 AUTO-START
+   =================================== */
 
 /**
  * Check DOM readiness and initialize
- * Handles both loading and loaded states
+ * Handles both loading and already-loaded states
  */
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initialize);
@@ -651,6 +692,10 @@ setTimeout(() => {
     }
 }, 100);
 
+/* ===================================
+   🌐 GLOBAL API & EXPORTS
+   =================================== */
+
 /**
  * Global API object for external control and debugging
  * Available as window.pricesSection
@@ -659,120 +704,36 @@ setTimeout(() => {
  */
 if (typeof window !== 'undefined') {
     window.pricesSection = {
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // PUBLIC METHODS
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-        /**
-         * Show prices section
-         * @public
-         */
+        // Public methods
         show: showPrices,
-
-        /**
-         * Hide prices section
-         * @public
-         */
         hide: hidePrices,
-
-        /**
-         * Toggle prices visibility
-         * @public
-         */
         toggle: togglePrices,
 
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // STATE GETTERS
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // State getters
+        isVisible: () => state.isVisible,
+        isAnimating: () => state.isAnimating,
 
-        /**
-         * Check if prices are currently visible
-         * @returns {boolean}
-         * @public
-         */
-        isVisible: () => isVisible,
+        // Configuration access
+        config: ANIMATION_CONFIG,
+        classes: CSS_CLASSES,
 
-        /**
-         * Check if animation is in progress
-         * @returns {boolean}
-         * @public
-         */
-        isAnimating: () => isAnimating,
-
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // DEBUG METHODS
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-        /**
-         * Run visibility diagnostics
-         * @public
-         */
-        test: testVisibility,
-
-        /**
-         * Check for component conflicts
-         * @public
-         */
-        checkConflicts: checkForConflicts,
-
-        /**
-         * Toggle debug visualization mode
-         * Adds visual borders to elements
-         * @public
-         */
+        // Debug method
         debug: () => {
             if (priceSection) {
-                // Toggle debug class for visual debugging
                 priceSection.classList.toggle('debug-force-visible');
                 debugLog('🐛 Debug mode toggled');
             }
         },
 
-        /**
-         * Re-initialize the component
-         * Useful for development and hot-reloading
-         * @public
-         */
+        // Re-initialize method
         reinitialize: initialize,
 
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // CONFIGURATION ACCESS
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-        /**
-         * Animation configuration object
-         * @readonly
-         * @public
-         */
-        config: ANIMATION_CONFIG,
-
-        /**
-         * CSS class names used by component
-         * @readonly
-         * @public
-         */
-        classes: CSS_CLASSES,
-
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // METADATA
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-        /**
-         * Component version
-         * @readonly
-         * @public
-         */
+        // Metadata
         version: '3.0.0',
-
-        /**
-         * Compatibility information
-         * @readonly
-         * @public
-         */
         compatibility: {
             aboutMeConflict: false, // Resolved with unique class names
-            globalNamespace: 'pricesSection', // Unique namespace
-            cssClassPrefix: 'prices-', // All classes prefixed
+            globalNamespace: 'pricesSection',
+            cssClassPrefix: 'prices-',
         },
     };
 
@@ -781,30 +742,237 @@ if (typeof window !== 'undefined') {
 }
 
 /* ================================================
-   🔧 DEVELOPER CONSOLE UTILITIES
+   🔧 DEBUG UTILITIES - MOVE TO DEV FILE LATER
    ================================================
    
-   Copy these commands to browser console for testing:
+   📊 Console Testing Commands:
+   Copy these to browser console for debugging
    
-   // Test visibility
-   testPrices()
+   ──────────────────────────────────────────────
+   TEST VISIBILITY:
+   ──────────────────────────────────────────────
    
-   // Control manually
-   pricesSection.show()
-   pricesSection.hide()
-   pricesSection.toggle()
+   // Run diagnostic tool
+   function testPrices() {
+       const section = document.querySelector('.prices-grid');
+       const button = document.querySelector('.prices__button');
+       
+       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+       console.log('💰 PRICES SECTION STATUS');
+       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+       console.log('Section exists:', !!section);
+       console.log('Button exists:', !!button);
+       
+       if (section) {
+           const styles = getComputedStyle(section);
+           console.log('Section styles:', {
+               display: styles.display,
+               height: styles.height,
+               opacity: styles.opacity,
+               overflow: styles.overflow,
+           });
+           
+           const priceCards = section.querySelectorAll('.prices-card');
+           const explanationCards = section.querySelectorAll('.prices-explanation-card');
+           
+           console.log('Price cards found:', priceCards.length);
+           console.log('Explanation cards found:', explanationCards.length);
+           
+           console.log('Section CSS classes:', section.className);
+           console.log('Cards with animation class:',
+               section.querySelectorAll('.prices-card-animate-in').length
+           );
+       }
+       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+   }
    
-   // Check state
-   pricesSection.isVisible()
-   pricesSection.isAnimating()
+   ──────────────────────────────────────────────
+   MANUAL CONTROL:
+   ──────────────────────────────────────────────
    
-   // Debug mode
-   pricesSection.debug()
+   // Show prices manually
+   pricesSection.show();
    
-   // Check conflicts
-   pricesSection.checkConflicts()
+   // Hide prices manually
+   pricesSection.hide();
    
-   // View configuration
-   console.table(pricesSection.config)
-   console.table(pricesSection.classes)
+   // Toggle prices
+   pricesSection.toggle();
+   
+   ──────────────────────────────────────────────
+   CHECK STATE:
+   ──────────────────────────────────────────────
+   
+   // Check if visible
+   console.log('Is visible:', pricesSection.isVisible());
+   
+   // Check if animating
+   console.log('Is animating:', pricesSection.isAnimating());
+   
+   ──────────────────────────────────────────────
+   VIEW CONFIGURATION:
+   ──────────────────────────────────────────────
+   
+   // View animation config
+   console.table(pricesSection.config);
+   
+   // View CSS classes
+   console.table(pricesSection.classes);
+   
+   ──────────────────────────────────────────────
+   TEST BUTTON CLICK:
+   ──────────────────────────────────────────────
+   
+   // Simulate button click
+   function testButtonClick() {
+       const button = document.querySelector('.prices__button');
+       if (button) {
+           button.click();
+           console.log('✅ Button clicked');
+       } else {
+           console.error('❌ Button not found');
+       }
+   }
+   
+   ──────────────────────────────────────────────
+   TEST KEYBOARD EVENTS:
+   ──────────────────────────────────────────────
+   
+   // Test Enter key
+   function testEnterKey() {
+       const button = document.querySelector('.prices__button');
+       const event = new KeyboardEvent('keydown', { key: 'Enter' });
+       button.dispatchEvent(event);
+       console.log('⌨️ Enter key pressed');
+   }
+   
+   // Test Space key
+   function testSpaceKey() {
+       const button = document.querySelector('.prices__button');
+       const event = new KeyboardEvent('keydown', { key: ' ' });
+       button.dispatchEvent(event);
+       console.log('⌨️ Space key pressed');
+   }
+   
+   // Test Escape key
+   function testEscapeKey() {
+       const event = new KeyboardEvent('keydown', { key: 'Escape' });
+       document.dispatchEvent(event);
+       console.log('⌨️ Escape key pressed');
+   }
+   
+   ──────────────────────────────────────────────
+   TEST ANIMATIONS:
+   ──────────────────────────────────────────────
+   
+   // Test card animations
+   function testCardAnimations() {
+       const cards = document.querySelectorAll('.prices-card, .prices-explanation-card');
+       console.log('🎬 Testing card animations...');
+       console.log('Total cards:', cards.length);
+       
+       cards.forEach((card, i) => {
+           const hasAnimation = card.classList.contains('prices-card-animate-in');
+           console.log(`Card ${i + 1}:`, hasAnimation ? '✅ Animated' : '❌ Not animated');
+       });
+   }
+   
+   ──────────────────────────────────────────────
+   FULL DIAGNOSTIC:
+   ──────────────────────────────────────────────
+   
+   // Run complete diagnostic
+   function fullPricesDiagnostic() {
+       console.log('🔍 RUNNING FULL PRICES DIAGNOSTIC');
+       console.log('═══════════════════════════════════════\n');
+       
+       testPrices();
+       console.log('\n───────────────────────────────────────\n');
+       
+       console.log('📊 State:');
+       console.log('  Visible:', pricesSection.isVisible());
+       console.log('  Animating:', pricesSection.isAnimating());
+       console.log('\n───────────────────────────────────────\n');
+       
+       testCardAnimations();
+       
+       console.log('\n═══════════════════════════════════════');
+       console.log('✅ DIAGNOSTIC COMPLETE');
+   }
+   
+   ──────────────────────────────────────────────
+   USAGE:
+   ──────────────────────────────────────────────
+   
+   Copy and paste in browser console:
+   
+   fullPricesDiagnostic()         // Complete diagnostic
+   testPrices()                    // Check visibility
+   pricesSection.show()            // Show prices
+   pricesSection.hide()            // Hide prices
+   pricesSection.toggle()          // Toggle state
+   pricesSection.isVisible()       // Check visibility
+   pricesSection.isAnimating()     // Check animation
+   console.table(pricesSection.config)  // View config
+   testButtonClick()               // Test button
+   testEnterKey()                  // Test Enter
+   testSpaceKey()                  // Test Space
+   testEscapeKey()                 // Test Escape
+   testCardAnimations()            // Test animations
+   pricesSection.debug()           // Debug mode
+   
 */
+
+/* ================================================
+   📝 TECHNICAL DOCUMENTATION
+   ================================================
+   
+   ──────────────────────────────────────────────
+   HEIGHT ANIMATION STRATEGY:
+   ──────────────────────────────────────────────
+   
+   Challenge:
+   - CSS transition: height from 0 to 'auto' doesn't work
+   - Need specific pixel value for smooth animation
+   
+   Solution:
+   1. Calculate natural height (scrollHeight)
+   2. Set height: 0 initially
+   3. Force reflow (void element.offsetHeight)
+   4. Animate to calculated pixel value
+   5. After animation, set height: 'auto' for responsiveness
+   
+   Why height: 'auto' at end?
+   - Allows content to grow if window resizes
+   - Maintains responsiveness
+   - No fixed height constraints
+   
+   Why force reflow?
+   - Ensures browser processes height: 0 before transition
+   - Without it, browser may batch both changes
+   - No animation would occur
+   
+   ──────────────────────────────────────────────
+   STAGGERED ANIMATION TIMING:
+   ──────────────────────────────────────────────
+   
+   Timing breakdown:
+   1. Container starts expanding (0ms)
+   2. Cards wait for container (200ms delay)
+   3. Cards animate one by one (100ms interval)
+   4. Container finishes expanding (600ms total)
+   
+   Formula for card N:
+   startTime = CARDS_START_DELAY + (N × CARDS_INTERVAL)
+   
+   Example with 5 cards:
+   - Card 1: 200ms
+   - Card 2: 300ms
+   - Card 3: 400ms
+   - Card 4: 500ms
+   - Card 5: 600ms
+   
+   Why staggered?
+   - More visually interesting
+   - Draws eye through content*/
+
