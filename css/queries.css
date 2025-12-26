@@ -1,0 +1,187 @@
+/* RESPONSIVE STYLES */
+
+/* For Larger */
+@media (max-width: 1100px) {
+    .hero__heading-primary {
+        font-size: 3.2rem;
+        margin-top: 4.8rem 0 0 0;
+    }
+
+    .hero__text {
+        font-size: 2rem;
+    }
+
+    .hero__buttons {
+        padding: 3.2rem 6.4rem;
+    }
+    .main-nav__list__link:link,
+    .main-nav__list__link:visited {
+        font-size: 1.6rem;
+    }
+}
+
+/* For Laptops */
+@media (max-width: 992px) {
+    .hero__button {
+        padding: 1rem 2rem;
+        font-size: 1.6rem;
+    }
+    .hero__text {
+        width: 65%;
+    }
+    header {
+        height: 6.4rem;
+        padding: 0 2.4rem;
+    }
+
+    .main-nav__list__link:link,
+    .main-nav__list__link:visited {
+        font-size: 1.4rem;
+    }
+
+    .logo {
+        height: 6rem;
+    }
+
+    .main-nav__list {
+        gap: 1.2rem;
+    }
+}
+
+/* Adjust further for larger devices */
+@media (max-width: 768px) {
+    .hero__heading-primary {
+        font-size: 3.2rem;
+        margin: 6.4rem 0 1.6rem 3.2rem;
+    }
+
+    .hero__text {
+        width: 60%;
+        font-size: 1.8rem;
+        padding: 3.2rem;
+    }
+
+    .hero__buttons {
+        padding: 3.2rem;
+    }
+
+    header {
+        padding: 0 1.2rem;
+        gap: 1rem;
+        height: 4.8rem;
+    }
+
+    .logo {
+        height: 4rem;
+    }
+
+    .main-nav__list {
+        gap: 0.8rem;
+    }
+
+    .main-nav__list__link:link,
+    .main-nav__list__link:visited {
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .main-nav__list__link::after {
+        height: 1.2px; /* Adjust the thickness if necessary */
+    }
+}
+
+@media (max-width: 600px) {
+    .hero__heading-primary {
+        font-size: 2.4rem;
+    }
+
+    .hero__text {
+        width: 70%;
+        font-size: 1.6rem;
+        padding: 3.2rem;
+    }
+
+    .hero__buttons {
+        padding: 3.2rem;
+    }
+
+    .hero__button {
+        font-size: 1.4rem;
+    }
+
+    /* MOBILE NAV */
+
+    .btn-mobile-nav {
+        display: block;
+        z-index: 9999;
+    }
+
+    .main-nav {
+        background-color: rgba(238, 201, 204, 0.8);
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 40%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in, opacity 0.5s ease-in;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+    }
+
+    .nav-open .main-nav {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+    }
+
+    .icon-mobile-nav[name='close'] {
+        display: block;
+    }
+
+    .icon-mobile-nav[name='color-wand'] {
+        display: none;
+    }
+
+    .main-nav__list {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2rem;
+        width: 100%;
+        margin: 10rem 0 0 0;
+    }
+
+    .main-nav__list__link {
+        font-size: 3rem;
+        padding: 1rem 2rem;
+        width: 100%;
+        position: relative;
+    }
+}
+
+@media (max-width: 450px) {
+    .hero__heading-primary {
+        margin-bottom: 0;
+        font-size: 2rem;
+    }
+    .hero__text {
+        width: 80%;
+        font-size: 1.4rem;
+    }
+
+    .hero__buttons {
+        padding: 1.6rem 0 3.2rem 2.4rem;
+    }
+    .hero__button {
+        font-size: 1.2rem;
+        padding: 1.2rem 1.6rem;
+    }
+}
