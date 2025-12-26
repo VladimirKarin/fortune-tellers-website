@@ -7,34 +7,53 @@
 // teller is traveling to other cities. Features automatic date updates,
 // responsive layout adaptation, and visual highlighting of special days.
 //
-// 🎯 KEY FEATURES:
-// - Auto-updates every 6 hours to stay current
-// - Highlights current day, weekends, and travel dates
-// - Displays 6-week view for consistent layout
-// - Russian language support for months/weekdays
-// - Keyboard and screen reader accessible
-//
-// 📦 EXPORTS:
-// - getCurrentDate() - Returns comprehensive current date information
-// - renderCalendar() - Renders calendar for currently viewed month
-// - startAutoUpdate() - Begins periodic auto-update system
-// - stopAutoUpdate() - Halts auto-update system
-// - forceUpdateCalendar() - Manually triggers calendar refresh
+// 🎬 USER INTERACTION FLOW:
+// 1. Calendar loads showing current month automatically
+// 2. User can navigate months using prev/next buttons
+// 3. Current day highlighted in calendar
+// 4. Travel dates visually marked with city names
+// 5. Calendar auto-updates every 6 hours to stay current
+// 6. Returns to current month when page becomes visible again
 //
 // 🔗 DEPENDENCIES:
-// - index.html - DOM elements (.calendar-weekdays, .calendar-days, etc.)
-// - 09-calendar-section-styles.css - Visual styling
-// - script.js - Initialization via renderCalendar() and startAutoUpdate()
+// - HTML: .calendar-weekdays container for day names
+// - HTML: .calendar-days container for date cells
+// - HTML: .calendar-button--previous and .calendar-button--next buttons
+// - HTML: .month-name and .month-year display elements
+// - CSS: 09-calendar-section-styles.css for styling
+//
+// 📦 FEATURES:
+// - Auto-updates every 6 hours to stay current
+// - Highlights current day, weekends, and travel dates
+// - Displays consistent 6-week view (42 days total)
+// - Russian language support for months/weekdays
+// - Keyboard and screen reader accessible (ARIA attributes)
+// - Previous/next month navigation
+// - Automatic return to current month on page visibility change
+// - Memory leak prevention with cleanup functions
+//
+// 🎨 VISUAL INDICATORS:
+// - .calendar-day--today: Current date
+// - .calendar-day--weekend: Saturday or Sunday
+// - .calendar-day--travel: Falls within travel date range
+// - .calendar-day--other-month: Belongs to previous/next month
+//
+// ⚠️ IMPORTANT NOTES:
+// - Initialized from script.js (call renderCalendar() and startAutoUpdate())
+// - Travel dates configured in tripDates object
+// - Auto-update interval: 6 hours (configurable)
+// - Always shows 6 weeks (42 days) for consistent height
 
-// ================================================
-// 🌐 CONFIGURATION & STATE
-// ================================================
+/* ===================================
+   🌐 CONFIGURATION & STATE
+   =================================== */
 
 /**
  * Auto-update interval in milliseconds
  * Calendar automatically refreshes to stay current with the date
+ *
  * @constant {number}
- * @default 21600000 (6 hours in milliseconds)
+ * @default 21600000 (6 hours)
  *
  * 🔧 Adjustment guide:
  * - 1 hour = 60 * 60 * 1000 = 3,600,000ms
@@ -46,6 +65,7 @@ const UPDATE_INTERVAL = 6 * 60 * 60 * 1000;
 /**
  * Travel schedule configuration
  * Defines when and where the fortune teller will be traveling
+ *
  * @constant {Object}
  * @property {string} cityRussian - Destination city name in Russian
  * @property {string} start - Start date in ISO format (YYYY-MM-DD)
@@ -63,34 +83,38 @@ const tripDates = {
 /**
  * Current date information object
  * Stores comprehensive details about today's date
- * @type {Object}
+ *
+ * @type {Object|null}
  */
 let todayDateInfo = null;
 
 /**
  * Currently viewed year in calendar
  * User can navigate to different years using next/prev buttons
- * @type {number}
+ *
+ * @type {number|null}
  */
 let viewedYear = null;
 
 /**
  * Currently viewed month in calendar (1-12)
  * User can navigate to different months using next/prev buttons
- * @type {number}
+ *
+ * @type {number|null}
  */
 let viewedMonth = null;
 
 /**
  * Auto-update interval reference
  * Used to clear interval when stopping auto-updates
+ *
  * @type {number|null}
  */
 let autoUpdateInterval = null;
 
-// ================================================
-// 📅 DATE UTILITY FUNCTIONS
-// ================================================
+/* ===================================
+   📅 DATE UTILITY FUNCTIONS
+   =================================== */
 
 /**
  * Get comprehensive information about the current date
@@ -273,9 +297,9 @@ function shouldUpdateCalendar() {
     );
 }
 
-// ================================================
-// 🔄 AUTO-UPDATE SYSTEM
-// ================================================
+/* ===================================
+   🔄 AUTO-UPDATE SYSTEM
+   =================================== */
 
 /**
  * Update calendar to current month if date has changed
@@ -287,6 +311,7 @@ function shouldUpdateCalendar() {
  * This is called periodically by the auto-update system and also
  * when the page becomes visible again after being hidden.
  *
+ * @returns {void}
  * @private
  */
 function updateToCurrentMonth() {
@@ -295,9 +320,6 @@ function updateToCurrentMonth() {
         viewedYear = todayDateInfo.year;
         viewedMonth = todayDateInfo.month;
         renderCalendar();
-
-        // 🔧 DEBUG: Uncomment to log auto-updates
-        // console.log('📅 Calendar auto-updated to current month:', todayDateInfo.month, todayDateInfo.year);
     }
 }
 
@@ -325,9 +347,6 @@ export function startAutoUpdate() {
 
     // Start new interval
     autoUpdateInterval = setInterval(updateToCurrentMonth, UPDATE_INTERVAL);
-
-    // 🔧 DEBUG: Uncomment to log auto-update start
-    // console.log('✅ Calendar auto-update started (interval: 6 hours)');
 }
 
 /**
@@ -348,9 +367,6 @@ export function stopAutoUpdate() {
     if (autoUpdateInterval) {
         clearInterval(autoUpdateInterval);
         autoUpdateInterval = null;
-
-        // 🔧 DEBUG: Uncomment to log auto-update stop
-        // console.log('🛑 Calendar auto-update stopped');
     }
 }
 
@@ -369,18 +385,16 @@ export function stopAutoUpdate() {
  */
 export function forceUpdateCalendar() {
     updateToCurrentMonth();
-
-    // 🔧 DEBUG: Uncomment to log forced updates
-    // console.log('🔄 Calendar force-updated');
 }
 
-// ================================================
-// 🌍 LOCALIZATION DATA
-// ================================================
+/* ===================================
+   🌍 LOCALIZATION DATA
+   =================================== */
 
 /**
  * Month names in Russian
  * Used for calendar header display
+ *
  * @constant {Object}
  * @private
  */
@@ -405,6 +419,7 @@ const months = {
  * Weekday names in Russian
  * Used for weekday header row
  * Starts with Monday (European convention)
+ *
  * @constant {Object}
  * @private
  */
@@ -420,9 +435,9 @@ const weekdays = {
     ],
 };
 
-// ================================================
-// 🎨 CALENDAR RENDERING
-// ================================================
+/* ===================================
+   🎨 CALENDAR RENDERING
+   =================================== */
 
 /**
  * Render the complete calendar for the currently viewed month
@@ -455,6 +470,7 @@ const weekdays = {
  * // Render calendar for current viewed month
  * renderCalendar();
  *
+ * @example
  * // After changing viewedMonth/viewedYear
  * viewedMonth = 12;
  * viewedYear = 2025;
@@ -471,10 +487,7 @@ export function renderCalendar() {
     weekContainer.innerHTML = '';
     dayContainer.innerHTML = '';
 
-    // ─────────────────────────────────────────────
-    // RENDER WEEKDAY HEADERS
-    // ─────────────────────────────────────────────
-
+    // Render weekday headers
     weekdays.russian.forEach((weekday) => {
         const element = document.createElement('div');
         element.className = 'calendar-weekday';
@@ -482,15 +495,10 @@ export function renderCalendar() {
         weekContainer.appendChild(element);
     });
 
-    // ─────────────────────────────────────────────
-    // CALCULATE 6-WEEK CALENDAR GRID
-    // ─────────────────────────────────────────────
-
-    /**
-     * Calculate the starting offset for the first day of the month
-     * JavaScript's getDay() returns 0 for Sunday, but we want Monday-first
-     * layout, so we adjust: Sunday (0) becomes 6, Monday (1) becomes 0, etc.
-     */
+    // Calculate 6-week calendar grid
+    // Calculate the starting offset for the first day of the month
+    // JavaScript's getDay() returns 0 for Sunday, but we want Monday-first
+    // layout, so we adjust: Sunday (0) becomes 6, Monday (1) becomes 0, etc.
     const firstDayOfMonth = new Date(viewedYear, viewedMonth - 1, 1);
     const firstDayWeekday = firstDayOfMonth.getDay();
     const startIndex = firstDayWeekday === 0 ? 6 : firstDayWeekday - 1;
@@ -511,26 +519,15 @@ export function renderCalendar() {
         days.push(new Date(viewedYear, viewedMonth - 1, i));
     }
 
-    /**
-     * Add next month's leading days to complete 6 weeks
-     * Why 42? Standard calendar shows 6 rows of 7 days
-     * This ensures consistent calendar height regardless of month
-     */
+    // Add next month's leading days to complete 6 weeks
+    // Why 42? Standard calendar shows 6 rows of 7 days
+    // This ensures consistent calendar height regardless of month
     const fillCount = 42 - days.length;
     for (let i = 1; i <= fillCount; i++) {
         days.push(new Date(viewedYear, viewedMonth, i));
     }
 
-    // ─────────────────────────────────────────────
-    // RENDER DAY CELLS
-    // ─────────────────────────────────────────────
-
-    /**
-     * Performance note: Rendering 42 DOM elements is efficient here
-     * because we only re-render on month change, not on every interaction.
-     * For more frequent updates, consider virtual scrolling or incremental
-     * rendering approaches.
-     */
+    // Render day cells
     days.forEach((date) => {
         const formatted = formatDateISO(date);
         const isTodayFlag = isToday(date);
@@ -540,7 +537,7 @@ export function renderCalendar() {
         const cell = document.createElement('div');
         cell.className = 'calendar-day';
 
-        // ♿ Accessibility attributes
+        // Accessibility attributes
         cell.setAttribute('role', 'gridcell');
         cell.setAttribute('tabindex', '0'); // Keyboard navigable
         cell.setAttribute(
@@ -580,21 +577,15 @@ export function renderCalendar() {
         dayContainer.appendChild(cell);
     });
 
-    // ─────────────────────────────────────────────
-    // UPDATE HEADER TEXT
-    // ─────────────────────────────────────────────
-
+    // Update header text
     document.querySelector('.month-name').textContent =
         months.russian[viewedMonth - 1];
     document.querySelector('.month-year').textContent = viewedYear;
-
-    // 🔧 DEBUG: Uncomment to log render events
-    // console.log('🎨 Calendar rendered:', months.russian[viewedMonth - 1], viewedYear);
 }
 
-// ================================================
-// 🎮 USER INTERACTION HANDLERS
-// ================================================
+/* ===================================
+   🎮 USER INTERACTION HANDLERS
+   =================================== */
 
 /**
  * Navigate to a different month
@@ -603,6 +594,7 @@ export function renderCalendar() {
  * Handles year transitions automatically.
  *
  * @param {number} direction - 1 for next month, -1 for previous month
+ * @returns {void}
  * @private
  */
 function changeMonth(direction) {
@@ -618,34 +610,24 @@ function changeMonth(direction) {
     }
 
     renderCalendar();
-
-    // 🔧 DEBUG: Uncomment to log navigation
-    // console.log('🔄 Navigated to:', months.russian[viewedMonth - 1], viewedYear);
 }
 
-// ─────────────────────────────────────────────
-// NAVIGATION BUTTON EVENT LISTENERS
-// ─────────────────────────────────────────────
-
 /**
- * Previous month button
+ * Previous month button event listener
  * Navigates backward one month when clicked
  */
 const prevButton = document.querySelector('.calendar-button--previous');
 prevButton.addEventListener('click', () => changeMonth(-1));
 
 /**
- * Next month button
+ * Next month button event listener
  * Navigates forward one month when clicked
  */
 const nextButton = document.querySelector('.calendar-button--next');
 nextButton.addEventListener('click', () => changeMonth(1));
 
-// ─────────────────────────────────────────────
-// PAGE VISIBILITY CHANGE HANDLER
-// ─────────────────────────────────────────────
-
 /**
+ * Page visibility change handler
  * Update calendar when page becomes visible again
  *
  * If user switches away from the page and comes back later,
@@ -657,15 +639,12 @@ nextButton.addEventListener('click', () => changeMonth(1));
 document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
         setTimeout(updateToCurrentMonth, 1000);
-
-        // 🔧 DEBUG: Uncomment to log visibility updates
-        // console.log('👁️ Page visible again, checking for date changes...');
     }
 });
 
-// ================================================
-// 🚀 INITIALIZATION
-// ================================================
+/* ===================================
+   🚀 INITIALIZATION
+   =================================== */
 
 /**
  * Initialize calendar state and render
@@ -683,74 +662,198 @@ startAutoUpdate();
 
 console.log('✅ Calendar module initialized');
 
-// ================================================
-// 🔧 DEBUG UTILITIES (COMMENTED OUT)
-// ================================================
-
-/**
- * Optional debug API exposed to window for console testing
- * Uncomment the block below to enable debugging tools
- */
-
-/*
-window.calendarDebug = {
-    // Force update to current month
-    forceUpdate: forceUpdateCalendar,
-    
-    // Stop/start auto-update system
-    stopAutoUpdate,
-    startAutoUpdate,
-    
-    // Get current state
-    getState: () => ({
-        todayDateInfo,
-        viewedYear,
-        viewedMonth,
-        viewedMonthName: months.russian[viewedMonth - 1],
-        isAutoUpdating: autoUpdateInterval !== null,
-        tripDates
-    }),
-    
-    // Navigate to specific month
-    goToMonth: (year, month) => {
-        viewedYear = year;
-        viewedMonth = month;
-        renderCalendar();
-    },
-    
-    // Test date checking functions
-    testDate: (dateString) => {
-        const date = new Date(dateString);
-        return {
-            isToday: isToday(date),
-            isTrip: isTrip(date),
-            isWeekend: isWeekend(date.getDay()),
-            formatted: formatDateISO(date)
-        };
-    }
-};
-
-console.log('🔧 Calendar debug API available: window.calendarDebug');
-
-// USAGE EXAMPLES:
-// ──────────────────────────────────────────────
-
-// Check current state
-// window.calendarDebug.getState()
-
-// Navigate to specific month
-// window.calendarDebug.goToMonth(2026, 1) // January 2026
-
-// Force immediate update
-// window.calendarDebug.forceUpdate()
-
-// Test if a date is special
-// window.calendarDebug.testDate('2025-12-20')
-// Returns: { isToday: false, isTrip: true, isWeekend: false, formatted: "2025-12-20" }
-
-// Stop auto-updates (for testing)
-// window.calendarDebug.stopAutoUpdate()
-
-// Resume auto-updates
-// window.calendarDebug.startAutoUpdate()
+/* ================================================
+   🔧 DEBUG UTILITIES - MOVE TO DEV FILE LATER
+   ================================================
+   
+   📊 Console Testing Commands:
+   Copy these to browser console for debugging
+   
+   ──────────────────────────────────────────────
+   CHECK CURRENT STATE:
+   ──────────────────────────────────────────────
+   
+   // Get current calendar state
+   function debugCalendar() {
+       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+       console.log('📅 CALENDAR STATE');
+       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+       console.log('Today:', todayDateInfo);
+       console.log('Viewed Month:', viewedMonth);
+       console.log('Viewed Year:', viewedYear);
+       console.log('Auto-update active:', autoUpdateInterval !== null);
+       console.log('Trip dates:', tripDates);
+       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+   }
+   
+   ──────────────────────────────────────────────
+   NAVIGATE MONTHS:
+   ──────────────────────────────────────────────
+   
+   // Go to specific month
+   function goToMonth(year, month) {
+       viewedYear = year;
+       viewedMonth = month;
+       renderCalendar();
+       console.log(`✅ Navigated to ${month}/${year}`);
+   }
+   
+   // Usage:
+   goToMonth(2026, 1);   // January 2026
+   goToMonth(2025, 12);  // December 2025
+   
+   ──────────────────────────────────────────────
+   TEST DATE FUNCTIONS:
+   ──────────────────────────────────────────────
+   
+   // Test if a date is special
+   function testDate(dateString) {
+       const date = new Date(dateString);
+       console.log(`🧪 Testing date: ${dateString}`);
+       console.log({
+           isToday: isToday(date),
+           isTrip: isTrip(date),
+           isWeekend: isWeekend(date.getDay()),
+           formatted: formatDateISO(date)
+       });
+   }
+   
+   // Usage:
+   testDate('2025-12-20');  // Test a specific date
+   testDate('2025-12-25');  // Test another date
+   
+   ──────────────────────────────────────────────
+   FORCE UPDATE:
+   ──────────────────────────────────────────────
+   
+   // Force calendar to update to current month
+   function forceUpdate() {
+       forceUpdateCalendar();
+       console.log('✅ Calendar force-updated to current month');
+   }
+   
+   ──────────────────────────────────────────────
+   CONTROL AUTO-UPDATE:
+   ──────────────────────────────────────────────
+   
+   // Stop auto-updates
+   function stopUpdates() {
+       stopAutoUpdate();
+       console.log('🛑 Auto-update stopped');
+   }
+   
+   // Start auto-updates
+   function startUpdates() {
+       startAutoUpdate();
+       console.log('▶️ Auto-update started');
+   }
+   
+   ──────────────────────────────────────────────
+   CHECK CALENDAR CELLS:
+   ──────────────────────────────────────────────
+   
+   // List all rendered days and their states
+   function debugCells() {
+       const cells = document.querySelectorAll('.calendar-day');
+       console.log(`📊 Calendar has ${cells.length} cells (should be 42)\n`);
+       
+       let todayCount = 0;
+       let weekendCount = 0;
+       let travelCount = 0;
+       
+       cells.forEach(cell => {
+           if (cell.classList.contains('calendar-day--today')) todayCount++;
+           if (cell.classList.contains('calendar-day--weekend')) weekendCount++;
+           if (cell.classList.contains('calendar-day--travel')) travelCount++;
+       });
+       
+       console.log('Today cells:', todayCount);
+       console.log('Weekend cells:', weekendCount);
+       console.log('Travel cells:', travelCount);
+   }
+   
+   ──────────────────────────────────────────────
+   TEST NAVIGATION BUTTONS:
+   ──────────────────────────────────────────────
+   
+   // Test previous button
+   function testPrevious() {
+       const button = document.querySelector('.calendar-button--previous');
+       button.click();
+       console.log('⬅️ Previous month');
+   }
+   
+   // Test next button
+   function testNext() {
+       const button = document.querySelector('.calendar-button--next');
+       button.click();
+       console.log('➡️ Next month');
+   }
+   
+   ──────────────────────────────────────────────
+   MODIFY TRIP DATES:
+   ──────────────────────────────────────────────
+   
+   // Change travel dates
+   function setTripDates(city, start, end) {
+       tripDates.cityRussian = city;
+       tripDates.start = start;
+       tripDates.end = end;
+       renderCalendar();
+       console.log('✅ Trip dates updated:', tripDates);
+   }
+   
+   // Usage:
+   setTripDates('Москва', '2025-12-20', '2025-12-25');
+   
+   ──────────────────────────────────────────────
+   FULL DIAGNOSTIC:
+   ──────────────────────────────────────────────
+   
+   // Run complete diagnostic
+   function fullCalendarDiagnostic() {
+       console.log('🔍 RUNNING FULL CALENDAR DIAGNOSTIC');
+       console.log('═══════════════════════════════════════\n');
+       
+       debugCalendar();
+       console.log('\n───────────────────────────────────────\n');
+       
+       debugCells();
+       console.log('\n───────────────────────────────────────\n');
+       
+       console.log('📍 Current date info:');
+       console.log(getCurrentDate());
+       
+       console.log('\n═══════════════════════════════════════');
+       console.log('✅ DIAGNOSTIC COMPLETE');
+   }
+   
+   ──────────────────────────────────────────────
+   USAGE:
+   ──────────────────────────────────────────────
+   
+   Copy and paste in browser console:
+   
+   fullCalendarDiagnostic()         // Complete diagnostic
+   debugCalendar()                   // Check state
+   goToMonth(2026, 1)                // Navigate to month
+   testDate('2025-12-20')            // Test date
+   forceUpdate()                     // Force update
+   stopUpdates()                     // Stop auto-update
+   startUpdates()                    // Start auto-update
+   debugCells()                      // Check cells
+   testPrevious()                    // Test prev button
+   testNext()                        // Test next button
+   setTripDates('Москва', '2025-12-20', '2025-12-25')  // Change trip
+   
 */
+
+/* ================================================
+   📝 TECHNICAL DOCUMENTATION
+   ================================================
+   
+   ──────────────────────────────────────────────
+   6-WEEK CALENDAR ALGORITHM:
+   ──────────────────────────────────────────────
+   
+   Why always show*/
