@@ -131,7 +131,7 @@ dist
 .pnp.*
 
 # Backup folders with files
-js/backup/
-js/debug/
-js/documentation/
-css/backup/
+# js/backup/
+# js/debug/
+# js/documentation/
+# css/backup/
