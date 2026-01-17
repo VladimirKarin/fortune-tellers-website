@@ -60,6 +60,7 @@
     object-fit: contain;
     /* Make logo White for contrast on dark bg */
     filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(212, 175, 55, 0.5));
+    animation: logoPulse 3s ease-in-out infinite; /* Pulsating Glow */
     transition: all var(--transition-smooth);
 }
 

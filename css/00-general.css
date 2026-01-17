@@ -680,3 +680,16 @@ console.log('Current breakpoint:', breakpoint, `(${width}px)`);
     animation: mysticPulse 3s infinite;
 }
 
+/* 4. Logo Glow Pulse (White + Gold) */
+@keyframes logoPulse {
+    0% {
+        filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(212, 175, 55, 0.4));
+    }
+    50% {
+        filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
+    }
+    100% {
+        filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(212, 175, 55, 0.4));
+    }
+}
+

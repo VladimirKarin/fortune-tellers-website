@@ -79,6 +79,7 @@
     width: 12rem;
     /* White Logo with Gold Glow */
     filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+    animation: logoPulse 3s ease-in-out infinite; /* Pulsating Glow */
     transition: transform var(--transition-bounce), filter var(--transition-smooth);
 }
 
