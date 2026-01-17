@@ -9,9 +9,6 @@
 /* ===================================
    HERO CONTAINER
    =================================== */
-/* ===================================
-   HERO CONTAINER
-   =================================== */
 .hero-section {
     position: relative;
     min-height: var(--hero-min-height);
@@ -22,18 +19,20 @@
     overflow: hidden;
 
     /* PREMIUM BACKGROUND IMAGE */
-    background-image: url('../img/03-hero-section/hero-bg-premium.png');
+    /* Ensure the path is correct relative to this CSS file */
+    background-image: url('../img/03-hero-section/hero-bg-mystic-table.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Parallax effect */
 }
 
-/* Vignette Overlay for Depth */
+/* Vignette Overlay for Depth - reduced opacity to ensure visibility */
 .hero-section::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 30%, var(--color-background) 100%);
+    /* Use rgba for direct control over opacity, making the center clearer */
+    background: radial-gradient(circle at center, rgba(10, 5, 20, 0.2) 30%, var(--color-background) 100%);
     pointer-events: none;
     z-index: 1;
 }
