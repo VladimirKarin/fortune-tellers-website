@@ -58,6 +58,9 @@
     height: 4.8rem;
     width: auto;
     object-fit: contain;
+    /* Make logo White for contrast on dark bg */
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(212, 175, 55, 0.5));
+    transition: all var(--transition-smooth);
 }
 
 /* ===================================

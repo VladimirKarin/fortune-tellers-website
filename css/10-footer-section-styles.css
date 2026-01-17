@@ -77,12 +77,15 @@
 
 .footer__logo {
     width: 12rem;
-    filter: drop-shadow(0 0 10px rgba(139, 69, 19, 0.3));
-    transition: transform var(--transition-bounce);
+    /* White Logo with Gold Glow */
+    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+    transition: transform var(--transition-bounce), filter var(--transition-smooth);
 }
 
 .footer__logo:hover {
     transform: scale(1.05) rotate(2deg);
+    /* Intesify Glow on Hover */
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px var(--color-accent));
 }
 
 /* ===================================
