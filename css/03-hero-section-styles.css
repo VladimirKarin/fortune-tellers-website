@@ -20,7 +20,7 @@
 
     /* PREMIUM BACKGROUND IMAGE */
     /* Ensure the path is correct relative to this CSS file */
-    background-image: url('../img/03-hero-section/hero-bg-mystic-table.png');
+    background-image: url('../img/02-hero-section/hero-bg-mystic-table.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Parallax effect */
