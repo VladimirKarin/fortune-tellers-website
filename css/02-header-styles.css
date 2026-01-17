@@ -142,29 +142,54 @@
 @media (max-width: 991px) {
     .btn-mobile-nav {
         display: block;
+        z-index: 1001; /* Ensure button is above menu */
+    }
+
+    /* Icon Toggling Logic */
+    .icon-mobile-nav {
+        width: 3.2rem;
+        height: 3.2rem;
+    }
+
+    .btn-mobile-nav .close-icon {
+        display: none; /* Hide close icon by default */
+    }
+
+    /* When header has .nav-open (menu active) */
+    .header.nav-open .btn-mobile-nav .open-icon {
+        display: none; /* Hide open icon */
+    }
+
+    .header.nav-open .btn-mobile-nav .close-icon {
+        display: block; /* Show close icon */
     }
 
     .main-nav {
         position: fixed;
         top: 0;
         right: 0;
-        width: 70%;
+        width: 100%; /* Full width for better mobile experience, or keep 70% if preferred */
+        max-width: 450px; /* Limit width on larger tablets */
         height: 100vh;
-        background: hsl(var(--hsl-primary)); /* Solid backing for visibility */
+        
+        /* Updated Background to match Premium Dark Theme */
+        background: var(--color-background); 
+        
         border-left: 1px solid var(--glass-border);
         padding: var(--spacing-xxl) var(--spacing-lg);
         flex-direction: column;
         justify-content: center;
         transform: translateX(100%);
         transition: transform var(--transition-smooth);
-        /* Mobile Glass Effect */
+        
+        /* Mobile Glass Effect Overlay */
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
     }
 
     .header.nav-open .main-nav {
         transform: translateX(0);
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
     }
 
     .nav-list {
