@@ -29,230 +29,120 @@
    =================================== */
 
 :root {
-    /* Primary Brand Colors */
-    --color-primary: #4a3f70; /* Main brand purple - use for headings and key elements */
-    --color-secondary: #6b5b95; /* Secondary purple - for accents and highlights */
-    --color-highlight: #8e44ad; /* Bright purple - for focus states and CTAs */
+    /* ===================================
+       1️⃣ PALETTE: DEEP MYSTIC LUXURY (HSL)
+       Based on original Purple/Pink identity, but elevated to Premium Dark Mode.
+       =================================== */
+    
+    /* Primary Brand: Deep Regal Purple */
+    --hsl-primary: 270, 50%, 15%;      /* Dark Foundation */
+    --color-primary: hsl(var(--hsl-primary));
+    
+    /* Secondary: Vibrant Mystic Purple */
+    --hsl-secondary: 265, 60%, 55%;    /* Glowing Accents */
+    --color-secondary: hsl(var(--hsl-secondary));
+    
+    /* Accent: Antique Gold (Premium Feel) */
+    --hsl-accent: 35, 80%, 65%;
+    --color-accent: hsl(var(--hsl-accent));
+    
+    /* Highlight: Ethereal Pink/Lavender */
+    --hsl-highlight: 310, 50%, 75%;
+    --color-highlight: hsl(var(--hsl-highlight));
 
-    /* Background Colors */
-    --color-background: #f4f3f2; /* Main page background - warm off-white */
-    --color-header-bg: rgba(
-        249,
-        248,
-        252,
-        0.7
-    ); /* Semi-transparent header background */
-    --color-section-bg: #f2b4b4; /* Section background - soft pink */
-    --color-card-bg: #f4f3f2; /* Card background - matches main background */
-    --color-footer-bg: #9b59b6; /* Footer background - vibrant purple */
+    /* Backgrounds */
+    --color-background: hsl(270, 30%, 8%);     /* Deepest Purple/Black - Main BG */
+    --color-background-alt: hsl(270, 25%, 12%); /* Slightly lighter for sections */
+    
+    /* Surfaces (Glassmorphism) */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 
     /* Text Colors */
-    --color-text: #4a3f70; /* Primary text color - dark purple for readability */
-    --color-light-text: #ece5f5; /* Light text for dark backgrounds */
+    --color-text: hsl(280, 10%, 95%);           /* Main text - Soft White */
+    --color-text-muted: hsl(280, 5%, 70%);      /* Secondary text */
+    --color-text-dark: hsl(270, 30%, 10%);      /* Text for light buttons etc */
 
-    /* Status Colors */
-    --color-error: #ff6b6b; /* Error text color - bright red */
-    --color-error-bg: #ffe0e0; /* Error background - light red */
+    /* Gradients */
+    --gradient-mystic: linear-gradient(135deg, hsl(270, 50%, 15%) 0%, hsl(290, 40%, 10%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(35, 80%, 65%) 0%, hsl(45, 90%, 75%) 100%);
+    --gradient-glow: radial-gradient(circle at 50% 50%, rgba(142, 68, 173, 0.2), transparent 70%);
+
+    /* Status */
+    --color-error: hsl(0, 70%, 65%);
+    --color-success: hsl(150, 60%, 45%);
+
+    /* ===================================
+       2️⃣ SPACING & LAYOUT
+       =================================== */
+    --spacing-xs: 0.8rem;
+    --spacing-sm: 1.6rem;
+    --spacing-md: 2.4rem;
+    --spacing-lg: 3.2rem;
+    --spacing-xl: 4.8rem;
+    --spacing-xxl: 6.4rem;
+    --spacing-huge: 9.6rem;
+
+    /* ===================================
+       3️⃣ SHADOWS & GLOWS
+       =================================== */
+    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 20px rgba(142, 68, 173, 0.4);
+    --shadow-neon: 0 0 10px var(--color-accent), 0 0 20px var(--color-secondary);
+
+    /* ===================================
+       4️⃣ TYPOGRAPHY
+       =================================== */
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+    
+    --font-size-xs: 1.2rem;
+    --font-size-sm: 1.4rem;
+    --font-size-base: 1.6rem;
+    --font-size-lg: 1.8rem;
+    --font-size-xl: 2.4rem;
+    --font-size-xxl: 3.6rem;
+    --font-size-display: 5.6rem; /* New for Hero */
+
+    /* ===================================
+       5️⃣ ANIMATIONS
+       =================================== */
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* ===================================
-   2️⃣ CSS VARIABLES - GRADIENT SYSTEM
+   6️⃣ GLOBAL RESET & BASE
    =================================== */
-
-:root {
-    /* 
-       Main background gradient - 12-stop purple gradient for smooth transitions
-       Used for full-page backgrounds and major visual areas
-    */
-    --main-background-gradient: linear-gradient(
-        to bottom,
-        #4a206f,
-        /* Darkest purple */ #542778,
-        #5d2f80,
-        #673689,
-        #713e92,
-        #713e92,
-        /* Mid-tone anchor points */ #713e92,
-        #713e92,
-        #673689,
-        #5d2f80,
-        #542778,
-        #4a206f /* Back to darkest */
-    );
-
-    /* Subtle gradient for cards and sections */
-    --color-gradient-start: #f2e7f2; /* Light purple start */
-    --color-gradient-end: #b68cb8; /* Medium purple end */
-
-    /* Button gradient - vibrant purple to pink */
-    --btn-gradient: linear-gradient(
-        90deg,
-        hsla(279, 83%, 70%, 1) 0%,
-        /* Purple start */ hsla(321, 90%, 70%, 1) 100% /* Pink end */
-    );
-}
-
-/* ===================================
-   3️⃣ CSS VARIABLES - SPACING SYSTEM
-   =================================== */
-
-:root {
-    /* 
-       Consistent spacing scale - based on 8px grid
-       Use these variables throughout the site for consistent spacing
-    */
-    --spacing-xs: 0.8rem; /* 8px - minimal spacing */
-    --spacing-sm: 1.6rem; /* 16px - small spacing */
-    --spacing-md: 2.4rem; /* 24px - medium spacing */
-    --spacing-lg: 3.2rem; /* 32px - large spacing */
-    --spacing-xl: 4.8rem; /* 48px - extra large spacing */
-    --spacing-xxl: 6.4rem; /* 64px - section spacing */
-    --spacing-xxxl: 7.4rem; /* 74px - section spacing */
-    --spacing-huge: 9.6rem; /* 96px - major section gaps */
-}
-
-/* ===================================
-   4️⃣ CSS VARIABLES - MOON SECTION VARIABLES
-   =================================== */
-
-:root {
-    /* 
-       Responsive spacing for moon section - scales with viewport
-       These are specific to the moon phase display component
-    */
-    --moon-section-gap: clamp(2.4rem, 5vw, 6.4rem); /* Gap between moon cards */
-    --moon-card-padding: clamp(0.8rem, 3vw, 1.6rem); /* Internal card padding */
-    --moon-card-gap: clamp(
-        2.4rem,
-        4vw,
-        4.8rem
-    ); /* Space between card elements */
-    --moon-image-max-height: clamp(
-        20rem,
-        30vw,
-        25rem
-    ); /* Moon image height limits */
-}
-
-/* ===================================
-   5️⃣ CSS VARIABLES - BORDER & SHADOW SYSTEM
-   =================================== */
-
-:root {
-    /* Border radius scale */
-    --border-radius: 2rem; /* Primary border radius - 20px */
-    --border-radius-small: 1rem; /* Small border radius - 10px */
-    --border-radius-button: 2rem 0 1.5rem 0; /* Unique button shape - asymmetrical corners */
-
-    /* Shadow system for depth */
-    --shadow-light: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.15); /* Subtle card shadow */
-    --shadow-hover: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.2); /* Elevated hover shadow */
-    --shadow-focus: 0 0 0 3px rgba(142, 68, 173, 0.3); /* Focus ring shadow */
-}
-
-/* ===================================
-   6️⃣ CSS VARIABLES - ANIMATION SYSTEM
-   =================================== */
-
-:root {
-    /* Transition speeds - consistent timing */
-    --transition-fast: 0.15s ease-in-out; /* Quick micro-interactions */
-    --transition-smooth: 0.3s ease-in-out; /* Standard smooth transitions */
-    --transition-slow: 0.5s ease-in-out; /* Deliberate slow animations */
-
-    /* Animation easing functions */
-    --ease-bounce: cubic-bezier(
-        0.68,
-        -0.55,
-        0.265,
-        1.55
-    ); /* Playful bounce effect */
-}
-
-/* ===================================
-   7️⃣ CSS VARIABLES - TYPOGRAPHY SYSTEM
-   =================================== */
-
-:root {
-    /* Font families - Google Fonts integration */
-    --font-primary: 'Montserrat', sans-serif; /* Headings and brand text */
-    --font-secondary: 'Roboto', sans-serif; /* Body text and UI elements */
-
-    /* Font size scale - responsive and accessible */
-    --font-size-xs: 1.2rem; /* 12px - small text */
-    --font-size-sm: 1.4rem; /* 14px - UI text */
-    --font-size-base: 1.6rem; /* 16px - body text baseline */
-    --font-size-lg: 1.8rem; /* 18px - large body text */
-    --font-size-xl: 2rem; /* 20px - small headings */
-    --font-size-xxl: 3rem; /* 30px - section headings */
-}
-
-/* ===================================
-   8️⃣ ACCESSIBILITY & MOTION PREFERENCES
-   =================================== */
-
-/* 
-   ♿ Respect user's motion preferences for accessibility
-   Disables animations for users who have set reduced motion in their OS
-*/
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important; /* Nearly instant animations */
-        animation-iteration-count: 1 !important; /* Single iteration only */
-        transition-duration: 0.01ms !important; /* Nearly instant transitions */
-        scroll-behavior: auto !important; /* Disable smooth scrolling */
-    }
-}
-
-/* ===================================
-   9️⃣ GLOBAL RESET & BASE STYLES
-   =================================== */
-
-/* 
-   Universal reset for consistent styling across browsers
-   Removes default padding and margins from all elements
-*/
 * {
-    padding: 0;
     margin: 0;
-    box-sizing: border-box; /* Include padding/border in element width */
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 
-   Enhanced focus styles for keyboard navigation accessibility
-   Provides clear visual feedback for keyboard users
-*/
-*:focus-visible {
-    outline: 2px solid var(--color-highlight); /* Purple outline for visibility */
-    outline-offset: 3px; /* Space between element and outline */
-    box-shadow: var(--shadow-focus); /* Additional glow effect */
-}
-
-/* 
-   Root HTML setup - 62.5% = 10px base for easy rem calculations
-   This makes 1rem = 10px, simplifying responsive design math
-*/
 html {
-    font-size: 62.5%; /* 1rem = 10px for easy math */
-    scroll-behavior: smooth; /* Smooth scrolling between sections */
+    font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 
-/* 
-   Body foundation - flex layout for sticky footer with full-page gradient
-   Creates vertical layout structure for entire page
-*/
 body {
     width: 100%;
-    min-height: 100vh; /* Full viewport height minimum */
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Stack header, main, footer vertically */
-    line-height: 1; /* Reset line-height for precise control */
-    font-weight: 400; /* Normal font weight default */
-    color: var(--color-light-text); /* Light text for dark backgrounds */
-    font-family: var(--font-secondary); /* Roboto as default body font */
-    font-size: var(--font-size-base); /* 16px base font size */
+    flex-direction: column;
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(142, 68, 173, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(52, 152, 219, 0.05), transparent 25%);
+    background-attachment: fixed; /* Parallax-like feel */
 }
 
 /* ===================================
@@ -723,3 +613,70 @@ console.log('Current breakpoint:', breakpoint, `(${width}px)`);
    - All section CSS files import these base styles
    - style.css is the main entry point
 */
+
+/* ===================================
+   2️⃣0️⃣ PREMIUM ANIMATIONS (New)
+   =================================== */
+
+/* Base class for animated elements */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+/* Staggered delays for children if needed */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+
+/* The state when element comes into view */
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Special Animations */
+
+/* 1. Golden Shimmer (Text/Borders) */
+@keyframes shimmerGold {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.text-shimmer {
+    background: linear-gradient(
+        90deg, 
+        var(--color-accent) 0%, 
+        white 50%, 
+        var(--color-accent) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmerGold 3s linear infinite;
+}
+
+/* 2. Floating Levitation (Cards/Hero Image) */
+@keyframes levitate {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.levitate {
+    animation: levitate 6s ease-in-out infinite;
+}
+
+/* 3. Mystical Pulse (Buttons/Orbs) */
+@keyframes mysticPulse {
+    0% { box-shadow: 0 0 0 0 rgba(142, 68, 173, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(142, 68, 173, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(142, 68, 173, 0); }
+}
+
+.pulse-mystic {
+    animation: mysticPulse 3s infinite;
+}
+

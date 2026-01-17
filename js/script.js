@@ -39,6 +39,7 @@
 // Self-initializing modules (no manual init needed)
 import './moon-phase.js'; // 🌙 Auto-initializes on DOMContentLoaded
 import './price-section.js'; // 💰 Auto-initializes on DOMContentLoaded
+import './animations.js'; // ✨ Auto-initializes scroll animations
 
 // Modules requiring manual initialization
 import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';

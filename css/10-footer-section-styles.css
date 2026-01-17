@@ -1,568 +1,163 @@
 /* ================================================
-   👣 FOOTER SECTION - Comprehensive Footer Styling
-   ================================================
-   
-   📋 TABLE OF CONTENTS:
-   1. CSS Variables (Footer Configuration)
-   2. Footer Container & Header
-   3. Footer Grid Layout
-   4. Logo & Image Styling
-   5. Social Media Navigation
-   6. Copyright Information
-   7. Responsive Breakpoints (Simplified)
-   8. Accessibility Enhancements
-   9. Debug Utilities
-*/
-
-/* ===================================
-   1️⃣ CSS VARIABLES - FOOTER CONFIGURATION
-   =================================== */
+   👣 FOOTER: MYSTIC CONCLUSION
+   ================================================ */
 
 :root {
-    /* 📐 Footer-specific spacing controls */
-    --footer-section-padding-top: clamp(
-        2.4rem,
-        5vw,
-        6.4rem
-    ); /* Top padding - scales with viewport */
-    --footer-header-gap: var(
-        --spacing-sm
-    ); /* 1.6rem - Gap between header elements */
-    --footer-header-margin: var(--spacing-lg); /* 3.2rem - Space below header */
-    --footer-grid-gap: clamp(
-        2.4rem,
-        4vw,
-        4.8rem
-    ); /* Gap between grid columns */
-
-    /* 🖼️ Logo sizing controls */
-    --footer-logo-min: 10rem; /* Minimum logo width */
-    --footer-logo-max: 20rem; /* Maximum logo width */
-    --footer-logo-responsive: 20vw; /* Responsive scaling factor */
-
-    /* 🔗 Social icon sizing controls */
-    --footer-icon-size: 5rem; /* Default social media icon size */
-    --footer-icon-gap: clamp(
-        1.2rem,
-        3vw,
-        6.4rem
-    ); /* Space between social icons */
-
-    /* 📱 Social media grid configuration */
-    --footer-social-max-width: 40rem; /* Maximum width of social icons container */
-    --footer-social-columns: 6; /* Number of social media icons */
+    --footer-bg: linear-gradient(to top, #05020a, #0b0514);
+    --footer-text: var(--color-text-muted);
 }
 
 /* ===================================
-   2️⃣ FOOTER CONTAINER & HEADER
+   FOOTER CONTAINER
    =================================== */
-
-/* Main footer section wrapper */
 .footer-section {
-    padding: var(--footer-section-padding-top) 0 0 0; /* Top padding only - bottom handled by children */
-    width: 100%; /* Full viewport width */
-    margin: var(--spacing-lg) auto 0 auto; /* Top margin for separation from previous section */
+    background: var(--footer-bg);
+    padding: var(--spacing-xxl) 0 var(--spacing-lg);
+    border-top: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Footer header - title and description container */
-.footer_header {
-    display: flex;
-    flex-direction: column; /* Stack heading and text vertically */
-    align-items: center; /* Center-align content horizontally */
-    justify-content: center; /* Center-align content vertically */
-    text-align: center; /* Center-align text */
-    gap: var(--footer-header-gap); /* 1.6rem spacing between elements */
-    margin-bottom: var(--footer-header-margin); /* 3.2rem space before grid */
-}
-
-/* Footer heading - inherits from .heading-secondary in general.css */
-.footer_header__heading {
-    margin-bottom: 0; /* Override default heading margin */
-}
-
-/* Footer description text */
-.footer_header__text {
-    font-size: 1.4rem; /* Slightly smaller than body text for subtitle feel */
-    color: var(--color-light-text); /* Light text for dark background */
-    line-height: 1.4; /* Comfortable reading line height */
-    margin: 0 0 var(--spacing-sm) 0; /* Small bottom margin */
-}
-
-/* ===================================
-   3️⃣ FOOTER GRID LAYOUT
-   =================================== */
-
-/* 
-   Main footer grid - logo + social media icons layout
-   Default: 30% logo / 60% social icons with 10% gap
-*/
-.footer-grid {
-    display: grid;
-    grid-template-columns: 30% 60%; /* Asymmetric layout - logo smaller, social area larger */
-    gap: var(--footer-grid-gap); /* Responsive gap between columns */
-    align-items: center; /* Vertically center grid items */
-    justify-items: center; /* Horizontally center grid items */
-}
-
-/* ===================================
-   4️⃣ LOGO & IMAGE STYLING
-   =================================== */
-
-/* Logo container */
-.footer-img {
-    text-align: center; /* Center-align logo image */
-}
-
-/* Footer logo image - responsive sizing with clamp */
-.footer__logo {
-    width: clamp(
-        var(--footer-logo-min),
-        var(--footer-logo-responsive),
-        var(--footer-logo-max)
-    ); /* Scales from 10rem to 20rem based on 20vw */
-    height: auto; /* Maintain aspect ratio */
-}
-
-/* ===================================
-   5️⃣ SOCIAL MEDIA NAVIGATION
-   =================================== */
-
-/* Social media navigation container */
-.footer_header__social_icons {
-    display: flex;
-    align-items: center; /* Vertically center icons */
-    justify-content: center; /* Horizontally center icons */
-    width: 100%; /* Full width of grid cell */
-}
-
-/* Social media icons grid list */
-.footer__list {
-    display: grid;
-    grid-template-columns: repeat(
-        var(--footer-social-columns),
-        1fr
-    ); /* 6 equal columns for 6 icons */
-    gap: var(--footer-icon-gap); /* Responsive gap between icons */
-    justify-content: center; /* Center grid within available space */
-    place-items: center; /* Center items within grid cells */
-    list-style: none; /* Remove default list bullets */
-    padding: 0; /* Remove default list padding */
-    margin: 0; /* Remove default list margin */
-    width: 100%; /* Full width of parent */
-    max-width: var(--footer-social-max-width); /* Limit maximum width */
-}
-
-/* Individual social media list item */
-.footer__item {
-    display: inline-block; /* Allow width/height control */
-}
-
-/* Social media icon images */
-.social-network-logo {
-    width: var(--footer-icon-size); /* Default 5rem icon size */
-    height: auto; /* Maintain aspect ratio */
-    transition: var(
-        --transition-smooth
-    ); /* Smooth transitions for interactions */
-}
-
-/* Social media link hover state - affects nested image */
-.footer__link:hover .social-network-logo {
-    opacity: 0.8; /* Slightly transparent on hover */
-    transform: scale(1.05); /* Subtle growth effect */
-}
-
-/* Social media link focus state - keyboard navigation accessibility */
-.footer__link:focus-visible {
-    outline: 2px solid var(--color-highlight); /* Purple outline for visibility */
-    outline-offset: 4px; /* Space between link and outline */
-    border-radius: var(--border-radius-small); /* Rounded outline corners */
-}
-
-/* ===================================
-   6️⃣ COPYRIGHT INFORMATION
-   =================================== */
-
-/* Copyright container */
-.footer-copyright-info {
-    text-align: center; /* Center-align copyright text */
-    margin-top: var(--spacing-sm); /* 1.6rem space above copyright */
-    padding-bottom: var(--spacing-sm); /* 1.6rem space beyond copyright */
-}
-
-/* Copyright text styling */
-.copyright-text {
-    font-size: 1.4rem; /* Small text for legal information */
-    color: var(--color-light-text); /* Light text for dark background */
-    line-height: 1.4; /* Comfortable reading line height */
-}
-
-/* ===================================
-   7️⃣ RESPONSIVE BREAKPOINTS (SIMPLIFIED)
-   =================================== */
-
-/*
-   🎯 OPTIMIZED: Consolidated from 7 breakpoints to 4
-   Aligns with site-wide standards: 1200px, 991px, 768px, 599px
-   Each breakpoint adjusts layout, sizing, and spacing appropriately
-*/
-
-/* ─────────────────────────────────────────────
-   📱 LARGE DESKTOP (≤1200px)
-   ─────────────────────────────────────────── */
-
-@media (max-width: 1200px) {
-    /* Adjust grid proportions for medium screens */
-    .footer-grid {
-        grid-template-columns: 25% 70%; /* Slightly more space for social icons */
-        gap: clamp(3rem, 5vw, 5rem); /* Responsive gap scaling */
-    }
-
-    /* Adjust logo size for medium screens */
-    .footer__logo {
-        width: clamp(10rem, 20vw, 22rem); /* Allow slightly larger logo */
-    }
-
-    /* Maintain 6-column social grid */
-    .footer__list {
-        grid-template-columns: repeat(6, 1fr);
-        max-width: 45rem; /* Slightly wider container */
-        gap: clamp(1.5rem, 3vw, 4rem); /* Adjusted gap range */
-    }
-
-    /* Slightly larger icons on larger screens */
-    .social-network-logo {
-        width: 5.5rem;
-    }
-}
-
-/* ─────────────────────────────────────────────
-   📱 TABLET LANDSCAPE (≤991px)
-   Switch to single-column centered layout
-   ─────────────────────────────────────────── */
-
-@media (max-width: 991px) {
-    /* Single column layout - stack logo above social icons */
-    .footer-grid {
-        grid-template-columns: 1fr; /* Full width single column */
-        row-gap: var(--spacing-sm); /* 1.6rem vertical spacing */
-        text-align: center; /* Center all content */
-    }
-
-    /* Adjust logo size for tablet */
-    .footer__logo {
-        width: clamp(10rem, 30vw, 18rem); /* Responsive logo sizing */
-    }
-
-    /* Maintain 6-column social grid */
-    .footer__list {
-        grid-template-columns: repeat(6, 1fr);
-        max-width: 42rem;
-        gap: clamp(1.5rem, 2.5vw, 2.5rem); /* Tighter gap range */
-    }
-
-    /* Standard icon size for tablet */
-    .social-network-logo {
-        width: 4.8rem;
-    }
-
-    /* Adjust header text size */
-    .footer_header__text {
-        font-size: 1.5rem; /* Slightly larger for tablet readability */
-    }
-}
-
-/* ─────────────────────────────────────────────
-   📱 TABLET PORTRAIT (≤768px)
-   Further refinements for smaller tablets
-   ─────────────────────────────────────────── */
-
-@media (max-width: 768px) {
-    /* Maintain single column layout with adjusted spacing */
-    .footer-grid {
-        row-gap: var(--spacing-sm); /* Consistent 1.6rem spacing */
-    }
-
-    /* Adjust logo size for smaller tablets */
-    .footer__logo {
-        width: clamp(10rem, 35vw, 16rem); /* Slightly smaller range */
-    }
-
-    /* Switch to 3-column social grid for better mobile fit */
-    .footer__list {
-        grid-template-columns: repeat(3, 1fr); /* 3 columns, 2 rows */
-        gap: clamp(1.5rem, 3vw, 2rem); /* Responsive gap */
-        max-width: 30rem; /* Narrower container */
-    }
-
-    /* Smaller icons for tablet portrait */
-    .social-network-logo {
-        width: 4.2rem;
-    }
-
-    /* Standard header text size */
-    .footer_header__text {
-        font-size: 1.4rem;
-    }
-}
-
-/* ─────────────────────────────────────────────
-   📱 MOBILE (≤599px)
-   Optimized for mobile devices
-   ─────────────────────────────────────────── */
-
-@media (max-width: 599px) {
-    /* Mobile-optimized single column */
-    .footer-grid {
-        grid-template-columns: 1fr;
-        row-gap: 2rem; /* Fixed spacing for predictability */
-        text-align: center;
-    }
-
-    /* Smaller logo for mobile screens */
-    .footer__logo {
-        width: clamp(8rem, 45vw, 14rem); /* Compact logo sizing */
-    }
-
-    /* Maintain 3-column grid for mobile */
-    .footer__list {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem; /* Fixed gap for consistency */
-        max-width: 25rem; /* Compact container */
-    }
-
-    /* Smaller icons for mobile */
-    .social-network-logo {
-        width: 3.8rem;
-    }
-
-    /* Compact header text */
-    .footer_header__text {
-        font-size: 1.3rem;
-        padding: 0 var(--spacing-sm); /* Add horizontal padding */
-    }
-
-    /* Compact copyright text */
-    .copyright-text {
-        font-size: 1.3rem;
-        padding: 0 var(--spacing-sm); /* Add horizontal padding */
-        line-height: 1.4; /* Maintain readability */
-    }
-
-    /* Reduce header spacing */
-    .footer_header {
-        margin-bottom: 2.4rem; /* Tighter spacing on mobile */
-    }
-
-    /* Reduce copyright spacing */
-    .footer-copyright-info {
-        margin-top: 2rem; /* Tighter spacing on mobile */
-    }
-}
-
-/* ─────────────────────────────────────────────
-   📱 SMALL MOBILE (≤480px)
-   Ultra-compact optimizations
-   ─────────────────────────────────────────── */
-
-@media (max-width: 480px) {
-    /* Further reduce logo size */
-    .footer__logo {
-        width: clamp(6rem, 50vw, 12rem); /* Very compact logo */
-    }
-
-    /* Even smaller icons for tiny screens */
-    .social-network-logo {
-        width: 3.2rem;
-    }
-
-    /* Tighter icon spacing */
-    .footer__list {
-        gap: 1.2rem;
-        max-width: 20rem;
-    }
-
-    /* Compact text sizing */
-    .footer_header__text {
-        font-size: 1.2rem;
-    }
-
-    .copyright-text {
-        font-size: 1.2rem;
-    }
-}
-
-/* ===================================
-   8️⃣ ACCESSIBILITY ENHANCEMENTS
-   =================================== */
-
-/* Respect user's motion preferences */
-@media (prefers-reduced-motion: reduce) {
-    .social-network-logo {
-        transition: none !important; /* Disable animations */
-    }
-
-    .footer__link:hover .social-network-logo {
-        transform: none !important; /* Disable hover scale effect */
-    }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .footer__link:focus-visible {
-        outline-width: 3px; /* Thicker outline for better visibility */
-    }
-
-    .social-network-logo {
-        border: 2px solid transparent; /* Add border for high contrast */
-    }
-
-    .footer__link:hover .social-network-logo {
-        border-color: var(--color-highlight); /* Show border on hover */
-    }
-}
-
-/* Skip link focus - for keyboard navigation */
-.footer__link:focus-visible {
-    /* Enhanced focus state */
-    box-shadow: var(--shadow-focus); /* Add glow effect */
-}
-
-/* ================================================
-   9️⃣ DEBUG UTILITIES SECTION
-   ================================================
-   
-   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
-*/
-
-/* ─────────────────────────────────────────────
-   VISUAL LAYOUT DEBUGGING
-   ───────────────────────────────────────────── */
-
-/*
-🎨 Layout Boundaries Visualization:
-Uncomment to see colored borders around footer elements
-
-.footer-section { 
-    border: 3px solid red !important; 
-    background: rgba(255,0,0,0.05) !important;
-}
-
-.footer-grid { 
-    border: 2px solid blue !important; 
-    background: rgba(0,0,255,0.05) !important;
-}
-
-.footer__list { 
-    border: 1px solid green !important; 
-    background: rgba(0,255,0,0.05) !important;
-}
-
-.footer__item { 
-    outline: 1px dashed orange !important; 
-}
-*/
-
-/* ─────────────────────────────────────────────
-   GRID DEBUGGING
-   ───────────────────────────────────────────── */
-
-/*
-📊 Grid Column Visualization:
-Uncomment to see grid structure
-
-.footer-grid::before {
-    content: "FOOTER GRID: " attr(class);
+/* Top Glow */
+.footer-section::before {
+    content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    background: rgba(255,0,0,0.8);
-    color: white;
-    padding: 5px 10px;
-    font-size: 12px;
-    z-index: 1000;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: radial-gradient(circle, var(--color-accent) 0%, transparent 100%);
+    opacity: 0.5;
+}
+
+/* ===================================
+   HEADER CONTENT
+   =================================== */
+.footer_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.footer_header__heading {
+    font-family: var(--font-primary);
+    font-size: 2.4rem;
+    color: var(--color-accent);
+    margin-bottom: 0;
+}
+
+.footer_header__text {
+    font-size: 1.4rem;
+    color: var(--footer-text);
+    max-width: 40ch;
+}
+
+/* ===================================
+   GRID LAYOUT
+   =================================== */
+.footer-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xl);
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+/* ===================================
+   LOGO
+   =================================== */
+.footer-img {
+    margin-bottom: var(--spacing-md);
+}
+
+.footer__logo {
+    width: 12rem;
+    filter: drop-shadow(0 0 10px rgba(139, 69, 19, 0.3));
+    transition: transform var(--transition-bounce);
+}
+
+.footer__logo:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+/* ===================================
+   SOCIAL ICONS
+   =================================== */
+.footer_header__social_icons {
+    width: 100%;
+    max-width: 50rem;
 }
 
 .footer__list {
-    background: repeating-linear-gradient(
-        90deg,
-        rgba(0,0,255,0.1) 0px,
-        rgba(0,0,255,0.1) 1px,
-        transparent 1px,
-        transparent calc(100% / 6)
-    );
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    list-style: none;
+    flex-wrap: wrap;
 }
-*/
 
-/* ─────────────────────────────────────────────
-   RESPONSIVE BREAKPOINT TESTING
-   ───────────────────────────────────────────── */
+.footer__link {
+    display: block;
+    transition: transform var(--transition-bounce);
+}
 
-/*
-📐 Breakpoint Indicator:
-Copy this to console to see current layout mode:
+.social-network-logo {
+    width: 3.2rem;
+    height: 3.2rem;
+    fill: var(--color-text-muted);
+    transition: all var(--transition-fast);
+}
 
-const width = window.innerWidth;
-const layout = 
-    width <= 480 ? 'Small Mobile (≤480px)' :
-    width <= 599 ? 'Mobile (≤599px)' :
-    width <= 768 ? 'Tablet Portrait (≤768px)' :
-    width <= 991 ? 'Tablet Landscape (≤991px)' :
-    width <= 1200 ? 'Large Desktop (≤1200px)' :
-    'Ultra-wide Desktop';
+.footer__link:hover .social-network-logo {
+    fill: var(--color-accent);
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px var(--color-accent));
+}
+
+/* ===================================
+   COPYRIGHT
+   =================================== */
+.footer-copyright-info {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    text-align: center;
+}
+
+.copyright-text {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.05em;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+@media (min-width: 900px) {
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+        text-align: left;
+        padding: 0 var(--spacing-xxl);
+    }
     
-console.log('📱 Current footer layout:', layout, `(${width}px)`);
-console.log('📊 Grid columns:', window.getComputedStyle(document.querySelector('.footer-grid')).gridTemplateColumns);
-console.log('🔗 Social icon size:', window.getComputedStyle(document.querySelector('.social-network-logo')).width);
-*/
+    .footer_header {
+        align-items: flex-start;
+        text-align: left;
+    }
 
-/* ─────────────────────────────────────────────
-   CSS VARIABLE TESTING
-   ───────────────────────────────────────────── */
+    .footer_header__social_icons {
+        margin-left: auto; /* Push to right */
+    }
 
-/*
-🎛️ Test Different Footer Configurations:
-Copy these to console to experiment with sizing:
-
-// Increase icon size
-document.documentElement.style.setProperty('--footer-icon-size', '7rem');
-
-// Adjust logo size range
-document.documentElement.style.setProperty('--footer-logo-min', '15rem');
-document.documentElement.style.setProperty('--footer-logo-max', '30rem');
-
-// Change social icon spacing
-document.documentElement.style.setProperty('--footer-icon-gap', '3rem');
-
-// Change social columns (2-6 recommended)
-document.documentElement.style.setProperty('--footer-social-columns', '4');
-
-// Reset to defaults
-document.documentElement.style.setProperty('--footer-icon-size', '5rem');
-document.documentElement.style.setProperty('--footer-logo-min', '10rem');
-document.documentElement.style.setProperty('--footer-logo-max', '20rem');
-document.documentElement.style.setProperty('--footer-icon-gap', 'clamp(1.2rem, 3vw, 6.4rem)');
-document.documentElement.style.setProperty('--footer-social-columns', '6');
-*/
-
-/* ─────────────────────────────────────────────
-   SOCIAL MEDIA ICON DEBUGGING
-   ───────────────────────────────────────────── */
-
-/*
-🔗 Social Icon State Inspector:
-Copy to console to check social icon states:
-
-document.querySelectorAll('.footer__link').forEach((link, i) => {
-    console.log(`Icon ${i + 1}:`, {
-        href: link.getAttribute('href'),
-        ariaLabel: link.getAttribute('aria-label'),
-        imgSrc: link.querySelector('img')?.getAttribute('src'),
-        imgAlt: link.querySelector('img')?.getAttribute('alt')
-    });
-});
-*/
-
-/* ─────────────────────────────────────────────
-   END OF DEBUG UTILITIES
-   ───────────────────────────────────────────── */
+    .footer__list {
+        justify-content: flex-end;
+    }
+}
