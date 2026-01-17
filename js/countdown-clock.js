@@ -339,6 +339,12 @@ function handleExpiredCountdown(elements) {
    ♿ ACCESSIBILITY FUNCTIONS
    =================================== */
 
+import { getTranslation } from './i18n.js';
+
+/* ===================================
+   ♿ ACCESSIBILITY FUNCTIONS
+   =================================== */
+
 /**
  * Update ARIA labels for screen reader accessibility
  *
@@ -363,28 +369,34 @@ function handleExpiredCountdown(elements) {
  * @private
  */
 function updateAriaLabels(elements, timeUnits) {
+    const remainingText = getTranslation('countdown.aria_remaining');
+    const daysText = getTranslation('countdown.aria_days');
+    const hoursText = getTranslation('countdown.aria_hours');
+    const minutesText = getTranslation('countdown.aria_minutes');
+    const secondsText = getTranslation('countdown.aria_seconds');
+
     if (elements.days) {
         elements.days.setAttribute(
             'aria-label',
-            `${timeUnits.days} days remaining`
+            `${timeUnits.days} ${daysText} ${remainingText}`
         );
     }
     if (elements.hours) {
         elements.hours.setAttribute(
             'aria-label',
-            `${timeUnits.hours} hours remaining`
+            `${timeUnits.hours} ${hoursText} ${remainingText}`
         );
     }
     if (elements.minutes) {
         elements.minutes.setAttribute(
             'aria-label',
-            `${timeUnits.minutes} minutes remaining`
+            `${timeUnits.minutes} ${minutesText} ${remainingText}`
         );
     }
     if (elements.seconds) {
         elements.seconds.setAttribute(
             'aria-label',
-            `${timeUnits.seconds} seconds remaining`
+            `${timeUnits.seconds} ${secondsText} ${remainingText}`
         );
     }
 }
@@ -425,10 +437,10 @@ export function initializeCountdown() {
             '⚠️ Missing countdown elements:',
             missingElements.join(', '),
             '\n🔍 Required HTML structure:',
-            '\n<h3 id="days">00</h3>',
-            '\n<h3 id="hours">00</h3>',
-            '\n<h3 id="minutes">00</h3>',
-            '\n<h3 id="seconds">00</h3>'
+            '\n<div id="days">00</div>',
+            '\n<div id="hours">00</div>',
+            '\n<div id="minutes">00</div>',
+            '\n<div id="seconds">00</div>'
         );
         return false;
     }

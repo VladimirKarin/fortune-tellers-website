@@ -75,8 +75,8 @@
     <main>
         <!-- Header + NavMenu -->
         <header class="header">
-            <a href="#hero" class="logo" aria-label="Перейти на главную страницу">
-                <img src="./img/01-header-section/logo/logoCrop2.png" alt="Логотип Уголок Доброй Феи" class="logo__img" />
+            <a href="#hero" class="logo" aria-label="Перейти на главную страницу" data-i18n-attr="aria-label:nav.home">
+                <img src="./img/01-header-section/logo/logoCrop2.png" alt="Логотип Уголок Доброй Феи" class="logo__img" data-i18n-attr="alt:meta.title" />
             </a>
 
             <nav class="main-nav" aria-label="Основное навигационное меню">
@@ -166,22 +166,22 @@
                     <h2 id="countdown-heading" class="heading-secondary" data-i18n="countdown.heading">Бесплатные вопросы через:</h2>
                     <div class="timebox" role="timer" aria-live="polite" aria-atomic="true">
                         <div class="time" role="presentation">
-                            <h3 id="days" aria-label="days remaining">00</h3>
+                            <div class="time-value" id="days" aria-label="days remaining">00</div>
                             <p aria-hidden="true" data-i18n="countdown.days">дн.</p>
                         </div>
 
                         <div class="time" role="presentation">
-                            <h3 id="hours" aria-label="hours remaining">00</h3>
+                            <div class="time-value" id="hours" aria-label="hours remaining">00</div>
                             <p aria-hidden="true" data-i18n="countdown.hours">ч.</p>
                         </div>
 
                         <div class="time" role="presentation">
-                            <h3 id="minutes" aria-label="minutes remaining">00</h3>
+                            <div class="time-value" id="minutes" aria-label="minutes remaining">00</div>
                             <p aria-hidden="true" data-i18n="countdown.minutes">мин.</p>
                         </div>
 
                         <div class="time" role="presentation">
-                            <h3 id="seconds" aria-label="seconds remaining">00</h3>
+                            <div class="time-value" id="seconds" aria-label="seconds remaining">00</div>
                             <p aria-hidden="true" data-i18n="countdown.seconds">с.</p>
                         </div>
                     </div>
@@ -206,7 +206,7 @@
                             <div class="gallery-item-content">
                                 <h3 class="gallery-item-title" data-i18n="services.items.1.title">Гадание на картах</h3>
                                 <p class="gallery-item-text" data-i18n="services.items.1.text">Классическое гадание...</p>
-                                <button class="gallery-item-button" data-popup="popup-1" data-i18n="services.items.1.button">Узнать больше</button>
+                                <button class="gallery-item-button" data-popup="popup-1" data-i18n="services.items.1.button" data-i18n-attr="aria-label:services.items.1.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
@@ -216,7 +216,7 @@
                             <div class="gallery-item-content">
                                 <h3 class="gallery-item-title" data-i18n="services.items.2.title">Таро расклад</h3>
                                 <p class="gallery-item-text" data-i18n="services.items.2.text">Глубокий анализ...</p>
-                                <button class="gallery-item-button" data-popup="popup-2" data-i18n="services.items.2.button">Узнать больше</button>
+                                <button class="gallery-item-button" data-popup="popup-2" data-i18n="services.items.2.button" data-i18n-attr="aria-label:services.items.2.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
@@ -226,7 +226,7 @@
                             <div class="gallery-item-content">
                                 <h3 class="gallery-item-title" data-i18n="services.items.3.title">Ритуалы и заговоры</h3>
                                 <p class="gallery-item-text" data-i18n="services.items.3.text">Древние обряды...</p>
-                                <button class="gallery-item-button" data-popup="popup-3" data-i18n="services.items.3.button">Узнать больше</button>
+                                <button class="gallery-item-button" data-popup="popup-3" data-i18n="services.items.3.button" data-i18n-attr="aria-label:services.items.3.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
@@ -236,7 +236,7 @@
                             <div class="gallery-item-content">
                                 <h3 class="gallery-item-title" data-i18n="services.items.4.title">Восковая отливка</h3>
                                 <p class="gallery-item-text" data-i18n="services.items.4.text">Диагностика...</p>
-                                <button class="gallery-item-button" data-popup="popup-4" data-i18n="services.items.4.button">Узнать больше</button>
+                                <button class="gallery-item-button" data-popup="popup-4" data-i18n="services.items.4.button" data-i18n-attr="aria-label:services.items.4.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
@@ -246,7 +246,7 @@
                             <div class="gallery-item-content">
                                 <h3 class="gallery-item-title" data-i18n="services.items.5.title">Обереги и амулеты</h3>
                                 <p class="gallery-item-text" data-i18n="services.items.5.text">Создание...</p>
-                                <button class="gallery-item-button" data-popup="popup-5" data-i18n="services.items.5.button">Узнать больше</button>
+                                <button class="gallery-item-button" data-popup="popup-5" data-i18n="services.items.5.button" data-i18n-attr="aria-label:services.items.5.aria_label">Узнать больше</button>
                             </div>
                         </div>
                     </div>
@@ -261,11 +261,11 @@
                     </div>
 
                     <div class="gallery-indicators" role="group">
-                        <span class="gallery-indicator" data-index="1" role="button" tabindex="0"></span>
-                        <span class="gallery-indicator" data-index="2" role="button" tabindex="0"></span>
-                        <span class="gallery-indicator" data-index="3" role="button" tabindex="0"></span>
-                        <span class="gallery-indicator" data-index="4" role="button" tabindex="0"></span>
-                        <span class="gallery-indicator" data-index="5" role="button" tabindex="0"></span>
+                        <span class="gallery-indicator" data-index="1" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_1"></span>
+                        <span class="gallery-indicator" data-index="2" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_2"></span>
+                        <span class="gallery-indicator" data-index="3" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_3"></span>
+                        <span class="gallery-indicator" data-index="4" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_4"></span>
+                        <span class="gallery-indicator" data-index="5" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_5"></span>
                     </div>
                 </div>
             </section>
@@ -427,33 +427,33 @@
                     <nav class="footer_header__social_icons" aria-label="Социальные сети">
                         <ul class="footer__list">
                             <li class="footer__item">
-                                <a class="footer__link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/facebook-logo.png" alt="Facebook" class="social-network-logo" />
+                                <a class="footer__link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.facebook">
+                                    <img src="./img/06-footer-section/social-network-logos/facebook-logo.png" alt="" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/instagram-logo.png" alt="Instagram" class="social-network-logo" />
+                                <a class="footer__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.instagram">
+                                    <img src="./img/06-footer-section/social-network-logos/instagram-logo.png" alt="" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/vkontakte-logo.png" alt="ВКонтакте" class="social-network-logo" />
+                                <a class="footer__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.vkontakte">
+                                    <img src="./img/06-footer-section/social-network-logos/vkontakte-logo.png" alt="" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/telegram-logo.png" alt="Telegram" class="social-network-logo" />
+                                <a class="footer__link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.telegram">
+                                    <img src="./img/06-footer-section/social-network-logos/telegram-logo.png" alt="" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://viber.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/viber-logo.png" alt="Viber" class="social-network-logo" />
+                                <a class="footer__link" href="https://viber.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.viber">
+                                    <img src="./img/06-footer-section/social-network-logos/viber-logo.png" alt="" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://whatsapp.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/whatsapp-logo.png" alt="WhatsApp" class="social-network-logo" />
+                                <a class="footer__link" href="https://whatsapp.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.whatsapp">
+                                    <img src="./img/06-footer-section/social-network-logos/whatsapp-logo.png" alt="" class="social-network-logo" />
                                 </a>
                             </li>
                         </ul>
@@ -465,7 +465,6 @@
                         © 2025 "Гадалкина Избушка"
                     </p>
                 </div>
-            </footer>
             </footer>
         </div>
 

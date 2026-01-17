@@ -74,7 +74,7 @@
    =================================== */
 
 /* Large countdown numbers - Optimized responsive sizing */
-.time h3 {
+.time .time-value {
     font-size: clamp(
         2rem,
         5vw,
@@ -118,7 +118,7 @@
         max-width: 70rem; /* Narrower container */
     }
 
-    .time h3 {
+    .time .time-value {
         font-size: clamp(1.8rem, 4.5vw, 4rem); /* Slightly smaller numbers */
     }
 }
@@ -138,7 +138,7 @@
         padding: var(--spacing-xs); /* Add padding for touch targets */
     }
 
-    .time h3 {
+    .time .time-value {
         font-size: clamp(1.6rem, 5vw, 3.2rem); /* Mobile-friendly sizing */
     }
 
@@ -154,7 +154,7 @@
         max-width: 100%; /* Full width utilization */
     }
 
-    .time h3 {
+    .time .time-value {
         font-size: clamp(
             1.4rem,
             6vw,
@@ -181,7 +181,7 @@
 */
 
 /* Red tinted numbers when countdown expires */
-.countdown-section.countdown-expired .time h3 {
+.countdown-section.countdown-expired .time .time-value {
     color: var(--color-error); /* Error red from general.css variables */
     opacity: 0.7; /* Faded appearance */
 }
@@ -209,7 +209,7 @@
         padding: var(--spacing-xs); /* Ensure content has breathing room */
     }
 
-    .time h3 {
+    .time .time-value {
         text-shadow: 0 0 4px rgba(0, 0, 0, 0.8); /* Enhanced readability */
     }
 }
@@ -224,7 +224,7 @@
         transform: none; /* Disable hover animations */
     }
 
-    .time h3 {
+    .time .time-value {
         transition: none; /* Disable number transitions */
     }
 }

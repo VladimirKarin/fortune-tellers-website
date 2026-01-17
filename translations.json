@@ -38,7 +38,12 @@
             "days": "дн.",
             "hours": "ч.",
             "minutes": "мин.",
-            "seconds": "с."
+            "seconds": "с.",
+            "aria_days": "дней",
+            "aria_hours": "часов",
+            "aria_minutes": "минут",
+            "aria_seconds": "секунд",
+            "aria_remaining": "осталось"
         },
         "services": {
             "heading": "Что я могу Вам предложить",
@@ -46,32 +51,42 @@
                 "1": {
                     "title": "Гадание на картах",
                     "text": "Классическое гадание с использованием различных карточных систем для точных предсказаний вашего будущего.",
-                    "button": "Узнать больше"
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о гадании на картах"
                 },
                 "2": {
                     "title": "Таро расклад",
                     "text": "Глубокий анализ ситуаций с помощью карт Таро, раскрывающий скрытые аспекты и потенциальные пути развития.",
-                    "button": "Узнать больше"
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о Таро раскладе"
                 },
                 "3": {
                     "title": "Ритуалы и заговоры",
                     "text": "Древние обряды и заговоры для привлечения удачи, любви, денег и защиты от негативных влияний.",
-                    "button": "Узнать больше"
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о ритуалах и заговорах"
                 },
                 "4": {
                     "title": "Восковая отливка",
                     "text": "Диагностика и снятие негативных воздействий с помощью древнего метода восковой отливки.",
-                    "button": "Узнать больше"
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о восковой отливке"
                 },
                 "5": {
                     "title": "Обереги и амулеты",
                     "text": "Создание индивидуальных защитных оберегов и амулетов для различных жизненных ситуаций.",
-                    "button": "Узнать больше"
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше об оберегах и амулетах"
                 }
             },
             "controls": {
                 "prev": "Предыдущее",
-                "next": "Следующее"
+                "next": "Следующее",
+                "indicator_1": "Посмотреть услугу 1",
+                "indicator_2": "Посмотреть услугу 2",
+                "indicator_3": "Посмотреть услугу 3",
+                "indicator_4": "Посмотреть услугу 4",
+                "indicator_5": "Посмотреть услугу 5"
             }
         },
         "prices": {
@@ -121,7 +136,15 @@
         "footer": {
             "heading": "Свяжитесь со мной",
             "text": "Я здесь, чтобы помочь вам.",
-            "copyright": "© 2025 \"Гадалкина Избушка\" Сайт сделан в качестве дипломного проекта Автор: Владимир Карин."
+            "copyright": "© 2025 \"Гадалкина Избушка\" Сайт сделан в качестве дипломного проекта Автор: Владимир Карин.",
+            "social": {
+                "facebook": "Посетите нашу страницу на Facebook",
+                "instagram": "Посетите нашу страницу в Instagram",
+                "vkontakte": "Посетите нашу страницу ВКонтакте",
+                "telegram": "Напишите нам в Telegram",
+                "viber": "Напишите нам в Viber",
+                "whatsapp": "Напишите нам в WhatsApp"
+            }
         },
         "popups": {
             "1": {
@@ -185,7 +208,12 @@
             "days": "d.",
             "hours": "val.",
             "minutes": "min.",
-            "seconds": "s."
+            "seconds": "s.",
+            "aria_days": "dienų",
+            "aria_hours": "valandų",
+            "aria_minutes": "minučių",
+            "aria_seconds": "sekundžių",
+            "aria_remaining": "liko"
         },
         "services": {
             "heading": "Paslaugos",
@@ -193,32 +221,42 @@
                 "1": {
                     "title": "Būrimas kortomis",
                     "text": "Klasikinis būrimas naudojant įvairias kortų sistemą tikslioms ateities prognozėms.",
-                    "button": "Sužinoti daugiau"
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie kortų būrimą"
                 },
                 "2": {
                     "title": "Taro dėlionė",
                     "text": "Gili situacijų analizė Taro kortomis, atskleidžianti paslėptus aspektus ir galimus kelius.",
-                    "button": "Sužinoti daugiau"
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie Taro dėlionę"
                 },
                 "3": {
                     "title": "Ritualai ir užkalbėjimai",
                     "text": "Senoviniai ritualai ir užkalbėjimai sėkmei, meilei, pinigams pritraukti ir apsaugai nuo negatyvo.",
-                    "button": "Sužinoti daugiau"
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie ritualus"
                 },
                 "4": {
                     "title": "Vaško liejimas",
                     "text": "Diagnostika ir negatyvių poveikių nuėmimas senoviniu vaško liejimo metodu.",
-                    "button": "Sužinoti daugiau"
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie vaško liejimą"
                 },
                 "5": {
                     "title": "Amuletai ir talismanai",
                     "text": "Individualių apsauginių amuletų ir talismanų kūrimas įvairioms gyvenimo situacijoms.",
-                    "button": "Sužinoti daugiau"
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie amuletus"
                 }
             },
             "controls": {
                 "prev": "Ankstesnis",
-                "next": "Kitas"
+                "next": "Kitas",
+                "indicator_1": "Peržiūrėti 1 paslaugą",
+                "indicator_2": "Peržiūrėti 2 paslaugą",
+                "indicator_3": "Peržiūrėti 3 paslaugą",
+                "indicator_4": "Peržiūrėti 4 paslaugą",
+                "indicator_5": "Peržiūrėti 5 paslaugą"
             }
         },
         "prices": {
@@ -268,7 +306,15 @@
         "footer": {
             "heading": "Susisiekite su manimi",
             "text": "Aš čia, kad jums padėčiau.",
-            "copyright": "© 2025 \"Gerosios Fėjos kampelis\""
+            "copyright": "© 2025 \"Gerosios Fėjos kampelis\"",
+            "social": {
+                "facebook": "Aplankykite mūsų Facebook puslapį",
+                "instagram": "Aplankykite mūsų Instagram puslapį",
+                "vkontakte": "Aplankykite mūsų VK puslapį",
+                "telegram": "Rašykite mums į Telegram",
+                "viber": "Rašykite mums į Viber",
+                "whatsapp": "Rašykite mums į WhatsApp"
+            }
         },
         "popups": {
             "1": {
