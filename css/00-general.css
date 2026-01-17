@@ -113,6 +113,17 @@
     --transition-fast: 0.2s ease;
     --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* restored missing variables */
+    --border-radius-button: 8px 30px 8px 30px;
+    --color-light-text: hsl(280, 10%, 95%);
+    --btn-gradient: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-highlight) 100%);
+    
+    /* NEW: Mystic background system (Picture 1 style) */
+    --main-background-gradient: 
+        radial-gradient(circle at 10% 20%, rgba(142, 68, 173, 0.15), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(52, 152, 219, 0.1), transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(10, 5, 20, 1) 0%, rgba(5, 2, 10, 1) 100%);
 }
 
 /* ===================================
@@ -150,17 +161,16 @@ body {
    =================================== */
 
 /* 
-   ⚠️ DEPRECATED: Legacy gradient container
-   This class was used for full-page background gradients
-   Consider removing if not in use
+   ⚠️ REFINED: Background gradient system
+   Creates the 'Picture 1' misty effect
 */
 .background-gradient-container {
-    background-image: var(
-        --main-background-gradient
-    ); /* 12-stop purple gradient */
-    background-size: cover; /* Cover entire viewport */
-    background-repeat: no-repeat; /* Don't repeat gradient */
-    background-position: center; /* Center the gradient */
+    background-image: var(--main-background-gradient);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    width: 100%;
+    position: relative;
+    z-index: 0;
 }
 
 /* ===================================
