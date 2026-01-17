@@ -1,731 +1,283 @@
 /* ================================================
-   🌍 LANGUAGE SELECTION SECTION - Splash Page Styles
-   ================================================
-   
-   📋 TABLE OF CONTENTS:
-   1. Reset & Base Styles (Scoped to Language Page)
-   2. Animated Background - Twinkling Stars
-   3. Main Container - Language Selector Card
-   4. Logo & Floating Animation
-   5. Typography - Heading & Subheading
-   6. Language Selection Cards
-   7. Language Code Circles - RU / LT Display
-   8. Loading States - Button Feedback
-   9. Footer Text - Service Tagline
-   10. Mobile Responsive Design
-   11. Accessibility Enhancements
-   12. Debug Utilities
-   
-   ⚡ KEY FEATURES:
-   - Scoped styles (only affect .language-selection-page)
-   - Animated starfield background
-   - Floating logo animation
-   - Interactive language cards with hover effects
-   - Full accessibility support
-   - Mobile-optimized layout
-*/
+   🌍 LANGUAGE SELECTION SECTION - PREMIUM MYSTIC THEME
+   ================================================ */
 
 /* ===================================
-   1️⃣ RESET & BASE STYLES - SCOPED TO LANGUAGE PAGE ONLY
+   1️⃣ RESET & BASE STYLES
    =================================== */
-
-/* 
-   ✅ CRITICAL FIX: Only apply reset to language selection page
-   Prevents styles from affecting main site pages
-*/
 .language-selection-page * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* 
-   Base container for language selection splash page
-   Full-screen purple gradient background with centered content
-*/
 .language-selection-page {
     /* Typography */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-secondary, 'Roboto', sans-serif);
+    color: var(--color-text);
 
     /* Layout */
-    min-height: 100vh; /* Full viewport height */
+    min-height: 100vh;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center;
+    align-items: center;
 
-    /* Visual styling */
-    background: linear-gradient(
-        to bottom,
-        #5d2f80 0%,
-        #4a206f 100%
-    ); /* Purple gradient */
-    overflow: hidden; /* Hide overflow for star animations */
+    /* PREMIUM VISUALS */
+    background-image: url('../img/02-hero-section/hero-bg-mystic-table.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: var(--color-background); /* Fallback */
+    
+    overflow: hidden;
+    position: relative;
+}
 
-    /* Positioning */
-    position: relative; /* Context for absolute positioned children */
+/* Dark overlay to ensure text readability against the detailed background */
+.language-selection-page::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(10, 5, 20, 0.4) 0%, rgba(10, 5, 20, 0.8) 100%);
+    z-index: 0;
+    pointer-events: none;
 }
 
 /* ===================================
-   2️⃣ ANIMATED BACKGROUND - TWINKLING STARS
+   2️⃣ ANIMATED BACKGROUND (STARS)
    =================================== */
-
-/* 
-   Background animation container
-   Houses all animated star elements
-*/
 .language-selection-page .background-animation {
     position: absolute;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    z-index: 0; /* Behind content */
+    z-index: 1; /* On top of background image/overlay */
+    pointer-events: none;
 }
 
-/* 
-   Individual star element
-   Small white circles with twinkling animation
-   Stars are generated dynamically by JavaScript
-*/
 .language-selection-page .star {
     position: absolute;
     background: white;
-    border-radius: 50%; /* Circular shape */
-    animation: twinkle 3s infinite ease-in-out; /* Continuous twinkling */
+    border-radius: 50%;
+    animation: twinkle 4s infinite ease-in-out;
+    opacity: 0.6;
 }
 
-/* 
-   Twinkling animation keyframes
-   Creates pulsing opacity and scale effect
-*/
 @keyframes twinkle {
-    0%,
-    100% {
-        opacity: 0.3; /* Dim */
-        transform: scale(1); /* Normal size */
-    }
-    50% {
-        opacity: 1; /* Bright */
-        transform: scale(1.2); /* Slightly larger */
-    }
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 0.8; transform: scale(1.2); }
 }
 
 /* ===================================
-   3️⃣ MAIN CONTAINER - LANGUAGE SELECTOR CARD
+   3️⃣ MAIN CONTAINER - GLASS CARD
    =================================== */
-
-/* 
-   Central language selector card
-   Contains logo, text, and language buttons
-*/
 .language-selection-page .language-selector {
-    /* Positioning */
     position: relative;
-    z-index: 10; /* Above background animation */
-
-    /* Layout */
+    z-index: 10;
     text-align: center;
-    max-width: 500px; /* Limit width on large screens */
-    width: 90%; /* Responsive width */
+    max-width: 600px;
+    width: 90%;
+    padding: 4rem 3rem;
 
-    /* Spacing */
-    padding: 3rem 2rem;
+    /* GLASSMORPHISM */
+    background: rgba(15, 10, 30, 0.6); /* Darker glass */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 
-    /* Visual styling */
-    background: #f2f2f2; /* Light gray background */
-    border-radius: 20px; /* Rounded corners */
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Dramatic shadow for depth */
-
-    /* Animation */
-    animation: fadeInScale 0.8s ease-out; /* Entrance animation */
+    animation: fadeUp 1s ease-out;
 }
 
-/* 
-   Card entrance animation
-   Fades in and scales up from 80% to 100%
-*/
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.8); /* Start smaller */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1); /* End at natural size */
-    }
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===================================
-   4️⃣ LOGO & FLOATING ANIMATION
+   4️⃣ LOGO & ANIMATION
    =================================== */
-
-/* 
-   Logo container with floating animation
-   Creates gentle up-and-down movement
-*/
 .language-selection-page .logo-container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-bottom: 2rem; /* Space below logo */
-    animation: floatAnimation 3s ease-in-out infinite; /* Continuous floating */
+    margin-bottom: 2rem;
+    animation: levitate 6s ease-in-out infinite;
 }
 
-/* 
-   Floating animation keyframes
-   Gentle vertical movement effect
-*/
-@keyframes floatAnimation {
-    0%,
-    100% {
-        transform: translateY(0px); /* Natural position */
-    }
-    50% {
-        transform: translateY(-10px); /* Float up 10px */
-    }
-}
-
-/* 
-   Logo image styling
-   Circular logo with shadow
-*/
 .language-selection-page .logo-lang {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* Circular shape */
-    object-fit: cover; /* Crop to fill circle */
-    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.2); /* Purple-tinted shadow */
+    width: 140px;
+    height: auto;
+    object-fit: contain;
+    
+    /* White + Gold Glow Style */
+    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
+    animation: logoPulse 3s ease-in-out infinite;
 }
 
 /* ===================================
-   5️⃣ TYPOGRAPHY - HEADING & SUBHEADING
+   5️⃣ TYPOGRAPHY
    =================================== */
-
-/* 
-   Main heading - "Choose Your Language" style
-   Large, bold, gradient text
-*/
 .language-selection-page .heading {
-    font-size: 2rem;
-    color: #333; /* Fallback color */
+    font-family: var(--font-primary, 'Montserrat', sans-serif);
+    font-size: 3.2rem;
+    font-weight: 800;
     margin-bottom: 1rem;
-    font-weight: 600; /* Semi-bold */
-
-    /* Gradient text effect */
-    background: linear-gradient(135deg, #4a206f 0%, #764ba2 100%);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    
+    /* Gold Gradient Text */
+    background: var(--gradient-gold);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
 }
 
-/* 
-   Subheading text
-   Smaller descriptive text below heading
-*/
 .language-selection-page .subheading {
-    font-size: 1.1rem;
-    color: #333;
-    margin-bottom: 2.5rem; /* Space before language buttons */
-    font-weight: 400; /* Normal weight */
+    font-size: 1.4rem;
+    color: var(--color-text-muted);
+    margin-bottom: 4rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
 }
 
 /* ===================================
-   6️⃣ LANGUAGE SELECTION CARDS
+   6️⃣ LANGUAGE BUTTONS
    =================================== */
-
-/* 
-   Container for language selection buttons
-   Horizontal layout with wrapping support
-*/
 .language-selection-page .language-buttons {
     display: flex;
-    gap: 1.5rem; /* Space between buttons */
-    justify-content: center; /* Center buttons */
-    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-/* 
-   Individual language selection button
-   Large interactive card with icon and label
-*/
 .language-selection-page .language-btn {
-    /* Layout */
     display: flex;
-    flex-direction: column; /* Stack icon and text vertically */
+    flex-direction: column;
     align-items: center;
-    gap: 1rem; /* Space between icon and text */
+    gap: 1.5rem;
+    padding: 3rem 4rem;
+    min-width: 180px;
 
-    /* Sizing */
-    padding: 2rem 2.5rem;
-    min-width: 160px; /* Minimum button width */
-
-    /* Visual styling */
-    background: white;
-    border: 3px solid #e0e0e0; /* Light gray border */
-    border-radius: 15px;
-
-    /* Reset link styles */
+    /* Glass Effect Buttons */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    
     text-decoration: none;
-    color: #333;
+    color: var(--color-text);
     cursor: pointer;
-
-    /* Positioning */
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     position: relative;
-    overflow: hidden; /* Clip shine effect */
-
-    /* Animation */
-    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
-/* 
-   Shine effect on language button
-   Animated gradient sweep from left to right
-*/
-.language-selection-page .language-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%; /* Start off-screen left */
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(102, 126, 234, 0.1),
-        /* Light blue shine */ transparent
-    );
-    transition: left 0.5s ease;
-}
-
-/* 
-   Trigger shine effect on hover
-   Sweeps gradient across button
-*/
-.language-selection-page .language-btn:hover::before {
-    left: 100%; /* Move to off-screen right */
-}
-
-/* 
-   Language button hover state
-   Lifts button and changes border color
-*/
 .language-selection-page .language-btn:hover {
-    transform: translateY(-5px); /* Lift up 5px */
-    border-color: #4a206f; /* Purple border */
-    box-shadow: 0 10px 30px rgba(74, 32, 111, 0.302); /* Purple shadow */
-}
-
-/* 
-   Language button active state
-   Provides feedback when clicked
-*/
-.language-selection-page .language-btn:active {
-    transform: translateY(-2px); /* Slight lift */
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-accent);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
 }
 
 /* ===================================
-   7️⃣ LANGUAGE CODE CIRCLES - RU / LT DISPLAY
+   7️⃣ FLAG CIRCLES
    =================================== */
-
-/* 
-   Circular container for language code
-   Displays "RU" or "LT" with gradient background
-*/
 .language-selection-page .flag-circle {
-    /* Layout */
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* Sizing */
-    width: 120px;
-    height: 120px;
-
-    /* Visual styling */
-    border-radius: 50%; /* Perfect circle */
-    overflow: hidden; /* Clip content to circle */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
-    background: linear-gradient(
-        135deg,
-        #f2e7f2 0%,
-        #b68cb8 100%
-    ); /* Purple gradient */
-
-    /* Animation */
-    transition: all 0.3s ease;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--color-accent);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    
+    transition: all 0.4s ease;
 }
 
-/* 
-   Language code text (RU / LT)
-   Large, bold letters in center of circle
-*/
 .language-selection-page .flag-code {
-    /* Positioning */
-    position: relative;
-    z-index: 2; /* Above background */
-
-    /* Typography */
-    font-size: 2.4rem;
-    font-weight: 700; /* Bold */
-    color: #713e92; /* Dark purple */
-    letter-spacing: 2px; /* Space between letters */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Text depth */
-
-    /* Animation */
-    transition: all 0.3s ease;
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 1px;
 }
 
-/* 
-   Circle hover effect
-   Scales up and enhances shadow
-*/
 .language-selection-page .language-btn:hover .flag-circle {
-    transform: scale(1.1); /* 10% larger */
-    box-shadow: 0 6px 20px rgba(74, 32, 111, 0.4); /* Deeper purple shadow */
+    background: var(--color-accent);
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
 }
 
-/* 
-   Language code hover effect
-   Scales text and enhances shadow
-*/
 .language-selection-page .language-btn:hover .flag-code {
-    transform: scale(1.1); /* 10% larger */
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7); /* Deeper shadow */
+    color: var(--color-primary); /* Dark text on gold bg */
 }
 
-/* 
-   Language name label
-   Text below the circle (e.g., "Русский", "Lietuvių")
-*/
+/* ===================================
+   8️⃣ BUTTON TEXT
+   =================================== */
 .language-selection-page .language-name {
-    font-size: 1.2rem;
-    font-weight: 600; /* Semi-bold */
-    color: #333;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     transition: color 0.3s ease;
 }
 
-/* 
-   Language name hover effect
-   Changes color to purple
-*/
 .language-selection-page .language-btn:hover .language-name {
-    color: #713e92; /* Purple text */
+    color: var(--color-accent);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 /* ===================================
-   8️⃣ LOADING STATES - BUTTON FEEDBACK
+   9️⃣ FOOTER
    =================================== */
-
-/* 
-   Loading state for language button
-   Applied when user clicks and language is loading
-*/
-.language-selection-page .language-btn.loading {
-    pointer-events: none; /* Disable interactions */
-    opacity: 0.6; /* Faded appearance */
-}
-
-/* 
-   Loading animation on circle
-   Pulsing effect to indicate activity
-*/
-.language-selection-page .language-btn.loading .flag-circle {
-    animation: pulse 1s infinite; /* Continuous pulsing */
-}
-
-/* 
-   Pulse animation keyframes
-   Gentle scale in/out effect
-*/
-@keyframes pulse {
-    0%,
-    100% {
-        transform: scale(1); /* Normal size */
-    }
-    50% {
-        transform: scale(1.05); /* Slightly larger */
-    }
-}
-
-/* ===================================
-   9️⃣ FOOTER TEXT - SERVICE TAGLINE
-   =================================== */
-
-/* 
-   Footer text below language buttons
-   Service tagline or additional information
-*/
 .language-selection-page .footer-text {
-    margin-top: 2rem; /* Space above footer */
-    font-size: 1.6rem;
-    color: #4a206f; /* Purple text */
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 /* ===================================
-   🔟 MOBILE RESPONSIVE DESIGN
+   🔟 RESPONSIVE
    =================================== */
-
-/* 
-   📱 MOBILE (≤600px)
-   Optimizations for mobile devices
-*/
 @media (max-width: 600px) {
-    /* Reduce card padding */
     .language-selection-page .language-selector {
-        padding: 2rem 1.5rem;
+        padding: 3rem 2rem;
+        width: 95%;
     }
 
-    /* Smaller logo on mobile */
+    .language-selection-page .heading {
+        font-size: 2.4rem;
+    }
+
     .language-selection-page .logo-lang {
         width: 100px;
-        height: 100px;
     }
 
-    /* Smaller heading */
-    .language-selection-page .heading {
-        font-size: 1.5rem;
-    }
-
-    /* Smaller subheading */
-    .language-selection-page .subheading {
-        font-size: 1rem;
-    }
-
-    /* Stack buttons vertically on mobile */
     .language-selection-page .language-buttons {
-        flex-direction: column; /* Vertical stacking */
-        gap: 1rem; /* Reduce gap */
+        gap: 1.5rem;
     }
 
-    /* Full-width buttons on mobile */
     .language-selection-page .language-btn {
-        width: 100%; /* Full width */
-        min-width: unset; /* Remove minimum width */
-        padding: 1.5rem 2rem; /* Adjust padding */
+        width: 100%;
+        flex-direction: row; /* Horizontal on mobile for better touch targets */
+        padding: 1.5rem 2rem;
+        justify-content: flex-start;
     }
 
-    /* Smaller language circles on mobile */
     .language-selection-page .flag-circle {
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
     }
 
-    /* Smaller language code text */
     .language-selection-page .flag-code {
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
 }
-
-/* ===================================
-   1️⃣1️⃣ ACCESSIBILITY ENHANCEMENTS
-   =================================== */
-
-/* 
-   ♿ Respect reduced motion preferences
-   Disables animations for users who prefer less motion
-*/
-@media (prefers-reduced-motion: reduce) {
-    .language-selection-page *,
-    .language-selection-page *::before,
-    .language-selection-page *::after {
-        animation-duration: 0.01ms !important; /* Nearly instant */
-        animation-iteration-count: 1 !important; /* Single iteration */
-        transition-duration: 0.01ms !important; /* Nearly instant */
-    }
-
-    /* Disable floating logo animation */
-    .language-selection-page .logo-container {
-        animation: none;
-    }
-
-    /* Disable star twinkling */
-    .language-selection-page .star {
-        animation: none;
-        opacity: 0.5; /* Fixed medium opacity */
-    }
-
-    /* Disable card entrance animation */
-    .language-selection-page .language-selector {
-        animation: none;
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* 
-   ♿ High contrast mode support
-   Improves visibility for users with vision impairments
-*/
-@media (prefers-contrast: high) {
-    /* Stronger borders */
-    .language-selection-page .language-btn {
-        border: 3px solid currentColor;
-    }
-
-    /* Bolder text */
-    .language-selection-page .flag-code,
-    .language-selection-page .language-name {
-        font-weight: 700;
-    }
-
-    /* Remove shine effect in high contrast */
-    .language-selection-page .language-btn::before {
-        display: none;
-    }
-}
-
-/* 
-   ♿ Focus state for keyboard navigation
-   Visible focus indicator for accessibility
-*/
-.language-selection-page .language-btn:focus-visible {
-    outline: 3px solid #713e92; /* Purple outline */
-    outline-offset: 4px; /* Space between button and outline */
-    box-shadow: 0 0 0 6px rgba(113, 62, 146, 0.2); /* Additional glow */
-}
-
-/* ================================================
-   1️⃣2️⃣ DEBUG UTILITIES SECTION
-   ================================================
-   
-   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
-*/
-
-/* ─────────────────────────────────────────────
-   VISUAL LAYOUT DEBUGGING
-   ───────────────────────────────────────────── */
-
-/*
-🎨 Layout Boundaries Visualization:
-Uncomment to see colored borders around elements
-
-body { 
-    border: 5px solid red !important; 
-}
-
-.language-selector { 
-    border: 3px solid blue !important; 
-    background: rgba(255,255,0,0.1) !important;
-}
-
-.language-buttons { 
-    border: 2px solid green !important; 
-}
-
-.language-btn { 
-    border: 2px solid orange !important; 
-}
-
-.flag-circle { 
-    border: 2px solid purple !important; 
-}
-*/
-
-/* ─────────────────────────────────────────────
-   ANIMATION DEBUGGING
-   ───────────────────────────────────────────── */
-
-/*
-🎬 Animation Testing:
-Copy these to console to test different speeds
-
-// Slow down all animations (easier to see):
-document.documentElement.style.setProperty('animation-duration', '5s', 'important');
-document.documentElement.style.setProperty('transition-duration', '2s', 'important');
-
-// Speed up all animations:
-document.documentElement.style.setProperty('animation-duration', '0.1s', 'important');
-document.documentElement.style.setProperty('transition-duration', '0.1s', 'important');
-
-// Reset to normal:
-document.documentElement.style.removeProperty('animation-duration');
-document.documentElement.style.removeProperty('transition-duration');
-*/
-
-/* ─────────────────────────────────────────────
-   STAR DEBUGGING
-   ───────────────────────────────────────────── */
-
-/*
-⭐ Star Visualization:
-Make stars more visible for debugging
-
-.star {
-    background: red !important;
-    opacity: 1 !important;
-    width: 10px !important;
-    height: 10px !important;
-    animation: none !important;
-}
-*/
-
-/* ─────────────────────────────────────────────
-   RESPONSIVE BREAKPOINT TESTING
-   ───────────────────────────────────────────── */
-
-/*
-📐 Current Breakpoint Checker:
-Copy this to console to see which layout is active:
-
-const width = window.innerWidth;
-const isMobile = width <= 600;
-console.log('Screen width:', width + 'px');
-console.log('Layout:', isMobile ? 'Mobile (≤600px)' : 'Desktop (>600px)');
-console.log('Buttons:', isMobile ? 'Vertical stack' : 'Horizontal row');
-*/
-
-/* ─────────────────────────────────────────────
-   STATE TESTING
-   ───────────────────────────────────────────── */
-
-/*
-🔄 Test Loading State:
-Copy this to console to manually trigger loading state:
-
-const button = document.querySelector('.language-btn');
-button.classList.add('loading');
-
-// Remove after 3 seconds:
-setTimeout(() => button.classList.remove('loading'), 3000);
-*/
-
-/* ─────────────────────────────────────────────
-   END OF DEBUG UTILITIES
-   ───────────────────────────────────────────── */
-
-/* ================================================
-   📝 USAGE NOTES & TIPS
-   ================================================
-   
-   🎨 COLOR CUSTOMIZATION:
-   Main colors used in this file:
-   - #5d2f80, #4a206f: Background gradient (dark purple)
-   - #713e92: Language code text and accents
-   - #f2f2f2: Main card background (light gray)
-   - #e0e0e0: Button borders (light gray)
-   - white: Button backgrounds
-   
-   🎬 ANIMATION TUNING:
-   Key animation durations:
-   - Stars twinkle: 3s
-   - Logo float: 3s
-   - Card entrance: 0.8s
-   - Hover transitions: 0.3s
-   - Loading pulse: 1s
-   
-   📱 BREAKPOINTS:
-   - Mobile: ≤600px (single column, reduced sizes)
-   - Desktop: >600px (horizontal layout, full sizes)
-   
-   ♿ ACCESSIBILITY CHECKLIST:
-   ✅ Keyboard navigation supported
-   ✅ Focus states visible
-   ✅ Reduced motion respected
-   ✅ High contrast mode supported
-   ✅ Color contrast meets WCAG AA standards
-   
-   🔗 RELATED FILES:
-   - index.html: HTML structure
-   - language-selection-page.js: Star generation & interactions
-   - style.css: Main stylesheet (imports this file)
-*/
