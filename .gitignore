@@ -135,3 +135,6 @@ js/backup/
 js/debug/
 js/documentation/
 css/backup/
+
+# Agent files
+agents/
