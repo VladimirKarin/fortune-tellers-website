@@ -79,7 +79,12 @@
 
     /* Visual styling */
     color: var(--color-text); /* Dark purple text from general.css */
-    box-shadow: var(--shadow-light); /* Subtle depth shadow */
+    /* PREMIUM FIX: Semi-transparent background for contrast against dark theme */
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for definition */
+
     border-radius: var(
         --border-radius-button
     ); /* Unique asymmetrical corners */
@@ -95,12 +100,33 @@
 
     /* Interaction feedback */
     cursor: default; /* Reset cursor */
+
+    /* Pulse Animation for "Living" feel */
+    animation: shadowPulse 4s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+    0% {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 15px 50px rgba(142, 68, 173, 0.2); /* Subtle purple glow */
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
 }
 
 /* Optional hover effect for cards */
 .about-me-card:hover {
-    box-shadow: var(--shadow-hover); /* Elevated shadow on hover */
-    transform: translateY(-4px); /* Slight lift effect */
+    animation: none; /* Stop pulse on hover to focus */
+    box-shadow: 0 20px 60px rgba(212, 175, 55, 0.25); /* Gold glow on hover */
+    border-color: rgba(212, 175, 55, 0.5); /* Gold border hint */
+    transform: translateY(-8px); /* Higher lift effect */
+    background: rgba(255, 255, 255, 0.08); /* Slightly brighter */
 }
 
 /* ===================================
@@ -194,7 +220,8 @@
     font-size: clamp(1.8rem, 2vw, 2rem); /* Responsive title size */
     font-weight: 600; /* Semi-bold */
     margin-bottom: var(--spacing-lg); /* Space before text */
-    color: var(--color-primary); /* Brand purple */
+    color: var(--color-accent); /* Gold for visibility */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 /* Card body text */

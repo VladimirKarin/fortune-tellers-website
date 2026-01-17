@@ -63,9 +63,12 @@
 
     /* 🎨 Special colors - Weekend & Travel highlights */
     --calendar-weekend-color: #e91e63; /* Pink for weekends */
-    --calendar-weekend-bg: rgba(233, 30, 99, 0.2); /* Light pink background */
-    --calendar-travel-bg: hsla(279, 83%, 70%, 0.9); /* Purple for travel days */
-    --calendar-travel-border: hsla(279, 83%, 50%, 1); /* Darker purple border */
+    --calendar-weekend-bg: rgba(233, 30, 99, 0.1); /* Light pink background */
+    
+    /* UPDATED: Harmonized Mystic Colors */
+    --calendar-travel-bg: rgba(212, 175, 55, 0.8); /* Gold background for travel */
+    --calendar-travel-border: #d4af37; /* Gold border */
+    
     --calendar-today-border-width: 3px; /* Thicker border for current day */
 }
 
@@ -402,9 +405,16 @@
    🎯 Travel day hover effect
    Enhanced hover feedback for travel days
 */
+/* 
+   🎯 Travel day hover effect
+   (Disabled as per user request - forced override)
+*/
 .calendar-day--travel:hover {
-    background-color: hsla(279, 83%, 70%, 1); /* Fully opaque purple */
-    transform: translateY(-2px); /* More pronounced lift - 2px */
+    background-color: var(--calendar-travel-bg) !important; /* Force keep Gold */
+    color: #000 !important; /* Force keep Black text */
+    transform: none !important; /* No movement */
+    cursor: default; /* Indicate non-interactive */
+    box-shadow: none !important;
 }
 
 /* 

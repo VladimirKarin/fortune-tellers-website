@@ -142,6 +142,17 @@
     transform: scale(1.05); /* 5% scale increase */
 }
 
+/* 
+   🌕 Moon Image
+   Large moon visualization on the right
+   UPDATED: Added Pulsating Gold Glow
+*/
+.moon-section__image {
+    /* Fixed: Removed brightness(0) invert(1) which was making it a white circle */
+    /* filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));  <-- defined in keyframes now */
+    animation: moonFloat 6s ease-in-out infinite, moonPulse 4s infinite ease-in-out; /* Uses new NO-FILTER animation */
+}
+
 /* ===================================
    4️⃣ INFORMATION GRID SYSTEM
    =================================== */
@@ -171,29 +182,33 @@
     min-width: 0; /* Allow flex items to shrink below content size - prevents overflow */
     padding: var(--moon-card-padding); /* Responsive internal spacing */
     border-radius: var(--border-radius) 0 1.5rem 0; /* Unique asymmetrical corners (matches site style) */
-    background: rgba(
-        244,
-        243,
-        242,
-        0.8
-    ); /* Semi-transparent light background */
-    backdrop-filter: blur(
-        var(--moon-card-blur)
-    ); /* Glassmorphism blur effect */
-    box-shadow: var(--shadow-light); /* Subtle depth shadow */
-    transition: var(--transition-smooth); /* Smooth hover/focus transitions */
-    display: flex;
-    flex-direction: column; /* Stack title and content vertically */
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center-align text */
-    border: 1px solid rgba(255, 255, 255, var(--moon-border-opacity)); /* Subtle border for definition */
-    position: relative; /* For ::before pseudo-element positioning */
+    
+    /* PREMIUM UPDATE: Dark Glassmorphism */
+    background: rgba(20, 10, 40, 0.6); /* Dark semi-transparent */
+    backdrop-filter: blur(10px); /* Glassmorphism blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow */
     overflow: hidden; /* Clip ::before pseudo-element to border-radius */
 }
 
 /* 
+   HOVER EFFECTS DISABLED
+.moon-section__card:hover {
+    transform: translateX(10px);
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+}
+*/
+
+/* 
    🎨 Decorative top accent line
    Appears on card hover as a gradient bar
+*/
+/* 
+   🎨 Decorative top accent line
+   Appears on card hover as a gradient bar
+   (Disabled hover effect as per user request)
 */
 .moon-section__card::before {
     content: '';
@@ -208,25 +223,28 @@
         var(--color-secondary)
     ); /* Purple gradient accent */
     opacity: 0; /* Hidden by default */
-    transition: opacity 0.3s ease; /* Fade in on hover */
 }
 
-/* Show accent line on card hover */
+/* Show accent line on card hover - DISABLED
 .moon-section__card:hover::before {
-    opacity: 1; /* Fade in gradient line */
+    opacity: 1; 
 }
+*/
 
 /* 
    📌 Card title/label
    Small uppercase label for each data point (e.g., "Лунная фаза:")
 */
 .moon-section__card-title {
-    color: var(--color-light-text); /* Light text for readability */
+    color: rgba(255, 255, 255, 0.7); /* Light text for readability */
     margin-bottom: clamp(
         0.8rem,
         2vw,
         1.2rem
     ); /* Responsive spacing below title */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 /* 
@@ -235,7 +253,7 @@
    JavaScript updates these elements with moon phase information
 */
 .moon-section__card-text {
-    color: var(--color-light-text); /* Light text color */
+    color: #ffffff; /* Bright white text */
     font-size: clamp(1.6rem, 3vw, 2rem); /* Responsive font size */
     line-height: 1.4; /* Comfortable line spacing */
     word-wrap: break-word; /* Prevent text overflow */

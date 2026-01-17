@@ -693,3 +693,16 @@ console.log('Current breakpoint:', breakpoint, `(${width}px)`);
     }
 }
 
+/* 5. Moon Glow Pulse (Gold Shadow ONLY - No Color Filter) */
+@keyframes moonPulse {
+    0% {
+        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+    }
+}
+

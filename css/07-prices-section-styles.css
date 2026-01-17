@@ -95,16 +95,17 @@
     margin-top: clamp(2.4rem, 4vw, 3.2rem); /* Space above button */
     padding: clamp(1rem, 2.5vw, 1.2rem) clamp(2rem, 4vw, 2.4rem); /* Responsive padding */
 
-    /* Visual styling - overrides general.css button */
-    background: var(--color-highlight); /* Purple background */
-    color: var(--color-card-bg); /* Light text */
-    border: 3px solid var(--color-footer-bg); /* Purple border */
+    /* Visual styling - PREMIUM GOLD THEME */
+    background: var(--color-accent); /* Gold background */
+    color: var(--color-primary); /* Dark text */
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Subtle light border */
     transition: all var(--transition-smooth); /* Smooth transitions */
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); /* Gold glow */
 
     /* Typography */
     font-size: clamp(1.4rem, 2.5vw, 1.8rem); /* Responsive font size */
-    font-weight: 500; /* Medium weight */
-    font-family: var(--font-secondary); /* Roboto font */
+    font-weight: 600; /* Bold */
+    font-family: var(--font-primary); /* Montserrat font */
 
     /* Accessibility */
     min-height: 44px; /* iOS minimum touch target */
@@ -115,18 +116,18 @@
 
 /* Button focus state for keyboard navigation */
 .prices__button:focus-visible {
-    outline: 3px solid var(--color-highlight); /* Purple focus ring */
+    outline: 3px solid var(--color-accent); /* Gold focus ring */
     outline-offset: 2px; /* Space between button and outline */
     box-shadow: var(--shadow-focus); /* Additional glow effect */
 }
 
 /* Button hover state */
 .prices__button:hover {
-    background: var(--color-footer-bg); /* Darker purple on hover */
-    border: 2px solid var(--color-highlight); /* Swap border color */
-    background-image: var(--btn-gradient); /* Apply gradient overlay */
+    background: #fff; /* White on hover */
+    color: var(--color-primary); /* Dark text */
+    border-color: var(--color-accent); /* Gold border */
     transform: translateY(-2px); /* Lift button slightly */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Elevated shadow */
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6); /* Bright glow */
 }
 
 /* Button active state */
@@ -211,8 +212,12 @@
     border-radius: var(
         --border-radius-button
     ); /* Unique asymmetrical shape (2rem 0 1.5rem 0) */
-    background-color: var(--color-card-bg); /* Light card background */
-    box-shadow: var(--shadow-light); /* Subtle depth shadow */
+    
+    /* PREMIUM FIX: Dark Glassmorphism */
+    background: rgba(20, 10, 40, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
     /* Layout */
     overflow: hidden; /* Clip content to border radius */
@@ -243,18 +248,19 @@
 /* Card title (service name) */
 .prices-card__title {
     font-size: clamp(1.6rem, 2.5vw, 2rem); /* Responsive title size */
-    color: var(--color-text); /* Dark purple text */
+    color: var(--color-accent); /* Gold for Title */
     font-weight: 600; /* Semi-bold */
     margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem); /* Space before price */
     line-height: 1.2; /* Tight line height for headings */
     font-family: var(--font-primary); /* Montserrat font */
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 /* Card text (price) */
 .prices-card__text {
     font-size: clamp(1.4rem, 2vw, 1.6rem); /* Responsive text size */
     line-height: 1.6; /* Comfortable reading line height */
-    color: var(--color-text); /* Dark purple text */
+    color: #e0e0e0; /* Light text */
     margin: 0; /* Remove default margin */
     font-family: var(--font-secondary); /* Roboto font */
 }
@@ -334,10 +340,12 @@
    Visually distinct with border and different background
 */
 .prices-explanation-card {
-    background-color: rgba(155, 91, 182, 0.1); /* Light purple tint */
-    border: 2px solid var(--color-highlight); /* Purple border for emphasis */
+    /* Visual styling */
+    background: rgba(255, 255, 255, 0.03); /* Extremely subtle fill */
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Gold border (Fixed from Pink) */
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--shadow-light);
     padding: clamp(1.6rem, 3vw, 2.4rem); /* Slightly more padding */
-    border-radius: var(--border-radius-small); /* Rounded corners (1rem) */
     margin-top: clamp(1.6rem, 3vw, 2.4rem); /* Extra top spacing */
 
     /* Grid placement: span full width regardless of column count */

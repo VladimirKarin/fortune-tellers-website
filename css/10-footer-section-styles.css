@@ -13,7 +13,7 @@
 .footer-section {
     background: var(--footer-bg);
     padding: var(--spacing-xxl) 0 var(--spacing-lg);
-    border-top: 1px solid var(--glass-border);
+    border-top: 1px solid rgba(212, 175, 55, 0.3); /* Gold border top */
     position: relative;
     overflow: hidden;
 }
@@ -27,10 +27,14 @@
     transform: translateX(-50%);
     width: 60%;
     height: 1px;
-    background: radial-gradient(circle, var(--color-accent) 0%, transparent 100%);
-    opacity: 0.5;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, transparent 100%); /* Stronger Gold Glow */
+    opacity: 0.8;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); /* Ambient light */
 }
 
+/* ===================================
+   HEADER CONTENT
+   =================================== */
 /* ===================================
    HEADER CONTENT
    =================================== */
@@ -41,6 +45,12 @@
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-xl);
     text-align: center;
+    
+    /* FIX: Constrain width and center */
+    max-width: 120rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 var(--spacing-md);
 }
 
 .footer_header__heading {
@@ -126,12 +136,20 @@
 /* ===================================
    COPYRIGHT
    =================================== */
+/* ===================================
+   COPYRIGHT
+   =================================== */
 .footer-copyright-info {
     margin-top: var(--spacing-xl);
     padding-top: var(--spacing-md);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     width: 100%;
     text-align: center;
+    
+    /* FIX: Constrain width and center */
+    max-width: 120rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .copyright-text {
