@@ -9,6 +9,9 @@
 /* ===================================
    HERO CONTAINER
    =================================== */
+/* ===================================
+   HERO CONTAINER
+   =================================== */
 .hero-section {
     position: relative;
     min-height: var(--hero-min-height);
@@ -18,7 +21,11 @@
     padding: var(--spacing-xxl) var(--spacing-lg);
     overflow: hidden;
 
-    /* Background handles by Body Parallax, but we add a vignette overlay */
+    /* PREMIUM BACKGROUND IMAGE */
+    background-image: url('../img/03-hero-section/hero-bg-premium.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Parallax effect */
 }
 
 /* Vignette Overlay for Depth */
