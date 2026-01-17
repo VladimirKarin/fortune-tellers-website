@@ -76,8 +76,8 @@ const UPDATE_INTERVAL = 6 * 60 * 60 * 1000;
  */
 const tripDates = {
     cityRussian: 'Вильнюс', // Vilnius in Russian
-    start: '2025-12-16',
-    end: '2025-12-26',
+    start: '2026-01-19',
+    end: '2026-01-27',
 };
 
 /**
