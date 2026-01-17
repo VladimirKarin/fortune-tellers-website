@@ -167,7 +167,7 @@ function checkSavedLanguage() {
 
             // Brief delay for smooth transition
             setTimeout(() => {
-                window.location.href = `./${savedLanguage}/index.html`;
+                window.location.href = `./home.html`;
             }, REDIRECT_DELAY);
 
             return true;
