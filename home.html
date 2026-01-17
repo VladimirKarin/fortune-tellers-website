@@ -5,7 +5,27 @@
     <!-- META -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Сайт гадалки. Гадание на картах обычных, гадание на таро картах, ритуалы..." data-i18n-attr="content:meta.description">
+    <meta name="description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня." data-i18n-attr="content:meta.description">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="Уголок Доброй Феи | Гадание на картах и Таро">
+    <meta property="og:description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня.">
+    <meta property="og:image" content="https://your-domain.com/img/01-header-section/logo/logoCrop2.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-domain.com/">
+    <meta property="twitter:title" content="Уголок Доброй Феи | Гадание на картах и Таро">
+    <meta property="twitter:description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня.">
+    <meta property="twitter:image" content="https://your-domain.com/img/01-header-section/logo/logoCrop2.png">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://your-domain.com/">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./img/01-header-section/logo/logoCrop2.png" type="image/png">
 
     <!-- FONT -->
     <!-- Montserrat -->
@@ -32,7 +52,23 @@
     </script>
     <script defer type="module" src="./js/script.js"></script>
 
-    <title data-i18n="meta.title">Уголок Доброй Феи</title>
+    <title data-i18n="meta.title">Уголок Доброй Феи | Гадание на картах и Таро</title>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Уголок Доброй Феи",
+      "image": "https://your-domain.com/img/01-header-section/logo/logoCrop2.png",
+      "description": "Профессиональное гадание на картах Таро, ритуалы, снятие негатива.",
+      "priceRange": "50€ - 80€",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "LT"
+      }
+    }
+    </script>
 </head>
 
 <body>
@@ -40,7 +76,7 @@
         <!-- Header + NavMenu -->
         <header class="header">
             <a href="#hero" class="logo" aria-label="Перейти на главную страницу">
-                <img src="./img/01-header-section/logo/logoCrop2.png" alt="Логотип" class="logo__img" />
+                <img src="./img/01-header-section/logo/logoCrop2.png" alt="Логотип Уголок Доброй Феи" class="logo__img" />
             </a>
 
             <nav class="main-nav" aria-label="Основное навигационное меню">
@@ -92,7 +128,7 @@
 
                 <div class="container grid grid--3-cols grid--center-v">
                     <div class="about-me-card">
-                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img">
+                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="Фотография гадалки за работой" class="about-me-card__img">
                         <div class="about-me-card__content">
                             <p class="about-me-card__title" data-i18n="about.card1.title">Кто я такая</p>
                             <p class="about-me-card__text" data-i18n="about.card1.text">
@@ -102,7 +138,7 @@
                     </div>
 
                     <div class="about-me-card">
-                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img">
+                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="Фотография гадалки за работой" class="about-me-card__img">
                         <div class="about-me-card__content">
                             <p class="about-me-card__title" data-i18n="about.card2.title">Как я к этому пришла</p>
                             <p class="about-me-card__text" data-i18n="about.card2.text">
@@ -111,7 +147,7 @@
                         </div>
                     </div>
                     <div class="about-me-card">
-                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img">
+                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="Фотография гадалки за работой" class="about-me-card__img">
                         <div class="about-me-card__content">
                             <p class="about-me-card__title" data-i18n="about.card3.title">Для чего всё это</p>
                             <p class="about-me-card__text" data-i18n="about.card3.text">
@@ -304,7 +340,7 @@
 
                     <div class="moon-section__layout">
                         <div class="moon-section__image-wrapper">
-                            <img class="moon-section__image" src="./img/05-moon-information-section/moon-phase-1-new-moon.png" alt="Moon phase" loading="lazy">
+                            <img class="moon-section__image" src="./img/05-moon-information-section/moon-phase-1-new-moon.png" alt="Фаза луны - Новолуние" loading="lazy">
                         </div>
 
                         <div class="moon-section__grid">
@@ -392,32 +428,32 @@
                         <ul class="footer__list">
                             <li class="footer__item">
                                 <a class="footer__link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/facebook-logo.png" alt="facebook logo" class="social-network-logo" />
+                                    <img src="./img/06-footer-section/social-network-logos/facebook-logo.png" alt="Facebook" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
                                 <a class="footer__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/instagram-logo.png" alt="instagram logo" class="social-network-logo" />
+                                    <img src="./img/06-footer-section/social-network-logos/instagram-logo.png" alt="Instagram" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
                                 <a class="footer__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/vkontakte-logo.png" alt="vk logo" class="social-network-logo" />
+                                    <img src="./img/06-footer-section/social-network-logos/vkontakte-logo.png" alt="ВКонтакте" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
                                 <a class="footer__link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/telegram-logo.png" alt="telegram logo" class="social-network-logo" />
+                                    <img src="./img/06-footer-section/social-network-logos/telegram-logo.png" alt="Telegram" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
                                 <a class="footer__link" href="https://viber.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/viber-logo.png" alt="viber logo" class="social-network-logo" />
+                                    <img src="./img/06-footer-section/social-network-logos/viber-logo.png" alt="Viber" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
                                 <a class="footer__link" href="https://whatsapp.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/whatsapp-logo.png" alt="whatsapp logo" class="social-network-logo" />
+                                    <img src="./img/06-footer-section/social-network-logos/whatsapp-logo.png" alt="WhatsApp" class="social-network-logo" />
                                 </a>
                             </li>
                         </ul>
