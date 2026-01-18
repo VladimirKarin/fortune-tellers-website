@@ -1,0 +1,165 @@
+/* About Me Section */
+.about-me-section .grid--3-cols {
+    /* Равномерно по 3 столбца, без «раздувания» контентом */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-xxl); /* пусть остаётся твой оригинальный gap */
+}
+
+/* Обязательно добавляем, чтобы карточки не «расширялись» под содержимое */
+.about-me-section .grid--3-cols > .about-me-card {
+    min-width: 0;
+}
+
+.about-me-section__heading {
+    text-align: left;
+}
+
+/* Карточки */
+.about-me-card {
+    max-width: clamp(30rem, 90%, 40rem); /* ограничиваем ширину */
+    width: 100%;
+    color: var(--color-text);
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+    border-radius: 2rem 0 1.5rem 0;
+    overflow: hidden;
+    margin: 0 auto; /* центрируем при одной колонке */
+
+    /* АНИМАЦИЯ: Начальное состояние - невидимые карточки */
+    opacity: 0;
+    transform: translateY(50px); /* НАСТРОЙКА: расстояние движения - 50px */
+    transition: all 0.75s ease-out; /* НАСТРОЙКА: продолжительность анимации - 0.75s, тип easing - ease-out */
+}
+
+/* АНИМАЦИЯ: Состояния для разных направлений появления */
+.about-me-card.animate-from-bottom-left {
+    transform: translate(-30px, 50px);
+}
+
+.about-me-card.animate-from-bottom {
+    transform: translateY(50px);
+}
+
+.about-me-card.animate-from-bottom-right {
+    transform: translate(30px, 50px);
+}
+
+/* АНИМАЦИЯ: Финальное состояние - видимые карточки */
+.about-me-card.animate-in {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* АНИМАЦИЯ: Задержки для staggered эффекта */
+.about-me-card:nth-child(1).animate-in {
+    transition-delay: 0s; /* НАСТРОЙКА: первый блок без задержки */
+}
+
+.about-me-card:nth-child(2).animate-in {
+    transition-delay: 0.3s; /* НАСТРОЙКА: задержка между блоками - 0.3s */
+}
+
+.about-me-card:nth-child(3).animate-in {
+    transition-delay: 0.6s; /* НАСТРОЙКА: задержка для третьего блока - 0.6s */
+}
+
+/* Изображение */
+.about-me-card__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Контент карточки */
+.about-me-card__content {
+    background-color: var(--color-card-bg);
+    padding: 2.4rem 3.6rem 3.6rem;
+}
+
+.about-me-card__title {
+    font-size: clamp(1.8rem, 2vw, 2rem);
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+}
+
+.about-me-card__text {
+    text-align: center;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    line-height: 1.6;
+}
+
+/* Убираем абсолютные позиционирования старых стрелок/лого */
+
+.about-me-img {
+    display: none !important;
+    position: relative;
+    width: 75%;
+    height: 75%;
+}
+
+/* RESPONSIVE STYLES */
+
+/* Ultra-wide screens */
+@media (min-width: 1201px) {
+    /* About Me: 3 columns */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6.4rem;
+    }
+}
+
+/* Desktop: 992px - 1200px */
+@media (min-width: 992px) and (max-width: 1200px) {
+    /* About Me: 3 columns */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(2rem, 5vw, 6.4rem);
+    }
+}
+
+/* Tablet and Mobile: ≤ 991px */
+@media (max-width: 991px) {
+    /* About Me: 2 columns, center 3rd */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(2rem, 5vw, 6.4rem);
+    }
+
+    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        max-width: clamp(30rem, 70%, 40rem);
+        min-width: 0;
+    }
+}
+
+/* Tablet Portrait: 600px - 767px */
+@media (max-width: 767px) {
+    /* About Me: 2 columns */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(2rem, 5vw, 6.4rem);
+    }
+
+    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        max-width: clamp(30rem, 70%, 40rem);
+        min-width: 0;
+    }
+}
+
+/* Mobile (≤ 599px) */
+@media (max-width: 599px) {
+    /* About Me: 1 column */
+    .about-me-section .grid--3-cols {
+        grid-template-columns: 1fr;
+        gap: clamp(2rem, 5vw, 4rem);
+    }
+
+    .about-me-section .grid--3-cols > .about-me-card:nth-child(3) {
+        grid-column: initial;
+        justify-self: initial;
+        max-width: clamp(30rem, 90%, 40rem);
+    }
+}

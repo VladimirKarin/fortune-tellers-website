@@ -1,0 +1,541 @@
+/* ================================================
+   🦸 HERO SECTION - Full-Screen Landing Banner
+   ================================================
+   
+   📋 TABLE OF CONTENTS:
+   1. CSS Variables (Hero Configuration)
+   2. Hero Container & Layout
+   3. Hero Content Styling
+   4. Hero Typography
+   5. Hero Button Styling
+   6. Responsive Breakpoints (Simplified)
+   7. Accessibility Enhancements
+   8. Debug Utilities
+*/
+
+/* ===================================
+   1️⃣ CSS VARIABLES - HERO CONFIGURATION
+   =================================== */
+
+:root {
+    /* 🎨 Hero section visual customization */
+    --hero-min-height: 100vh; /* Minimum section height */
+    --hero-min-height-mobile: 100dvh; /* Dynamic viewport height for mobile */
+    --hero-bg-fallback: var(
+        --color-section-bg
+    ); /* Fallback color while image loads */
+    --hero-overlay-opacity: 0.3; /* Optional: for background overlay */
+
+    /* 📐 Hero content spacing */
+    --hero-content-margin-top: var(--spacing-huge); /* Top spacing (64px) */
+    --hero-content-margin-left: var(--spacing-xl); /* Left spacing (48px) */
+    --hero-content-max-width: 60rem; /* Maximum content width */
+    --hero-content-padding-x: clamp(
+        2rem,
+        5vw,
+        8rem
+    ); /* Horizontal padding (responsive) */
+
+    /* ✏️ Hero typography scaling */
+    --hero-heading-size: clamp(
+        3rem,
+        6vw,
+        4.4rem
+    ); /* Heading font size (responsive) */
+    --hero-text-size: clamp(
+        1.4rem,
+        2vw,
+        2rem
+    ); /* Body text size (responsive) */
+    --hero-text-line-height: 1.5; /* Comfortable reading line height */
+
+    /* 🔘 Hero button styling */
+    --hero-button-padding: clamp(1rem, 2vw, 2.4rem) clamp(2rem, 4vw, 3.6rem); /* Button padding */
+    --hero-button-font-size: clamp(1.2rem, 2vw, 2rem); /* Button text size */
+    --hero-button-gap: clamp(
+        1rem,
+        2vw,
+        3.6rem
+    ); /* Gap between multiple buttons */
+    --hero-button-transition: all 0.8s ease-in-out; /* Button hover transition */
+}
+
+/* ===================================
+   2️⃣ HERO CONTAINER & LAYOUT
+   =================================== */
+
+/* 
+   🔄 TRANSLATED: Base styles for large and medium screens
+   Original: "Базовые стили для больших и средних экранов"
+*/
+.hero-section {
+    /* Container sizing */
+    max-width: 193rem; /* 1930px maximum width for ultra-wide screens */
+    min-height: var(
+        --hero-min-height
+    ); /* 🔄 TRANSLATED: "заменили height на min-height" */
+
+    /* Flexbox layout for content positioning */
+    display: flex;
+    justify-content: flex-start; /* Align content to left */
+    align-items: flex-start; /* Align content to top */
+
+    /* Centering and spacing */
+    margin: 0 auto;
+    padding: clamp(4rem, 8vw, 8rem) 0; /* Responsive vertical padding */
+
+    /* Background styling */
+    background-color: var(
+        --hero-bg-fallback
+    ); /* Fallback color before image loads */
+    background-image: url(../img/02-hero-section/hero-img-2.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* Cover entire container */
+
+    /* Performance optimization */
+    will-change: transform; /* Hint browser for better performance */
+}
+
+/* Optional: Add semi-transparent overlay for better text readability */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, var(--hero-overlay-opacity));
+    pointer-events: none; /* Allow clicks through overlay */
+    opacity: 0; /* Disabled by default - change to 1 to enable */
+}
+
+/* ===================================
+   3️⃣ HERO CONTENT STYLING
+   =================================== */
+
+/* Content wrapper container */
+.hero__content {
+    /* Layout */
+    text-align: left; /* Left-align all text */
+    position: relative; /* Stack above optional overlay */
+    z-index: 1; /* Ensure content is above overlay */
+
+    /* Spacing - using CSS variables */
+    margin: var(--hero-content-margin-top) 0 0 var(--hero-content-margin-left);
+    padding: 0 var(--hero-content-padding-x);
+
+    /* Width constraints for readability */
+    max-width: clamp(30rem, 60%, var(--hero-content-max-width));
+
+    /* Typography */
+    color: var(--color-light-text); /* Light text color for dark background */
+}
+
+/* Button container */
+.hero__buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+    gap: var(--hero-button-gap); /* Space between buttons */
+    margin: 0; /* Reset default margins */
+}
+
+/* ===================================
+   4️⃣ HERO TYPOGRAPHY
+   =================================== */
+
+/* Primary heading - main hero title */
+.hero__heading-primary {
+    /* Typography */
+    font-size: var(--hero-heading-size); /* Responsive font size via clamp() */
+    font-weight: 700; /* Bold for emphasis */
+    text-transform: uppercase; /* All caps for impact */
+    line-height: 1.1; /* Tight line height for headings */
+    letter-spacing: 0.5px; /* Slight spacing for readability */
+
+    /* Spacing */
+    margin-bottom: clamp(1rem, 4vw, 2rem); /* Responsive bottom margin */
+
+    /* Visual enhancement */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Depth on background image */
+    color: var(--color-light-text); /* Consistent light text */
+}
+
+/* Hero description text */
+.hero__text {
+    /* Typography */
+    font-size: var(--hero-text-size); /* Responsive body text */
+    line-height: var(--hero-text-line-height); /* Comfortable reading */
+    font-family: var(--font-secondary); /* Roboto for body text */
+
+    /* Spacing */
+    margin-bottom: clamp(2rem, 4vw, 6rem); /* Space before buttons */
+
+    /* Visual */
+    color: var(--color-light-text); /* Light text */
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); /* Subtle depth */
+}
+
+/* ===================================
+   5️⃣ HERO BUTTON STYLING
+   =================================== */
+
+/* Primary call-to-action button */
+.hero__button {
+    /* Sizing */
+    padding: var(--hero-button-padding); /* Responsive padding */
+    font-size: var(--hero-button-font-size); /* Responsive font */
+
+    /* Visual styling */
+    background: var(--color-highlight); /* Bright purple background */
+    color: var(--color-card-bg); /* Light text color */
+    border: 3px solid var(--color-footer-bg); /* Purple border */
+    border-radius: var(--border-radius-button); /* Unique asymmetrical shape */
+
+    /* Interaction */
+    cursor: pointer; /* Indicate clickability */
+    transition: var(--hero-button-transition); /* Smooth hover effect */
+
+    /* Accessibility */
+    min-height: 44px; /* iOS minimum touch target */
+
+    /* Typography */
+    font-family: var(--font-secondary); /* Consistent font */
+    font-weight: 600; /* Semi-bold for emphasis */
+    text-transform: uppercase; /* All caps for buttons */
+    letter-spacing: 0.5px; /* Slight spacing */
+}
+
+/* Button hover state */
+.hero__button:hover {
+    /* Visual transformation */
+    background-image: var(--btn-gradient); /* Gradient on hover */
+    border-color: var(--color-highlight); /* Change border color */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: var(--shadow-hover); /* Add depth shadow */
+
+    /* Brightness enhancement */
+    filter: brightness(1.1); /* Slightly brighter */
+}
+
+/* Button focus state for keyboard navigation */
+.hero__button:focus-visible {
+    outline: 2px solid var(--color-light-text); /* Visible focus ring */
+    outline-offset: 3px; /* Space from button */
+    box-shadow: var(--shadow-focus); /* Focus glow */
+}
+
+/* Button active state */
+.hero__button:active {
+    transform: translateY(0); /* Return to original position */
+    filter: brightness(0.95); /* Slightly darker when clicked */
+}
+
+/* ===================================
+   6️⃣ RESPONSIVE BREAKPOINTS (SIMPLIFIED)
+   =================================== */
+
+/* 
+   🎯 OPTIMIZED: Reduced from 6 breakpoints to 4 for consistency
+   Aligns with site standard: 1200px, 768px, 480px + default
+   Removed clamp() overrides - let clamp() handle responsive sizing
+*/
+
+/* 📱 LARGE TABLET / SMALL DESKTOP (≤1200px) */
+@media (max-width: 1200px) {
+    .hero-section {
+        padding: clamp(3rem, 6vw, 6rem) 0; /* Reduce vertical padding */
+    }
+
+    .hero__content {
+        margin: clamp(4rem, 6vw, 6.4rem) 0 0 clamp(3rem, 5vw, 4.8rem); /* Responsive margins */
+        max-width: clamp(30rem, 70%, 60rem); /* Slightly wider content area */
+    }
+
+    .hero__buttons {
+        gap: clamp(1rem, 3vw, 2rem); /* Reduce button spacing */
+    }
+}
+
+/* 📱 TABLET (≤768px) */
+@media (max-width: 768px) {
+    .hero-section {
+        /* Use dynamic viewport height on mobile to account for address bar */
+        min-height: var(--hero-min-height-mobile);
+        padding: clamp(2.5rem, 5vw, 4rem) 0; /* Further reduce padding */
+    }
+
+    .hero__content {
+        margin: clamp(3rem, 5vw, 4rem) 0 0 clamp(2rem, 4vw, 3rem); /* Tighter margins */
+        padding: 0 clamp(1.5rem, 4vw, 4rem); /* Reduce horizontal padding */
+        max-width: clamp(30rem, 85%, 60rem); /* Wider on tablets */
+    }
+
+    .hero__heading-primary {
+        margin-bottom: clamp(
+            0.8rem,
+            3vw,
+            1.5rem
+        ); /* Less space after heading */
+    }
+
+    .hero__text {
+        margin-bottom: clamp(1.5rem, 3vw, 3rem); /* Less space before buttons */
+    }
+
+    .hero__buttons {
+        gap: clamp(1rem, 2vw, 1.5rem); /* Compact button spacing */
+        justify-content: flex-start; /* Align buttons to left */
+    }
+}
+
+/* 📱 MOBILE (≤480px) */
+@media (max-width: 480px) {
+    .hero-section {
+        padding: clamp(2rem, 4vw, 3rem) 0; /* Minimal vertical padding */
+    }
+
+    .hero__content {
+        margin: clamp(2rem, 4vw, 3rem) 0 0 clamp(1.5rem, 3vw, 2rem); /* Compact margins */
+        padding: 0 clamp(1rem, 3vw, 2rem); /* Minimal horizontal padding */
+        max-width: clamp(28rem, 95%, 50rem); /* Nearly full width */
+    }
+
+    .hero__heading-primary {
+        font-size: clamp(2.2rem, 7vw, 3rem); /* Smaller heading on mobile */
+        margin-bottom: clamp(0.6rem, 2vw, 1rem); /* Tight spacing */
+    }
+
+    .hero__text {
+        font-size: clamp(1.3rem, 4vw, 1.6rem); /* Smaller text on mobile */
+        margin-bottom: clamp(1.2rem, 3vw, 2rem); /* Compact spacing */
+    }
+
+    .hero__buttons {
+        flex-direction: column; /* Stack buttons vertically on mobile */
+        gap: clamp(0.8rem, 2vw, 1rem); /* Minimal vertical gap */
+        width: 100%; /* Full width container */
+    }
+
+    .hero__button {
+        width: 100%; /* Full-width buttons on mobile */
+        padding: clamp(1.2rem, 3vw, 1.6rem) clamp(1.6rem, 4vw, 2rem); /* Adjust padding */
+        font-size: clamp(1.2rem, 3.5vw, 1.4rem); /* Smaller button text */
+    }
+}
+
+/* 📱 VERY SMALL MOBILE (≤320px) */
+@media (max-width: 320px) {
+    .hero__content {
+        margin: 1.5rem 0 0 1rem; /* Minimal margins for tiny screens */
+        padding: 0 1rem; /* Minimal padding */
+    }
+
+    .hero__heading-primary {
+        font-size: 2rem; /* Fixed smaller heading */
+    }
+
+    .hero__text {
+        font-size: 1.2rem; /* Fixed smaller text */
+    }
+
+    .hero__button {
+        padding: 1rem 1.5rem; /* Compact button padding */
+        font-size: 1.1rem; /* Smaller button text */
+    }
+}
+
+/* ===================================
+   7️⃣ ACCESSIBILITY ENHANCEMENTS
+   =================================== */
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .hero-section {
+        will-change: auto; /* Disable performance hints */
+    }
+
+    .hero__button {
+        transition: none; /* Disable all animations */
+    }
+
+    .hero__button:hover {
+        transform: none; /* Disable lift effect */
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .hero-section::before {
+        opacity: 0.6; /* Increase overlay for better contrast */
+    }
+
+    .hero__heading-primary,
+    .hero__text {
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.9); /* Stronger text shadow */
+    }
+
+    .hero__button {
+        border-width: 4px; /* Thicker border for visibility */
+    }
+}
+
+/* Ensure text is readable on all backgrounds */
+@media (prefers-color-scheme: light) {
+    /* If user prefers light mode, ensure dark overlay for text readability */
+    .hero-section::before {
+        opacity: 0.4; /* Visible overlay in light mode */
+    }
+}
+
+/* ================================================
+   8️⃣ DEBUG UTILITIES SECTION
+   ================================================
+   
+   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
+*/
+
+/* ─────────────────────────────────────────────
+   VISUAL LAYOUT DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎨 Layout Boundaries Visualization:
+Uncomment to see colored borders around hero elements
+
+.hero-section { 
+    border: 3px solid red !important; 
+    background-color: rgba(255,0,0,0.1) !important;
+}
+
+.hero__content { 
+    border: 2px solid blue !important; 
+    background: rgba(0,0,255,0.1) !important;
+}
+
+.hero__heading-primary { 
+    background: rgba(255,255,0,0.3) !important; 
+    outline: 1px dashed orange !important;
+}
+
+.hero__text { 
+    background: rgba(0,255,0,0.2) !important; 
+    outline: 1px dashed green !important;
+}
+
+.hero__buttons { 
+    border: 1px solid purple !important; 
+    background: rgba(128,0,128,0.1) !important;
+}
+
+.hero__button { 
+    outline: 2px solid cyan !important; 
+}
+*/
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE BREAKPOINT TESTING
+   ───────────────────────────────────────────── */
+
+/*
+📐 Breakpoint Indicator:
+Copy this to console to see current layout mode:
+
+const width = window.innerWidth;
+const layout = 
+    width <= 320 ? 'Very Small Mobile (≤320px)' :
+    width <= 480 ? 'Mobile (≤480px)' :
+    width <= 768 ? 'Tablet (≤768px)' :
+    width <= 1200 ? 'Desktop (≤1200px)' :
+    'Large Desktop (>1200px)';
+console.log('Current hero layout:', layout, `(${width}px)`);
+*/
+
+/* ─────────────────────────────────────────────
+   CSS VARIABLE TESTING
+   ───────────────────────────────────────────── */
+
+/*
+🎛️ Test Different Hero Configurations:
+Copy these to console to experiment with hero appearance:
+
+// Change hero minimum height
+document.documentElement.style.setProperty('--hero-min-height', '80vh');
+
+// Adjust content spacing
+document.documentElement.style.setProperty('--hero-content-margin-top', '10rem');
+document.documentElement.style.setProperty('--hero-content-max-width', '80rem');
+
+// Modify typography
+document.documentElement.style.setProperty('--hero-heading-size', 'clamp(4rem, 8vw, 6rem)');
+document.documentElement.style.setProperty('--hero-text-size', 'clamp(1.6rem, 3vw, 2.4rem)');
+
+// Enable background overlay
+document.documentElement.style.setProperty('--hero-overlay-opacity', '0.5');
+document.querySelector('.hero-section::before').style.opacity = '1';
+
+// Reset to defaults:
+location.reload();
+*/
+
+/* ─────────────────────────────────────────────
+   BACKGROUND IMAGE TESTING
+   ───────────────────────────────────────────── */
+
+/*
+🖼️ Test Background Image Loading:
+Copy to console to simulate slow image loading:
+
+const heroSection = document.querySelector('.hero-section');
+const originalBg = heroSection.style.backgroundImage;
+
+// Remove image to test fallback color
+heroSection.style.backgroundImage = 'none';
+console.log('Fallback color visible');
+
+// Restore after 3 seconds
+setTimeout(() => {
+    heroSection.style.backgroundImage = originalBg;
+    console.log('Background image restored');
+}, 3000);
+*/
+
+/* ─────────────────────────────────────────────
+   BUTTON INTERACTION TESTING
+   ───────────────────────────────────────────── */
+
+/*
+🔘 Test Button States:
+Copy to console to test all button states:
+
+const heroButton = document.querySelector('.hero__button');
+
+// Test hover state
+heroButton.classList.add('hover-test');
+heroButton.style.transform = 'translateY(-2px)';
+console.log('Hover state applied');
+
+// Test focus state
+setTimeout(() => {
+    heroButton.focus();
+    console.log('Focus state active');
+}, 2000);
+
+// Test active state
+setTimeout(() => {
+    heroButton.style.transform = 'translateY(0)';
+    console.log('Active state applied');
+}, 4000);
+
+// Reset
+setTimeout(() => {
+    heroButton.blur();
+    heroButton.style.transform = '';
+    heroButton.classList.remove('hover-test');
+    console.log('Reset to normal state');
+}, 6000);
+*/
+
+/* ─────────────────────────────────────────────
+   END OF DEBUG UTILITIES
+   ───────────────────────────────────────────── */

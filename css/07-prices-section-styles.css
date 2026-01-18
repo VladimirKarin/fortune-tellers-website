@@ -1,0 +1,752 @@
+/* ================================================
+   💰 PRICES SECTION - Responsive Card Layout with Toggle Animation
+   ================================================
+   
+   📋 TABLE OF CONTENTS:
+   1. CSS Variables (Animation & Layout Configuration)
+   2. Section Base Styles
+   3. Toggle Button Styles
+   4. Prices Grid Container (Collapsible)
+   5. Price Card Styles
+   6. Card Animation System
+   7. Explanation Card
+   8. Responsive Breakpoints
+   9. Accessibility Enhancements
+   10. Debug Utilities
+*/
+
+/* ===================================
+   1️⃣ CSS VARIABLES - CONFIGURATION
+   =================================== */
+
+:root {
+    /* 🎬 Animation timing controls for prices section */
+    --prices-animation-duration: 0.6s; /* Main container expand/collapse speed */
+    --prices-animation-easing: cubic-bezier(
+        0.4,
+        0,
+        0.2,
+        1
+    ); /* Smooth easing curve */
+    --prices-card-animation-duration: 0.5s; /* Individual card entrance speed */
+    --prices-card-stagger-delay: 0.1s; /* Delay between each card animation */
+
+    /* 🎨 Card sizing controls */
+    --prices-card-min-width: 28rem; /* Minimum card width (280px) */
+    --prices-card-max-width: 40rem; /* Maximum card width (400px) */
+    --prices-card-padding: clamp(1.6rem, 3vw, 2rem); /* Responsive padding */
+
+    /* 📏 Grid spacing */
+    --prices-grid-gap: clamp(2rem, 4vw, 3.2rem); /* Space between cards */
+    --prices-section-margin: clamp(
+        2.4rem,
+        4vw,
+        3.2rem
+    ); /* Section top margin */
+}
+
+/* ===================================
+   2️⃣ SECTION BASE STYLES
+   =================================== */
+
+/* Main section container */
+.prices-section {
+    background-color: var(
+        --color-main-background
+    ); /* Transparent/inherit from parent */
+    display: flex;
+    flex-direction: column; /* Stack heading, grid, and button vertically */
+    align-items: center; /* Center all children horizontally */
+    justify-content: center; /* Center vertically if needed */
+    margin-top: var(--spacing-lg); /* Top spacing from previous section */
+    position: relative; /* For absolute positioned children if needed */
+
+    /* 🔧 DEBUG: Uncomment to see section boundaries
+    border: 2px solid red;
+    */
+}
+
+/* Section heading */
+.prices-section__heading {
+    text-align: center; /* Center the heading text */
+    font-size: clamp(
+        2.4rem,
+        4vw,
+        3rem
+    ); /* Responsive heading size (24px - 30px) */
+    margin-bottom: clamp(2rem, 4vw, 2.4rem); /* Space before grid */
+    color: var(--color-light-text); /* Light text for dark backgrounds */
+    font-weight: 700; /* Bold heading */
+    text-transform: uppercase; /* Consistent with other section headings */
+    letter-spacing: 1px; /* Subtle spacing */
+}
+
+/* ===================================
+   3️⃣ TOGGLE BUTTON STYLES
+   =================================== */
+
+/* 
+   Button to show/hide prices grid
+   Inherits base button styles from 00-general.css
+*/
+.prices__button {
+    display: block; /* Block level for centering */
+    margin: 0 auto; /* Center horizontally */
+    margin-top: clamp(2.4rem, 4vw, 3.2rem); /* Space above button */
+    padding: clamp(1rem, 2.5vw, 1.2rem) clamp(2rem, 4vw, 2.4rem); /* Responsive padding */
+
+    /* Visual styling - overrides general.css button */
+    background: var(--color-highlight); /* Purple background */
+    color: var(--color-card-bg); /* Light text */
+    border: 3px solid var(--color-footer-bg); /* Purple border */
+    transition: all var(--transition-smooth); /* Smooth transitions */
+
+    /* Typography */
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem); /* Responsive font size */
+    font-weight: 500; /* Medium weight */
+    font-family: var(--font-secondary); /* Roboto font */
+
+    /* Accessibility */
+    min-height: 44px; /* iOS minimum touch target */
+    cursor: pointer; /* Indicate interactivity */
+    outline: none; /* Remove default outline (custom focus styles below) */
+    position: relative; /* For pseudo-elements if needed */
+}
+
+/* Button focus state for keyboard navigation */
+.prices__button:focus-visible {
+    outline: 3px solid var(--color-highlight); /* Purple focus ring */
+    outline-offset: 2px; /* Space between button and outline */
+    box-shadow: var(--shadow-focus); /* Additional glow effect */
+}
+
+/* Button hover state */
+.prices__button:hover {
+    background: var(--color-footer-bg); /* Darker purple on hover */
+    border: 2px solid var(--color-highlight); /* Swap border color */
+    background-image: var(--btn-gradient); /* Apply gradient overlay */
+    transform: translateY(-2px); /* Lift button slightly */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Elevated shadow */
+}
+
+/* Button active state */
+.prices__button:active {
+    transform: translateY(0); /* Return to original position */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+}
+
+/* ===================================
+   4️⃣ PRICES GRID CONTAINER
+   =================================== */
+
+/* 
+   🔄 COLLAPSIBLE GRID CONTAINER
+   This element animates between height: 0 and height: auto
+   Controlled by JavaScript in price-section.js
+*/
+.prices-grid {
+    display: grid; /* CSS Grid layout */
+    gap: var(--prices-grid-gap); /* Space between cards */
+    max-width: 120rem; /* Maximum container width (1200px) */
+    margin: 0 auto; /* Center the grid */
+    padding: 0 clamp(1.6rem, 3vw, 3.2rem); /* Horizontal padding */
+    width: 100%; /* Full width up to max-width */
+
+    /* 
+       Grid auto-fit: Creates responsive columns
+       Each column minimum 28rem, maximum 40rem
+       Auto-adjusts column count based on available space
+    */
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(clamp(28rem, 45vw, 40rem), 1fr)
+    );
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎬 ANIMATION: Initial hidden state
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    height: 0; /* Collapsed by default */
+    overflow: hidden; /* Hide content when collapsed */
+    opacity: 0; /* Invisible when collapsed */
+
+    /* 
+       Transition properties:
+       - height: Smooth expand/collapse animation
+       - opacity: Fade in/out effect (slight delay for better visual)
+    */
+    transition: height var(--prices-animation-duration)
+            var(--prices-animation-easing),
+        opacity 0.3s ease 0.1s; /* Opacity transitions slightly after height starts */
+
+    /* 🔧 DEBUG: Uncomment to see grid boundaries
+    border: 2px solid blue;
+    background: rgba(0, 0, 255, 0.05);
+    */
+}
+
+/* 
+   🎬 ANIMATION: Visible state (added by JavaScript)
+   When this class is present, grid becomes visible
+*/
+.prices-grid.prices-section-visible {
+    opacity: 1; /* Fully visible */
+    /* Height is controlled dynamically by JavaScript */
+}
+
+/* ===================================
+   5️⃣ PRICE CARD STYLES
+   =================================== */
+
+/* 
+   Individual price card component
+   Each card displays service name and price
+*/
+.prices-card {
+    width: 100%; /* Fill grid cell width */
+    min-width: clamp(28rem, 90vw, 40rem); /* Responsive minimum width */
+    max-width: 100%; /* Don't exceed grid cell */
+    padding: var(--prices-card-padding); /* Responsive internal padding */
+
+    /* Visual styling */
+    border-radius: var(
+        --border-radius-button
+    ); /* Unique asymmetrical shape (2rem 0 1.5rem 0) */
+    background-color: var(--color-card-bg); /* Light card background */
+    box-shadow: var(--shadow-light); /* Subtle depth shadow */
+
+    /* Layout */
+    overflow: hidden; /* Clip content to border radius */
+    position: relative; /* For pseudo-elements or absolute children */
+
+    /* 
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎬 ANIMATION: Initial state
+       Cards start in normal position (no transform)
+       Animation is triggered by adding .prices-card-animate-in class
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    */
+    transform: translateY(0); /* Normal position */
+    opacity: 1; /* Fully visible when grid is open */
+
+    /* Hover transition */
+    transition: transform var(--transition-smooth),
+        box-shadow var(--transition-smooth);
+}
+
+/* Card hover effect - lift on hover */
+/* 
+.prices-card:hover {
+    transform: translateY(-4px); /* Lift card slightly 
+    box-shadow: var(--shadow-hover); /* Deeper shadow for elevation 
+} */
+
+/* Card title (service name) */
+.prices-card__title {
+    font-size: clamp(1.6rem, 2.5vw, 2rem); /* Responsive title size */
+    color: var(--color-text); /* Dark purple text */
+    font-weight: 600; /* Semi-bold */
+    margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem); /* Space before price */
+    line-height: 1.2; /* Tight line height for headings */
+    font-family: var(--font-primary); /* Montserrat font */
+}
+
+/* Card text (price) */
+.prices-card__text {
+    font-size: clamp(1.4rem, 2vw, 1.6rem); /* Responsive text size */
+    line-height: 1.6; /* Comfortable reading line height */
+    color: var(--color-text); /* Dark purple text */
+    margin: 0; /* Remove default margin */
+    font-family: var(--font-secondary); /* Roboto font */
+}
+
+/* ===================================
+   6️⃣ CARD ANIMATION SYSTEM
+   =================================== */
+
+/* 
+   🎬 ENTRANCE ANIMATION
+   Applied by JavaScript when grid becomes visible
+   Cards slide up from below with fade-in effect
+*/
+
+/* Animation on all cards */
+/* .prices-card.prices-card-animate-in {
+    animation: pricesSlideInUp var(--prices-card-animation-duration)
+        var(--prices-animation-easing) forwards;
+} */
+
+/* 
+   Keyframe animation for card entrance
+   Cards move from below (30px down) to normal position
+   While fading from transparent to fully visible
+*/
+@keyframes pricesSlideInUp {
+    from {
+        transform: translateY(30px); /* Start 30px below final position */
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        transform: translateY(0); /* End at natural position */
+        opacity: 1; /* End fully visible */
+    }
+}
+
+/* 
+   🎬 STAGGERED ANIMATION DELAYS
+   Each card appears with a progressive delay
+   Creates waterfall/cascade effect
+*/
+.prices-card:nth-child(1).prices-card-animate-in {
+    animation-delay: calc(var(--prices-card-stagger-delay) * 1); /* 0.1s */
+}
+
+.prices-card:nth-child(2).prices-card-animate-in {
+    animation-delay: calc(var(--prices-card-stagger-delay) * 2); /* 0.2s */
+}
+
+.prices-card:nth-child(3).prices-card-animate-in {
+    animation-delay: calc(var(--prices-card-stagger-delay) * 3); /* 0.3s */
+}
+
+.prices-card:nth-child(4).prices-card-animate-in {
+    animation-delay: calc(var(--prices-card-stagger-delay) * 4); /* 0.4s */
+}
+
+.prices-card:nth-child(5).prices-card-animate-in {
+    animation-delay: calc(var(--prices-card-stagger-delay) * 5); /* 0.5s */
+}
+
+.prices-card:nth-child(6).prices-card-animate-in {
+    animation-delay: calc(var(--prices-card-stagger-delay) * 6); /* 0.6s */
+}
+
+/* Explanation card appears last */
+.prices-explanation-card.prices-card-animate-in {
+    animation-delay: calc(var(--prices-card-stagger-delay) * 7); /* 0.7s */
+}
+
+/* ===================================
+   7️⃣ EXPLANATION CARD
+   =================================== */
+
+/* 
+   Special card displaying payment terms explanation
+   Visually distinct with border and different background
+*/
+.prices-explanation-card {
+    background-color: rgba(155, 91, 182, 0.1); /* Light purple tint */
+    border: 2px solid var(--color-highlight); /* Purple border for emphasis */
+    padding: clamp(1.6rem, 3vw, 2.4rem); /* Slightly more padding */
+    border-radius: var(--border-radius-small); /* Rounded corners (1rem) */
+    margin-top: clamp(1.6rem, 3vw, 2.4rem); /* Extra top spacing */
+
+    /* Grid placement: span full width regardless of column count */
+    grid-column: 1 / -1; /* Span from first to last column */
+    max-width: 100%; /* Don't exceed container width */
+}
+
+/* Explanation card text */
+.prices__text {
+    text-align: center; /* Center the explanation text */
+    font-size: clamp(1.4rem, 2vw, 1.6rem); /* Responsive text size */
+    line-height: 1.6; /* Comfortable reading */
+    color: var(--color-light-text); /* Light text for visibility */
+    margin: 0; /* Remove default margin */
+    font-weight: 500; /* Medium weight */
+    font-family: var(--font-secondary); /* Roboto font */
+}
+
+/* ===================================
+   8️⃣ RESPONSIVE BREAKPOINTS
+   =================================== */
+
+/* 
+   📱 Breakpoint strategy (aligned with site-wide system):
+   - >1200px: 3 columns (ultra-wide)
+   - 992-1200px: 2 columns (desktop)
+   - 768-991px: 2 columns (tablet landscape)
+   - 600-767px: 1 column (tablet portrait)
+   - <600px: 1 column (mobile)
+*/
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   💻 ULTRA-WIDE SCREENS (>1200px)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (min-width: 1201px) {
+    .prices-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+        gap: clamp(3.2rem, 4vw, 4.8rem); /* Larger gaps on big screens */
+    }
+
+    .prices-card {
+        min-width: 35rem; /* Wider cards on large screens */
+    }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   💻 DESKTOP (992px - 1200px)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (min-width: 992px) and (max-width: 1200px) {
+    .prices-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        gap: clamp(2.4rem, 3vw, 3.2rem); /* Medium gaps */
+    }
+
+    .prices-card {
+        min-width: 32rem; /* Moderate card width */
+    }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📱 TABLET LANDSCAPE (768px - 991px)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 991px) {
+    .prices-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns maintained */
+        gap: clamp(2rem, 3vw, 2.4rem); /* Reduced gaps */
+    }
+
+    .prices-card {
+        min-width: 30rem; /* Slightly narrower cards */
+        padding: clamp(1.4rem, 2.5vw, 1.8rem); /* Reduced padding */
+    }
+
+    /* Explanation card spans both columns */
+    .prices-explanation-card {
+        grid-column: 1 / -1; /* Full width */
+    }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📱 TABLET PORTRAIT (600px - 767px)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 767px) {
+    .prices-grid {
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: clamp(1.6rem, 3vw, 2rem); /* Vertical spacing between cards */
+        padding: 0 clamp(1.6rem, 4vw, 2.4rem); /* Horizontal padding */
+    }
+
+    .prices-card {
+        min-width: 100%; /* Full width cards */
+        max-width: 50rem; /* But not too wide */
+        margin: 0 auto; /* Center cards */
+    }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📱 MOBILE (≤599px)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 599px) {
+    .prices-section {
+        margin-top: var(--prices-section-margin); /* Responsive top margin */
+    }
+
+    .prices-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: clamp(1.6rem, 3vw, 2rem); /* Vertical spacing */
+        padding: 0 clamp(1.6rem, 4vw, 2rem); /* Side padding */
+    }
+
+    .prices-card {
+        min-width: 100%; /* Full width */
+        padding: clamp(1.4rem, 3vw, 1.8rem); /* Reduced padding */
+    }
+
+    /* Adjust typography for mobile */
+    .prices-card__title {
+        font-size: clamp(1.6rem, 3.5vw, 1.8rem); /* Smaller titles */
+    }
+
+    .prices-card__text {
+        font-size: clamp(1.4rem, 3vw, 1.5rem); /* Smaller text */
+    }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📱 SMALL MOBILE (≤449px)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 449px) {
+    .prices-section {
+        margin-top: clamp(2rem, 4vw, 2.4rem); /* Reduced margin */
+    }
+
+    .prices-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: clamp(1.4rem, 3vw, 1.6rem); /* Tighter spacing */
+        padding: 0 clamp(1.2rem, 3vw, 1.6rem); /* Minimal padding */
+    }
+
+    .prices-card {
+        min-width: 100%; /* Full width */
+        padding: clamp(1.2rem, 3vw, 1.6rem); /* Compact padding */
+    }
+
+    /* Further typography adjustments */
+    .prices-card__title {
+        font-size: clamp(1.4rem, 4vw, 1.6rem); /* Smaller titles */
+        margin-bottom: clamp(0.6rem, 2vw, 1rem); /* Reduced spacing */
+    }
+
+    .prices-card__text {
+        font-size: clamp(1.2rem, 3.5vw, 1.4rem); /* Smaller text */
+    }
+
+    .prices__text {
+        font-size: clamp(1.2rem, 3.5vw, 1.4rem); /* Match card text size */
+    }
+
+    .prices-explanation-card {
+        padding: clamp(1.2rem, 3vw, 1.6rem); /* Compact padding */
+        margin-top: clamp(1.2rem, 3vw, 1.6rem); /* Reduced margin */
+    }
+}
+
+/* ===================================
+   9️⃣ ACCESSIBILITY ENHANCEMENTS
+   =================================== */
+
+/* ♿ High contrast mode support */
+@media (prefers-contrast: high) {
+    .prices-card {
+        border: 2px solid var(--color-text); /* Add visible border */
+    }
+
+    .prices__button {
+        border-width: 3px; /* Thicker border for visibility */
+    }
+
+    .prices-card__title {
+        font-weight: 700; /* Bolder text */
+    }
+}
+
+/* ♿ Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all animations and transitions */
+    .prices-card,
+    .prices__button,
+    .prices-grid {
+        transition: none !important; /* Remove transitions */
+        animation: none !important; /* Remove animations */
+    }
+
+    /* Disable hover transforms */
+    .prices-card:hover,
+    .prices__button:hover {
+        transform: none !important;
+    }
+
+    /* Instantly show/hide content without animation */
+    .prices-grid {
+        transition: opacity 0.01ms !important;
+    }
+}
+
+/* ♿ Focus management for keyboard users */
+.prices-card:focus-within {
+    outline: 2px solid var(--color-highlight); /* Purple focus ring */
+    outline-offset: 2px; /* Space between card and outline */
+    box-shadow: var(--shadow-focus); /* Additional glow */
+}
+
+/* ♿ Skip to content for screen readers */
+.prices-section[aria-hidden='true'] {
+    /* When section is hidden, ensure it's not read by screen readers */
+    visibility: hidden; /* Hide from screen readers when collapsed */
+}
+
+.prices-section[aria-hidden='false'] {
+    visibility: visible; /* Show to screen readers when expanded */
+}
+
+/* ===================================
+   🖨️ PRINT STYLES
+   =================================== */
+
+@media print {
+    /* Optimize prices section for printing */
+    .prices-section {
+        margin-top: 2rem; /* Fixed margin for print */
+        break-inside: avoid; /* Don't split section across pages */
+        page-break-inside: avoid; /* Legacy property for older browsers */
+    }
+
+    /* Show all prices when printing */
+    .prices-grid {
+        height: auto !important; /* Force grid to show */
+        opacity: 1 !important; /* Make visible */
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for print layout */
+        gap: 2rem; /* Fixed gap */
+        display: grid !important; /* Ensure grid shows */
+    }
+
+    .prices-card {
+        box-shadow: none; /* Remove shadows for print */
+        border: 1px solid #ccc; /* Add subtle border */
+        break-inside: avoid; /* Don't split cards across pages */
+        page-break-inside: avoid; /* Legacy property */
+    }
+
+    /* Hide toggle button in print */
+    .prices__button {
+        display: none !important;
+    }
+
+    /* Ensure readable text colors */
+    .prices-card__title,
+    .prices-card__text,
+    .prices__text {
+        color: #000 !important; /* Black text for print */
+    }
+}
+
+/* ================================================
+   🔟 DEBUG UTILITIES SECTION
+   ================================================
+   
+   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
+*/
+
+/* ─────────────────────────────────────────────
+   VISUAL LAYOUT DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎨 Layout Boundaries Visualization:
+Uncomment to see colored borders around section elements
+
+.prices-section { 
+    border: 3px solid red !important; 
+    background: rgba(255,0,0,0.05) !important;
+}
+
+.prices-grid { 
+    border: 2px solid blue !important; 
+    background: rgba(0,0,255,0.05) !important;
+}
+
+.prices-card { 
+    border: 1px solid green !important; 
+    background: rgba(0,255,0,0.05) !important;
+}
+
+.prices-explanation-card { 
+    border: 2px solid purple !important; 
+    background: rgba(128,0,128,0.1) !important;
+}
+*/
+
+/* ─────────────────────────────────────────────
+   ANIMATION DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎬 Animation State Visualization:
+Uncomment to see which animation states are active
+
+.prices-card.prices-card-animate-in::before {
+    content: "✅ Animating In";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: green;
+    color: white;
+    padding: 2px 5px;
+    font-size: 10px;
+    z-index: 1000;
+    border-radius: 3px;
+}
+
+.prices-grid.prices-section-visible::after {
+    content: "👁️ GRID VISIBLE";
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: blue;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    z-index: 1000;
+    border-radius: 5px;
+}
+*/
+
+/* ─────────────────────────────────────────────
+   GRID DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+📊 Grid Column Visualization:
+Uncomment to see grid column boundaries
+
+.prices-grid {
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgba(255,0,0,0.1) 0px,
+        rgba(255,0,0,0.1) 1px,
+        transparent 1px,
+        transparent calc(100% / 3)
+    );
+}
+*/
+
+/* ─────────────────────────────────────────────
+   FORCE VISIBLE STATE (TESTING)
+   ───────────────────────────────────────────── */
+
+/*
+🧪 Force Grid to Show (for testing without JavaScript):
+Uncomment to bypass collapse/expand animation
+
+.prices-grid.debug-force-visible {
+    height: auto !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+}
+
+.prices-grid.debug-force-visible .prices-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+// Add this class to .prices-grid in HTML to test layout without JS
+*/
+
+/* ─────────────────────────────────────────────
+   CSS VARIABLE TESTING
+   ───────────────────────────────────────────── */
+
+/*
+🎛️ Test Different Animation Timings:
+Copy these to console to experiment with animation values:
+
+document.documentElement.style.setProperty('--prices-animation-duration', '2s');
+document.documentElement.style.setProperty('--prices-card-animation-duration', '1s');
+document.documentElement.style.setProperty('--prices-card-stagger-delay', '0.2s');
+
+// Reset to defaults:
+document.documentElement.style.setProperty('--prices-animation-duration', '0.6s');
+document.documentElement.style.setProperty('--prices-card-animation-duration', '0.5s');
+document.documentElement.style.setProperty('--prices-card-stagger-delay', '0.1s');
+*/
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE BREAKPOINT TESTING
+   ───────────────────────────────────────────── */
+
+/*
+📐 Breakpoint Indicator:
+Copy this to console to see current layout mode:
+
+const width = window.innerWidth;
+const layout = 
+    width > 1200 ? '💻 Ultra-Wide (3 columns)' :
+    width > 991 ? '💻 Desktop (2 columns)' :
+    width > 767 ? '📱 Tablet Landscape (2 columns)' :
+    width > 599 ? '📱 Tablet Portrait (1 column)' :
+    '📱 Mobile (1 column)';
+console.log('Current layout:', layout, `(${width}px)`);
+*/

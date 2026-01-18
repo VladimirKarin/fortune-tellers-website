@@ -1,0 +1,239 @@
+/* ================================================
+   ⏰ COUNTDOWN SECTION - Fixed Responsive Sizing
+   ================================================ */
+
+/* Main countdown section container */
+.countdown-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-light-text); /* Use consistent color variables */
+    padding: clamp(2rem, 5vw, 4rem) var(--spacing-sm); /* Use spacing variables */
+}
+
+/* ===================================
+   🕐 COUNTDOWN GRID LAYOUT
+   =================================== */
+
+/* Time display grid - 4 equal columns for days/hours/minutes/seconds */
+.timebox {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1rem, 6vw, 6rem); /* Reduced max gap from 9rem to 6rem */
+    margin: clamp(1.6rem, 4vw, 3.2rem) auto 0 auto; /* 🎯 FIXED: Auto margins for centering */
+    width: 100%;
+    max-width: 80rem; /* Limit maximum width for better control */
+    justify-items: center;
+
+    /* 🔧 DEBUG: Uncomment to see grid boundaries
+    border: 2px solid red;
+    */
+}
+
+/* ===================================
+   🎯 TIME UNIT STYLING
+   =================================== */
+
+/* Individual time unit container (days, hours, minutes, seconds) */
+.time {
+    text-align: center;
+    min-width: 0; /* Prevent overflow issues */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* 🔧 DEBUG: Uncomment to see time unit boundaries
+    border: 1px solid blue;
+    */
+}
+
+/* ===================================
+   🔢 TIME NUMBERS STYLING
+   =================================== */
+
+/* Large time numbers - FIXED SIZING */
+.time h3 {
+    /* 🎯 FIXED: Reduced viewport scaling and limited max size */
+    font-size: clamp(
+        2.4rem,
+        5vw,
+        4.8rem
+    ); /* Changed from 8vw to 5vw, max from 7.4rem to 4.8rem */
+    font-weight: 700; /* Bolder for better readability */
+    line-height: 1; /* Tight line height for numbers */
+    margin: 0;
+    letter-spacing: -0.02em; /* Slight negative spacing for better appearance */
+    color: var(--color-light-text); /* Ensure consistent color */
+    font-family: var(--font-primary); /* Use primary font for consistency */
+
+    /* Add text shadow for better readability on gradient background */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    /* 🔧 DEBUG: Uncomment to see font size applied
+    border: 1px solid yellow;
+    */
+}
+
+/* ===================================
+   📝 TIME LABELS STYLING
+   =================================== */
+
+/* Time unit labels (дн., ч., мин., с.) */
+.time p {
+    font-size: clamp(1rem, 2vw, 1.4rem); /* Smaller, more controlled scaling */
+    margin: clamp(0.5rem, 1vw, 1rem) 0 0 0;
+    opacity: 0.9; /* Slightly transparent for hierarchy */
+    color: var(--color-light-text); /* Consistent color */
+    font-family: var(--font-secondary); /* Secondary font for labels */
+    font-weight: 500; /* Medium weight */
+    text-transform: uppercase; /* Uppercase for consistency */
+    letter-spacing: 0.5px; /* Slight spacing for readability */
+
+    /* 🔧 DEBUG: Uncomment to see label styling
+    border: 1px solid green;
+    */
+}
+
+/* ===================================
+   📱 RESPONSIVE BREAKPOINTS
+   =================================== */
+
+/* Large tablets and small desktops */
+@media (max-width: 1200px) {
+    .timebox {
+        gap: clamp(1rem, 5vw, 4rem); /* Reduce gap on smaller screens */
+        max-width: 70rem; /* Smaller max width */
+    }
+
+    .time h3 {
+        font-size: clamp(2rem, 4.5vw, 4rem); /* Further reduce scaling */
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .countdown-section {
+        padding: clamp(1.5rem, 4vw, 3rem) var(--spacing-sm);
+    }
+
+    .timebox {
+        gap: clamp(0.8rem, 4vw, 3rem); /* Smaller gaps on tablets */
+        max-width: 60rem;
+    }
+
+    .time {
+        padding: var(--spacing-xs); /* Smaller padding */
+    }
+
+    .time h3 {
+        font-size: clamp(1.8rem, 4vw, 3.2rem); /* More conservative sizing */
+    }
+
+    .time p {
+        font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .timebox {
+        gap: clamp(0.5rem, 3vw, 2rem); /* Minimal gaps on mobile */
+        max-width: 100%; /* Full width on mobile */
+    }
+
+    .time h3 {
+        font-size: clamp(1.6rem, 6vw, 2.8rem); /* Mobile-optimized sizing */
+        font-weight: 600; /* Slightly lighter on small screens */
+    }
+
+    .time p {
+        font-size: clamp(0.8rem, 3vw, 1rem);
+        margin-top: 0.4rem; /* Smaller top margin */
+    }
+}
+
+/* Very small mobile screens */
+@media (max-width: 320px) {
+    .time h3 {
+        font-size: clamp(
+            1.4rem,
+            7vw,
+            2.4rem
+        ); /* Even smaller for tiny screens */
+    }
+
+    .time p {
+        font-size: 0.8rem; /* Fixed small size */
+    }
+}
+
+/* ===================================
+   🎯 COUNTDOWN EXPIRED STATE
+   =================================== */
+
+/* Styling when countdown reaches zero */
+.countdown-section.countdown-expired .time h3 {
+    color: var(--color-error); /* Red color for expired state */
+    opacity: 0.7; /* Slightly faded */
+}
+
+.countdown-section.countdown-expired .time p {
+    opacity: 0.5; /* More faded labels */
+}
+
+.countdown-section.countdown-expired .time {
+    background: rgba(255, 107, 107, 0.1); /* Subtle red background */
+}
+
+/* ===================================
+   🔧 DEBUG UTILITIES (Commented Out)
+   =================================== */
+
+/*
+🔧 DEBUG: Uncomment to visualize countdown layout
+
+.countdown-section { border: 3px solid red !important; }
+.timebox { border: 2px solid blue !important; }
+.time { border: 1px solid green !important; }
+.time h3 { background: yellow !important; }
+.time p { background: orange !important; }
+
+🔧 DEBUG: Add this JavaScript to console to check current font sizes:
+document.querySelectorAll('.time h3').forEach((el, i) => {
+    console.log(`Time unit ${i + 1}: ${getComputedStyle(el).fontSize}`);
+});
+*/
+
+/* Ensure countdown is readable for users with low vision */
+@media (prefers-contrast: high) {
+    .time {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid var(--color-light-text);
+    }
+
+    .time h3 {
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .time {
+        transition: none;
+    }
+
+    .time:hover {
+        transform: none;
+    }
+}
+
+/* High DPI */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .time h3 {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}

@@ -1,0 +1,354 @@
+/* ================================================
+   ⏰ COUNTDOWN SECTION - Optimized Responsive Design
+   ================================================ */
+
+/* 
+   📋 TABLE OF CONTENTS:
+   1. Main Container
+   2. Grid Layout
+   3. Time Unit Styling
+   4. Number & Label Typography
+   5. Responsive Breakpoints (Simplified)
+   6. Expired State Styling
+   7. Accessibility Features
+   8. Debug Utilities (Bottom Section)
+*/
+
+/* ===================================
+   1️⃣ MAIN COUNTDOWN SECTION CONTAINER
+   =================================== */
+
+/* Primary countdown section wrapper with flexible layout */
+.countdown-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(
+        --color-light-text
+    ); /* Light text for dark gradient background */
+    padding: clamp(2rem, 5vw, 4rem) var(--spacing-sm); /* Responsive vertical padding */
+}
+
+/* ===================================
+   2️⃣ COUNTDOWN GRID LAYOUT
+   =================================== */
+
+/* 
+   Time display grid - Creates 4 equal columns for:
+   - Days | Hours | Minutes | Seconds
+*/
+.timebox {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+    gap: clamp(1rem, 5vw, 6rem); /* 🎯 OPTIMIZED: Simplified gap scaling */
+    margin: clamp(1.6rem, 4vw, 3.2rem) auto 0 auto; /* Centered with top spacing */
+    width: 100%;
+    max-width: 80rem; /* Limit maximum width for better readability */
+    justify-items: center; /* Center items horizontally within grid cells */
+}
+
+/* ===================================
+   3️⃣ TIME UNIT STYLING
+   =================================== */
+
+/* Individual time unit container (wraps number and label) */
+.time {
+    text-align: center;
+    min-width: 0; /* Prevent flex/grid overflow issues */
+    display: flex;
+    flex-direction: column; /* Stack number above label */
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth); /* Smooth hover effects */
+}
+
+/* Optional hover effect for interactive feel */
+/* Subtle lift on hover */
+/* .time:hover {
+    transform: translateY(-2px); 
+} */
+
+/* ===================================
+   4️⃣ NUMBER & LABEL TYPOGRAPHY
+   =================================== */
+
+/* Large countdown numbers - Optimized responsive sizing */
+.time h3 {
+    font-size: clamp(
+        2rem,
+        5vw,
+        4.8rem
+    ); /* 🎯 OPTIMIZED: Balanced scaling for all screens */
+    font-weight: 700; /* Bold for emphasis and readability */
+    line-height: 1; /* Tight line height for compact numbers */
+    margin: 0; /* Remove default margins */
+    letter-spacing: -0.02em; /* Slight negative spacing for visual tightness */
+    color: var(--color-light-text); /* Consistent with section color */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Depth and readability on gradient */
+
+    /* 🎯 OPTIMIZED: Smooth number transitions when updating */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Time unit labels (дн., ч., мин., с.) - Typography styling */
+.time p {
+    font-size: clamp(1rem, 2vw, 1.4rem); /* Proportional label sizing */
+    margin: clamp(0.5rem, 1vw, 1rem) 0 0 0; /* Top margin for spacing */
+    opacity: 0.9; /* Slightly transparent for visual hierarchy */
+    color: var(--color-light-text); /* Consistent color scheme */
+    font-weight: 500; /* Medium weight for readability */
+    text-transform: uppercase; /* Uppercase for consistency and emphasis */
+    letter-spacing: 0.5px; /* Slight spacing for readability */
+}
+
+/* ===================================
+   5️⃣ RESPONSIVE BREAKPOINTS (SIMPLIFIED)
+   =================================== */
+
+/* 
+   🎯 OPTIMIZED: Reduced from 5 breakpoints to 3 for easier maintenance
+   Breakpoints align with your site standard: 1200px, 768px, 480px
+*/
+
+/* 📱 TABLET & SMALL DESKTOP (≤1200px) */
+@media (max-width: 1200px) {
+    .timebox {
+        gap: clamp(0.8rem, 4vw, 4rem); /* Reduced gap for medium screens */
+        max-width: 70rem; /* Narrower container */
+    }
+
+    .time h3 {
+        font-size: clamp(1.8rem, 4.5vw, 4rem); /* Slightly smaller numbers */
+    }
+}
+
+/* 📱 TABLET (≤768px) */
+@media (max-width: 768px) {
+    .countdown-section {
+        padding: clamp(1.5rem, 4vw, 3rem) var(--spacing-sm); /* Reduce vertical padding */
+    }
+
+    .timebox {
+        gap: clamp(0.6rem, 3vw, 3rem); /* Tighter gaps on tablets */
+        max-width: 60rem;
+    }
+
+    .time {
+        padding: var(--spacing-xs); /* Add padding for touch targets */
+    }
+
+    .time h3 {
+        font-size: clamp(1.6rem, 5vw, 3.2rem); /* Mobile-friendly sizing */
+    }
+
+    .time p {
+        font-size: clamp(0.9rem, 2vw, 1.2rem); /* Proportional labels */
+    }
+}
+
+/* 📱 MOBILE (≤480px) */
+@media (max-width: 480px) {
+    .timebox {
+        gap: clamp(0.4rem, 2.5vw, 2rem); /* Minimal gaps for small screens */
+        max-width: 100%; /* Full width utilization */
+    }
+
+    .time h3 {
+        font-size: clamp(
+            1.4rem,
+            6vw,
+            2.8rem
+        ); /* Optimized for mobile readability */
+        font-weight: 600; /* Slightly lighter for small sizes */
+    }
+
+    .time p {
+        font-size: clamp(0.8rem, 3vw, 1rem); /* Small but readable labels */
+        margin-top: 0.4rem; /* Compact spacing */
+    }
+}
+
+/* ===================================
+   6️⃣ COUNTDOWN EXPIRED STATE
+   =================================== */
+
+/* 
+   🔗 JAVASCRIPT INTEGRATION NOTE:
+   The class '.countdown-expired' is added by JavaScript in countdown-clock.js
+   when the countdown reaches zero (see timer() function).
+   This styling provides visual feedback for expired countdowns.
+*/
+
+/* Red tinted numbers when countdown expires */
+.countdown-section.countdown-expired .time h3 {
+    color: var(--color-error); /* Error red from general.css variables */
+    opacity: 0.7; /* Faded appearance */
+}
+
+/* Faded labels for expired countdown */
+.countdown-section.countdown-expired .time p {
+    opacity: 0.5; /* More transparent than numbers */
+}
+
+/* Subtle background tint for expired state */
+.countdown-section.countdown-expired .time {
+    background: rgba(255, 107, 107, 0.1); /* Light red background overlay */
+    border-radius: var(--border-radius-small); /* Soft corners */
+}
+
+/* ===================================
+   7️⃣ ACCESSIBILITY FEATURES
+   =================================== */
+
+/* High contrast mode support for users with low vision */
+@media (prefers-contrast: high) {
+    .time {
+        background: rgba(255, 255, 255, 0.2); /* Visible background */
+        border: 1px solid var(--color-light-text); /* Clear borders */
+        padding: var(--spacing-xs); /* Ensure content has breathing room */
+    }
+
+    .time h3 {
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.8); /* Enhanced readability */
+    }
+}
+
+/* Respect reduced motion preferences for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .time {
+        transition: none; /* Disable all transitions */
+    }
+
+    .time:hover {
+        transform: none; /* Disable hover animations */
+    }
+
+    .time h3 {
+        transition: none; /* Disable number transitions */
+    }
+}
+
+/* High DPI display optimization (Retina screens, etc.) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .time h3 {
+        text-rendering: optimizeLegibility; /* Better text rendering */
+        -webkit-font-smoothing: antialiased; /* Smoother fonts on webkit */
+        -moz-osx-font-smoothing: grayscale; /* Smoother fonts on Firefox/Mac */
+    }
+}
+
+/* ================================================
+   8️⃣ DEBUG UTILITIES SECTION
+   ================================================
+   
+   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
+   
+   These utilities help visualize layout boundaries and test
+   responsive behavior during development. Keep commented out
+   in production for optimal performance.
+*/
+
+/* ─────────────────────────────────────────────
+   VISUAL LAYOUT DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎨 Layout Boundaries Visualization:
+Uncomment to see colored borders around countdown elements
+
+.countdown-section { 
+    border: 3px solid red !important; 
+    background: rgba(255,0,0,0.1) !important;
+}
+
+.timebox { 
+    border: 2px solid blue !important; 
+    background: rgba(0,0,255,0.1) !important;
+}
+
+.time { 
+    border: 1px solid green !important; 
+    background: rgba(0,255,0,0.1) !important;
+}
+
+.time h3 { 
+    background: rgba(255,255,0,0.3) !important; 
+    outline: 1px dashed orange !important;
+}
+
+.time p { 
+    background: rgba(255,165,0,0.3) !important; 
+    outline: 1px dashed purple !important;
+}
+*/
+
+/* ─────────────────────────────────────────────
+   JAVASCRIPT CONSOLE DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+📊 Font Size Testing:
+Copy and paste this into browser console to check computed font sizes:
+
+document.querySelectorAll('.time h3').forEach((el, i) => {
+    const styles = getComputedStyle(el);
+    console.log(`Time unit ${i + 1}:`, {
+        fontSize: styles.fontSize,
+        lineHeight: styles.lineHeight,
+        color: styles.color
+    });
+});
+*/
+
+/*
+📐 Responsive Breakpoint Testing:
+Copy and paste into console to see current breakpoint:
+
+const width = window.innerWidth;
+const breakpoint = 
+    width <= 480 ? 'Mobile (≤480px)' :
+    width <= 768 ? 'Tablet (≤768px)' :
+    width <= 1200 ? 'Desktop Small (≤1200px)' :
+    'Desktop Large (>1200px)';
+console.log('Current breakpoint:', breakpoint, `(${width}px)`);
+*/
+
+/*
+🎯 Grid Gap Visualization:
+Add temporary background to see gaps between time units:
+
+document.querySelector('.timebox').style.background = 
+    'repeating-linear-gradient(90deg, rgba(255,0,0,0.1) 0px, rgba(255,0,0,0.1) 1px, transparent 1px, transparent 100%)';
+*/
+
+/* ─────────────────────────────────────────────
+   PERFORMANCE DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+⚡ Animation Performance Testing:
+Uncomment to add visible indicators when animations trigger:
+
+.time h3 {
+    animation: pulse 1s infinite !important;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+*/
+
+/*
+🔄 Transition Duration Testing:
+Uncomment to slow down all transitions for debugging:
+
+* {
+    transition-duration: 2s !important;
+}
+*/
+
+/* ─────────────────────────────────────────────
+   END OF DEBUG UTILITIES
+   ───────────────────────────────────────────── */

@@ -1,84 +1,22 @@
 // ================================================
-// 🎯 MAIN APPLICATION ORCHESTRATOR
-// ================================================
-//
-// 📋 MODULE PURPOSE:
-// Central initialization and coordination point for all application components.
-// Handles module imports, event delegation, and ensures proper initialization
-// order for all interactive features.
-//
-// 🎬 INITIALIZATION FLOW:
-// 1. Import all feature modules
-// 2. Define static data (SERVICE_DATA)
-// 3. Initialize components on DOMContentLoaded
-// 4. Setup cleanup handlers on beforeunload
-//
-// 🔗 DEPENDENCIES:
-// - ./moon-phase.js (self-initializing)
-// - ./price-section.js (self-initializing)
-// - ./countdown-clock.js
-// - ./carousel.js
-// - ./calendar.js
-// - ./nav.js
-// - ./hero-button.js
-//
-// 📦 MAIN COMPONENTS:
-// - SERVICE_DATA: Static service descriptions for popups
-// - PopupManager: Modal system for service details
-// - AboutMeAnimation: Scroll-triggered card animations
-//
-// ⚠️ IMPORTANT NOTES:
-// - Each module should only be initialized ONCE
-// - Moon phase and price section self-initialize (don't call manually)
-// - Countdown cleanup prevents memory leaks on page unload
-
-// ================================================
 // 📦 MODULE IMPORTS
 // ================================================
 
-// Self-initializing modules (no manual init needed)
-import './moon-phase.js'; // 🌙 Auto-initializes on DOMContentLoaded
-import './price-section.js'; // 💰 Auto-initializes on DOMContentLoaded
-
-// Modules requiring manual initialization
 import { initializeCountdown, cleanupCountdown } from './countdown-clock.js';
+import { initializeMoonPhase } from './moon-phase.js';
 import Carousel from './carousel.js';
 import { renderCalendar, startAutoUpdate } from './calendar.js';
 import { initNav, destroyNav } from './nav.js';
 import { initializeHeroButton, destroyHeroButton } from './hero-button.js';
 
 // ================================================
-// 🎴 SERVICE DATA - POPUP CONTENT
+// 🎴 SERVICE DATA - Popup Content
 // ================================================
 //
-// 📋 PURPOSE:
-// Static service descriptions displayed in popup modals when users click
-// "Learn More" buttons on service carousel cards.
-//
-// 🔄 MIGRATED FROM: HTML popup divs (improved maintainability)
-//
-// 📝 STRUCTURE:
-// Each service ID maps to:
-// - title: Service name (Russian)
-// - content: Full HTML description with formatting
-//
-// 🔧 MAINTENANCE:
-// To add new service:
-// 1. Add new entry with next ID number
-// 2. Update data-popup attribute in HTML carousel card
-// 3. Ensure PopupManager buttons have matching data-popup value
+// 📋 Service descriptions for popup modals
+// Each service has detailed information displayed when "Learn More" is clicked
+// This data was migrated from HTML popup divs for better maintainability
 
-/**
- * Service descriptions for popup modals
- * Maps service IDs to display content
- *
- * @constant {Object.<string, {title: string, content: string}>}
- *
- * @example
- * // Access service data
- * const service = SERVICE_DATA['1'];
- * console.log(service.title); // "Гадание на картах"
- */
 const SERVICE_DATA = {
     1: {
         title: 'Гадание на картах',
@@ -158,161 +96,141 @@ const SERVICE_DATA = {
     },
 };
 
-/* ===================================
-   🧭 MOBILE NAVIGATION
-   =================================== */
+// ------------------------------------------------------------------
+// MOBILE NAVIGATION FUNCTIONALITY
+// ------------------------------------------------------------------
 
-/**
- * Initialize mobile navigation menu system
- * Handles off-canvas menu, focus trap, and scroll locking
- *
- * @see nav.js for detailed implementation
- * @private
- */
 document.addEventListener('DOMContentLoaded', () => {
     initNav();
-    console.log('✅ Mobile navigation initialized');
 });
 
-/* ===================================
-   🦸 HERO BUTTON - SMOOTH SCROLL
-   =================================== */
+// ------------------------------------------------------------------
+// 🦸 HERO BUTTON FUNCTIONALITY
+// ------------------------------------------------------------------
 
-/**
- * Initialize hero section CTA button
- * Provides smooth scrolling to target sections
- *
- * @see hero-button.js for scroll implementation
- * @private
- */
+// Initialize hero button smooth scroll
 document.addEventListener('DOMContentLoaded', () => {
     initializeHeroButton();
-    console.log('✅ Hero button initialized');
 });
 
-/**
- * Cleanup hero button listeners on page unload
- * Prevents memory leaks
- *
- * @private
- */
+// Optional: Cleanup on page unload
 window.addEventListener('beforeunload', () => {
     destroyHeroButton();
 });
 
+/* ================================================
+   👤 ABOUT ME SECTION - ANIMATION CONTROLLER
+   ================================================
+   
+   📋 FEATURES:
+   - Scroll-triggered entrance animations using IntersectionObserver
+   - Responsive animation directions based on screen layout
+   - Debounced resize handling for performance
+   - Memory leak prevention with proper cleanup
+   - Staggered card entrance for visual interest
+   
+   🎬 ANIMATION FLOW:
+   1. Cards start hidden (opacity: 0, translateY)
+   2. When section enters viewport, IntersectionObserver triggers
+   3. Cards receive direction classes based on screen width
+   4. CSS handles the actual animation with transition delays
+   
+   🔗 CSS INTEGRATION:
+   Works with animate-from-* classes in about-me-section-styles.css
+*/
+
 /* ===================================
-   👤 ABOUT ME SECTION - SCROLL ANIMATIONS
+   📱 RESPONSIVE BREAKPOINT CONSTANTS
    =================================== */
 
-//  ───────────────────────────────────────────────
-//  📱 RESPONSIVE BREAKPOINTS
-//  ───────────────────────────────────────────────
-
-/**
- * Breakpoint configuration for responsive animation directions
- * Defines at which screen widths the layout changes
- *
- * @constant {Object}
- */
 const BREAKPOINTS = {
     MOBILE: 599, // ≤599px: Single column layout
-    TABLET: 991, // ≤991px: Two column layout
+    TABLET: 991, // ≤991px: Two column layout with centered third card
     DESKTOP: Infinity, // >991px: Three column layout
 };
 
-//  ───────────────────────────────────────────────
-//  ⏱️ ANIMATION TIMING
-//  ───────────────────────────────────────────────
+/* ===================================
+   ⏱️ ANIMATION TIMING CONSTANTS
+   =================================== */
 
-/**
- * Animation timing configuration
- * Controls IntersectionObserver thresholds and delays
- *
- * @constant {Object}
- */
 const ANIMATION_CONFIG = {
     // IntersectionObserver thresholds
-    VISIBILITY_THRESHOLD: 0.3, // Trigger at 30% visibility
-    ROOT_MARGIN: '-10% 0px -10% 0px', // Start trigger slightly before entering viewport
+    VISIBILITY_THRESHOLD: 0.3, // Trigger when 30% of section is visible
+    ROOT_MARGIN: '-10% 0px -10% 0px', // Start trigger slightly before section enters viewport
 
-    // Timing for staggered card entrance
-    BROWSER_DELAY: 100, // Delay between each card animation (ms)
+    // Timing for staggered appearance
+    BROWSER_DELAY: 100, // Small delay between card animations (ms)
 
     // Resize debouncing
-    RESIZE_DEBOUNCE_DELAY: 250, // Wait after last resize event (ms)
+    RESIZE_DEBOUNCE_DELAY: 250, // Wait 250ms after last resize before updating (ms)
 };
 
-//  ───────────────────────────────────────────────
-//  🎬 ANIMATION DIRECTION PATTERNS
-//  ───────────────────────────────────────────────
+/* ===================================
+   🎬 ANIMATION DIRECTION CONFIGURATIONS
+   =================================== */
 
-/**
- * Animation direction configurations for different screen sizes
- * Defines which direction each card should slide in from
- *
- * @constant {Object.<string, Array<string>>}
- *
- * @example
- * // Mobile: alternating diagonal + centered bottom
- * ['animate-from-bottom-left', 'animate-from-bottom-right', 'animate-from-bottom']
- */
+/*
+   🔄 TRANSLATED: Animation direction patterns for different screen sizes
+   Original: "Мобильные устройства", "Планшеты", "Десктоп"
+   
+   Each layout defines which direction each card should animate from:
+   - bottom-left: Slides in from lower left diagonal
+   - bottom: Slides in from straight below
+   - bottom-right: Slides in from lower right diagonal
+*/
 const ANIMATION_DIRECTIONS = {
     MOBILE: [
-        'animate-from-bottom-left', // Card 1: Diagonal from lower-left
-        'animate-from-bottom-right', // Card 2: Diagonal from lower-right
-        'animate-from-bottom', // Card 3: Straight up (centered)
+        'animate-from-bottom-left', // Card 1: From bottom-left
+        'animate-from-bottom-right', // Card 2: From bottom-right
+        'animate-from-bottom', // Card 3: From bottom (centered)
     ],
     TABLET: [
-        'animate-from-bottom-left', // Card 1: Left column
-        'animate-from-bottom-right', // Card 2: Right column
-        'animate-from-bottom', // Card 3: Centered (spans both columns)
+        'animate-from-bottom-left', // Card 1: From bottom-left (left column)
+        'animate-from-bottom-right', // Card 2: From bottom-right (right column)
+        'animate-from-bottom', // Card 3: From bottom (centered, spans both columns)
     ],
     DESKTOP: [
-        'animate-from-bottom-left', // Card 1: Left column
-        'animate-from-bottom', // Card 2: Center column
-        'animate-from-bottom-right', // Card 3: Right column
+        'animate-from-bottom-left', // Card 1: From bottom-left (left column)
+        'animate-from-bottom', // Card 2: From bottom (center column)
+        'animate-from-bottom-right', // Card 3: From bottom-right (right column)
     ],
 };
 
-//  ───────────────────────────────────────────────
-//  📦 ABOUT ME ANIMATION CLASS
-//  ───────────────────────────────────────────────
+/* ===================================
+   📦 ABOUT ME ANIMATION CLASS
+   =================================== */
 
 /**
- * Manages scroll-triggered entrance animations for About Me section
- *
- * Uses IntersectionObserver to detect when section enters viewport,
- * then triggers staggered card entrance animations with direction
- * classes that adapt to current screen size.
+ * Manages scroll-triggered entrance animations for About Me section cards
  *
  * @class AboutMeAnimation
- *
  * @example
- * // Automatic initialization on DOM ready
+ * // Initialize animations when DOM is ready
  * const aboutMeAnimation = new AboutMeAnimation();
  *
- * @example
- * // Manual control (for testing)
- * aboutMeAnimation.triggerAnimation(); // Force animate
- * aboutMeAnimation.resetAnimation();   // Reset to initial state
+ * // Manually trigger animation (optional)
+ * aboutMeAnimation.triggerAnimation();
+ *
+ * // Reset animation state (optional)
+ * aboutMeAnimation.resetAnimation();
  */
 class AboutMeAnimation {
     /**
-     * Initialize animation system
-     * Caches DOM elements, sets up observer, and configures resize handler
+     * Initialize the animation system
+     * Sets up IntersectionObserver and resize handler
      */
     constructor() {
-        // Cache DOM elements for performance
+        // Cache DOM elements
         this.aboutMeSection = document.querySelector('.about-me-section');
         this.aboutMeCards = document.querySelectorAll('.about-me-card');
 
         // Animation state tracking
-        this.hasAnimated = false; // Prevents re-triggering animation
-        this.currentBreakpoint = null; // Tracks current responsive layout
-        this.resizeTimeout = null; // Debounce timer for resize events
-        this.observer = null; // IntersectionObserver instance
+        this.hasAnimated = false; // Prevents animation from triggering multiple times
+        this.currentBreakpoint = null; // Tracks which breakpoint we're currently in
+        this.resizeTimeout = null; // For debouncing resize events
+        this.observer = null; // Store observer reference for cleanup
 
-        // Validate required DOM elements exist
+        // Validate required elements exist
         if (!this.aboutMeSection || this.aboutMeCards.length === 0) {
             console.warn(
                 '⚠️ About Me section or cards not found. Animation disabled.'
@@ -323,24 +241,23 @@ class AboutMeAnimation {
         // Initialize animation system
         this.initializeAnimation();
         this.setupIntersectionObserver();
-
-        console.log('✅ About Me animation initialized');
     }
 
     /**
-     * Set up initial animation classes and resize handler
+     * Set up initial animation classes based on current screen size
      * @private
      */
     initializeAnimation() {
+        // 🔄 TRANSLATED: Set initial animation direction classes
+        // Original: "Устанавливаем начальные классы для направлений анимации"
         this.updateAnimationDirections();
         this.setupResizeHandler();
     }
 
     /**
-     * Determine current responsive breakpoint based on window width
-     *
-     * @returns {string} Current breakpoint name ('MOBILE', 'TABLET', or 'DESKTOP')
+     * Determine current breakpoint based on window width
      * @private
+     * @returns {string} Current breakpoint name ('MOBILE', 'TABLET', or 'DESKTOP')
      */
     getCurrentBreakpoint() {
         const width = window.innerWidth;
@@ -351,22 +268,22 @@ class AboutMeAnimation {
     }
 
     /**
-     * Update animation direction classes based on current screen size
-     * Only updates if breakpoint has actually changed (performance optimization)
-     *
+     * Update animation direction classes based on screen size
+     * Only updates if breakpoint has actually changed
      * @private
      */
     updateAnimationDirections() {
         const newBreakpoint = this.getCurrentBreakpoint();
 
-        // Skip update if breakpoint hasn't changed
+        // 🎯 OPTIMIZATION: Only update if breakpoint changed
         if (newBreakpoint === this.currentBreakpoint) {
-            return;
+            return; // No change needed
         }
 
         this.currentBreakpoint = newBreakpoint;
 
-        // Remove all existing direction classes
+        // 🔄 TRANSLATED: Remove all existing direction classes
+        // Original: "Сбрасываем все классы направлений"
         this.aboutMeCards.forEach((card) => {
             card.classList.remove(
                 'animate-from-bottom-left',
@@ -386,11 +303,11 @@ class AboutMeAnimation {
 
     /**
      * Set up debounced window resize handler
-     * Prevents excessive updates during active resize
-     *
+     * Prevents excessive updates during window resize
      * @private
      */
     setupResizeHandler() {
+        // 🎯 OPTIMIZATION: Debounce resize events for performance
         const debouncedUpdate = () => {
             // Clear existing timeout
             if (this.resizeTimeout) {
@@ -403,6 +320,8 @@ class AboutMeAnimation {
             }, ANIMATION_CONFIG.RESIZE_DEBOUNCE_DELAY);
         };
 
+        // 🔄 TRANSLATED: Update directions when window is resized
+        // Original: "Обновляем направления при изменении размера окна"
         window.addEventListener('resize', debouncedUpdate);
 
         // Store reference for cleanup
@@ -410,15 +329,14 @@ class AboutMeAnimation {
     }
 
     /**
-     * Set up IntersectionObserver to trigger animation when section enters viewport
-     *
+     * Set up IntersectionObserver to trigger animation on scroll
      * @private
      */
     setupIntersectionObserver() {
         const options = {
-            root: null,
-            rootMargin: ANIMATION_CONFIG.ROOT_MARGIN,
-            threshold: ANIMATION_CONFIG.VISIBILITY_THRESHOLD,
+            root: null, // Use viewport as root
+            rootMargin: ANIMATION_CONFIG.ROOT_MARGIN, // 🔄 TRANSLATED: "Триггер когда секция на 10% видна"
+            threshold: ANIMATION_CONFIG.VISIBILITY_THRESHOLD, // 🔄 TRANSLATED: "Анимация запускается когда 30% секции видно"
         };
 
         this.observer = new IntersectionObserver((entries) => {
@@ -440,12 +358,17 @@ class AboutMeAnimation {
     /**
      * Trigger staggered entrance animation for all cards
      * Adds 'animate-in' class with progressive delays
-     *
      * @private
      */
     animateCards() {
+        // 🔄 TRANSLATED: Trigger animation for all cards
+        // Original: "Запускаем анимацию для всех карточек"
+
         this.aboutMeCards.forEach((card, index) => {
-            // Small browser delay creates smooth staggered effect
+            // 🔄 TRANSLATED: Add animation class with delays set in CSS
+            // Original: "Добавляем класс анимации с учетом задержек, установленных в CSS"
+
+            // Small browser delay for smoother visual effect
             setTimeout(() => {
                 card.classList.add('animate-in');
             }, index * ANIMATION_CONFIG.BROWSER_DELAY);
@@ -455,10 +378,12 @@ class AboutMeAnimation {
     /**
      * Manually trigger the entrance animation
      * Useful for testing or forcing animation after reset
-     *
      * @public
      */
     triggerAnimation() {
+        // 🔄 TRANSLATED: Manual animation trigger method
+        // Original: "Метод для ручного запуска анимации (если потребуется)"
+
         if (!this.hasAnimated) {
             this.animateCards();
             this.hasAnimated = true;
@@ -467,11 +392,13 @@ class AboutMeAnimation {
 
     /**
      * Reset animation state - allows animation to trigger again
-     * Useful for testing or development
-     *
+     * Useful for testing or re-triggering animation
      * @public
      */
     resetAnimation() {
+        // 🔄 TRANSLATED: Reset animation state method
+        // Original: "Метод для сброса анимации (если потребуется)"
+
         this.hasAnimated = false;
 
         // Remove animate-in class from all cards
@@ -483,7 +410,6 @@ class AboutMeAnimation {
     /**
      * Clean up event listeners and observers
      * Prevents memory leaks when component is destroyed
-     *
      * @public
      */
     destroy() {
@@ -502,75 +428,97 @@ class AboutMeAnimation {
             this.observer.disconnect();
         }
 
-        console.log('🧹 About Me animation cleaned up');
+        console.log('🧹 About Me animation controller cleaned up');
     }
 }
 
 /* ===================================
-   🎭 POPUP MANAGER - SERVICE DETAILS MODAL
+   🔧 DEBUG UTILITIES
    =================================== */
 
+/*
+📊 Test Animation System:
+Copy these functions to browser console for debugging
+
+// Check current animation state
+function debugAboutMeAnimation() {
+    const section = document.querySelector('.about-me-section');
+    const cards = document.querySelectorAll('.about-me-card');
+    
+    console.log('📍 Current breakpoint:', window.innerWidth <= 599 ? 'MOBILE' : window.innerWidth <= 991 ? 'TABLET' : 'DESKTOP');
+    console.log('🎬 Cards found:', cards.length);
+    
+    cards.forEach((card, i) => {
+        const classes = card.className;
+        const hasAnimated = card.classList.contains('animate-in');
+        console.log(`Card ${i + 1}:`, {
+            classes,
+            animated: hasAnimated
+        });
+    });
+}
+
+// Force animation to trigger
+function forceAboutMeAnimation() {
+    document.querySelectorAll('.about-me-card').forEach((card, i) => {
+        setTimeout(() => card.classList.add('animate-in'), i * 100);
+    });
+}
+
+// Reset animation state
+function resetAboutMeAnimation() {
+    document.querySelectorAll('.about-me-card').forEach(card => {
+        card.classList.remove('animate-in');
+    });
+}
+
+debugAboutMeAnimation();
+*/
+
+// ================================================
+// 🎭 POPUP MANAGER - SERVICE DETAILS MODAL
+// ================================================
+//
+// 📋 FEATURES:
+// - Dynamically creates popup overlay and content
+// - Displays detailed service information from SERVICE_DATA
+// - Handles close events (button, outside click, ESC key)
+// - Prevents body scroll when popup is open
+//
+// 🔗 INTEGRATION:
+// Works with gallery-item-button clicks from carousel
+
 /**
- * Manages popup modal system for displaying service details
- *
- * Creates and controls a modal overlay that displays detailed service
- * information from SERVICE_DATA when user clicks "Learn More" buttons
- * on carousel service cards.
- *
+ * Manages popup modal for displaying service details
  * @class PopupManager
- *
- * @example
- * // Automatic initialization
- * const popupManager = new PopupManager();
- *
- * @example
- * // Manual control (if needed)
- * popupManager.show('Title', '<p>Content</p>');
- * popupManager.close();
  */
 class PopupManager {
-    /**
-     * Initialize popup system
-     * Creates DOM structure and sets up event listeners
-     */
     constructor() {
         this.createPopupElements();
         this.initializeEventListeners();
-        console.log('✅ Popup manager initialized');
+        console.log('✅ PopupManager initialized');
     }
 
     /**
      * Create popup DOM structure and append to body
-     *
-     * Structure:
-     * - overlay (backdrop)
-     *   - content (card)
-     *     - closeBtn (×)
-     *     - title (h2)
-     *     - text (div with HTML content)
-     *
      * @private
      */
     createPopupElements() {
-        // Create overlay backdrop
+        // Create main popup elements
         this.overlay = document.createElement('div');
         this.overlay.className = 'popup-overlay';
 
-        // Create content card
         this.content = document.createElement('div');
         this.content.className = 'popup-content';
 
-        // Create title element
         this.title = document.createElement('h2');
         this.title.className = 'popup-title';
 
-        // Create close button
         this.closeBtn = document.createElement('span');
         this.closeBtn.className = 'popup-close';
         this.closeBtn.innerHTML = '&times;';
         this.closeBtn.setAttribute('aria-label', 'Закрыть окно');
 
-        // Create text container
         this.text = document.createElement('div');
         this.text.className = 'popup-text';
 
@@ -584,8 +532,6 @@ class PopupManager {
 
     /**
      * Setup event listeners for popup interactions
-     * Handles: close button, outside clicks, ESC key, and "Learn More" buttons
-     *
      * @private
      */
     initializeEventListeners() {
@@ -612,7 +558,7 @@ class PopupManager {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
 
-                // Extract service ID from data-popup attribute
+                // Get service ID from button's data attribute
                 const serviceId = button
                     .getAttribute('data-popup')
                     ?.replace('popup-', '');
@@ -631,118 +577,54 @@ class PopupManager {
     }
 
     /**
-     * Display popup with title and HTML content
-     *
-     * @param {string} title - Popup title text
-     * @param {string} content - HTML content for popup body
-     *
-     * @example
-     * popupManager.show('Гадание на картах', '<p>Description here</p>');
-     *
+     * Display popup with title and content
      * @public
+     * @param {string} title - Popup title
+     * @param {string} content - HTML content for popup body
      */
     show(title, content) {
         this.title.textContent = title;
         this.text.innerHTML = content;
         this.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
 
-        // Prevent background scroll while popup is open
-        document.body.style.overflow = 'hidden';
+        // 🔧 DEBUG: Uncomment to log popup openings
+        // console.log('📖 Popup opened:', title);
     }
 
     /**
      * Close popup and reset content
-     * Restores body scroll and clears content after animation completes
-     *
      * @public
      */
     close() {
         this.overlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scroll
 
-        // Restore scroll
-        document.body.style.overflow = '';
-
-        // Clear content after CSS transition completes (300ms)
+        // Clear content after animation completes
         setTimeout(() => {
             this.title.textContent = '';
             this.text.innerHTML = '';
-        }, 300);
+        }, 300); // Match CSS transition duration
+
+        // 🔧 DEBUG: Uncomment to log popup closings
+        // console.log('📕 Popup closed');
     }
 }
 
-/* ===================================
-   ⏰ COUNTDOWN CLOCK
-   =================================== */
+// ================================================
+// 🎯 UNIFIED INITIALIZATION
+// ================================================
+//
+// All component initialization happens here in a single DOMContentLoaded event
+// This prevents duplicate initializations and keeps code organized
 
-/**
- * Initialize countdown timer
- *
- * ⚠️ IMPORTANT: This is the ONLY place countdown should be initialized
- * Multiple initializations will cause duplicate timers and memory leaks
- *
- * @see countdown-clock.js for timer implementation
- * @private
- */
-document.addEventListener('DOMContentLoaded', () => {
-    initializeCountdown();
-    console.log('✅ Countdown timer initialized');
-});
-
-/**
- * Cleanup countdown on page unload
- * Prevents memory leaks by clearing interval timers
- *
- * @private
- */
-window.addEventListener('beforeunload', () => {
-    cleanupCountdown();
-});
-
-/* ===================================
-   📅 CALENDAR SECTION
-   =================================== */
-
-/**
- * Render calendar for current month
- * Displays interactive monthly view with travel dates highlighted
- *
- * @see calendar.js for rendering logic
- * @private
- */
-renderCalendar();
-
-/**
- * Start calendar auto-update system
- * Calendar automatically refreshes every 6 hours to stay current
- *
- * @see calendar.js for update mechanism
- * @private
- */
-startAutoUpdate();
-
-console.log('✅ Calendar initialized with auto-update');
-
-/* ===================================
-   🎯 UNIFIED COMPONENT INITIALIZATION
-   =================================== */
-
-/**
- * Initialize all remaining components on DOM ready
- *
- * This centralized initialization point ensures:
- * - Proper initialization order
- * - No duplicate initializations
- * - Clean error handling
- *
- * @private
- */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('🚀 Initializing application components...');
 
     // Initialize popup system for service details
     const popupManager = new PopupManager();
 
-    // Initialize carousel
+    // Initialize carousel (SINGLE INITIALIZATION)
     const carousel = new Carousel();
 
     // Initialize About Me section animations
@@ -750,3 +632,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('✅ All components initialized successfully');
 });
+
+// ------------------------------------------------------------------
+// ⏰ COUNTDOWN CLOCK - SINGLE INITIALIZATION POINT
+// ------------------------------------------------------------------
+
+/**
+ * Initialize countdown timer
+ * This is the ONLY place countdown should be initialized
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('🎯 Initializing countdown from script.js');
+    initializeCountdown();
+});
+
+/**
+ * Cleanup countdown on page unload
+ * Prevents memory leaks
+ */
+window.addEventListener('beforeunload', function () {
+    console.log('🧹 Cleaning up countdown');
+    cleanupCountdown();
+});
+
+/*
+## 🔍 VERIFICATION STEPS
+
+After making these changes:
+
+### **1. Clear Cache & Reload**
+- Press `Ctrl + Shift + R` (Windows/Linux)
+- Press `Cmd + Shift + R` (Mac)
+- Or manually clear cache in DevTools
+
+### **2. Check Console**
+You should now see:
+```
+✅ Countdown configured for: [date]
+✅ Countdown timer initialized successfully
+*/
+
+// ------------------------------------------------------------------
+// Moon Phase Section Logic
+// ------------------------------------------------------------------
+
+initializeMoonPhase();
+
+// ------------------------------------------------------------------
+// Calendar Section Logic with Auto-Update
+// ------------------------------------------------------------------
+
+// Initial Calendar render
+renderCalendar();
+
+//Start the calendar auto-update system
+startAutoUpdate();

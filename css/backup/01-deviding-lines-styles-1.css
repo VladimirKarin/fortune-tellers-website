@@ -1,0 +1,63 @@
+/* 11d. Волновое свечение */
+
+/* Исправленная анимированная разделительная линия (вариант 1) */
+.divider-glow-wave {
+    width: 70%;
+    height: 4px;
+    background: var(--btn-gradient);
+    border: none;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    margin: 4.4rem auto;
+    /* Добавляем базовое свечение для равномерности и пульсацию */
+    box-shadow: 0 0 8px rgba(142, 68, 173, 0.3);
+    animation: basePulse 1.5s ease-in-out infinite alternate;
+}
+
+.divider-glow-wave::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(142, 68, 173, 0.6) 0%,
+        rgba(155, 89, 182, 0.4) 30%,
+        rgba(198, 155, 221, 0.2) 50%,
+        transparent 70%
+    );
+    animation: glowWave 3s linear infinite;
+    /* Добавляем смешивание для более мягкого эффекта */
+    mix-blend-mode: screen;
+}
+
+@keyframes glowWave {
+    0% {
+        transform: translateX(-100%) rotate(0deg) scale(0.8);
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(0%) rotate(180deg) scale(1);
+    }
+    100% {
+        transform: translateX(100%) rotate(360deg) scale(0.8);
+        opacity: 0.3;
+    }
+}
+
+/* Анимация базовой пульсации */
+@keyframes basePulse {
+    0% {
+        box-shadow: 0 0 8px rgba(142, 68, 173, 0.3),
+            0 0 16px rgba(155, 89, 182, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(142, 68, 173, 0.6),
+            0 0 25px rgba(155, 89, 182, 0.4), 0 0 35px rgba(198, 155, 221, 0.2);
+    }
+}

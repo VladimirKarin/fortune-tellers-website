@@ -1,0 +1,367 @@
+/* ================================================
+   ✨ DIVIDING LINES STYLES - Animated Section Separators
+   ================================================
+   
+   📋 TABLE OF CONTENTS:
+   1. Glow Wave Divider (Primary Style)
+   2. Divider Animations
+   3. Responsive Adjustments
+   4. Debug Utilities
+   
+   ⚡ KEY FEATURES:
+   - Animated gradient divider with wave effect
+   - Pulsing base glow for depth
+   - Sweeping radial gradient shine
+   - Fully responsive width
+   - Smooth, continuous animations
+   
+   🎨 VISUAL EFFECT:
+   Creates a horizontal divider with:
+   - Purple gradient base color
+   - Pulsing ambient glow
+   - Traveling wave of brighter light
+   - Screen blend mode for luminous effect
+*/
+
+/* ===================================
+   1️⃣ GLOW WAVE DIVIDER (PRIMARY STYLE)
+   =================================== */
+
+/* 
+   🔄 TRANSLATED: Animated dividing line with wave glow effect
+   Original: "Волновое свечение - Исправленная анимированная разделительная линия (вариант 1)"
+   
+   Primary divider style used between major sections
+   Features pulsing base glow with traveling wave effect
+*/
+.divider-glow-wave {
+    /* Sizing */
+    width: 70%; /* Centered with 15% margins on each side */
+    height: 4px; /* Thin horizontal line */
+
+    /* Visual styling */
+    background: var(
+        --btn-gradient
+    ); /* Purple-to-pink gradient from general.css */
+    border: none; /* Remove default hr border */
+    border-radius: 2px; /* Slightly rounded edges */
+
+    /* Positioning */
+    position: relative; /* Context for ::before pseudo-element */
+    overflow: hidden; /* Clip wave animation */
+    text-align: center; /* Center alignment */
+
+    /* Spacing */
+    margin: 4.4rem auto; /* 44px vertical spacing, centered horizontally */
+
+    /* 
+       Base glow effect - constant pulsing ambient light
+       Provides depth and luminosity even without wave
+    */
+    box-shadow: 0 0 8px rgba(142, 68, 173, 0.3); /* Soft purple glow */
+    animation: basePulse 1.5s ease-in-out infinite alternate; /* Gentle pulsing */
+}
+
+/* 
+   Wave shine effect - traveling radial gradient
+   Creates sweeping highlight across the divider
+*/
+.divider-glow-wave::before {
+    content: '';
+    position: absolute;
+    top: -100%; /* Start above divider */
+    left: -100%; /* Start left of divider */
+    width: 300%; /* Oversized to cover all angles */
+    height: 300%; /* Oversized to cover all angles */
+
+    /* 
+       Radial gradient - creates circular glow spot
+       Fades from center (bright) to edges (transparent)
+    */
+    background: radial-gradient(
+        ellipse at center,
+        rgba(142, 68, 173, 0.6) 0%,
+        /* Bright purple center */ rgba(155, 89, 182, 0.4) 30%,
+        /* Medium purple */ rgba(198, 155, 221, 0.2) 50%,
+        /* Light purple */ transparent 70% /* Fade to transparent */
+    );
+
+    /* Animation */
+    animation: glowWave 3s linear infinite; /* Continuous wave movement */
+
+    /* 
+       Screen blend mode - creates luminous effect
+       Brightens underlying colors rather than replacing them
+    */
+    mix-blend-mode: screen;
+}
+
+/* ===================================
+   2️⃣ DIVIDER ANIMATIONS
+   =================================== */
+
+/* 
+   Wave movement animation
+   Sweeps radial gradient from left to right with rotation
+   Creates dynamic, traveling light effect
+*/
+@keyframes glowWave {
+    0% {
+        transform: translateX(-100%) rotate(0deg) scale(0.8); /* Start left, small */
+        opacity: 0.3; /* Faded */
+    }
+    50% {
+        opacity: 0.8; /* Brightest at center */
+        transform: translateX(0%) rotate(180deg) scale(1); /* Center, rotated, full size */
+    }
+    100% {
+        transform: translateX(100%) rotate(360deg) scale(0.8); /* End right, small */
+        opacity: 0.3; /* Faded */
+    }
+}
+
+/* 
+   Base pulse animation
+   Gentle pulsing of the base glow effect
+   Adds depth and makes divider feel "alive"
+*/
+@keyframes basePulse {
+    0% {
+        box-shadow: 0 0 8px rgba(142, 68, 173, 0.3),
+            /* Inner glow */ 0 0 16px rgba(155, 89, 182, 0.2); /* Outer glow */
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(142, 68, 173, 0.6),
+            /* Stronger inner glow */ 0 0 25px rgba(155, 89, 182, 0.4),
+            /* Stronger mid glow */ 0 0 35px rgba(198, 155, 221, 0.2); /* Outer glow */
+    }
+}
+
+/* ===================================
+   3️⃣ RESPONSIVE ADJUSTMENTS
+   =================================== */
+
+/* 
+   📱 MOBILE (≤768px)
+   Adjustments for smaller screens
+*/
+@media (max-width: 768px) {
+    .divider-glow-wave {
+        width: 85%; /* Wider on mobile for better visual balance */
+        margin: 3.2rem auto; /* Reduced vertical spacing */
+    }
+}
+
+/* 
+   📱 SMALL MOBILE (≤480px)
+   Further optimizations for very small screens
+*/
+@media (max-width: 480px) {
+    .divider-glow-wave {
+        width: 90%; /* Nearly full width on small phones */
+        height: 3px; /* Slightly thinner */
+        margin: 2.4rem auto; /* Compact vertical spacing */
+    }
+}
+
+/* ===================================
+   4️⃣ ACCESSIBILITY ENHANCEMENTS
+   =================================== */
+
+/* 
+   ♿ Respect reduced motion preferences
+   Disables animations for users who prefer less motion
+*/
+@media (prefers-reduced-motion: reduce) {
+    .divider-glow-wave,
+    .divider-glow-wave::before {
+        animation: none !important; /* Disable all animations */
+    }
+
+    /* Keep static glow effect */
+    .divider-glow-wave {
+        box-shadow: 0 0 12px rgba(142, 68, 173, 0.5); /* Fixed medium glow */
+    }
+}
+
+/* 
+   ♿ High contrast mode support
+   Simplifies visual for better visibility
+*/
+@media (prefers-contrast: high) {
+    .divider-glow-wave {
+        box-shadow: none; /* Remove glow effects */
+        border: 2px solid currentColor; /* Solid border instead */
+        background: currentColor; /* Solid color */
+    }
+
+    .divider-glow-wave::before {
+        display: none; /* Disable wave effect */
+    }
+}
+
+/* ================================================
+   5️⃣ DEBUG UTILITIES SECTION
+   ================================================
+   
+   🔧 DEVELOPER TOOLS - Uncomment sections below for debugging
+*/
+
+/* ─────────────────────────────────────────────
+   VISUAL LAYOUT DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎨 Layout Boundaries Visualization:
+Uncomment to see divider boundaries
+
+.divider-glow-wave { 
+    outline: 2px solid red !important; 
+    background: rgba(255,0,0,0.1) !important;
+}
+
+.divider-glow-wave::before {
+    outline: 1px dashed blue !important;
+}
+*/
+
+/* ─────────────────────────────────────────────
+   ANIMATION DEBUGGING
+   ───────────────────────────────────────────── */
+
+/*
+🎬 Animation Speed Testing:
+Copy these to console to test different speeds:
+
+// Slow motion (easier to see wave movement)
+const dividers = document.querySelectorAll('.divider-glow-wave');
+dividers.forEach(div => {
+    div.style.animationDuration = '5s';
+    const pseudo = window.getComputedStyle(div, '::before');
+    // Note: Cannot directly modify ::before animation via JS
+    // Use browser DevTools to modify ::before animation
+});
+
+// Speed up wave (fast movement)
+dividers.forEach(div => {
+    div.style.animationDuration = '0.5s';
+});
+
+// Pause animation (freeze wave)
+dividers.forEach(div => {
+    div.style.animationPlayState = 'paused';
+});
+
+// Resume animation
+dividers.forEach(div => {
+    div.style.animationPlayState = 'running';
+});
+*/
+
+/* ─────────────────────────────────────────────
+   GLOW INTENSITY TESTING
+   ───────────────────────────────────────────── */
+
+/*
+💡 Test Different Glow Intensities:
+Copy to console to experiment with glow strength:
+
+const divider = document.querySelector('.divider-glow-wave');
+
+// Stronger glow
+divider.style.boxShadow = '0 0 20px rgba(142, 68, 173, 0.8), 0 0 40px rgba(155, 89, 182, 0.6)';
+
+// Subtle glow
+divider.style.boxShadow = '0 0 4px rgba(142, 68, 173, 0.2), 0 0 8px rgba(155, 89, 182, 0.1)';
+
+// No glow (solid line only)
+divider.style.boxShadow = 'none';
+
+// Reset to default
+divider.style.boxShadow = '';
+*/
+
+/* ─────────────────────────────────────────────
+   WAVE PATTERN VISUALIZATION
+   ───────────────────────────────────────────── */
+
+/*
+🌊 Make Wave More Visible:
+Uncomment to see wave pattern clearly
+
+.divider-glow-wave::before {
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 0, 0, 0.9) 0%,
+        rgba(255, 165, 0, 0.6) 30%,
+        rgba(255, 255, 0, 0.3) 50%,
+        transparent 70%
+    ) !important;
+    mix-blend-mode: normal !important;
+}
+*/
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE BREAKPOINT TESTING
+   ───────────────────────────────────────────── */
+
+/*
+📐 Current Breakpoint Checker:
+Copy this to console to see current divider width:
+
+const divider = document.querySelector('.divider-glow-wave');
+const width = window.innerWidth;
+const dividerWidth = divider.offsetWidth;
+const dividerPercent = (dividerWidth / document.body.offsetWidth * 100).toFixed(1);
+
+console.log('Viewport:', width + 'px');
+console.log('Divider width:', dividerWidth + 'px', `(${dividerPercent}%)`);
+console.log('Expected width:', 
+    width <= 480 ? '90%' :
+    width <= 768 ? '85%' :
+    '70%'
+);
+*/
+
+/* ─────────────────────────────────────────────
+   END OF DEBUG UTILITIES
+   ───────────────────────────────────────────── */
+
+/* ================================================
+   📝 USAGE NOTES & BEST PRACTICES
+   ================================================
+   
+   🎨 STYLING CUSTOMIZATION:
+   - Base color: Uses --btn-gradient variable
+   - Glow color: Purple tones (142, 68, 173)
+   - Width: 70% default, responsive on mobile
+   - Height: 4px (thin horizontal line)
+   
+   🎬 ANIMATION DETAILS:
+   - Wave cycle: 3s continuous loop
+   - Base pulse: 1.5s alternating
+   - Wave rotates 360° during travel
+   - Opacity fades at edges for smooth effect
+   
+   💡 TECHNICAL NOTES:
+   - Uses screen blend mode for luminosity
+   - Radial gradient creates circular glow spot
+   - Oversized pseudo-element (300%) ensures coverage
+   - Transform includes rotation for dynamic effect
+   
+   ♿ ACCESSIBILITY:
+   - Respects reduced motion preference
+   - High contrast mode shows solid border
+   - Semantic hr element recommended for HTML
+   - Purely decorative, no content
+   
+   📐 RESPONSIVE BEHAVIOR:
+   - Desktop: 70% width, 4.4rem spacing
+   - Tablet: 85% width, 3.2rem spacing
+   - Mobile: 90% width, 2.4rem spacing
+   
+   🔗 USAGE IN HTML:
+   <hr class="divider-glow-wave" aria-hidden="true">
+   
+   Note: Use aria-hidden="true" since this is decorative
+*/
