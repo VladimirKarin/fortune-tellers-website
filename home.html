@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <!-- META -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Сайт гадалки. Гадание на картах обычных, гадание на таро картах, ритуалы..." data-i18n-attr="content:meta.description">
+
+    <!-- FONT -->
+    <!-- Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <!-- CSS STYLES -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- ICONS -->
+    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+
+    <!-- JS SCRIPTS -->
+    <script type="module">
+        import { initI18n } from './js/i18n.js';
+        document.addEventListener('DOMContentLoaded', initI18n);
+    </script>
+    <script defer type="module" src="./js/script.js"></script>
+
+    <title data-i18n="meta.title">Уголок Доброй Феи</title>
+</head>
+
+<body>
+    <main>
+        <!-- Header + NavMenu -->
+        <header class="header">
+            <a href="#hero" class="logo" aria-label="Перейти на главную страницу">
+                <img src="./img/01-header-section/logo/logoCrop2.png" alt="Логотип" class="logo__img" />
+            </a>
+
+            <nav class="main-nav" aria-label="Основное навигационное меню">
+                <ul class="nav-list">
+                    <li><a href="#hero" data-i18n="nav.home">Главная</a></li>
+                    <li><a href="#about" data-i18n="nav.about">Обо мне</a></li>
+                    <li><a href="#services" data-i18n="nav.services">Услуги</a></li>
+                    <li><a href="#prices" data-i18n="nav.prices">Цены</a></li>
+                    <li><a href="#moon" data-i18n="nav.moon">Фаза Луны</a></li>
+                    <li><a href="#calendar" data-i18n="nav.calendar">Календарь</a></li>
+                    <li><a href="#contacts" data-i18n="nav.contacts">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="lang-switcher" style="display: flex; gap: 10px; margin-right: 20px;">
+                <a href="#" class="lang-btn" data-lang="ru" style="text-decoration: none; color: inherit; font-weight: bold;">RU</a>
+                <span style="color: inherit;">|</span>
+                <a href="#" class="lang-btn" data-lang="lt" style="text-decoration: none; color: inherit; font-weight: bold;">LT</a>
+            </div>
+
+            <button class="btn-mobile-nav" aria-label="Открыть меню" aria-expanded="false" aria-controls="primary-navigation">
+                <ion-icon name="color-wand" class="icon-mobile-nav open-icon"></ion-icon>
+                <ion-icon name="close" class="icon-mobile-nav close-icon"></ion-icon>
+            </button>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="hero__content">
+                <h1 class="hero__heading-primary" data-i18n="hero.heading">Уголок Доброй Феи</h1>
+                <p class="hero__text" data-i18n="hero.text">Мур мяу, мои дорогие! Нагадаю, обласкаю, всю правду скажу и расскажу, от беды уберегу, денег наколдую. За сметану</p>
+                <div class="hero__buttons">
+                    <button class="button hero__button" data-scroll-to="contacts" aria-label="Связаться со мной" data-i18n="hero.button">
+                        Связаться со мной
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="background-gradient-container">
+
+            <!-- About Me Section -->
+            <section class="about-me-section section-padding" id="about">
+                <div class="container">
+                    <h2 class="heading-secondary about-me-section__heading" data-i18n="about.heading">
+                        Обо мне
+                    </h2>
+                </div>
+
+                <div class="container grid grid--3-cols grid--center-v">
+                    <div class="about-me-card">
+                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img">
+                        <div class="about-me-card__content">
+                            <p class="about-me-card__title" data-i18n="about.card1.title">Кто я такая</p>
+                            <p class="about-me-card__text" data-i18n="about.card1.text">
+                                Lorem ipsum dolor sit amet...
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="about-me-card">
+                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img">
+                        <div class="about-me-card__content">
+                            <p class="about-me-card__title" data-i18n="about.card2.title">Как я к этому пришла</p>
+                            <p class="about-me-card__text" data-i18n="about.card2.text">
+                                Lorem ipsum dolor sit amet...
+                            </p>
+                        </div>
+                    </div>
+                    <div class="about-me-card">
+                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img">
+                        <div class="about-me-card__content">
+                            <p class="about-me-card__title" data-i18n="about.card3.title">Для чего всё это</p>
+                            <p class="about-me-card__text" data-i18n="about.card3.text">
+                                Lorem ipsum dolor sit amet...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="divider-glow-wave">
+
+            <!-- Countdown Component-->
+            <section class="countdown-section section-padding" role="region" aria-labelledby="countdown-heading" data-target-date="2026-02-14T00:00:00">
+                <div class="container grid--center-v">
+                    <h2 id="countdown-heading" class="heading-secondary" data-i18n="countdown.heading">Бесплатные вопросы через:</h2>
+                    <div class="timebox" role="timer" aria-live="polite" aria-atomic="true">
+                        <div class="time" role="presentation">
+                            <h3 id="days" aria-label="days remaining">00</h3>
+                            <p aria-hidden="true" data-i18n="countdown.days">дн.</p>
+                        </div>
+
+                        <div class="time" role="presentation">
+                            <h3 id="hours" aria-label="hours remaining">00</h3>
+                            <p aria-hidden="true" data-i18n="countdown.hours">ч.</p>
+                        </div>
+
+                        <div class="time" role="presentation">
+                            <h3 id="minutes" aria-label="minutes remaining">00</h3>
+                            <p aria-hidden="true" data-i18n="countdown.minutes">мин.</p>
+                        </div>
+
+                        <div class="time" role="presentation">
+                            <h3 id="seconds" aria-label="seconds remaining">00</h3>
+                            <p aria-hidden="true" data-i18n="countdown.seconds">с.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="divider-glow-wave">
+
+            <!-- Services Section -->
+            <section class="services-section section-padding" id="services">
+                <div class="container">
+                    <h2 class="heading-secondary" data-i18n="services.heading">
+                        Что я могу Вам предложить
+                    </h2>
+                </div>
+
+                <div class="gallery">
+                    <div class="gallery-container">
+                        <!-- Service 1 -->
+                        <div class="gallery-item gallery-item-1" data-index="1">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/1.jpg')"></div>
+                            <div class="gallery-item-content">
+                                <h3 class="gallery-item-title" data-i18n="services.items.1.title">Гадание на картах</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.1.text">Классическое гадание...</p>
+                                <button class="gallery-item-button" data-popup="popup-1" data-i18n="services.items.1.button">Узнать больше</button>
+                            </div>
+                        </div>
+
+                        <!-- Service 2 -->
+                        <div class="gallery-item gallery-item-2" data-index="2">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/2.jpg')"></div>
+                            <div class="gallery-item-content">
+                                <h3 class="gallery-item-title" data-i18n="services.items.2.title">Таро расклад</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.2.text">Глубокий анализ...</p>
+                                <button class="gallery-item-button" data-popup="popup-2" data-i18n="services.items.2.button">Узнать больше</button>
+                            </div>
+                        </div>
+
+                        <!-- Service 3 -->
+                        <div class="gallery-item gallery-item-3" data-index="3">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/3.jpg')"></div>
+                            <div class="gallery-item-content">
+                                <h3 class="gallery-item-title" data-i18n="services.items.3.title">Ритуалы и заговоры</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.3.text">Древние обряды...</p>
+                                <button class="gallery-item-button" data-popup="popup-3" data-i18n="services.items.3.button">Узнать больше</button>
+                            </div>
+                        </div>
+
+                        <!-- Service 4 -->
+                        <div class="gallery-item gallery-item-4" data-index="4">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/4.jpg')"></div>
+                            <div class="gallery-item-content">
+                                <h3 class="gallery-item-title" data-i18n="services.items.4.title">Восковая отливка</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.4.text">Диагностика...</p>
+                                <button class="gallery-item-button" data-popup="popup-4" data-i18n="services.items.4.button">Узнать больше</button>
+                            </div>
+                        </div>
+
+                        <!-- Service 5 -->
+                        <div class="gallery-item gallery-item-5" data-index="5">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/5.jpg')"></div>
+                            <div class="gallery-item-content">
+                                <h3 class="gallery-item-title" data-i18n="services.items.5.title">Обереги и амулеты</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.5.text">Создание...</p>
+                                <button class="gallery-item-button" data-popup="popup-5" data-i18n="services.items.5.button">Узнать больше</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-controls">
+                        <button class="gallery-controls-button gallery-controls-previous" aria-label="Предыдущая услуга">
+                            <ion-icon name="arrow-back" aria-hidden="true"></ion-icon> <span data-i18n="services.controls.prev">Предыдущее</span>
+                        </button>
+                        <button class="gallery-controls-button gallery-controls-next" aria-label="Следующая услуга">
+                            <span data-i18n="services.controls.next">Следующее</span> <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+                        </button>
+                    </div>
+
+                    <div class="gallery-indicators" role="group">
+                        <span class="gallery-indicator" data-index="1" role="button" tabindex="0"></span>
+                        <span class="gallery-indicator" data-index="2" role="button" tabindex="0"></span>
+                        <span class="gallery-indicator" data-index="3" role="button" tabindex="0"></span>
+                        <span class="gallery-indicator" data-index="4" role="button" tabindex="0"></span>
+                        <span class="gallery-indicator" data-index="5" role="button" tabindex="0"></span>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="divider-glow-wave">
+
+            <!-- Prices Section -->
+            <section class="prices-section section-padding" id="prices" aria-labelledby="prices-heading">
+                <div class="container">
+                    <h2 id="prices-heading" class="prices-section__heading heading-secondary" data-i18n="prices.heading">
+                        Цены
+                    </h2>
+
+                    <div id="prices-grid" class="prices-grid" role="region" aria-hidden="true">
+
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.1.title">Гадание на картах Таро</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.1.price">Цена: 50€</p>
+                        </article>
+
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.2.title">Натальная карта</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.2.price">Цена: 75€</p>
+                        </article>
+
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.3.title">Руническое гадание</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.3.price">Цена: 60€</p>
+                        </article>
+
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.4.title">Любовное гадание</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.4.price">Цена: 55€</p>
+                        </article>
+
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.5.title">Гадание на будущее</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.5.price">Цена: 65€</p>
+                        </article>
+
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.6.title">Снятие негатива</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.6.price">Цена: 80€</p>
+                        </article>
+
+                        <aside class="prices-card prices-explanation-card" role="note">
+                            <p class="prices__text" data-i18n="prices.explanation">
+                                Цены указаны в евро...
+                            </p>
+                        </aside>
+                    </div>
+
+                    <button class="prices__button" type="button" aria-expanded="false" aria-controls="prices-grid" data-i18n="prices.show_button">
+                        Показать цены
+                    </button>
+                </div>
+            </section>
+
+            <hr class="divider-glow-wave">
+
+            <!-- Moon Information Section -->
+            <section class="moon-section section-padding" id="moon">
+                <div class="container">
+                    <div class="moon-section__text">
+                        <h2 class="heading-secondary" data-i18n="moon.heading">Информация о луне</h2>
+                        <p class="moon-section__description" data-i18n="moon.description">
+                            Тут Вы найдёте нужную информацию о лунной фазе.
+                        </p>
+                    </div>
+
+                    <div class="moon-section__error" id="moonError" role="alert" aria-live="polite"></div>
+
+                    <div class="moon-section__layout">
+                        <div class="moon-section__image-wrapper">
+                            <img class="moon-section__image" src="./img/05-moon-information-section/moon-phase-1-new-moon.png" alt="Moon phase" loading="lazy">
+                        </div>
+
+                        <div class="moon-section__grid">
+                            <div class="moon-section__card">
+                                <h3 class="moon-section__card-title subheading" data-i18n="moon.phase">
+                                    Лунная фаза:
+                                </h3>
+                                <p class="moon-section__card-text" data-i18n="moon.loading">
+                                    Загрузка...
+                                </p>
+                            </div>
+
+                            <div class="moon-section__card">
+                                <h3 class="moon-section__card-title subheading" data-i18n="moon.next_phase">
+                                    До следующей фазы:
+                                </h3>
+                                <p class="moon-section__card-text" data-i18n="moon.loading">
+                                    Загрузка...
+                                </p>
+                            </div>
+
+                            <div class="moon-section__card moon-section__card--full">
+                                <h3 class="moon-section__card-title subheading" data-i18n="moon.rituals">
+                                    Какие обряды сейчас проводятся:
+                                </h3>
+                                <p class="moon-section__card-text" data-i18n="moon.loading">
+                                    Загрузка...
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="divider-glow-wave">
+
+            <!-- Calendar Component -->
+            <section class="section-calendar" id="calendar">
+                <div class="container">
+                    <h2 class="heading-secondary" data-i18n="calendar.heading">Календарь</h2>
+                    <p class="section-calendar__description" data-i18n="calendar.description">Даты, когда я бываю в других городах.</p>
+
+                    <div class="calendar-component">
+                        <div class="calendar-header">
+                            <button class="calendar-button calendar-button--previous" aria-label="Предыдущий месяц" tabindex="0" type="button">
+                                <ion-icon name="arrow-round-back" aria-hidden="true"></ion-icon>
+                            </button>
+
+                            <h3 class="calendar-month" id="calendar-month-label">
+                                <span class="month-name"></span> <span class="month-year"></span>
+                            </h3>
+
+                            <button class="calendar-button calendar-button--next" aria-label="Следующий месяц" tabindex="0" type="button">
+                                <ion-icon name="arrow-round-forward" aria-hidden="true"></ion-icon>
+                            </button>
+                        </div>
+
+                        <div class="calendar-grid" role="grid" aria-labelledby="calendar-month-label" aria-live="polite">
+                            <div class="calendar-weekdays" role="row"></div>
+                            <div class="calendar-days" role="rowgroup"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="divider-glow-wave">
+
+            <!-- Footer Section -->
+            <footer class="footer-section" id="contacts">
+                <div class="footer_header">
+                    <h3 class="footer_header__heading heading-secondary" data-i18n="footer.heading">
+                        Свяжитесь со мной
+                    </h3>
+                    <p class="footer_header__text" data-i18n="footer.text">
+                        Я здесь, чтобы помочь вам.
+                    </p>
+                </div>
+
+                <div class="container grid footer-grid">
+                    <div class="footer-img">
+                        <img src="./img/06-footer-section/logo/logoCrop2.png" alt="Logo" class="footer__logo" />
+                    </div>
+
+                    <nav class="footer_header__social_icons" aria-label="Социальные сети">
+                        <ul class="footer__list">
+                            <li class="footer__item">
+                                <a class="footer__link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+                                    <img src="./img/06-footer-section/social-network-logos/facebook-logo.png" alt="facebook logo" class="social-network-logo" />
+                                </a>
+                            </li>
+                            <li class="footer__item">
+                                <a class="footer__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                                    <img src="./img/06-footer-section/social-network-logos/instagram-logo.png" alt="instagram logo" class="social-network-logo" />
+                                </a>
+                            </li>
+                            <li class="footer__item">
+                                <a class="footer__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer">
+                                    <img src="./img/06-footer-section/social-network-logos/vkontakte-logo.png" alt="vk logo" class="social-network-logo" />
+                                </a>
+                            </li>
+                            <li class="footer__item">
+                                <a class="footer__link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer">
+                                    <img src="./img/06-footer-section/social-network-logos/telegram-logo.png" alt="telegram logo" class="social-network-logo" />
+                                </a>
+                            </li>
+                            <li class="footer__item">
+                                <a class="footer__link" href="https://viber.com/" target="_blank" rel="noopener noreferrer">
+                                    <img src="./img/06-footer-section/social-network-logos/viber-logo.png" alt="viber logo" class="social-network-logo" />
+                                </a>
+                            </li>
+                            <li class="footer__item">
+                                <a class="footer__link" href="https://whatsapp.com/" target="_blank" rel="noopener noreferrer">
+                                    <img src="./img/06-footer-section/social-network-logos/whatsapp-logo.png" alt="whatsapp logo" class="social-network-logo" />
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="footer-copyright-info">
+                    <p class="copyright-text" data-i18n="footer.copyright">
+                        © 2025 "Гадалкина Избушка"
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+
+</html>
