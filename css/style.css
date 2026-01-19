@@ -1,6 +1,47 @@
+/* ================================================
+   🎨 MAIN STYLESHEET - Import Manifest
+   ================================================
+   
+   📋 PURPOSE:
+   Central stylesheet that imports all module-specific CSS files.
+   Maintains modular CSS architecture for better organization and maintainability.
+   
+   📁 IMPORT ORDER:
+   Files are imported in a specific order from foundational (variables, resets) to specific sections:
+   
+   1. Language Selection    - Standalone landing page styles
+   2. General               - CSS variables, resets, global utilities
+   3. Dividing Lines        - Section separator components
+   4. Header                - Navigation and site header
+   5. Hero                  - Hero/banner section
+   6. About Me              - About section with cards
+   7. Countdown             - Event countdown timer
+   8. Services              - Services carousel/gallery
+   9. Prices                - Pricing section toggle
+   10. Moon Information     - Moon phase display
+   11. Calendar             - Travel calendar  
+   12. Footer               - Site footer
+   
+   ⚠️ IMPORT ORDER MATTERS:
+   - 00-general.css must load first (contains CSS variables)
+   - Section files depend on variables from general.css
+   - Changing order may cause styling issues
+   
+   🎯 ARCHITECTURE:
+   One CSS file per major section for better:
+   - Code organization and maintainability
+   - Easier debugging (issues isolated to specific files)
+   - Performance (can lazy-load unused sections if needed)
+   - Team collaboration (reduced merge conflicts)
+*/
+
+/* Language Selection Landing Page */
 @import url(./0-language-selection-section-styles.css);
+
+/* Foundation: Variables, Resets, Global Utilities */
 @import url(./00-general.css);
 
+/* Section-specific Stylesheets (in page order) */
 @import url(./01-deviding-lines-styles.css);
 @import url(./02-header-styles.css);
 @import url(./03-hero-section-styles.css);
