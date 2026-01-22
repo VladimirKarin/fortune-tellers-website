@@ -22,15 +22,15 @@
             "heading": "Обо мне",
             "card1": {
                 "title": "Кто я такая",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Я практикую гадание на картах уже много лет. Долгое время я думала, что мой метод уникален, что я сама его создала. Было непросто признать, что в основе лежит древняя старославянская система. Но это открытие меня не разочаровало, а наоборот, придало уверенности. Я внесла много своих наработок в традиционный расклад, адаптировала его под современную жизнь. То, что получилось - это сплав древних знаний и моего личного опыта. Сейчас я не только консультирую людей, но и обучаю тех, кто хочет научиться понимать язык карт."
             },
             "card2": {
                 "title": "Как я к этому пришла",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Моя история началась в детстве, когда я еще маленькой девочкой гостила у бабушки. Я наблюдала, как тетя раскладывала карты, и мне это запомнилось. Тогда, в семь лет, я не понимала значения карт, но сам процесс меня завораживал. Спустя годы я решила попробовать сама. Кое-что узнала у мамы, которая тоже когда-то увлекалась гаданием, кое-что додумала интуитивно. Первый опыт оказался неожиданно точным и даже пугающим. Это напугало меня саму и окружающих, и на несколько лет я оставила эту практику. Но интерес не ушел. Постепенно я возвращалась к картам, изучала разные системы, дорабатывала методы. Годы практики позволили мне найти свой подход и научиться работать с раскладами осознанно и ответственно."
             },
             "card3": {
                 "title": "Для чего всё это",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Моя основная задача - помочь вам увидеть ситуацию с разных сторон и найти правильное решение. Я работаю только в позитивном русле и не занимаюсь практиками, которые могут навредить людям. Важно понимать, что карты и ритуалы - это инструменты поддержки, а не волшебная палочка. Мы живем в реальном мире, где многое зависит от наших собственных действий. Гадание может показать направление, подсказать варианты, предупредить о препятствиях, но идти по пути вам придется самостоятельно. Я верю, что у каждого человека есть силы справиться с трудностями. Но иногда нужна помощь - взгляд со стороны, совет, поддержка."
             }
         },
         "countdown": {
@@ -77,6 +77,24 @@
                     "text": "Создание индивидуальных защитных оберегов и амулетов для различных жизненных ситуаций.",
                     "button": "Узнать больше",
                     "aria_label": "Узнать больше об оберегах и амулетах"
+                },
+                "6": {
+                    "title": "Программирование камней",
+                    "text": "Создание персональных контейнеров-камней для снятия блоков и привлечения позитивных изменений.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о программировании камней"
+                },
+                "7": {
+                    "title": "Очищение пространства",
+                    "text": "Энергетическое очищение домов, квартир и предметов от негативных влияний.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше об очищении пространства"
+                },
+                "8": {
+                    "title": "Принципы работы",
+                    "text": "Честный подход без манипуляций. Узнайте, как я работаю и что я не делаю никогда.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о принципах работы"
                 }
             },
             "controls": {
@@ -86,7 +104,10 @@
                 "indicator_2": "Посмотреть услугу 2",
                 "indicator_3": "Посмотреть услугу 3",
                 "indicator_4": "Посмотреть услугу 4",
-                "indicator_5": "Посмотреть услугу 5"
+                "indicator_5": "Посмотреть услугу 5",
+                "indicator_6": "Посмотреть услугу 6",
+                "indicator_7": "Посмотреть услугу 7",
+                "indicator_8": "Посмотреть услугу 8"
             }
         },
         "prices": {
@@ -95,28 +116,32 @@
             "explanation": "Цены указаны в евро. Возможна оплата в рублях, точная цена будет указана после работы по курсу на тот момент.",
             "items": {
                 "1": {
-                    "title": "Гадание на картах Таро",
+                    "title": "Гадание на картах",
                     "price": "Цена: 50€"
                 },
                 "2": {
-                    "title": "Натальная карта",
-                    "price": "Цена: 75€"
+                    "title": "Таро расклад",
+                    "price": "Цена: 50€"
                 },
                 "3": {
-                    "title": "Руническое гадание",
-                    "price": "Цена: 60€"
+                    "title": "Ритуалы и заговоры",
+                    "price": "Цена: 50€"
                 },
                 "4": {
-                    "title": "Любовное гадание",
-                    "price": "Цена: 55€"
+                    "title": "Восковая отливка",
+                    "price": "Цена: 50€"
                 },
                 "5": {
-                    "title": "Гадание на будущее",
-                    "price": "Цена: 65€"
+                    "title": "Обереги и амулеты",
+                    "price": "Цена: 50€"
                 },
                 "6": {
-                    "title": "Снятие негатива",
-                    "price": "Цена: 80€"
+                    "title": "Программирование камней",
+                    "price": "Цена: 50€"
+                },
+                "7": {
+                    "title": "Очищение пространства",
+                    "price": "Цена: 50€"
                 }
             }
         },
@@ -166,6 +191,18 @@
             "5": {
                 "title": "Обереги и амулеты",
                 "content": "<p>Обереги и амулеты - это предметы, заряженные особой энергией для защиты, привлечения удачи и благополучия. Я создаю индивидуальные обереги, учитывая ваши потребности, особенности энергетики и конкретные цели.</p><p>Виды оберегов, которые я изготавливаю:</p><ul><li><strong>Защитные амулеты</strong> - охраняют от негативных энергий и воздействий</li><li><strong>Любовные талисманы</strong> - привлекают любовь, гармонизируют отношения</li><li><strong>Денежные обереги</strong> - способствуют финансовому благополучию</li><li><strong>Здоровье и жизненные силы</strong> - укрепляют энергетику и защищают здоровье</li><li><strong>Путевые амулеты</strong> - обеспечивают защиту в пути и при переездах</li></ul><p>Каждый оберег создается в определенное время, с использованием специальных материалов и ритуалов активации. К амулету прилагаются инструкции по правильному использованию и периодической подзарядке.</p><p>Важно помнить, что оберег - это личный предмет, который настраивается на энергетику конкретного человека и не должен передаваться другим людям.</p>"
+            },
+            "6": {
+                "title": "Программирование камней",
+                "content": "<p>Программирование камней-контейнеров - это особая практика создания персональных энергетических помощников. Я использую природные камни, которые настраиваю на конкретную задачу для каждого человека.</p><p>Что такое камень-контейнер?</p><p>Это небольшой природный камень, запрограммированный на удаление преград из вашей жизни и привлечение того, что улучшит качество жизни. Каждый камень уникален и создается индивидуально.</p><p>Как это работает:</p><ul><li>Выбираю подходящий природный камень</li><li>Определяю вашу конкретную задачу или проблему</li><li>Провожу ритуал программирования на нужный результат</li><li>Активирую камень в определенное время</li></ul><p>Камень-контейнер можно настроить на разные цели: снятие энергетических блоков, открытие новых возможностей, улучшение определенной сферы жизни, привлечение нужных событий.</p><p>Вы получите инструкции по использованию и уходу за вашим персональным камнем-помощником.</p>"
+            },
+            "7": {
+                "title": "Очищение пространства",
+                "content": "<p>Энергетическое очищение - это важная практика для поддержания гармонии в вашем доме и жизни. Я провожу очищение домов, квартир, офисов и отдельных предметов от накопившегося негатива.</p><p>Когда нужно очищение:</p><ul><li>После конфликтов или тяжелых ситуаций в доме</li><li>При переезде в новое жилье</li><li>Если чувствуете тяжесть, дискомфорт в помещении</li><li>После болезни или неприятных событий</li><li>Для регулярной энергетической гигиены</li></ul><p>Что я делаю:</p><ul><li>Диагностирую энергетическое состояние пространства</li><li>Провожу ритуалы очищения от негативных влияний</li><li>Очищаю вещи, которые могут нести негативную энергию</li><li>Создаю защиту пространства</li><li>Даю рекомендации по поддержанию чистоты энергетики</li></ul><p>Очищение можно провести как лично, так и удаленно по фотографии помещения. После процедуры вы почувствуете легкость и комфорт в своем доме.</p>"
+            },
+            "8": {
+                "title": "Принципы работы",
+                "content": "<p>Я считаю важным быть честной с вами о том, как я работаю и чего я принципиально не делаю.</p><p><strong>Что я НЕ делаю никогда:</strong></p><ul><li>Не занимаюсь приворотами и отворотами</li><li>Не провожу ритуалы против воли других людей</li><li>Не манипулирую чужой волей и свободой выбора</li><li>Не обещаю невозможного</li><li>Не внушаю зависимость от магических практик</li></ul><p><strong>Мои принципы:</strong></p><ul><li>Работаю исключительно в положительном ключе</li><li>Уважаю свободу выбора каждого человека</li><li>Помогаю создать условия для позитивных изменений</li><li>Говорю правду, даже если она непростая</li><li>Верю, что человек сам должен быть активным участником своей жизни</li></ul><p>Магическая помощь - это поддержка и направление энергии, но не замена ваших собственных усилий. Я здесь, чтобы помочь вам найти путь, но идти по нему будете вы сами.</p><p>Если вам предлагают \"привязать\" или \"отвязать\" человека против его воли - это противоречит моим убеждениям. Настоящая помощь строится на уважении и честности.</p>"
             }
         }
     },
@@ -192,15 +229,15 @@
             "heading": "Apie mane",
             "card1": {
                 "title": "Kas aš tokia",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Praktikuoju kortų būrimą jau daugelį metų. Ilgą laiką maniau, kad mano metodas unikalus, kad pati jį sukūriau. Nebuvo lengva pripažinti, kad pagrindas yra sena slaviška sistema. Bet šis atradimas manęs nenuvylė, priešingai, suteikė pasitikėjimo. Įnešiau daug savo naujovių į tradicinę dėlionę, pritaikiau ją šiuolaikiniam gyvenimui. Tai, kas gavosi - tai senovės žinių ir mano asmeninės patirties sintezė. Dabar ne tik konsultuoju žmones, bet ir mokau tuos, kurie nori išmokti suprasti kortų kalbą."
             },
             "card2": {
                 "title": "Kaip aš iki to atėjau",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Mano istorija prasidėjo vaikystėje, kai dar mažyte svečiavausi pas močiutę. Stebėjau, kaip teta dėliojo kortas, ir tai man įsiminė. Tada, septynių metų, nesupratau kortų reikšmių, bet pats procesas mane žavėjo. Po metų nusprendžiau pabandyti pati. Kai ką sužinojau iš mamos, kuri irgi kadaise domėjosi būrimu, kai ką sugalvojau intuityviai. Pirmoji patirtis pasirodė netikėtai tiksli ir net bauginanti. Tai išgąsdino mane pačią ir aplinkinius, ir keletą metų palikau šią praktiką. Bet susidomėjimas neišnyko. Palaipsniui grįždavau prie kortų, studijavau skirtingas sistemas, tobulinau metodus. Metų praktika leido man rasti savo požiūrį ir išmokti dirbti su dėlionėmis sąmoningai ir atsakingai."
             },
             "card3": {
                 "title": "Kam viso to reikia",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Mano pagrindinis tikslas - padėti jums pamatyti situaciją iš skirtingų pusių ir rasti teisingą sprendimą. Dirbu tik pozityvioje kryptyje ir neužsiimu praktikomis, kurios gali pakenkti žmonėms. Svarbu suprasti, kad kortos ir ritualai - tai paramos įrankiai, o ne stebuklingas lazdelė. Gyvename tikroje pasaulyje, kur daug priklauso nuo mūsų pačių veiksmų. Būrimas gali parodyti kryptį, pasiūlyti variantus, perspėti apie kliūtis, bet eiti keliu turėsite patys. Tikiu, kad kiekvienas žmogus turi jėgų susidoroti su sunkumais. Bet kartais reikia pagalbos - žvilgsnio iš šalies, patarimo, paramos."
             }
         },
         "countdown": {
@@ -247,6 +284,24 @@
                     "text": "Individualių apsauginių amuletų ir talismanų kūrimas įvairioms gyvenimo situacijoms.",
                     "button": "Sužinoti daugiau",
                     "aria_label": "Sužinoti daugiau apie amuletus"
+                },
+                "6": {
+                    "title": "Akmenų programavimas",
+                    "text": "Asmeninių konteinerių-akmenų kūrimas blokų nuėmimui ir teigiamų pokyčių pritraukimui.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie akmenų programavimą"
+                },
+                "7": {
+                    "title": "Erdvės valymas",
+                    "text": "Energetinis namų, butų ir daiktų valymas nuo neigiamų įtakų.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie erdvės valymą"
+                },
+                "8": {
+                    "title": "Darbo principai",
+                    "text": "Sąžiningas požiūris be manipuliacijų. Sužinokite, kaip dirbu ir ko niekada nedarau.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie darbo principus"
                 }
             },
             "controls": {
@@ -256,7 +311,10 @@
                 "indicator_2": "Peržiūrėti 2 paslaugą",
                 "indicator_3": "Peržiūrėti 3 paslaugą",
                 "indicator_4": "Peržiūrėti 4 paslaugą",
-                "indicator_5": "Peržiūrėti 5 paslaugą"
+                "indicator_5": "Peržiūrėti 5 paslaugą",
+                "indicator_6": "Peržiūrėti 6 paslaugą",
+                "indicator_7": "Peržiūrėti 7 paslaugą",
+                "indicator_8": "Peržiūrėti 8 paslaugą"
             }
         },
         "prices": {
@@ -265,28 +323,32 @@
             "explanation": "Kainos nurodytos eurais. Galimas mokėjimas rubliais, tiksli kaina bus nurodyta po darbo pagal to meto kursą.",
             "items": {
                 "1": {
-                    "title": "Taro kortų būrimas",
+                    "title": "Būrimas kortomis",
                     "price": "Kaina: 50€"
                 },
                 "2": {
-                    "title": "Natalinė korta",
-                    "price": "Kaina: 75€"
+                    "title": "Taro dėlionė",
+                    "price": "Kaina: 50€"
                 },
                 "3": {
-                    "title": "Runų būrimas",
-                    "price": "Kaina: 60€"
+                    "title": "Ritualai ir užkalbėjimai",
+                    "price": "Kaina: 50€"
                 },
                 "4": {
-                    "title": "Meilės būrimas",
-                    "price": "Kaina: 55€"
+                    "title": "Vaško liejimas",
+                    "price": "Kaina: 50€"
                 },
                 "5": {
-                    "title": "Ateities būrimas",
-                    "price": "Kaina: 65€"
+                    "title": "Amuletai ir talismanai",
+                    "price": "Kaina: 50€"
                 },
                 "6": {
-                    "title": "Negatyvo nuėmimas",
-                    "price": "Kaina: 80€"
+                    "title": "Akmenų programavimas",
+                    "price": "Kaina: 50€"
+                },
+                "7": {
+                    "title": "Erdvės valymas",
+                    "price": "Kaina: 50€"
                 }
             }
         },
@@ -335,7 +397,19 @@
             },
             "5": {
                 "title": "Amuletai ir talismanai",
-                "content": "<p>Amuletai ir talismanai – tai daiktai, pakrauti ypatinga energija apsaugai, sėkmės ir gerovės pritraukimui. Kuriu individualius amuletus, atsižvelgdama į jūsų poreikius, energetikos ypatumus ir konkrečius tikslus.</p><p>Amuletų rūšys, kurias gaminu:</p><ul><li><strong>Apsauginiai amuletai</strong> – saugo nuo negatyvių energijų ir poveikių</li><li><strong>Meilės talismanai</strong> – pritraukia meilę, harmonizuoja santykius</li><li><strong>Pinigų amuletai</strong> – skatina finansinę gerovę</li><li><strong>Sveikata ir gyvybinės jėgos</strong> – stiprina energetiką ir saugo sveikatą</li><li><strong>Kelioniniai amuletai</strong> – užtikrina apsaugą kelyje ir persikraustant</li></ul><p>Kiekvienas amuletas kuriamas tam tikru laiku, naudojant specialias medžiagas ir aktyvacijos ritualus. Prie amuleto pridedamos instrukcijos dėl teisingo naudojimo ir periodinio pakrovimo.</p><p>Svarbu prisiminti, kad amuletas – tai asmeninis daiktas, kuris susiderina su konkrečio žmogaus energetika ir neturėtų būti perduodamas kitiems žmonėms.</p>"
+                "content": "<p>Amuletai ir talismanai – tai daiktai, pakrauti ypatinga energija apsaugai, sėkmės ir gerovės pritraukimui. Kuriu individualius amuletus, atsižvelgdama į jūsų poreikius, energetikos ypatumus ir konkrečius tikslus.</p><p>Amuletų rūšys, kurias gaminu:</p><ul><li><strong>Apsauginiai amuletai</strong> – saugo nuo neigiamų energijų ir poveikių</li><li><strong>Meilės talismanai</strong> – pritraukia meilę, harmonizuoja santykius</li><li><strong>Pinigų amuletai</strong> – skatina finansinę gerovę</li><li><strong>Sveikata ir gyvybinės jėgos</strong> – stiprina energetiką ir saugo sveikatą</li><li><strong>Kelioniniai amuletai</strong> – užtikrina apsaugą kelyje ir persikraustant</li></ul><p>Kiekvienas amuletas kuriamas tam tikru laiku, naudojant specialias medžiagas ir aktyvacijos ritualus. Prie amuleto pridedamos instrukcijos dėl teisingo naudojimo ir periodinio pakrovimo.</p><p>Svarbu prisiminti, kad amuletas – tai asmeninis daiktas, kuris susiderina su konkrečio žmogaus energetika ir neturėtų būti perduodamas kitiems žmonėms.</p>"
+            },
+            "6": {
+                "title": "Akmenų programavimas",
+                "content": "<p>Akmenų-konteinerių programavimas – tai ypatinga asmeninių energetinių padėjėjų kūrimo praktika. Naudoju gamtinius akmenis, kuriuos nustatau konkrečiai užduočiai kiekvienam žmogui.</p><p>Kas yra akmuo-konteineris?</p><p>Tai nedidelis gamtinis akmuo, suprogramuotas kliūčių pašalinimui iš jūsų gyvenimo ir pritraukti tai, kas pagerins gyvenimo kokybę. Kiekvienas akmuo unikalus ir kuriamas individualiai.</p><p>Kaip tai veikia:</p><ul><li>Parenku tinkamą gamtinį akmenį</li><li>Nustatau jūsų konkrečią užduotį ar problemą</li><li>Atlieku programavimo ritualą norimam rezultatui</li><li>Aktyvuoju akmenį tam tikru laiku</li></ul><p>Akmuo-konteineris gali būti nustatytas skirtingiems tikslams: energetinių blokų nuėmimui, naujų galimybių atsivėrimui, tam tikros gyvenimo sferos pagerinimui, reikalingų įvykių pritraukimui.</p><p>Gausite instrukcijas dėl jūsų asmeninio akmens-padėjėjo naudojimo ir priežiūros.</p>"
+            },
+            "7": {
+                "title": "Erdvės valymas",
+                "content": "<p>Energetinis valymas – tai svarbi praktika harmonijai jūsų namuose ir gyvenime palaikyti. Atlieku namų, butų, biurų ir atskirų daiktų valymą nuo susikrovusio negatyvo.</p><p>Kada reikia valymo:</p><ul><li>Po konfliktų ar sunkių situacijų namuose</li><li>Persikraunant į naują būstą</li><li>Jei jaučiate sunkumą, diskomfortą patalpose</li><li>Po ligos ar nemalonių įvykių</li><li>Reguliariai energetinei higienai</li></ul><p>Ką aš darau:</p><ul><li>Diagnozuoju energetinę erdvės būklę</li><li>Atlieku valymo ritualus nuo neigiamų įtakų</li><li>Valau daiktus, kurie gali nešti neigiamą energiją</li><li>Kuriu erdvės apsaugą</li><li>Pateikiu rekomendacijas energetikos švaros palaikymui</li></ul><p>Valymą galima atlikti tiek asmeniškai, tiek nuotoliniu būdu pagal patalpos nuotrauką. Po procedūros pajusite lengvumą ir komfortą savo namuose.</p>"
+            },
+            "8": {
+                "title": "Darbo principai",
+                "content": "<p>Manau, kad svarbu būti sąžininga su jumis apie tai, kaip dirbu ir ko principingai nedarau.</p><p><strong>Ko aš NIEKADA nedarau:</strong></p><ul><li>Neužsiimu meilės burtais ir atskyrimais</li><li>Neatlieku ritualų prieš kitų žmonių valią</li><li>Nemanipuliuoju kito žmogaus valia ir pasirinkimo laisve</li><li>Nežadu neįmanomo</li><li>Nekuriu priklausomybės nuo magiškų praktikų</li></ul><p><strong>Mano principai:</strong></p><ul><li>Dirbu išimtinai pozityvioje kryptyje</li><li>Gerbu kiekvieno žmogaus pasirinkimo laisvę</li><li>Padedu sukurti sąlygas teigiamiems pokyčiams</li><li>Sakau tiesą, net jei ji sunki</li><li>Tikiu, kad žmogus pats turi būti aktyvus savo gyvenimo dalyvis</li></ul><p>Magiška pagalba – tai parama ir energijos nukreipimas, bet ne jūsų pačių pastangų pakaitalas. Esu čia, kad padėčiau jums rasti kelią, bet eiti juo turėsite patys.</p><p>Jei jums siūlo \"prikabinti\" ar \"atkabinti\" žmogų prieš jo valią - tai prieštarauja mano įsitikinimams. Tikra pagalba remiasi pagarba ir sąžiningumu.</p>"
             }
         }
     }
