@@ -360,11 +360,11 @@ class Carousel {
                 item.classList.remove(className);
             });
 
-            // Calculate relative position from current center
-            // Example: if currentIndex = 2 and item index = 4
-            // position = (4 - 2 + 5) % 5 = 2 (this item is 2 positions ahead)
+            // Calculate relative position to center the active item (currentIndex)
+            // We want currentIndex to map to position 2 (gallery-item-3 / Center)
+            // So we add 2 to the offset.
             const position =
-                (index - this.currentIndex + this.itemsArray.length) %
+                (index - this.currentIndex + 2 + this.itemsArray.length) %
                 this.itemsArray.length;
 
             // Apply position class if within visible range (0-4)
