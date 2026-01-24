@@ -53,8 +53,16 @@
 /* ===================================
    GALLERY CARDS (GLASSMORPHISM)
    =================================== */
+/* ===================================
+   GALLERY CARDS (GLASSMORPHISM)
+   =================================== */
 .gallery-item {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Start centered, specific classes move it */
+    transform: translate(-50%, -50%) scale(0.8);
+    
     width: var(--card-width-side);
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -68,8 +76,8 @@
     flex-direction: column;
     /* Default State (Hidden/Back) */
     opacity: 0;
-    transform: scale(0.8);
     z-index: 0;
+    backface-visibility: hidden; /* Fix for Firefox rendering artifacts */
 }
 
 /* ===================================
@@ -80,7 +88,7 @@
     width: var(--card-width-center);
     height: auto;
     opacity: 1;
-    transform: translateX(0) scale(1);
+    transform: translate(-50%, -50%) scale(1);
     z-index: 3;
     border-color: rgba(255, 165, 0, 0.3); /* Gold hint */
     box-shadow: 
@@ -90,24 +98,28 @@
 
 /* Side Cards - Immediate Neighbors */
 .gallery-item-2 {
-    transform: translateX(-60%) scale(0.9);
+    /* -50% (center) - 60% (offset) = -110% */
+    transform: translate(-110%, -50%) scale(0.9);
     opacity: 0.7;
     z-index: 2;
 }
 .gallery-item-4 {
-    transform: translateX(60%) scale(0.9);
+    /* -50% (center) + 60% (offset) = 10% */
+    transform: translate(10%, -50%) scale(0.9);
     opacity: 0.7;
     z-index: 2;
 }
 
 /* Outer Cards - Far Edges */
 .gallery-item-1 {
-    transform: translateX(-100%) scale(0.8);
+    /* -50% (center) - 100% (offset) = -150% */
+    transform: translate(-150%, -50%) scale(0.8);
     opacity: 0.4;
     z-index: 1;
 }
 .gallery-item-5 {
-    transform: translateX(100%) scale(0.8);
+    /* -50% (center) + 100% (offset) = 50% */
+    transform: translate(50%, -50%) scale(0.8);
     opacity: 0.4;
     z-index: 1;
 }
@@ -157,6 +169,7 @@
     /* Truncate text */
     display: -webkit-box;
     -webkit-line-clamp: 4;
+    line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -342,7 +355,7 @@
     .gallery-item-2, .gallery-item-4 { display: none; }
     .gallery-item-3 { 
         width: 85vw; 
-        transform: translateX(0) !important;
+        transform: translate(-50%, -50%) !important;
     }
     :root { --carousel-height: 50rem; }
 }

@@ -75,6 +75,7 @@
         var(--about-card-max-width)
     ); /* Responsive width limits */
     width: 100%; /* Fill available space */
+    height: 100%; /* Ensure card fills the grid row height */
     margin: 0 auto; /* Center cards when in single column */
 
     /* Visual styling */
