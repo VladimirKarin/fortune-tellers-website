@@ -49,52 +49,52 @@
             "heading": "Что я могу Вам предложить",
             "items": {
                 "1": {
+                    "title": "Принципы работы",
+                    "text": "Честный подход без манипуляций. Узнайте, как я работаю и что я не делаю никогда.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о принципах работы"
+                },
+                "2": {
                     "title": "Гадание на картах",
                     "text": "Классическое гадание с использованием различных карточных систем для точных предсказаний вашего будущего.",
                     "button": "Узнать больше",
                     "aria_label": "Узнать больше о гадании на картах"
                 },
-                "2": {
+                "3": {
                     "title": "Таро расклад",
                     "text": "Глубокий анализ ситуаций с помощью карт Таро, раскрывающий скрытые аспекты и потенциальные пути развития.",
                     "button": "Узнать больше",
                     "aria_label": "Узнать больше о Таро раскладе"
                 },
-                "3": {
+                "4": {
                     "title": "Ритуалы и заговоры",
                     "text": "Обряды и заговоры для привлечения удачи, любви, денег и защиты от негативных влияний.",
                     "button": "Узнать больше",
                     "aria_label": "Узнать больше о ритуалах и заговорах"
                 },
-                "4": {
+                "5": {
                     "title": "Восковая отливка",
                     "text": "Диагностика и снятие негативных воздействий с помощью древнего метода восковой отливки.",
                     "button": "Узнать больше",
                     "aria_label": "Узнать больше о восковой отливке"
                 },
-                "5": {
+                "6": {
                     "title": "Обереги и амулеты",
                     "text": "Программирование индивидуальных защитных оберегов и амулетов для различных жизненных ситуаций.",
                     "button": "Узнать больше",
                     "aria_label": "Узнать больше об оберегах и амулетах"
                 },
-                "6": {
+                "7": {
                     "title": "Программирование камней",
                     "text": "Создание персональных контейнеров-камней для снятия блоков и привлечения позитивных изменений.",
                     "button": "Узнать больше",
                     "aria_label": "Узнать больше о программировании камней"
                 },
-                "7": {
+                "8": {
                     "title": "Очищение жилья и предметов",
                     "text": "Энергетическое очищение домов, квартир и предметов от негативных влияний.",
                     "button": "Узнать больше",
                     "aria_label": "Узнать больше об очищении жилья и предметов"
-                },
-                "8": {
-                    "title": "Принципы работы",
-                    "text": "Честный подход без манипуляций. Узнайте, как я работаю и что я не делаю никогда.",
-                    "button": "Узнать больше",
-                    "aria_label": "Узнать больше о принципах работы"
                 }
             },
             "controls": {
@@ -115,31 +115,31 @@
             "show_button": "Показать цены",
             "explanation": "Цены указаны в евро. Возможна оплата в рублях, точная цена будет указана после работы по курсу на тот момент.",
             "items": {
-                "1": {
+                "2": {
                     "title": "Гадание на картах",
                     "price": "Цена: 50€"
                 },
-                "2": {
+                "3": {
                     "title": "Таро расклад",
                     "price": "Цена: 50€"
                 },
-                "3": {
+                "4": {
                     "title": "Ритуалы и заговоры",
                     "price": "Цена: 50€"
                 },
-                "4": {
+                "5": {
                     "title": "Восковая отливка",
                     "price": "Цена: 50€"
                 },
-                "5": {
+                "6": {
                     "title": "Обереги и амулеты",
                     "price": "Цена: 50€"
                 },
-                "6": {
+                "7": {
                     "title": "Программирование камней",
                     "price": "Цена: 50€"
                 },
-                "7": {
+                "8": {
                     "title": "Очищение пространства",
                     "price": "Цена: 50€"
                 }
@@ -173,36 +173,36 @@
         },
         "popups": {
             "1": {
+                "title": "Принципы работы",
+                 "content": "<p>Я считаю важным быть честной с вами о том, как я работаю и чего я принципиально не делаю.</p><p><strong>Что я НЕ делаю никогда:</strong></p><ul><li>Не занимаюсь приворотами и отворотами</li><li>Не провожу ритуалы против воли других людей</li><li>Не манипулирую чужой волей и свободой выбора</li><li>Не обещаю невозможного</li><li>Не внушаю зависимость от магических практик</li><li>Не гадаю беременным женщинам и детям — считаю эти состояния особенно тонкими и требующими бережного отношения.</li></ul><p>Беременным могу посмотреть ситуацию только тогда, когда женщина ещё не знает о своём положении или стоит перед выбором — рожать или не рожать. Детям смотрю на картах только на здоровье. Для меня важно работать аккуратно, без вреда.</p><p><strong>Мои принципы:</strong></p><ul><li>Работаю исключительно в положительном ключе</li><li>Уважаю свободу выбора каждого человека</li><li>Помогаю создать условия для позитивных изменений</li><li>Говорю правду, даже если она непростая</li><li>Верю, что человек сам должен быть активным участником своей жизни</li></ul><p>Магическая помощь - это поддержка и направление энергии, но не замена ваших собственных усилий. Я здесь, чтобы помочь вам найти путь, но идти по нему будете вы сами.</p>"
+            },
+            "2": {
                 "title": "Гадание на картах",
                 "content": "<p>Я гадаю на обычных игральных картах — без сложных систем и лишних наворотов. Эти карты простые по форме, но очень точные по сути. Через них хорошо видно то, что действительно происходит в жизни человека.</p><p>В раскладах на игральных картах можно посмотреть практически любую сферу жизни и получить ответы на самые разные вопросы. Карты показывают общее состояние ситуации, скрытые моменты, причины происходящего и возможные пути развития событий.</p><p>Я делаю:</p><ul><li>общие расклады — когда важно понять, что сейчас происходит в жизни в целом</li><li>расклады на любовь, отношения, дружбу</li><li>вопросы работы, финансов и материальной сферы</li><li>расклады на здоровье и самочувствие</li><li>совет карт — подсказку, как лучше поступить в конкретной ситуации</li></ul><p>Каждый расклад индивидуален. Я не читаю «по шаблону» — я смотрю именно вашу ситуацию и отвечаю на ваш запрос. Карты помогают увидеть то, что может быть неочевидно, разобраться в сомнениях и понять, в каком направлении лучше двигаться дальше.</p>"
             },
-            "2": {
+            "3": {
                 "title": "Таро расклад",
                 "content": "<p>Я также работаю с картами Таро — это более глубокий инструмент, который помогает понять происходящее в жизни и заглянуть в суть ситуаций. В отличие от обычных игральных карт, Таро показывает многослойные смыслы и скрытые нюансы, помогая увидеть не только текущее положение, но и возможные пути развития.</p><p>Когда я раскладываю карты Таро, я вижу их по-своему, в своём уникальном раскладе. Карты помогают понять скрытые мотивы, причины происходящего и дают мягкие подсказки, куда лучше направить своё внимание.</p><p>Каждый сеанс делаю с вниманием к вашей ситуации. Таро, как и обычные карты, помогает увидеть то, что может быть неочевидно, разобраться в сомнениях и почувствовать ясность в том, что происходит.</p>"
             },
-            "3": {
+            "4": {
                 "title": "Ритуалы и заговоры",
                 "content": "<p>Ритуалы и заговоры - это древние практики, направленные на привлечение желаемых изменений в жизни или защиту от нежелательных влияний. Они основаны на работе с энергиями природы и силой слова.</p><p>Я провожу различные виды ритуалов:</p><ul><li><strong>Любовные ритуалы</strong> - для привлечения любви, улучшения отношений, укрепления чувств</li><li><strong>Денежные обряды</strong> - для привлечения финансового благополучия, новых источников дохода</li><li><strong>Очистительные ритуалы</strong> - для освобождения от негативных энергий, очищения жилища</li><li><strong>Защитные заговоры</strong> - для создания энергетической защиты от внешних воздействий</li></ul><p>Каждый ритуал подбирается индивидуально, с учетом вашей конкретной ситуации и потребностей. Для достижения наилучшего результата важно соблюдать все рекомендации и выполнять необходимые действия в течение указанного времени.</p><p>Помните, что ритуалы и заговоры - это помощь и направление энергии, но они работают в гармонии с вашими собственными усилиями и намерениями.</p>"
             },
-            "4": {
+            "5": {
                 "title": "Восковая отливка",
                 "content": "<p>Восковая отливка - это древний славянский метод диагностики и снятия негативных воздействий. Процедура заключается в выливании расплавленного воска в холодную воду над человеком или его фотографией.</p><p>Застывший воск принимает формы, которые имеют диагностическое значение и показывают:</p><ul><li>Наличие сглаза, порчи, проклятия или других негативных воздействий</li><li>Энергетические блоки и проблемные зоны</li><li>Источники и причины негативных влияний</li><li>Состояние энергетического поля человека</li></ul><p>Процедура восковой отливки не только диагностирует проблему, но и одновременно снимает негативное воздействие, перенося его с человека на воск. Так же восковой отливкой можно восстановить и улучшить состояние человека и наполнить его энергетическое поле.  Отлитые формы затем нейтрализуются специальным образом.</p><p> Колличество отливок обычно зависит от  просьбы людей. После процедуры даются рекомендации по энергетической защите и восстановлению.</p>"
             },
-            "5": {
+            "6": {
                 "title": "Обереги и амулеты",
                 "content": "<p>Обереги и амулеты - это предметы, заряженные особой энергией для защиты, привлечения удачи и благополучия. Я программирую) заговариваю) индивидуальные обереги, учитывая ваши потребности, особенности энергетики и конкретные цели.</p><p>Виды оберегов, которые я программирую:</p><ul><li><strong>Защитные амулеты</strong> - охраняют от негативных энергий и воздействий</li><li><strong>Любовные талисманы</strong> - привлекают любовь, гармонизируют отношения</li><li><strong>Денежные обереги</strong> - способствуют финансовому благополучию</li><li><strong>Здоровье и жизненные силы</strong> - укрепляют энергетику и защищают здоровье</li><li><strong>Путевые амулеты</strong> - обеспечивают защиту в пути и при переездах</li></ul><p>Каждый оберег создается в определенное время, с использованием специальных заговоров и ритуалов активации. К амулету прилагаются инструкции по правильному использованию и периодической подзарядке и чистке.</p><p>Важно помнить, что оберег - это личный предмет, который настраивается на энергетику конкретного человека и не должен передаваться другим людям.</p>"
             },
-            "6": {
+            "7": {
                 "title": "Программирование камней",
                 "content": "<p>Программирование камней-контейнеров - это особая практика создания персональных энергетических помощников. Я использую декоративные  камни, которые настраиваю на конкретную задачу для каждого человека.</p><p>Что такое камень-контейнер?</p><p>Это небольшой декоративный камень, запрограммированный на удаление преград из вашей жизни и привлечение того, что улучшит качество жизни. Каждый камень уникален и программируется индивидуально.</p><p>Как это работает:</p><ul><li>Клиент выбирает сам предоставленный мной камень</li><li>Определяю вашу конкретную задачу или проблему</li><li>Провожу ритуал программирования на нужный результат</li><li>Активирую камень в определенное время</li></ul><p>Камень-контейнер можно настроить на разные цели: снятие энергетических блоков, открытие новых возможностей, улучшение определенной сферы жизни, привлечение нужных событий.</p><p> 'контейнеры' отправляю работать в реку.</p>"
             },
-            "7": {
+            "8": {
                 "title": "Очищение жилья и предметов",
                 "content": "<p>Энергетическое очищение - это важная практика для поддержания гармонии в вашем доме и жизни. Я провожу очищение домов, квартир, офисов и отдельных предметов от накопившегося негатива.</p><p>Когда нужно очищение:</p><ul><li>После конфликтов или тяжелых ситуаций в доме</li><li>При переезде в новое жилье</li><li>Если чувствуете тяжесть, дискомфорт в помещении</li><li>После болезни или неприятных событий</li><li>Для регулярной энергетической гигиены</li></ul><p>Что я делаю:</p><ul><li>Диагностирую энергетическое состояние пространства</li><li>Провожу ритуалы очищения от негативных влияний</li><li>Очищаю вещи, которые могут нести негативную энергию</li><li>Создаю защиту пространства</li><li>Даю рекомендации по поддержанию чистоты энергетики</li></ul><p>Очищение можно провести как лично, так и удаленно по фотографии помещения. После процедуры вы почувствуете легкость и комфорт в своем доме.</p>"
-            },
-            "8": {
-                "title": "Принципы работы",
-                "content": "<p>Я считаю важным быть честной с вами о том, как я работаю и чего я принципиально не делаю.</p><p><strong>Что я НЕ делаю никогда:</strong></p><ul><li>Не занимаюсь приворотами и отворотами</li><li>Не провожу ритуалы против воли других людей</li><li>Не манипулирую чужой волей и свободой выбора</li><li>Не обещаю невозможного</li><li>Не внушаю зависимость от магических практик</li><li>Не гадаю беременным женщинам и детям — считаю эти состояния особенно тонкими и требующими бережного отношения.</li></ul><p>Беременным могу посмотреть ситуацию только тогда, когда женщина ещё не знает о своём положении или стоит перед выбором — рожать или не рожать. Детям смотрю на картах только на здоровье. Для меня важно работать аккуратно, без вреда.</p><p><strong>Мои принципы:</strong></p><ul><li>Работаю исключительно в положительном ключе</li><li>Уважаю свободу выбора каждого человека</li><li>Помогаю создать условия для позитивных изменений</li><li>Говорю правду, даже если она непростая</li><li>Верю, что человек сам должен быть активным участником своей жизни</li></ul><p>Магическая помощь - это поддержка и направление энергии, но не замена ваших собственных усилий. Я здесь, чтобы помочь вам найти путь, но идти по нему будете вы сами.</p>"
             }
         }
     },
@@ -256,52 +256,52 @@
             "heading": "Paslaugos",
             "items": {
                 "1": {
+                    "title": "Darbo principai",
+                    "text": "Sąžiningas požiūris be manipuliacijų. Sužinokite, kaip dirbu ir ko niekada nedarau.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie darbo principus"
+                },
+                "2": {
                     "title": "Būrimas kortomis",
                     "text": "Klasikinis būrimas naudojant įvairias kortų sistemą tikslioms ateities prognozėms.",
                     "button": "Sužinoti daugiau",
                     "aria_label": "Sužinoti daugiau apie kortų būrimą"
                 },
-                "2": {
+                "3": {
                     "title": "Taro dėlionė",
                     "text": "Gili situacijų analizė Taro kortomis, atskleidžianti paslėptus aspektus ir galimus kelius.",
                     "button": "Sužinoti daugiau",
                     "aria_label": "Sužinoti daugiau apie Taro dėlionę"
                 },
-                "3": {
+                "4": {
                     "title": "Ritualai ir užkalbėjimai",
                     "text": "Senoviniai ritualai ir užkalbėjimai sėkmei, meilei, pinigams pritraukti ir apsaugai nuo negatyvo.",
                     "button": "Sužinoti daugiau",
                     "aria_label": "Sužinoti daugiau apie ritualus"
                 },
-                "4": {
+                "5": {
                     "title": "Vaško liejimas",
                     "text": "Diagnostika ir negatyvių poveikių nuėmimas senoviniu vaško liejimo metodu.",
                     "button": "Sužinoti daugiau",
                     "aria_label": "Sužinoti daugiau apie vaško liejimą"
                 },
-                "5": {
+                "6": {
                     "title": "Amuletai ir talismanai",
                     "text": "Individualių apsauginių amuletų ir talismanų kūrimas įvairioms gyvenimo situacijoms.",
                     "button": "Sužinoti daugiau",
                     "aria_label": "Sužinoti daugiau apie amuletus"
                 },
-                "6": {
+                "7": {
                     "title": "Akmenų programavimas",
                     "text": "Asmeninių konteinerių-akmenų kūrimas blokų nuėmimui ir teigiamų pokyčių pritraukimui.",
                     "button": "Sužinoti daugiau",
                     "aria_label": "Sužinoti daugiau apie akmenų programavimą"
                 },
-                "7": {
+                "8": {
                     "title": "Erdvės valymas",
                     "text": "Energetinis namų, butų ir daiktų valymas nuo neigiamų įtakų.",
                     "button": "Sužinoti daugiau",
                     "aria_label": "Sužinoti daugiau apie erdvės valymą"
-                },
-                "8": {
-                    "title": "Darbo principai",
-                    "text": "Sąžiningas požiūris be manipuliacijų. Sužinokite, kaip dirbu ir ko niekada nedarau.",
-                    "button": "Sužinoti daugiau",
-                    "aria_label": "Sužinoti daugiau apie darbo principus"
                 }
             },
             "controls": {
@@ -322,31 +322,31 @@
             "show_button": "Rodyti kainas",
             "explanation": "Kainos nurodytos eurais. Galimas mokėjimas rubliais, tiksli kaina bus nurodyta po darbo pagal to meto kursą.",
             "items": {
-                "1": {
+                "2": {
                     "title": "Būrimas kortomis",
                     "price": "Kaina: 50€"
                 },
-                "2": {
+                "3": {
                     "title": "Taro dėlionė",
                     "price": "Kaina: 50€"
                 },
-                "3": {
+                "4": {
                     "title": "Ritualai ir užkalbėjimai",
                     "price": "Kaina: 50€"
                 },
-                "4": {
+                "5": {
                     "title": "Vaško liejimas",
                     "price": "Kaina: 50€"
                 },
-                "5": {
+                "6": {
                     "title": "Amuletai ir talismanai",
                     "price": "Kaina: 50€"
                 },
-                "6": {
+                "7": {
                     "title": "Akmenų programavimas",
                     "price": "Kaina: 50€"
                 },
-                "7": {
+                "8": {
                     "title": "Erdvės valymas",
                     "price": "Kaina: 50€"
                 }
@@ -380,36 +380,36 @@
         },
         "popups": {
             "1": {
+                "title": "Darbo principai",
+                "content": "<p>Manau, kad svarbu būti sąžininga su jumis apie tai, kaip dirbu ir ko principingai nedarau.</p><p><strong>Ko aš NIEKADA nedarau:</strong></p><ul><li>Neužsiimu meilės burtais ir atskyrimais</li><li>Neatlieku ritualų prieš kitų žmonių valią</li><li>Nemanipuliuoju kito žmogaus valia ir pasirinkimo laisve</li><li>Nežadu neįmanomo</li><li>Nekuriu priklausomybės nuo magiškų praktikų</li></ul><p><strong>Mano principai:</strong></p><ul><li>Dirbu išimtinai pozityvioje kryptyje</li><li>Gerbu kiekvieno žmogaus pasirinkimo laisvę</li><li>Padedu sukurti sąlygas teigiamiems pokyčiams</li><li>Sakau tiesą, net jei ji sunki</li><li>Tikiu, kad žmogus pats turi būti aktyvus savo gyvenimo dalyvis</li></ul><p>Magiška pagalba – tai parama ir energijos nukreipimas, bet ne jūsų pačių pastangų pakaitalas. Esu čia, kad padėčiau jums rasti kelią, bet eiti juo turėsite patys.</p><p>Jei jums siūlo \"prikabinti\" ar \"atkabinti\" žmogų prieš jo valią - tai prieštarauja mano įsitikinimams. Tikra pagalba remiasi pagarba ir sąžiningumu.</p>"
+            },
+            "2": {
                 "title": "Būrimas kortomis",
                 "content": "<p>Būrimas kortomis – tai senovinis menas pranašauti ateitį ir analizuoti dabartį per kortų simbolius ir vaizdinius. Savo praktikoje naudoju tiek paprastas žaidimo kortas, tiek specialias būrimo kalades.</p><p>Kortų pagalba galima gauti atsakymus į rūpimus klausimus apie:</p><ul><li>Asmeninius santykius ir meilę</li><li>Karjerą ir profesinį tobulėjimą</li><li>Finansinę padėtį ir materialinę gerovę</li><li>Gyvenimo kelią ir pašaukimą</li></ul><p>Kiekviena dėlionė yra individuali ir atsižvelgia į jūsų konkrečią situaciją. Kruopščiai interpretuoju kortų simbolius ir jų tarpusavio ryšį, kad suteikčiau jums tiksliausią ir naudingiausią pranašystę.</p><p>Būrimo seansas padės jums pamatyti paslėptus situacijos aspektus, gauti patarimą sprendimų priėmimui ir sužinoti apie galimas įvykių vystymosi perspektyvas.</p>"
             },
-            "2": {
+            "3": {
                 "title": "Taro dėlionė",
                 "content": "<p>Taro kortos – tai galingas įrankis giliai gyvenimiškų situacijų analizei ir savęs pažinimui. Skirtingai nuo paprastų kortų, Taro sistema turi turtingą simboliką ir daugiasluoksnes reikšmes, kas leidžia atlikti detalią praeities, dabarties ir galimos ateities analizę.</p><p>Savo praktikoje naudoju įvairias Taro dėliones:</p><ul><li><strong>Keltų kryžius</strong> – klasikinė dėlionė giliai konkrečios situacijos analizei</li><li><strong>Santykių dėlionė</strong> – meilės ir partnerystės santykių analizei</li><li><strong>Dienos korta</strong> – patarimui einamajai dienai gauti</li><li><strong>Dėlionė „Kelias“</strong> – jūsų gyvenimo kelio ir pašaukimo supratimui</li></ul><p>Taro būrimo seansas padės jums giliai suprasti vykstančius procesus, atskleisti paslėptus motyvus, pamatyti potencialias kliūtis ir rasti galimus kelius joms įveikti.</p><p>Kiekviena dėlionė lydima išsamaus kortų reikšmių ir jų tarpusavio ryšių paaiškinimo jūsų konkrečios situacijos kontekste.</p>"
             },
-            "3": {
+            "4": {
                 "title": "Ritualai ir užkalbėjimai",
                 "content": "<p>Ritualai ir užkalbėjimai – tai senovinės praktikos, skirtos pritraukti norimus pokyčius į gyvenimą arba apsisaugoti nuo nepageidaujamos įtakos. Jos remiasi darbu su gamtos energijomis ir žodžio galia.</p><p>Atlieku įvairių rūšių ritualus:</p><ul><li><strong>Meilės ritualai</strong> – meilei pritraukti, santykiams gerinti, jausmams stiprinti</li><li><strong>Pinigų apeigos</strong> – finansinei gerovei pritraukti, naujiems pajamų šaltiniams</li><li><strong>Apsivalymo ritualai</strong> – išsilaisvinimui nuo negatyvių energijų, būsto valymui</li><li><strong>Apsauginiai užkalbėjimai</strong> – energetinės apsaugos nuo išorinio poveikio sukūrimui</li></ul><p>Kiekvienas ritualas parenkamas individualiai, atsižvelgiant į jūsų konkrečią situaciją ir poreikius. Geriausiam rezultatui pasiekti svarbu laikytis visų rekomendacijų ir atlikti būtinus veiksmus nurodytu laiku.</p><p>Prisiminkite, kad ritualai ir užkalbėjimai – tai pagalba ir energijos nukreipimas, tačiau jie veikia harmonijoje su jūsų pačių pastangomis ir ketinimais.</p>"
             },
-            "4": {
+            "5": {
                 "title": "Vaško liejimas",
                 "content": "<p>Vaško liejimas – tai senovinis slaviškas diagnostikos ir negatyvių poveikių nuėmimo metodas. Procedūra susideda iš išlydyto vaško pylimo į šaltą vandenį virš žmogaus ar jo nuotraukos.</p><p>Sustingęs vaškas įgauna formas, kurios turi diagnostinę reikšmę ir parodo:</p><ul><li>Nužiūrėjimo, prakeiksmo ar kitų negatyvių poveikių buvimą</li><li>Energetinius blokus ir problemines zonas</li><li>Negatyvių įtakų šaltinius ir priežastis</li><li>Žmogaus energetinio lauko būklę</li></ul><p>Vaško liejimo procedūra ne tik diagnozuoja problemą, bet ir tuo pačiu metu nuima negatyvų poveikį, perkeldama jį nuo žmogaus į vašką. Išlietos formos vėliau neutralizuojamos specialiu būdu.</p><p>Pilnam apsivalymui paprastai reikia nuo 1 iki 9 seansų, priklausomai nuo negatyvaus poveikio stiprumo ir trukmės. Po procedūros pateikiamos rekomendacijos dėl energetinės apsaugos ir atsistatymo.</p>"
             },
-            "5": {
+            "6": {
                 "title": "Amuletai ir talismanai",
                 "content": "<p>Amuletai ir talismanai – tai daiktai, pakrauti ypatinga energija apsaugai, sėkmės ir gerovės pritraukimui. Kuriu individualius amuletus, atsižvelgdama į jūsų poreikius, energetikos ypatumus ir konkrečius tikslus.</p><p>Amuletų rūšys, kurias gaminu:</p><ul><li><strong>Apsauginiai amuletai</strong> – saugo nuo neigiamų energijų ir poveikių</li><li><strong>Meilės talismanai</strong> – pritraukia meilę, harmonizuoja santykius</li><li><strong>Pinigų amuletai</strong> – skatina finansinę gerovę</li><li><strong>Sveikata ir gyvybinės jėgos</strong> – stiprina energetiką ir saugo sveikatą</li><li><strong>Kelioniniai amuletai</strong> – užtikrina apsaugą kelyje ir persikraustant</li></ul><p>Kiekvienas amuletas kuriamas tam tikru laiku, naudojant specialias medžiagas ir aktyvacijos ritualus. Prie amuleto pridedamos instrukcijos dėl teisingo naudojimo ir periodinio pakrovimo.</p><p>Svarbu prisiminti, kad amuletas – tai asmeninis daiktas, kuris susiderina su konkrečio žmogaus energetika ir neturėtų būti perduodamas kitiems žmonėms.</p>"
             },
-            "6": {
+            "7": {
                 "title": "Akmenų programavimas",
                 "content": "<p>Akmenų-konteinerių programavimas – tai ypatinga asmeninių energetinių padėjėjų kūrimo praktika. Naudoju gamtinius akmenis, kuriuos nustatau konkrečiai užduočiai kiekvienam žmogui.</p><p>Kas yra akmuo-konteineris?</p><p>Tai nedidelis gamtinis akmuo, suprogramuotas kliūčių pašalinimui iš jūsų gyvenimo ir pritraukti tai, kas pagerins gyvenimo kokybę. Kiekvienas akmuo unikalus ir kuriamas individualiai.</p><p>Kaip tai veikia:</p><ul><li>Parenku tinkamą gamtinį akmenį</li><li>Nustatau jūsų konkrečią užduotį ar problemą</li><li>Atlieku programavimo ritualą norimam rezultatui</li><li>Aktyvuoju akmenį tam tikru laiku</li></ul><p>Akmuo-konteineris gali būti nustatytas skirtingiems tikslams: energetinių blokų nuėmimui, naujų galimybių atsivėrimui, tam tikros gyvenimo sferos pagerinimui, reikalingų įvykių pritraukimui.</p><p>Gausite instrukcijas dėl jūsų asmeninio akmens-padėjėjo naudojimo ir priežiūros.</p>"
             },
-            "7": {
+            "8": {
                 "title": "Erdvės valymas",
                 "content": "<p>Energetinis valymas – tai svarbi praktika harmonijai jūsų namuose ir gyvenime palaikyti. Atlieku namų, butų, biurų ir atskirų daiktų valymą nuo susikrovusio negatyvo.</p><p>Kada reikia valymo:</p><ul><li>Po konfliktų ar sunkių situacijų namuose</li><li>Persikraunant į naują būstą</li><li>Jei jaučiate sunkumą, diskomfortą patalpose</li><li>Po ligos ar nemalonių įvykių</li><li>Reguliariai energetinei higienai</li></ul><p>Ką aš darau:</p><ul><li>Diagnozuoju energetinę erdvės būklę</li><li>Atlieku valymo ritualus nuo neigiamų įtakų</li><li>Valau daiktus, kurie gali nešti neigiamą energiją</li><li>Kuriu erdvės apsaugą</li><li>Pateikiu rekomendacijas energetikos švaros palaikymui</li></ul><p>Valymą galima atlikti tiek asmeniškai, tiek nuotoliniu būdu pagal patalpos nuotrauką. Po procedūros pajusite lengvumą ir komfortą savo namuose.</p>"
-            },
-            "8": {
-                "title": "Darbo principai",
-                "content": "<p>Manau, kad svarbu būti sąžininga su jumis apie tai, kaip dirbu ir ko principingai nedarau.</p><p><strong>Ko aš NIEKADA nedarau:</strong></p><ul><li>Neužsiimu meilės burtais ir atskyrimais</li><li>Neatlieku ritualų prieš kitų žmonių valią</li><li>Nemanipuliuoju kito žmogaus valia ir pasirinkimo laisve</li><li>Nežadu neįmanomo</li><li>Nekuriu priklausomybės nuo magiškų praktikų</li></ul><p><strong>Mano principai:</strong></p><ul><li>Dirbu išimtinai pozityvioje kryptyje</li><li>Gerbu kiekvieno žmogaus pasirinkimo laisvę</li><li>Padedu sukurti sąlygas teigiamiems pokyčiams</li><li>Sakau tiesą, net jei ji sunki</li><li>Tikiu, kad žmogus pats turi būti aktyvus savo gyvenimo dalyvis</li></ul><p>Magiška pagalba – tai parama ir energijos nukreipimas, bet ne jūsų pačių pastangų pakaitalas. Esu čia, kad padėčiau jums rasti kelią, bet eiti juo turėsite patys.</p><p>Jei jums siūlo \"prikabinti\" ar \"atkabinti\" žmogų prieš jo valią - tai prieštarauja mano įsitikinimams. Tikra pagalba remiasi pagarba ir sąžiningumu.</p>"
             }
         }
     }
