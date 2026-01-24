@@ -211,7 +211,8 @@
             "phase": "Лунная фаза:",
             "next_phase": "До следующей фазы:",
             "rituals": "Какие обряды сейчас проводятся:",
-            "loading": "Загрузка..."
+            "loading": "Загрузка...",
+            "image_alt_prefix": "Фаза луны: "
         },
         "calendar": {
             "heading": "Календарь",
@@ -223,11 +224,17 @@
             "copyright": "© 2025 \"Уголок Доброй Феи\" Сайт сделан в качестве дипломного проекта. Автор: Владимир Карин.",
             "social": {
                 "facebook": "Посетите нашу страницу на Facebook",
+                "facebook_alt": "Логотип Facebook",
                 "instagram": "Посетите нашу страницу в Instagram",
+                "instagram_alt": "Логотип Instagram",
                 "vkontakte": "Посетите нашу страницу ВКонтакте",
+                "vkontakte_alt": "Логотип ВКонтакте",
                 "telegram": "Напишите мне в Telegram",
+                "telegram_alt": "Логотип Telegram",
                 "viber": "Напишите мне в Viber",
-                "whatsapp": "Напишите мне в WhatsApp"
+                "viber_alt": "Логотип Viber",
+                "whatsapp": "Напишите мне в WhatsApp",
+                "whatsapp_alt": "Логотип WhatsApp"
             }
         },
         "popups": {
@@ -477,7 +484,8 @@
             "phase": "Mėnulio fazė:",
             "next_phase": "Iki kitos fazės:",
             "rituals": "Kokie ritualai dabar atliekami:",
-            "loading": "Kraunama..."
+            "loading": "Kraunama...",
+            "image_alt_prefix": "Mėnulio fazė: "
         },
         "calendar": {
             "heading": "Kalendorius",
@@ -489,11 +497,17 @@
             "copyright": "© 2025 \"Gerosios Fėjos kampelis\" Svetainė sukurta kaip diplominis projektas. Autorius: Vladimir Karin.",
             "social": {
                 "facebook": "Aplankykite mūsų Facebook puslapį",
+                "facebook_alt": "Facebook logotipas",
                 "instagram": "Aplankykite mūsų Instagram puslapį",
+                "instagram_alt": "Instagram logotipas",
                 "vkontakte": "Aplankykite mūsų VKontakte puslapį",
+                "vkontakte_alt": "VKontakte logotipas",
                 "telegram": "Parašykite man Telegram",
+                "telegram_alt": "Telegram logotipas",
                 "viber": "Parašykite man Viber",
-                "whatsapp": "Parašykite man WhatsApp"
+                "viber_alt": "Viber logotipas",
+                "whatsapp": "Parašykite man WhatsApp",
+                "whatsapp_alt": "WhatsApp logotipas"
             }
         },
         "popups": {

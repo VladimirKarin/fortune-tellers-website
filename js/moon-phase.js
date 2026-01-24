@@ -1,6 +1,7 @@
 // ================================================
 // 🌙 MOON PHASE MODULE - Dynamic Moon Information Display
 // ================================================
+import { getTranslation, getCurrentLanguage } from './i18n.js';
 //
 // 📋 MODULE PURPOSE:
 // Displays current moon phase information with automatic updates from
@@ -313,7 +314,9 @@ async function setLoadingState(isLoading) {
  * @param {Object} moonData - Moon phase data object
  * @param {string} moonData.moonPhaseImage - Path to moon image
  * @param {string} moonData.moonPhaseNameRussian - Phase name in Russian
+ * @param {string} moonData.moonPhaseNameLithuanian - Phase name in Lithuanian
  * @param {Array<string>} moonData.moonPhaseRitualsRussian - Ritual recommendations
+ * @param {Array<string>} moonData.moonPhaseRitualsLithuanian - Ritual recommendations in Lithuanian
  * @returns {void}
  *
  * @example
@@ -335,9 +338,13 @@ function updateMoonUI(moonData) {
 
         // Update moon phase image with fade transition
         if (moonDOM.image) {
+            const currentLang = getCurrentLanguage();
+            const phaseName = currentLang === 'lt' ? moonData.moonPhaseNameLithuanian : moonData.moonPhaseNameRussian;
+            const altPrefix = getTranslation('moon.image_alt_prefix');
+
             moonDOM.image.style.opacity = '0';
             moonDOM.image.src = moonData.moonPhaseImage;
-            moonDOM.image.alt = `Изображение фазы ${moonData.moonPhaseNameRussian}`;
+            moonDOM.image.alt = `${altPrefix}${phaseName}`;
 
             moonDOM.image.onload = () => {
                 moonDOM.image.style.transition = 'opacity 0.3s ease';
