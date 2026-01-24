@@ -115,33 +115,81 @@
             "show_button": "Показать цены",
             "explanation": "Цены указаны в евро. Возможна оплата в рублях, точная цена будет указана после работы по курсу на тот момент.",
             "items": {
+                "1": {
+                    "title": "Один вопрос картам",
+                    "price": "Цена: 5€"
+                },
                 "2": {
-                    "title": "Гадание на картах",
-                    "price": "Цена: 50€"
+                    "title": "2–3 вопроса картам",
+                    "price": "Цена: 10€"
                 },
                 "3": {
-                    "title": "Таро расклад",
-                    "price": "Цена: 50€"
+                    "title": "Больше трёх вопросов картам",
+                    "price": "Цена: 20€"
                 },
                 "4": {
-                    "title": "Ритуалы и заговоры",
-                    "price": "Цена: 50€"
+                    "title": "Расклад + бонусные вопросы",
+                    "price": "Цена: 35€"
                 },
                 "5": {
-                    "title": "Восковая отливка",
+                    "title": "Годовой расклад",
                     "price": "Цена: 50€"
                 },
                 "6": {
-                    "title": "Обереги и амулеты",
-                    "price": "Цена: 50€"
+                    "title": "Обучение раскладу на картах",
+                    "price": "Цена: 500€"
                 },
                 "7": {
-                    "title": "Программирование камней",
-                    "price": "Цена: 50€"
+                    "title": "Обряд по раскрытию правды",
+                    "price": "Цена: 10€"
                 },
                 "8": {
-                    "title": "Очищение пространства",
-                    "price": "Цена: 50€"
+                    "title": "Открываю нужные дороги",
+                    "price": "Цена: 10€"
+                },
+                "9": {
+                    "title": "Помощь в продаже вещей",
+                    "price": "Цена: 10€"
+                },
+                "10": {
+                    "title": "Помощь пережить расставание",
+                    "price": "Цена: 10€"
+                },
+                "11": {
+                    "title": "Обряды на удачные завершения дел",
+                    "price": "Цена: 10€"
+                },
+                "12": {
+                    "title": "Поставить защиту",
+                    "price": "Цена: 10€"
+                },
+                "13": {
+                    "title": "Очищение жилья",
+                    "price": "Цена: 50–100€"
+                },
+                "14": {
+                    "title": "Восковая отливка",
+                    "price": "Цена: 20€"
+                },
+                "15": {
+                    "title": "Контейнер",
+                    "price": "Цена: 10€"
+                },
+                "16": {
+                    "title": "Заговорить вашу свечу",
+                    "price": "Цена: 10€"
+                },
+                "17": {
+                    "title": "Сделать свечу из собственного материала",
+                    "price": "Цена: 13€"
+                },
+                "18": {
+                    "title": "Запрограммировать оберег (из Вашей вещи)",
+                    "price": "Цена: 10€"
+                },
+                "19": {
+                    "title": "Запрограммировать оберег (из вещи, которую Вы выберете у меня)",
+                    "price": "Цена: 10€ + стоимость вещи"
                 }
             }
         },
@@ -322,33 +370,81 @@
             "show_button": "Rodyti kainas",
             "explanation": "Kainos nurodytos eurais. Galimas mokėjimas rubliais, tiksli kaina bus nurodyta po darbo pagal to meto kursą.",
             "items": {
+                "1": {
+                    "title": "Vienas klausimas kortoms",
+                    "price": "Kaina: 5€"
+                },
                 "2": {
-                    "title": "Būrimas kortomis",
-                    "price": "Kaina: 50€"
+                    "title": "2–3 klausimai kortoms",
+                    "price": "Kaina: 10€"
                 },
                 "3": {
-                    "title": "Taro dėlionė",
-                    "price": "Kaina: 50€"
+                    "title": "Daugiau nei trys klausimai kortoms",
+                    "price": "Kaina: 20€"
                 },
                 "4": {
-                    "title": "Ritualai ir užkalbėjimai",
-                    "price": "Kaina: 50€"
+                    "title": "Išdėstymas + papildomi klausimai",
+                    "price": "Kaina: 35€"
                 },
                 "5": {
-                    "title": "Vaško liejimas",
+                    "title": "Metinis išdėstymas",
                     "price": "Kaina: 50€"
                 },
                 "6": {
-                    "title": "Amuletai ir talismanai",
-                    "price": "Kaina: 50€"
+                    "title": "Mokymai burti kortomis",
+                    "price": "Kaina: 500€"
                 },
                 "7": {
-                    "title": "Akmenų programavimas",
-                    "price": "Kaina: 50€"
+                    "title": "Tiesos atskleidimo apeiga",
+                    "price": "Kaina: 10€"
                 },
                 "8": {
-                    "title": "Erdvės valymas",
-                    "price": "Kaina: 50€"
+                    "title": "Reikiamų kelių atidarymas",
+                    "price": "Kaina: 10€"
+                },
+                "9": {
+                    "title": "Pagalba parduodant turtą",
+                    "price": "Kaina: 10€"
+                },
+                "10": {
+                    "title": "Pagalba išgyvenant išsiskyrimą",
+                    "price": "Kaina: 10€"
+                },
+                "11": {
+                    "title": "Apeigos sėkmingam darbų užbaigimui",
+                    "price": "Kaina: 10€"
+                },
+                "12": {
+                    "title": "Apsaugos uždėjimas",
+                    "price": "Kaina: 10€"
+                },
+                "13": {
+                    "title": "Būsto valymas",
+                    "price": "Kaina: 50–100€"
+                },
+                "14": {
+                    "title": "Vaško liejimas",
+                    "price": "Kaina: 20€"
+                },
+                "15": {
+                    "title": "Konteineris",
+                    "price": "Kaina: 10€"
+                },
+                "16": {
+                    "title": "Jūsų žvakės užkalbėjimas",
+                    "price": "Kaina: 10€"
+                },
+                "17": {
+                    "title": "Žvakės gamyba iš nuosavų medžiagų",
+                    "price": "Kaina: 13€"
+                },
+                "18": {
+                    "title": "Amuleto programavimas (iš Jūsų daikto)",
+                    "price": "Kaina: 10€"
+                },
+                "19": {
+                    "title": "Amuleto programavimas (iš mano daikto)",
+                    "price": "Kaina: 10€ + mano daikto kaina"
                 }
             }
         },
