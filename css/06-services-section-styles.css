@@ -44,15 +44,12 @@
 .gallery-container {
     height: var(--carousel-height);
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* Remove flexbox - interfere with 3D sorting in Firefox when items are absolute */
+    display: block; 
     perspective: 1000px;
+    transform-style: preserve-3d; /* Critical for 3D sorting */
 }
 
-/* ===================================
-   GALLERY CARDS (GLASSMORPHISM)
-   =================================== */
 /* ===================================
    GALLERY CARDS (GLASSMORPHISM)
    =================================== */
@@ -78,6 +75,7 @@
     opacity: 0;
     z-index: 0;
     backface-visibility: hidden; /* Fix for Firefox rendering artifacts */
+    transform-style: preserve-3d; /* Ensure children participate in 3D space if needed */
 }
 
 /* ===================================
@@ -89,7 +87,7 @@
     height: auto;
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    z-index: 3;
+    z-index: 10; /* Highest priority */
     border-color: rgba(255, 165, 0, 0.3); /* Gold hint */
     box-shadow: 
         0 15px 40px rgba(0, 0, 0, 0.4),
@@ -101,13 +99,13 @@
     /* -50% (center) - 60% (offset) = -110% */
     transform: translate(-110%, -50%) scale(0.9);
     opacity: 0.7;
-    z-index: 2;
+    z-index: 5; /* Middle priority */
 }
 .gallery-item-4 {
     /* -50% (center) + 60% (offset) = 10% */
     transform: translate(10%, -50%) scale(0.9);
     opacity: 0.7;
-    z-index: 2;
+    z-index: 5; /* Middle priority */
 }
 
 /* Outer Cards - Far Edges */
@@ -115,13 +113,13 @@
     /* -50% (center) - 100% (offset) = -150% */
     transform: translate(-150%, -50%) scale(0.8);
     opacity: 0.4;
-    z-index: 1;
+    z-index: 1; /* Lowest visible priority */
 }
 .gallery-item-5 {
     /* -50% (center) + 100% (offset) = 50% */
     transform: translate(50%, -50%) scale(0.8);
     opacity: 0.4;
-    z-index: 1;
+    z-index: 1; /* Lowest visible priority */
 }
 
 /* ===================================
