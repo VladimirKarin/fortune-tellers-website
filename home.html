@@ -6,23 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня." data-i18n-attr="content:meta.description">
+    <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-domain.com/">
-    <meta property="og:title" content="Уголок Доброй Феи | Гадание на картах и Таро">
-    <meta property="og:description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня.">
+    <meta property="og:url" content="https://your-domain.com/"> <!-- TODO: Update with real domain -->
+    <meta property="og:title" content="Уголок Доброй Феи | Гадание на картах и Таро" data-i18n-attr="content:meta.title">
+    <meta property="og:description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня." data-i18n-attr="content:meta.description">
     <meta property="og:image" content="https://your-domain.com/img/01-header-section/logo/logoCrop2.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://your-domain.com/">
-    <meta property="twitter:title" content="Уголок Доброй Феи | Гадание на картах и Таро">
-    <meta property="twitter:description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня.">
+    <meta property="twitter:url" content="https://your-domain.com/"> <!-- TODO: Update with real domain -->
+    <meta property="twitter:title" content="Уголок Доброй Феи | Гадание на картах и Таро" data-i18n-attr="content:meta.title">
+    <meta property="twitter:description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня." data-i18n-attr="content:meta.description">
     <meta property="twitter:image" content="https://your-domain.com/img/01-header-section/logo/logoCrop2.png">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://your-domain.com/">
+    <link rel="canonical" href="https://your-domain.com/"> <!-- TODO: Update with real domain -->
 
     <!-- Favicon -->
     <link rel="icon" href="./img/01-header-section/logo/logoCrop2.png" type="image/png">
@@ -60,13 +61,48 @@
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "Уголок Доброй Феи",
+      "alternateName": "Gerosios Fėjos kampelis",
       "image": "https://your-domain.com/img/01-header-section/logo/logoCrop2.png",
-      "description": "Профессиональное гадание на картах Таро, ритуалы, снятие негатива.",
-      "priceRange": "50€ - 80€",
+      "description": "Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Специалист в Вильнюсе и онлайн.",
+      "priceRange": "€€",
+      "url": "https://your-domain.com/",
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": "LT"
-      }
+        "addressCountry": "LT",
+        "addressLocality": "Vilnius"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Услуги гадания и ритуалы",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Гадание на картах"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Таро расклад"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Восковая отливка"
+            }
+          }
+        ]
+      },
+      "sameAs": [
+        "https://www.facebook.com/",
+        "https://www.instagram.com/",
+        "https://vk.com/"
+      ]
     }
     </script>
 </head>
@@ -202,59 +238,71 @@
                     <div class="gallery-container">
                         <!-- Service 1 -->
                         <div class="gallery-item gallery-item-1" data-index="1">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-principles.png')"></div>
+                            <div class="gallery-item-visual">
+                                <img src="./img/04-services-section/service-principles.png" alt="Принципы работы гадалки" data-i18n-attr="alt:services.items.1.alt" loading="lazy">
+                            </div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.1.title">Гадание на картах</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.1.text">Классическое гадание...</p>
+                                <h3 class="gallery-item-title" data-i18n="services.items.1.title">Принципы работы</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.1.text">Честный подход...</p>
                                 <button class="gallery-item-button" data-popup="popup-1" data-i18n="services.items.1.button" data-i18n-attr="aria-label:services.items.1.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
                         <!-- Service 2 -->
                         <div class="gallery-item gallery-item-2" data-index="2">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-cards.png')"></div>
+                            <div class="gallery-item-visual">
+                                <img src="./img/04-services-section/service-cards.png" alt="Гадание на картах" data-i18n-attr="alt:services.items.2.alt" loading="lazy">
+                            </div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.2.title">Таро расклад</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.2.text">Глубокий анализ...</p>
+                                <h3 class="gallery-item-title" data-i18n="services.items.2.title">Гадание на картах</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.2.text">Классическое гадание...</p>
                                 <button class="gallery-item-button" data-popup="popup-2" data-i18n="services.items.2.button" data-i18n-attr="aria-label:services.items.2.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
                         <!-- Service 3 -->
                         <div class="gallery-item gallery-item-3" data-index="3">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-tarot.png')"></div>
+                            <div class="gallery-item-visual">
+                                <img src="./img/04-services-section/service-tarot.png" alt="Расклад на картах Таро" data-i18n-attr="alt:services.items.3.alt" loading="lazy">
+                            </div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.3.title">Ритуалы и заговоры</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.3.text">Древние обряды...</p>
+                                <h3 class="gallery-item-title" data-i18n="services.items.3.title">Таро расклад</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.3.text">Глубокий анализ...</p>
                                 <button class="gallery-item-button" data-popup="popup-3" data-i18n="services.items.3.button" data-i18n-attr="aria-label:services.items.3.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
                         <!-- Service 4 -->
                         <div class="gallery-item gallery-item-4" data-index="4">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-rituals.png')"></div>
+                            <div class="gallery-item-visual">
+                                <img src="./img/04-services-section/service-rituals.png" alt="Ритуалы и заговоры" data-i18n-attr="alt:services.items.4.alt" loading="lazy">
+                            </div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.4.title">Восковая отливка</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.4.text">Диагностика...</p>
+                                <h3 class="gallery-item-title" data-i18n="services.items.4.title">Ритуалы и заговоры</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.4.text">Древние обряды...</p>
                                 <button class="gallery-item-button" data-popup="popup-4" data-i18n="services.items.4.button" data-i18n-attr="aria-label:services.items.4.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
                         <!-- Service 5 -->
                         <div class="gallery-item gallery-item-5" data-index="5">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-wax.png')"></div>
+                            <div class="gallery-item-visual">
+                                <img src="./img/04-services-section/service-wax.png" alt="Восковая отливка для снятия негатива" data-i18n-attr="alt:services.items.5.alt" loading="lazy">
+                            </div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.5.title">Обереги и амулеты</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.5.text">Создание...</p>
+                                <h3 class="gallery-item-title" data-i18n="services.items.5.title">Восковая отливка</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.5.text">Диагностика...</p>
                                 <button class="gallery-item-button" data-popup="popup-5" data-i18n="services.items.5.button" data-i18n-attr="aria-label:services.items.5.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
                         <!-- Service 6 -->
                         <div class="gallery-item gallery-item-6" data-index="6">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-amulets.png')"></div>
+                            <div class="gallery-item-visual">
+                                <img src="./img/04-services-section/service-amulets.png" alt="Обереги и амулеты" data-i18n-attr="alt:services.items.6.alt" loading="lazy">
+                            </div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.6.title">Программирование камней</h3>
+                                <h3 class="gallery-item-title" data-i18n="services.items.6.title">Обереги и амулеты</h3>
                                 <p class="gallery-item-text" data-i18n="services.items.6.text">Создание...</p>
                                 <button class="gallery-item-button" data-popup="popup-6" data-i18n="services.items.6.button" data-i18n-attr="aria-label:services.items.6.aria_label">Узнать больше</button>
                             </div>
@@ -262,20 +310,24 @@
 
                         <!-- Service 7 -->
                         <div class="gallery-item gallery-item-7" data-index="7">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-stones.png')"></div>
+                            <div class="gallery-item-visual">
+                                <img src="./img/04-services-section/service-stones.png" alt="Программирование камней" data-i18n-attr="alt:services.items.7.alt" loading="lazy">
+                            </div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.7.title">Очищение пространства</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.7.text">Энергетическое...</p>
+                                <h3 class="gallery-item-title" data-i18n="services.items.7.title">Программирование камней</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.7.text">Создание...</p>
                                 <button class="gallery-item-button" data-popup="popup-7" data-i18n="services.items.7.button" data-i18n-attr="aria-label:services.items.7.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
                         <!-- Service 8 -->
                         <div class="gallery-item gallery-item-8" data-index="8">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-cleansing.png')"></div>
+                            <div class="gallery-item-visual">
+                                <img src="./img/04-services-section/service-cleansing.png" alt="Очищение пространства от негатива" data-i18n-attr="alt:services.items.8.alt" loading="lazy">
+                            </div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.8.title">Принципы работы</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.8.text">Честный подход...</p>
+                                <h3 class="gallery-item-title" data-i18n="services.items.8.title">Очищение пространства</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.8.text">Энергетическое...</p>
                                 <button class="gallery-item-button" data-popup="popup-8" data-i18n="services.items.8.button" data-i18n-attr="aria-label:services.items.8.aria_label">Узнать больше</button>
                             </div>
                         </div>
@@ -522,39 +574,39 @@
 
                 <div class="container grid footer-grid">
                     <div class="footer-img">
-                        <img src="./img/06-footer-section/logo/logoCrop2.png" alt="Logo" class="footer__logo" />
+                        <img src="./img/06-footer-section/logo/logoCrop2.png" alt="Логотип Уголок Доброй Феи" class="footer__logo" data-i18n-attr="alt:meta.title" />
                     </div>
 
                     <nav class="footer_header__social_icons" aria-label="Социальные сети">
                         <ul class="footer__list">
                             <li class="footer__item">
-                                <a class="footer__link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.facebook">
-                                    <img src="./img/06-footer-section/social-network-logos/facebook-logo.png" alt="" class="social-network-logo" />
+                                <a class="footer__link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Посетите нашу страницу на Facebook" data-i18n-attr="aria-label:footer.social.facebook">
+                                    <img src="./img/06-footer-section/social-network-logos/facebook-logo.png" alt="Facebook" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.instagram">
-                                    <img src="./img/06-footer-section/social-network-logos/instagram-logo.png" alt="" class="social-network-logo" />
+                                <a class="footer__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Посетите нашу страницу в Instagram" data-i18n-attr="aria-label:footer.social.instagram">
+                                    <img src="./img/06-footer-section/social-network-logos/instagram-logo.png" alt="Instagram" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.vkontakte">
-                                    <img src="./img/06-footer-section/social-network-logos/vkontakte-logo.png" alt="" class="social-network-logo" />
+                                <a class="footer__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer" aria-label="Посетите нашу страницу ВКонтакте" data-i18n-attr="aria-label:footer.social.vkontakte">
+                                    <img src="./img/06-footer-section/social-network-logos/vkontakte-logo.png" alt="ВКонтакте" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.telegram">
-                                    <img src="./img/06-footer-section/social-network-logos/telegram-logo.png" alt="" class="social-network-logo" />
+                                <a class="footer__link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer" aria-label="Напишите мне в Telegram" data-i18n-attr="aria-label:footer.social.telegram">
+                                    <img src="./img/06-footer-section/social-network-logos/telegram-logo.png" alt="Telegram" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://viber.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.viber">
-                                    <img src="./img/06-footer-section/social-network-logos/viber-logo.png" alt="" class="social-network-logo" />
+                                <a class="footer__link" href="https://viber.com/" target="_blank" rel="noopener noreferrer" aria-label="Напишите мне в Viber" data-i18n-attr="aria-label:footer.social.viber">
+                                    <img src="./img/06-footer-section/social-network-logos/viber-logo.png" alt="Viber" class="social-network-logo" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://whatsapp.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.whatsapp">
-                                    <img src="./img/06-footer-section/social-network-logos/whatsapp-logo.png" alt="" class="social-network-logo" />
+                                <a class="footer__link" href="https://whatsapp.com/" target="_blank" rel="noopener noreferrer" aria-label="Напишите мне в WhatsApp" data-i18n-attr="aria-label:footer.social.whatsapp">
+                                    <img src="./img/06-footer-section/social-network-logos/whatsapp-logo.png" alt="WhatsApp" class="social-network-logo" />
                                 </a>
                             </li>
                         </ul>
