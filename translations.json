@@ -15,8 +15,8 @@
         },
         "hero": {
             "heading": "Уголок Доброй Феи",
-            "text": "Мур мяу, мои дорогие! Нагадаю, обласкаю, всю правду скажу и расскажу, от беды уберегу, денег наколдую. За сметану",
-            "button": "Связаться со мной"
+            "text": "Добро пожаловать в мой уютный мир. Здесь вы найдете ответы на тревожащие вопросы и искреннюю поддержку. Я помогу вам бережно распутать сложные ситуации, снять тяжесть с души и найти верный путь к счастью. Всё будет хорошо.",
+            "button": "Написать мне"
         },
         "about": {
             "heading": "Обо мне",
@@ -207,16 +207,16 @@
             "description": "Даты, когда я бываю в других городах."
         },
         "footer": {
-            "heading": "Свяжитесь со мной",
-            "text": "Я здесь, чтобы помочь вам.",
-            "copyright": "© 2025 \"Гадалкина Избушка\" Сайт сделан в качестве дипломного проекта Автор: Владимир Карин.",
+            "heading": "Я здесь, чтобы помочь вам",
+            "text": "Не оставайтесь со своими переживаниями наедине. Напишите мне, и мы вместе всё обсудим и найдем решение.",
+            "copyright": "© 2025 \"Уголок Доброй Феи\" Сайт сделан в качестве дипломного проекта. Автор: Владимир Карин.",
             "social": {
                 "facebook": "Посетите нашу страницу на Facebook",
                 "instagram": "Посетите нашу страницу в Instagram",
                 "vkontakte": "Посетите нашу страницу ВКонтакте",
-                "telegram": "Напишите нам в Telegram",
-                "viber": "Напишите нам в Viber",
-                "whatsapp": "Напишите нам в WhatsApp"
+                "telegram": "Напишите мне в Telegram",
+                "viber": "Напишите мне в Viber",
+                "whatsapp": "Напишите мне в WhatsApp"
             }
         },
         "popups": {
@@ -270,8 +270,8 @@
         },
         "hero": {
             "heading": "Gerosios Fėjos kampelis",
-            "text": "Mur miau, mano brangieji! Išbursiu, paguosiu, visą tiesą pasakysiu, nuo nelaimių apsaugosiu, pinigų pribursiu. Už grietinę",
-            "button": "Susisiekti su manimi"
+            "text": "Sveiki atvykę į mano jaukų pasaulį. Čia rasite atsakymus į rūpimus klausimus ir nuoširdų palaikymą. Padėsiu Jums švelniai išspręsti sudėtingas situacijas, nuimti naštą nuo sielos ir rasti tikrąjį kelią į laimę. Viskas bus gerai.",
+            "button": "Parašyti man"
         },
         "about": {
             "heading": "Apie mane",
@@ -462,16 +462,16 @@
             "description": "Datos, kada būnu kituose miestuose."
         },
         "footer": {
-            "heading": "Susisiekite su manimi",
-            "text": "Aš čia, kad jums padėčiau.",
-            "copyright": "© 2025 \"Gerosios Fėjos kampelis\"",
+            "heading": "Esu čia, kad Jums padėčiau",
+            "text": "Nelikite vieni su savo išgyvenimais. Parašykite man, mes viską aptarsime ir kartu rasime sprendimą.",
+            "copyright": "© 2025 \"Gerosios Fėjos kampelis\" Svetainė sukurta kaip diplominis projektas. Autorius: Vladimir Karin.",
             "social": {
                 "facebook": "Aplankykite mūsų Facebook puslapį",
                 "instagram": "Aplankykite mūsų Instagram puslapį",
-                "vkontakte": "Aplankykite mūsų VK puslapį",
-                "telegram": "Rašykite mums į Telegram",
-                "viber": "Rašykite mums į Viber",
-                "whatsapp": "Rašykite mums į WhatsApp"
+                "vkontakte": "Aplankykite mūsų VKontakte puslapį",
+                "telegram": "Parašykite man Telegram",
+                "viber": "Parašykite man Viber",
+                "whatsapp": "Parašykite man WhatsApp"
             }
         },
         "popups": {
