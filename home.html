@@ -2,10 +2,16 @@
 <html lang="ru">
 
 <head>
-    <!-- META -->
+    <!-- SEO Optimization -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Сайт гадалки. Гадание на картах обычных, гадание на таро картах, ритуалы..." data-i18n-attr="content:meta.description">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Vladimir Karin">
+    <meta name="description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня." data-i18n-attr="content:meta.description">
+    <meta property="og:title" content="Уголок Доброй Феи | Гадание на картах и Таро" data-i18n-attr="content:meta.title">
+    <meta property="og:description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива." data-i18n-attr="content:meta.description">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://fortunetellers.com/home.html">
 
     <!-- FONT -->
     <!-- Montserrat -->
@@ -90,9 +96,9 @@
                     </h2>
                 </div>
 
-                <div class="container grid grid--3-cols grid--center-v">
+                <div class="container grid grid--3-cols">
                     <div class="about-me-card">
-                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img">
+                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img" data-i18n-attr="alt:about.card1.alt">
                         <div class="about-me-card__content">
                             <p class="about-me-card__title" data-i18n="about.card1.title">Кто я такая</p>
                             <p class="about-me-card__text" data-i18n="about.card1.text">
@@ -102,7 +108,7 @@
                     </div>
 
                     <div class="about-me-card">
-                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img">
+                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img" data-i18n-attr="alt:about.card2.alt">
                         <div class="about-me-card__content">
                             <p class="about-me-card__title" data-i18n="about.card2.title">Как я к этому пришла</p>
                             <p class="about-me-card__text" data-i18n="about.card2.text">
@@ -111,7 +117,7 @@
                         </div>
                     </div>
                     <div class="about-me-card">
-                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img">
+                        <img src="./img/03-about-me-section/about-me-img-I.jpg" alt="about me img" class="about-me-card__img" data-i18n-attr="alt:about.card3.alt">
                         <div class="about-me-card__content">
                             <p class="about-me-card__title" data-i18n="about.card3.title">Для чего всё это</p>
                             <p class="about-me-card__text" data-i18n="about.card3.text">
@@ -130,22 +136,22 @@
                     <h2 id="countdown-heading" class="heading-secondary" data-i18n="countdown.heading">Бесплатные вопросы через:</h2>
                     <div class="timebox" role="timer" aria-live="polite" aria-atomic="true">
                         <div class="time" role="presentation">
-                            <h3 id="days" aria-label="days remaining">00</h3>
+                            <h3 id="days" data-i18n-attr="aria-label:countdown.aria_days">00</h3>
                             <p aria-hidden="true" data-i18n="countdown.days">дн.</p>
                         </div>
 
                         <div class="time" role="presentation">
-                            <h3 id="hours" aria-label="hours remaining">00</h3>
+                            <h3 id="hours" data-i18n-attr="aria-label:countdown.aria_hours">00</h3>
                             <p aria-hidden="true" data-i18n="countdown.hours">ч.</p>
                         </div>
 
                         <div class="time" role="presentation">
-                            <h3 id="minutes" aria-label="minutes remaining">00</h3>
+                            <h3 id="minutes" data-i18n-attr="aria-label:countdown.aria_minutes">00</h3>
                             <p aria-hidden="true" data-i18n="countdown.minutes">мин.</p>
                         </div>
 
                         <div class="time" role="presentation">
-                            <h3 id="seconds" aria-label="seconds remaining">00</h3>
+                            <h3 id="seconds" data-i18n-attr="aria-label:countdown.aria_seconds">00</h3>
                             <p aria-hidden="true" data-i18n="countdown.seconds">с.</p>
                         </div>
                     </div>
@@ -155,62 +161,92 @@
             <hr class="divider-glow-wave">
 
             <!-- Services Section -->
-            <section class="services-section section-padding" id="services">
+            <section class="services-section section-padding" id="services" aria-labelledby="services-heading">
                 <div class="container">
-                    <h2 class="heading-secondary" data-i18n="services.heading">
+                    <h2 id="services-heading" class="heading-secondary" data-i18n="services.heading">
                         Что я могу Вам предложить
                     </h2>
                 </div>
 
-                <div class="gallery">
+                <div class="gallery" role="region" aria-label="Галерея услуг">
                     <div class="gallery-container">
-                        <!-- Service 1 -->
-                        <div class="gallery-item gallery-item-1" data-index="1">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/1.jpg')"></div>
+                        <!-- Service 1: Principles -->
+                        <div class="gallery-item gallery-item-1" data-index="1" role="group" aria-roledescription="service card" data-i18n-attr="aria-label:services.items.1.aria_label">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-principles.png')" data-i18n-attr="aria-label:services.items.1.alt"></div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.1.title">Гадание на картах</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.1.text">Классическое гадание...</p>
-                                <button class="gallery-item-button" data-popup="popup-1" data-i18n="services.items.1.button">Узнать больше</button>
+                                <h3 class="gallery-item-title" data-i18n="services.items.1.title">Принципы работы</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.1.text">Честный подход...</p>
+                                <button class="gallery-item-button" data-popup="popup-1" data-i18n="services.items.1.button" data-i18n-attr="aria-label:services.items.1.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
-                        <!-- Service 2 -->
-                        <div class="gallery-item gallery-item-2" data-index="2">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/2.jpg')"></div>
+                        <!-- Service 2: Cards -->
+                        <div class="gallery-item gallery-item-2" data-index="2" role="group" aria-roledescription="service card" data-i18n-attr="aria-label:services.items.2.aria_label">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-cards.png')" data-i18n-attr="aria-label:services.items.2.alt"></div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.2.title">Таро расклад</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.2.text">Глубокий анализ...</p>
-                                <button class="gallery-item-button" data-popup="popup-2" data-i18n="services.items.2.button">Узнать больше</button>
+                                <h3 class="gallery-item-title" data-i18n="services.items.2.title">Гадание на картах</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.2.text">Классическое гадание...</p>
+                                <button class="gallery-item-button" data-popup="popup-2" data-i18n="services.items.2.button" data-i18n-attr="aria-label:services.items.2.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
-                        <!-- Service 3 -->
-                        <div class="gallery-item gallery-item-3" data-index="3">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/3.jpg')"></div>
+                        <!-- Service 3: Tarot -->
+                        <div class="gallery-item gallery-item-3" data-index="3" role="group" aria-roledescription="service card" data-i18n-attr="aria-label:services.items.3.aria_label">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-tarot.png')" data-i18n-attr="aria-label:services.items.3.alt"></div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.3.title">Ритуалы и заговоры</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.3.text">Древние обряды...</p>
-                                <button class="gallery-item-button" data-popup="popup-3" data-i18n="services.items.3.button">Узнать больше</button>
+                                <h3 class="gallery-item-title" data-i18n="services.items.3.title">Таро расклад</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.3.text">Глубокий анализ...</p>
+                                <button class="gallery-item-button" data-popup="popup-3" data-i18n="services.items.3.button" data-i18n-attr="aria-label:services.items.3.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
-                        <!-- Service 4 -->
-                        <div class="gallery-item gallery-item-4" data-index="4">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/4.jpg')"></div>
+                        <!-- Service 4: Rituals -->
+                        <div class="gallery-item gallery-item-4" data-index="4" role="group" aria-roledescription="service card" data-i18n-attr="aria-label:services.items.4.aria_label">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-rituals.png')" data-i18n-attr="aria-label:services.items.4.alt"></div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.4.title">Восковая отливка</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.4.text">Диагностика...</p>
-                                <button class="gallery-item-button" data-popup="popup-4" data-i18n="services.items.4.button">Узнать больше</button>
+                                <h3 class="gallery-item-title" data-i18n="services.items.4.title">Ритуалы и заговоры</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.4.text">Древние обряды...</p>
+                                <button class="gallery-item-button" data-popup="popup-4" data-i18n="services.items.4.button" data-i18n-attr="aria-label:services.items.4.aria_label">Узнать больше</button>
                             </div>
                         </div>
 
-                        <!-- Service 5 -->
-                        <div class="gallery-item gallery-item-5" data-index="5">
-                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/5.jpg')"></div>
+                        <!-- Service 5: Wax -->
+                        <div class="gallery-item gallery-item-5" data-index="5" role="group" aria-roledescription="service card" data-i18n-attr="aria-label:services.items.5.aria_label">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-wax.png')" data-i18n-attr="aria-label:services.items.5.alt"></div>
                             <div class="gallery-item-content">
-                                <h3 class="gallery-item-title" data-i18n="services.items.5.title">Обереги и амулеты</h3>
-                                <p class="gallery-item-text" data-i18n="services.items.5.text">Создание...</p>
-                                <button class="gallery-item-button" data-popup="popup-5" data-i18n="services.items.5.button">Узнать больше</button>
+                                <h3 class="gallery-item-title" data-i18n="services.items.5.title">Восковая отливка</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.5.text">Диагностика...</p>
+                                <button class="gallery-item-button" data-popup="popup-5" data-i18n="services.items.5.button" data-i18n-attr="aria-label:services.items.5.aria_label">Узнать больше</button>
+                            </div>
+                        </div>
+
+                        <!-- Service 6: Amulets -->
+                        <div class="gallery-item gallery-item-6" data-index="6" role="group" aria-roledescription="service card" data-i18n-attr="aria-label:services.items.6.aria_label">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-amulets.png')" data-i18n-attr="aria-label:services.items.6.alt"></div>
+                            <div class="gallery-item-content">
+                                <h3 class="gallery-item-title" data-i18n="services.items.6.title">Обереги и амулеты</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.6.text">Программирование...</p>
+                                <button class="gallery-item-button" data-popup="popup-6" data-i18n="services.items.6.button" data-i18n-attr="aria-label:services.items.6.aria_label">Узнать больше</button>
+                            </div>
+                        </div>
+
+                        <!-- Service 7: Stones -->
+                        <div class="gallery-item gallery-item-7" data-index="7" role="group" aria-roledescription="service card" data-i18n-attr="aria-label:services.items.7.aria_label">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-stones.png')" data-i18n-attr="aria-label:services.items.7.alt"></div>
+                            <div class="gallery-item-content">
+                                <h3 class="gallery-item-title" data-i18n="services.items.7.title">Программирование камней</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.7.text">Создание...</p>
+                                <button class="gallery-item-button" data-popup="popup-7" data-i18n="services.items.7.button" data-i18n-attr="aria-label:services.items.7.aria_label">Узнать больше</button>
+                            </div>
+                        </div>
+
+                        <!-- Service 8: Cleansing -->
+                        <div class="gallery-item gallery-item-8" data-index="8" role="group" aria-roledescription="service card" data-i18n-attr="aria-label:services.items.8.aria_label">
+                            <div class="gallery-item-visual" style="background-image: url('./img/04-services-section/service-cleansing.png')" data-i18n-attr="aria-label:services.items.8.alt"></div>
+                            <div class="gallery-item-content">
+                                <h3 class="gallery-item-title" data-i18n="services.items.8.title">Очищение жилья и предметов</h3>
+                                <p class="gallery-item-text" data-i18n="services.items.8.text">Энергетическое...</p>
+                                <button class="gallery-item-button" data-popup="popup-8" data-i18n="services.items.8.button" data-i18n-attr="aria-label:services.items.8.aria_label">Узнать больше</button>
                             </div>
                         </div>
                     </div>
@@ -224,12 +260,15 @@
                         </button>
                     </div>
 
-                    <div class="gallery-indicators" role="group">
-                        <span class="gallery-indicator" data-index="1" role="button" tabindex="0"></span>
-                        <span class="gallery-indicator" data-index="2" role="button" tabindex="0"></span>
-                        <span class="gallery-indicator" data-index="3" role="button" tabindex="0"></span>
-                        <span class="gallery-indicator" data-index="4" role="button" tabindex="0"></span>
-                        <span class="gallery-indicator" data-index="5" role="button" tabindex="0"></span>
+                    <div class="gallery-indicators" role="group" aria-label="Выбор услуги">
+                        <span class="gallery-indicator" data-index="1" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_1"></span>
+                        <span class="gallery-indicator" data-index="2" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_2"></span>
+                        <span class="gallery-indicator" data-index="3" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_3"></span>
+                        <span class="gallery-indicator" data-index="4" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_4"></span>
+                        <span class="gallery-indicator" data-index="5" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_5"></span>
+                        <span class="gallery-indicator" data-index="6" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_6"></span>
+                        <span class="gallery-indicator" data-index="7" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_7"></span>
+                        <span class="gallery-indicator" data-index="8" role="button" tabindex="0" data-i18n-attr="aria-label:services.controls.indicator_8"></span>
                     </div>
                 </div>
             </section>
@@ -244,35 +283,82 @@
                     </h2>
 
                     <div id="prices-grid" class="prices-grid" role="region" aria-hidden="true">
-
+                        <!-- Items 1 to 19 -->
                         <article class="prices-card" role="article">
-                            <h3 class="prices-card__title" data-i18n="prices.items.1.title">Гадание на картах Таро</h3>
-                            <p class="prices-card__text" data-i18n="prices.items.1.price">Цена: 50€</p>
+                            <h3 class="prices-card__title" data-i18n="prices.items.1.title">Один вопрос картам</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.1.price">Цена: 5€</p>
                         </article>
-
                         <article class="prices-card" role="article">
-                            <h3 class="prices-card__title" data-i18n="prices.items.2.title">Натальная карта</h3>
-                            <p class="prices-card__text" data-i18n="prices.items.2.price">Цена: 75€</p>
+                            <h3 class="prices-card__title" data-i18n="prices.items.2.title">2–3 вопроса картам</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.2.price">Цена: 10€</p>
                         </article>
-
                         <article class="prices-card" role="article">
-                            <h3 class="prices-card__title" data-i18n="prices.items.3.title">Руническое гадание</h3>
-                            <p class="prices-card__text" data-i18n="prices.items.3.price">Цена: 60€</p>
+                            <h3 class="prices-card__title" data-i18n="prices.items.3.title">Больше трёх вопросов картам</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.3.price">Цена: 20€</p>
                         </article>
-
                         <article class="prices-card" role="article">
-                            <h3 class="prices-card__title" data-i18n="prices.items.4.title">Любовное гадание</h3>
-                            <p class="prices-card__text" data-i18n="prices.items.4.price">Цена: 55€</p>
+                            <h3 class="prices-card__title" data-i18n="prices.items.4.title">Расклад + бонусные вопросы</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.4.price">Цена: 35€</p>
                         </article>
-
                         <article class="prices-card" role="article">
-                            <h3 class="prices-card__title" data-i18n="prices.items.5.title">Гадание на будущее</h3>
-                            <p class="prices-card__text" data-i18n="prices.items.5.price">Цена: 65€</p>
+                            <h3 class="prices-card__title" data-i18n="prices.items.5.title">Годовой расклад</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.5.price">Цена: 50€</p>
                         </article>
-
                         <article class="prices-card" role="article">
-                            <h3 class="prices-card__title" data-i18n="prices.items.6.title">Снятие негатива</h3>
-                            <p class="prices-card__text" data-i18n="prices.items.6.price">Цена: 80€</p>
+                            <h3 class="prices-card__title" data-i18n="prices.items.6.title">Обучение раскладу на картах</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.6.price">Цена: 500€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.7.title">Обряд по раскрытию правды</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.7.price">Цена: 10€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.8.title">Открываю нужные дороги</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.8.price">Цена: 10€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.9.title">Помощь в продаже вещей</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.9.price">Цена: 10€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.10.title">Помощь пережить расставание</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.10.price">Цена: 10€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.11.title">Обряды на удачные завершения дел</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.11.price">Цена: 10€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.12.title">Поставить защиту</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.12.price">Цена: 10€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.13.title">Очищение жилья</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.13.price">Цена: 50–100€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.14.title">Восковая отливка</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.14.price">Цена: 20€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.15.title">Контейнер</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.15.price">Цена: 10€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.16.title">Заговорить вашу свечу</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.16.price">Цена: 10€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.17.title">Сделать свечу из собственного материала</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.17.price">Цена: 13€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.18.title">Запрограммировать оберег (из Вашей вещи)</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.18.price">Цена: 10€</p>
+                        </article>
+                        <article class="prices-card" role="article">
+                            <h3 class="prices-card__title" data-i18n="prices.items.19.title">Запрограммировать оберег (из вещи у меня)</h3>
+                            <p class="prices-card__text" data-i18n="prices.items.19.price">Цена: 10€ + вещь</p>
                         </article>
 
                         <aside class="prices-card prices-explanation-card" role="note">
@@ -304,7 +390,7 @@
 
                     <div class="moon-section__layout">
                         <div class="moon-section__image-wrapper">
-                            <img class="moon-section__image" src="./img/05-moon-information-section/moon-phase-1-new-moon.png" alt="Moon phase" loading="lazy">
+                            <img class="moon-section__image" src="./img/05-moon-information-section/moon-phase-1-new-moon.png" alt="Moon phase" loading="lazy" data-i18n-attr="alt:moon.image_alt_prefix">
                         </div>
 
                         <div class="moon-section__grid">
@@ -391,33 +477,33 @@
                     <nav class="footer_header__social_icons" aria-label="Социальные сети">
                         <ul class="footer__list">
                             <li class="footer__item">
-                                <a class="footer__link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/facebook-logo.png" alt="facebook logo" class="social-network-logo" />
+                                <a class="footer__link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.facebook">
+                                    <img src="./img/06-footer-section/social-network-logos/facebook-logo.png" alt="facebook logo" class="social-network-logo" data-i18n-attr="alt:footer.social.facebook_alt" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/instagram-logo.png" alt="instagram logo" class="social-network-logo" />
+                                <a class="footer__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.instagram">
+                                    <img src="./img/06-footer-section/social-network-logos/instagram-logo.png" alt="instagram logo" class="social-network-logo" data-i18n-attr="alt:footer.social.instagram_alt" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/vkontakte-logo.png" alt="vk logo" class="social-network-logo" />
+                                <a class="footer__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.vkontakte">
+                                    <img src="./img/06-footer-section/social-network-logos/vkontakte-logo.png" alt="vk logo" class="social-network-logo" data-i18n-attr="alt:footer.social.vkontakte_alt" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/telegram-logo.png" alt="telegram logo" class="social-network-logo" />
+                                <a class="footer__link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.telegram">
+                                    <img src="./img/06-footer-section/social-network-logos/telegram-logo.png" alt="telegram logo" class="social-network-logo" data-i18n-attr="alt:footer.social.telegram_alt" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://viber.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/viber-logo.png" alt="viber logo" class="social-network-logo" />
+                                <a class="footer__link" href="https://viber.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.viber">
+                                    <img src="./img/06-footer-section/social-network-logos/viber-logo.png" alt="viber logo" class="social-network-logo" data-i18n-attr="alt:footer.social.viber_alt" />
                                 </a>
                             </li>
                             <li class="footer__item">
-                                <a class="footer__link" href="https://whatsapp.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="./img/06-footer-section/social-network-logos/whatsapp-logo.png" alt="whatsapp logo" class="social-network-logo" />
+                                <a class="footer__link" href="https://whatsapp.com/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:footer.social.whatsapp">
+                                    <img src="./img/06-footer-section/social-network-logos/whatsapp-logo.png" alt="whatsapp logo" class="social-network-logo" data-i18n-attr="alt:footer.social.whatsapp_alt" />
                                 </a>
                             </li>
                         </ul>

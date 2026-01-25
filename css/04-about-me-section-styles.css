@@ -95,6 +95,10 @@
 
     /* Interaction feedback */
     cursor: default; /* Reset cursor */
+
+    /* 📏 Equal height behavior */
+    display: flex;
+    flex-direction: column;
 }
 
 /* Optional hover effect for cards */
@@ -187,6 +191,11 @@
 .about-me-card__content {
     background-color: var(--color-card-bg); /* Light purple background */
     padding: 2.4rem 3.6rem 3.6rem; /* Asymmetrical padding (top smaller) */
+    
+    /* 📏 Equal height behavior */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Card title styling */

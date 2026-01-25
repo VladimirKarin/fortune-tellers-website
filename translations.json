@@ -1,8 +1,8 @@
 {
     "ru": {
         "meta": {
-            "title": "Уголок Доброй Феи",
-            "description": "Сайт гадалки. Гадание на картах обычных, гадание на таро картах, ритуалы, восковая отливка, восковая заливка, снятие негатива, снятие порчи, защита, контейнеры, обереги."
+            "title": "Уголок Доброй Феи | Гадание на картах и Таро",
+            "description": "Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня."
         },
         "nav": {
             "home": "Главная",
@@ -15,22 +15,25 @@
         },
         "hero": {
             "heading": "Уголок Доброй Феи",
-            "text": "Мур мяу, мои дорогие! Нагадаю, обласкаю, всю правду скажу и расскажу, от беды уберегу, денег наколдую. За сметану",
-            "button": "Связаться со мной"
+            "text": "Добро пожаловать в мой уютный мир. Здесь вы найдете ответы на тревожащие вопросы и искреннюю поддержку. Я помогу вам бережно распутать сложные ситуации, снять тяжесть с души и найти верный путь к счастью. Всё будет хорошо.",
+            "button": "Написать мне"
         },
         "about": {
             "heading": "Обо мне",
             "card1": {
                 "title": "Кто я такая",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Я практикую гадание на картах уже много лет. Долгое время я думала, что мой метод уникален, что я сама его создала. Было непросто признать, что в основе лежит древняя старославянская система. Но это открытие меня не разочаровало, а наоборот, придало уверенности. Я внесла много своих наработок в традиционный расклад, адаптировала его под современную жизнь. То, что получилось - это сплав древних знаний и моего личного опыта. Сейчас я не только консультирую людей, но и обучаю тех, кто хочет научиться понимать язык карт.",
+                "alt": "Практикующая гадалка - профессиональное предсказание будущего"
             },
             "card2": {
                 "title": "Как я к этому пришла",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Моя история началась в детстве, когда я еще маленькой девочкой гостила у бабушки. Я наблюдала, как тетя раскладывала карты, и мне это запомнилось. Тогда, в семь лет, я не понимала значения карт, но сам процесс меня завораживал. Спустя годы я решила попробовать сама. Кое-что узнала у мамы, которая тоже когда-то увлекалась гаданием, кое-что додумала интуитивно. Первый опыт оказался неожиданно точным и даже пугающим. Это напугало меня саму и окружающих, и на несколько лет я оставила эту практику. Но интерес не ушел. Постепенно я возвращалась к картам, изучала разные системы, дорабатывала методы. Годы практики позволили мне найти свой подход и научиться работать с раскладами осознанно и ответственно.",
+                "alt": "История пути специалиста по гаданию и Таро"
             },
             "card3": {
                 "title": "Для чего всё это",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Моя основная задача - помочь вам увидеть ситуацию с разных сторон и найти правильное решение. Я работаю только в позитивном русле и не занимаюсь практиками, которые могут навредить людям. Важно понимать, что карты и ритуалы - это инструменты поддержки, а не волшебная палочка. Мы живем в реальном мире, где многое зависит от наших собственных действий. Гадание может показать направление, подсказать варианты, предупредить о препятствиях, но идти по пути вам придется самостоятельно. Я верю, что у каждого человека есть силы справиться с трудностями. Но иногда нужна помощь - взгляд со стороны, совет, поддержка.",
+                "alt": "Философия и миссия помощи через карты и ритуалы"
             }
         },
         "countdown": {
@@ -38,40 +41,84 @@
             "days": "дн.",
             "hours": "ч.",
             "minutes": "мин.",
-            "seconds": "с."
+            "seconds": "с.",
+            "aria_days": "дней",
+            "aria_hours": "часов",
+            "aria_minutes": "минут",
+            "aria_seconds": "секунд",
+            "aria_remaining": "осталось"
         },
         "services": {
             "heading": "Что я могу Вам предложить",
             "items": {
                 "1": {
-                    "title": "Гадание на картах",
-                    "text": "Классическое гадание с использованием различных карточных систем для точных предсказаний вашего будущего.",
-                    "button": "Узнать больше"
+                    "title": "Принципы работы",
+                    "text": "Честный подход без манипуляций. Узнайте, как я работаю и что я не делаю никогда.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о принципах работы",
+                    "alt": "Принципы работы и этика гадалки"
                 },
                 "2": {
-                    "title": "Таро расклад",
-                    "text": "Глубокий анализ ситуаций с помощью карт Таро, раскрывающий скрытые аспекты и потенциальные пути развития.",
-                    "button": "Узнать больше"
+                    "title": "Гадание на картах",
+                    "text": "Классическое гадание с использованием различных карточных систем для точных предсказаний вашего будущего.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о гадании на картах",
+                    "alt": "Гадание на игральных картах - предсказание будущего"
                 },
                 "3": {
-                    "title": "Ритуалы и заговоры",
-                    "text": "Древние обряды и заговоры для привлечения удачи, любви, денег и защиты от негативных влияний.",
-                    "button": "Узнать больше"
+                    "title": "Таро расклад",
+                    "text": "Глубокий анализ ситуаций с помощью карт Таро, раскрывающий скрытые аспекты и потенциальные пути развития.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о Таро раскладе",
+                    "alt": "Профессиональный расклад на картах Таро"
                 },
                 "4": {
-                    "title": "Восковая отливка",
-                    "text": "Диагностика и снятие негативных воздействий с помощью древнего метода восковой отливки.",
-                    "button": "Узнать больше"
+                    "title": "Ритуалы и заговоры",
+                    "text": "Обряды и заговоры для привлечения удачи, любви, денег и защиты от негативных влияний.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о ритуалах и заговорах",
+                    "alt": "Эффективные ритуалы и магические заговоры"
                 },
                 "5": {
+                    "title": "Восковая отливка",
+                    "text": "Диагностика и снятие негативных воздействий с помощью древнего метода восковой отливки.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о восковой отливке",
+                    "alt": "Восковая отливка для снятия порчи и сглаза"
+                },
+                "6": {
                     "title": "Обереги и амулеты",
-                    "text": "Создание индивидуальных защитных оберегов и амулетов для различных жизненных ситуаций.",
-                    "button": "Узнать больше"
+                    "text": "Программирование индивидуальных защитных оберегов и амулетов для различных жизненных ситуаций.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше об оберегах и амулетах",
+                    "alt": "Заряженные защитные обереги и амулеты"
+                },
+                "7": {
+                    "title": "Программирование камней",
+                    "text": "Создание персональных контейнеров-камней для снятия блоков и привлечения позитивных изменений.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше о программировании камней",
+                    "alt": "Программирование камней на удачу и успех"
+                },
+                "8": {
+                    "title": "Очищение жилья и предметов",
+                    "text": "Энергетическое очищение домов, квартир и предметов от негативных влияний.",
+                    "button": "Узнать больше",
+                    "aria_label": "Узнать больше об очищении жилья и предметов",
+                    "alt": "Энергетическая чистка дома и пространства"
                 }
             },
             "controls": {
                 "prev": "Предыдущее",
-                "next": "Следующее"
+                "next": "Следующее",
+                "indicator_1": "Посмотреть услугу 1",
+                "indicator_2": "Посмотреть услугу 2",
+                "indicator_3": "Посмотреть услугу 3",
+                "indicator_4": "Посмотреть услугу 4",
+                "indicator_5": "Посмотреть услугу 5",
+                "indicator_6": "Посмотреть услугу 6",
+                "indicator_7": "Посмотреть услугу 7",
+                "indicator_8": "Посмотреть услугу 8"
             }
         },
         "prices": {
@@ -80,28 +127,80 @@
             "explanation": "Цены указаны в евро. Возможна оплата в рублях, точная цена будет указана после работы по курсу на тот момент.",
             "items": {
                 "1": {
-                    "title": "Гадание на картах Таро",
-                    "price": "Цена: 50€"
+                    "title": "Один вопрос картам",
+                    "price": "Цена: 5€"
                 },
                 "2": {
-                    "title": "Натальная карта",
-                    "price": "Цена: 75€"
+                    "title": "2–3 вопроса картам",
+                    "price": "Цена: 10€"
                 },
                 "3": {
-                    "title": "Руническое гадание",
-                    "price": "Цена: 60€"
+                    "title": "Больше трёх вопросов картам",
+                    "price": "Цена: 20€"
                 },
                 "4": {
-                    "title": "Любовное гадание",
-                    "price": "Цена: 55€"
+                    "title": "Расклад + бонусные вопросы",
+                    "price": "Цена: 35€"
                 },
                 "5": {
-                    "title": "Гадание на будущее",
-                    "price": "Цена: 65€"
+                    "title": "Годовой расклад",
+                    "price": "Цена: 50€"
                 },
                 "6": {
-                    "title": "Снятие негатива",
-                    "price": "Цена: 80€"
+                    "title": "Обучение раскладу на картах",
+                    "price": "Цена: 500€"
+                },
+                "7": {
+                    "title": "Обряд по раскрытию правды",
+                    "price": "Цена: 10€"
+                },
+                "8": {
+                    "title": "Открываю нужные дороги",
+                    "price": "Цена: 10€"
+                },
+                "9": {
+                    "title": "Помощь в продаже вещей",
+                    "price": "Цена: 10€"
+                },
+                "10": {
+                    "title": "Помощь пережить расставание",
+                    "price": "Цена: 10€"
+                },
+                "11": {
+                    "title": "Обряды на удачные завершения дел",
+                    "price": "Цена: 10€"
+                },
+                "12": {
+                    "title": "Поставить защиту",
+                    "price": "Цена: 10€"
+                },
+                "13": {
+                    "title": "Очищение жилья",
+                    "price": "Цена: 50–100€"
+                },
+                "14": {
+                    "title": "Восковая отливка",
+                    "price": "Цена: 20€"
+                },
+                "15": {
+                    "title": "Контейнер",
+                    "price": "Цена: 10€"
+                },
+                "16": {
+                    "title": "Заговорить вашу свечу",
+                    "price": "Цена: 10€"
+                },
+                "17": {
+                    "title": "Сделать свечу из собственного материала",
+                    "price": "Цена: 13€"
+                },
+                "18": {
+                    "title": "Запрограммировать оберег (из Вашей вещи)",
+                    "price": "Цена: 10€"
+                },
+                "19": {
+                    "title": "Запрограммировать оберег (из вещи, которую Вы выберете у меня)",
+                    "price": "Цена: 10€ + стоимость вещи"
                 }
             }
         },
@@ -112,37 +211,64 @@
             "phase": "Лунная фаза:",
             "next_phase": "До следующей фазы:",
             "rituals": "Какие обряды сейчас проводятся:",
-            "loading": "Загрузка..."
+            "loading": "Загрузка...",
+            "image_alt_prefix": "Фаза луны: "
         },
         "calendar": {
             "heading": "Календарь",
             "description": "Даты, когда я бываю в других городах."
         },
         "footer": {
-            "heading": "Свяжитесь со мной",
-            "text": "Я здесь, чтобы помочь вам.",
-            "copyright": "© 2025 \"Гадалкина Избушка\" Сайт сделан в качестве дипломного проекта Автор: Владимир Карин."
+            "heading": "Я здесь, чтобы помочь вам",
+            "text": "Не оставайтесь со своими переживаниями наедине. Напишите мне, и мы вместе всё обсудим и найдем решение.",
+            "copyright": "© 2025 \"Уголок Доброй Феи\" Сайт сделан в качестве дипломного проекта. Автор: Владимир Карин.",
+            "social": {
+                "facebook": "Посетите нашу страницу на Facebook",
+                "facebook_alt": "Логотип Facebook",
+                "instagram": "Посетите нашу страницу в Instagram",
+                "instagram_alt": "Логотип Instagram",
+                "vkontakte": "Посетите нашу страницу ВКонтакте",
+                "vkontakte_alt": "Логотип ВКонтакте",
+                "telegram": "Напишите мне в Telegram",
+                "telegram_alt": "Логотип Telegram",
+                "viber": "Напишите мне в Viber",
+                "viber_alt": "Логотип Viber",
+                "whatsapp": "Напишите мне в WhatsApp",
+                "whatsapp_alt": "Логотип WhatsApp"
+            }
         },
         "popups": {
             "1": {
-                "title": "Гадание на картах",
-                "content": "<p>Гадание на картах - это древнее искусство предсказания будущего и анализа настоящего через символы и образы карт. В своей практике я использую как обычные игральные карты, так и специальные гадальные колоды.</p><p>С помощью карт можно получить ответы на волнующие вопросы о:</p><ul><li>Личных отношениях и любви</li><li>Карьере и профессиональном развитии</li><li>Финансовом положении и материальном благополучии</li><li>Жизненном пути и предназначении</li></ul><p>Каждый расклад индивидуален и учитывает вашу конкретную ситуацию. Я тщательно интерпретирую символы карт и их взаимосвязь, чтобы дать вам наиболее точное и полезное предсказание.</p><p>Сеанс гадания на картах поможет вам увидеть скрытые аспекты ситуации, получить совет для принятия решений и узнать о возможных перспективах развития событий.</p>"
+                "title": "Принципы работы",
+                 "content": "<p>Я считаю важным быть честной с вами о том, как я работаю и чего я принципиально не делаю.</p><p><strong>Что я НЕ делаю никогда:</strong></p><ul><li>Не занимаюсь приворотами и отворотами</li><li>Не провожу ритуалы против воли других людей</li><li>Не манипулирую чужой волей и свободой выбора</li><li>Не обещаю невозможного</li><li>Не внушаю зависимость от магических практик</li><li>Не гадаю беременным женщинам и детям — считаю эти состояния особенно тонкими и требующими бережного отношения.</li></ul><p>Беременным могу посмотреть ситуацию только тогда, когда женщина ещё не знает о своём положении или стоит перед выбором — рожать или не рожать. Детям смотрю на картах только на здоровье. Для меня важно работать аккуратно, без вреда.</p><p><strong>Мои принципы:</strong></p><ul><li>Работаю исключительно в положительном ключе</li><li>Уважаю свободу выбора каждого человека</li><li>Помогаю создать условия для позитивных изменений</li><li>Говорю правду, даже если она непростая</li><li>Верю, что человек сам должен быть активным участником своей жизни</li></ul><p>Магическая помощь - это поддержка и направление энергии, но не замена ваших собственных усилий. Я здесь, чтобы помочь вам найти путь, но идти по нему будете вы сами.</p>"
             },
             "2": {
-                "title": "Таро расклад",
-                "content": "<p>Карты Таро - это мощный инструмент для глубокого анализа жизненных ситуаций и самопознания. В отличие от обычных карт, система Таро имеет богатую символику и многослойные значения, что позволяет проводить детальный анализ прошлого, настоящего и возможного будущего.</p><p>В своей практике я использую различные расклады Таро:</p><ul><li><strong>Кельтский крест</strong> - классический расклад для глубокого анализа конкретной ситуации</li><li><strong>Расклад на отношения</strong> - для анализа любовных и партнерских отношений</li><li><strong>Карта дня</strong> - для получения совета на текущий день</li><li><strong>Расклад \"Путь\"</strong> - для понимания вашего жизненного пути и предназначения</li></ul><p>Сеанс гадания на Таро поможет вам получить глубокое понимание происходящих процессов, раскрыть скрытые мотивы, увидеть потенциальные препятствия и найти возможные пути их преодоления.</p><p>Каждый расклад сопровождается подробным объяснением значения карт и их взаимосвязей в контексте вашей конкретной ситуации.</p>"
+                "title": "Гадание на картах",
+                "content": "<p>Я гадаю на обычных игральных картах — без сложных систем и лишних наворотов. Эти карты простые по форме, но очень точные по сути. Через них хорошо видно то, что действительно происходит в жизни человека.</p><p>В раскладах на игральных картах можно посмотреть практически любую сферу жизни и получить ответы на самые разные вопросы. Карты показывают общее состояние ситуации, скрытые моменты, причины происходящего и возможные пути развития событий.</p><p>Я делаю:</p><ul><li>общие расклады — когда важно понять, что сейчас происходит в жизни в целом</li><li>расклады на любовь, отношения, дружбу</li><li>вопросы работы, финансов и материальной сферы</li><li>расклады на здоровье и самочувствие</li><li>совет карт — подсказку, как лучше поступить в конкретной ситуации</li></ul><p>Каждый расклад индивидуален. Я не читаю «по шаблону» — я смотрю именно вашу ситуацию и отвечаю на ваш запрос. Карты помогают увидеть то, что может быть неочевидно, разобраться в сомнениях и понять, в каком направлении лучше двигаться дальше.</p>"
             },
             "3": {
+                "title": "Таро расклад",
+                "content": "<p>Я также работаю с картами Таро — это более глубокий инструмент, который помогает понять происходящее в жизни и заглянуть в суть ситуаций. В отличие от обычных игральных карт, Таро показывает многослойные смыслы и скрытые нюансы, помогая увидеть не только текущее положение, но и возможные пути развития.</p><p>Когда я раскладываю карты Таро, я вижу их по-своему, в своём уникальном раскладе. Карты помогают понять скрытые мотивы, причины происходящего и дают мягкие подсказки, куда лучше направить своё внимание.</p><p>Каждый сеанс делаю с вниманием к вашей ситуации. Таро, как и обычные карты, помогает увидеть то, что может быть неочевидно, разобраться в сомнениях и почувствовать ясность в том, что происходит.</p>"
+            },
+            "4": {
                 "title": "Ритуалы и заговоры",
                 "content": "<p>Ритуалы и заговоры - это древние практики, направленные на привлечение желаемых изменений в жизни или защиту от нежелательных влияний. Они основаны на работе с энергиями природы и силой слова.</p><p>Я провожу различные виды ритуалов:</p><ul><li><strong>Любовные ритуалы</strong> - для привлечения любви, улучшения отношений, укрепления чувств</li><li><strong>Денежные обряды</strong> - для привлечения финансового благополучия, новых источников дохода</li><li><strong>Очистительные ритуалы</strong> - для освобождения от негативных энергий, очищения жилища</li><li><strong>Защитные заговоры</strong> - для создания энергетической защиты от внешних воздействий</li></ul><p>Каждый ритуал подбирается индивидуально, с учетом вашей конкретной ситуации и потребностей. Для достижения наилучшего результата важно соблюдать все рекомендации и выполнять необходимые действия в течение указанного времени.</p><p>Помните, что ритуалы и заговоры - это помощь и направление энергии, но они работают в гармонии с вашими собственными усилиями и намерениями.</p>"
             },
-            "4": {
-                "title": "Восковая отливка",
-                "content": "<p>Восковая отливка - это древний славянский метод диагностики и снятия негативных воздействий. Процедура заключается в выливании расплавленного воска в холодную воду над человеком или его фотографией.</p><p>Застывший воск принимает формы, которые имеют диагностическое значение и показывают:</p><ul><li>Наличие сглаза, порчи, проклятия или других негативных воздействий</li><li>Энергетические блоки и проблемные зоны</li><li>Источники и причины негативных влияний</li><li>Состояние энергетического поля человека</li></ul><p>Процедура восковой отливки не только диагностирует проблему, но и одновременно снимает негативное воздействие, перенося его с человека на воск. Отлитые формы затем нейтрализуются специальным образом.</p><p>Для полного очищения обычно требуется от 1 до 9 сеансов, в зависимости от силы и длительности негативного воздействия. После процедуры даются рекомендации по энергетической защите и восстановлению.</p>"
-            },
             "5": {
+                "title": "Восковая отливка",
+                "content": "<p>Восковая отливка - это древний славянский метод диагностики и снятия негативных воздействий. Процедура заключается в выливании расплавленного воска в холодную воду над человеком или его фотографией.</p><p>Застывший воск принимает формы, которые имеют диагностическое значение и показывают:</p><ul><li>Наличие сглаза, порчи, проклятия или других негативных воздействий</li><li>Энергетические блоки и проблемные зоны</li><li>Источники и причины негативных влияний</li><li>Состояние энергетического поля человека</li></ul><p>Процедура восковой отливки не только диагностирует проблему, но и одновременно снимает негативное воздействие, перенося его с человека на воск. Так же восковой отливкой можно восстановить и улучшить состояние человека и наполнить его энергетическое поле.  Отлитые формы затем нейтрализуются специальным образом.</p><p> Колличество отливок обычно зависит от  просьбы людей. После процедуры даются рекомендации по энергетической защите и восстановлению.</p>"
+            },
+            "6": {
                 "title": "Обереги и амулеты",
-                "content": "<p>Обереги и амулеты - это предметы, заряженные особой энергией для защиты, привлечения удачи и благополучия. Я создаю индивидуальные обереги, учитывая ваши потребности, особенности энергетики и конкретные цели.</p><p>Виды оберегов, которые я изготавливаю:</p><ul><li><strong>Защитные амулеты</strong> - охраняют от негативных энергий и воздействий</li><li><strong>Любовные талисманы</strong> - привлекают любовь, гармонизируют отношения</li><li><strong>Денежные обереги</strong> - способствуют финансовому благополучию</li><li><strong>Здоровье и жизненные силы</strong> - укрепляют энергетику и защищают здоровье</li><li><strong>Путевые амулеты</strong> - обеспечивают защиту в пути и при переездах</li></ul><p>Каждый оберег создается в определенное время, с использованием специальных материалов и ритуалов активации. К амулету прилагаются инструкции по правильному использованию и периодической подзарядке.</p><p>Важно помнить, что оберег - это личный предмет, который настраивается на энергетику конкретного человека и не должен передаваться другим людям.</p>"
+                "content": "<p>Обереги и амулеты - это предметы, заряженные особой энергией для защиты, привлечения удачи и благополучия. Я программирую) заговариваю) индивидуальные обереги, учитывая ваши потребности, особенности энергетики и конкретные цели.</p><p>Виды оберегов, которые я программирую:</p><ul><li><strong>Защитные амулеты</strong> - охраняют от негативных энергий и воздействий</li><li><strong>Любовные талисманы</strong> - привлекают любовь, гармонизируют отношения</li><li><strong>Денежные обереги</strong> - способствуют финансовому благополучию</li><li><strong>Здоровье и жизненные силы</strong> - укрепляют энергетику и защищают здоровье</li><li><strong>Путевые амулеты</strong> - обеспечивают защиту в пути и при переездах</li></ul><p>Каждый оберег создается в определенное время, с использованием специальных заговоров и ритуалов активации. К амулету прилагаются инструкции по правильному использованию и периодической подзарядке и чистке.</p><p>Важно помнить, что оберег - это личный предмет, который настраивается на энергетику конкретного человека и не должен передаваться другим людям.</p>"
+            },
+            "7": {
+                "title": "Программирование камней",
+                "content": "<p>Программирование камней-контейнеров - это особая практика создания персональных энергетических помощников. Я использую декоративные  камни, которые настраиваю на конкретную задачу для каждого человека.</p><p>Что такое камень-контейнер?</p><p>Это небольшой декоративный камень, запрограммированный на удаление преград из вашей жизни и привлечение того, что улучшит качество жизни. Каждый камень уникален и программируется индивидуально.</p><p>Как это работает:</p><ul><li>Клиент выбирает сам предоставленный мной камень</li><li>Определяю вашу конкретную задачу или проблему</li><li>Провожу ритуал программирования на нужный результат</li><li>Активирую камень в определенное время</li></ul><p>Камень-контейнер можно настроить на разные цели: снятие энергетических блоков, открытие новых возможностей, улучшение определенной сферы жизни, привлечение нужных событий.</p><p> 'контейнеры' отправляю работать в реку.</p>"
+            },
+            "8": {
+                "title": "Очищение жилья и предметов",
+                "content": "<p>Энергетическое очищение - это важная практика для поддержания гармонии в вашем доме и жизни. Я провожу очищение домов, квартир, офисов и отдельных предметов от накопившегося негатива.</p><p>Когда нужно очищение:</p><ul><li>После конфликтов или тяжелых ситуаций в доме</li><li>При переезде в новое жилье</li><li>Если чувствуете тяжесть, дискомфорт в помещении</li><li>После болезни или неприятных событий</li><li>Для регулярной энергетической гигиены</li></ul><p>Что я делаю:</p><ul><li>Диагностирую энергетическое состояние пространства</li><li>Провожу ритуалы очищения от негативных влияний</li><li>Очищаю вещи, которые могут нести негативную энергию</li><li>Создаю защиту пространства</li><li>Даю рекомендации по поддержанию чистоты энергетики</li></ul><p>Очищение можно провести как лично, так и удаленно по фотографии помещения. После процедуры вы почувствуете легкость и комфорт в своем доме.</p>"
             }
         }
     },
@@ -162,22 +288,25 @@
         },
         "hero": {
             "heading": "Gerosios Fėjos kampelis",
-            "text": "Mur miau, mano brangieji! Išbursiu, paguosiu, visą tiesą pasakysiu, nuo nelaimių apsaugosiu, pinigų pribursiu. Už grietinę",
-            "button": "Susisiekti su manimi"
+            "text": "Sveiki atvykę į mano jaukų pasaulį. Čia rasite atsakymus į rūpimus klausimus ir nuoširdų palaikymą. Padėsiu Jums švelniai išspręsti sudėtingas situacijas, nuimti naštą nuo sielos ir rasti tikrąjį kelią į laimę. Viskas bus gerai.",
+            "button": "Parašyti man"
         },
         "about": {
             "heading": "Apie mane",
             "card1": {
                 "title": "Kas aš tokia",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Praktikuoju kortų būrimą jau daugelį metų. Ilgą laiką maniau, kad mano metodas unikalus, kad pati jį sukūriau. Nebuvo lengva pripažinti, kad pagrindas yra sena slaviška sistema. Bet šis atradimas manęs nenuvylė, priešingai, suteikė pasitikėjimo. Įnešiau daug savo naujovių į tradicinę dėlionę, pritaikiau ją šiuolaikiniam gyvenimui. Tai, kas gavosi - tai senovės žinių ir mano asmeninės patirties sintezė. Dabar ne tik konsultuoju žmones, bet ir mokau tuos, kurie nori išmokti suprasti kortų kalbą.",
+                "alt": "Profesionali būrėja - ateities spėjimas kortomis"
             },
             "card2": {
                 "title": "Kaip aš iki to atėjau",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Mano istorija prasidėjo vaikystėje, kai dar mažyte svečiavausi pas močiutę. Stebėjau, kaip teta dėliojo kortas, ir tai man įsiminė. Tada, septynių metų, nesupratau kortų reikšmių, bet pats procesas mane žavėjo. Po metų nusprendžiau pabandyti pati. Kai ką sužinojau iš mamos, kuri irgi kadaise domėjosi būrimu, kai ką sugalvojau intuityviai. Pirmoji patirtis pasirodė netikėtai tiksli ir net bauginanti. Tai išgąsdino mane pačią ir aplinkinius, ir keletą metų palikau šią praktiką. Bet susidomėjimas neišnyko. Palaipsniui grįždavau prie kortų, studijavau skirtingas sistemas, tobulinau metodus. Metų praktika leido man rasti savo požiūrį ir išmokti dirbti su dėlionėmis sąmoningai ir atsakingai.",
+                "alt": "Būrimo ir Taro specialistės kelias"
             },
             "card3": {
                 "title": "Kam viso to reikia",
-                "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, libero repudiandae. Sunt officia aliquam unde iste accusantium cupiditate ipsa deleniti fugiat consequatur nam esse iure, nostrum, nobis perferendis sequi quis ipsam delectus incidunt odit dolor debitis natus totam. Voluptatum esse quae nihil alias repudiandae. Consequatur error non libero rem optio?"
+                "text": "Mano pagrindinis tikslas - padėti jums pamatyti situaciją iš skirtingų pusių ir rasti teisingą sprendimą. Dirbu tik pozityvioje kryptyje ir neužsiimu praktikomis, kurios gali pakenkti žmonėms. Svarbu suprasti, kad kortos ir ritualai - tai paramos įrankiai, o ne stebuklingas lazdelė. Gyvename tikroje pasaulyje, kur daug priklauso nuo mūsų pačių veiksmų. Būrimas gali parodyti kryptį, pasiūlyti variantus, perspėti apie kliūtis, bet eiti keliu turėsite patys. Tikiu, kad kiekvienas žmogus turi jėgų susidoroti su sunkumais. Bet kartais reikia pagalbos - žvilgsnio iš šalies, patarimo, paramos.",
+                "alt": "Pagalbos per kortas ir ritualus misija"
             }
         },
         "countdown": {
@@ -185,40 +314,84 @@
             "days": "d.",
             "hours": "val.",
             "minutes": "min.",
-            "seconds": "s."
+            "seconds": "s.",
+            "aria_days": "dienų",
+            "aria_hours": "valandų",
+            "aria_minutes": "minučių",
+            "aria_seconds": "sekundžių",
+            "aria_remaining": "liko"
         },
         "services": {
             "heading": "Paslaugos",
             "items": {
                 "1": {
-                    "title": "Būrimas kortomis",
-                    "text": "Klasikinis būrimas naudojant įvairias kortų sistemas tikslioms ateities prognozėms.",
-                    "button": "Sužinoti daugiau"
+                    "title": "Darbo principai",
+                    "text": "Sąžiningas požiūris be manipuliacijų. Sužinokite, kaip dirbu ir ko niekada nedarau.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie darbo principus",
+                    "alt": "Būrėjos darbo principai ir etika"
                 },
                 "2": {
-                    "title": "Taro dėlionė",
-                    "text": "Gili situacijų analizė Taro kortomis, atskleidžianti paslėptus aspektus ir galimus kelius.",
-                    "button": "Sužinoti daugiau"
+                    "title": "Būrimas kortomis",
+                    "text": "Klasikinis būrimas naudojant įvairias kortų sistemą tikslioms ateities prognozėms.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie kortų būrimą",
+                    "alt": "Būrimas žaidimo kortomis - ateities spėjimas"
                 },
                 "3": {
-                    "title": "Ritualai ir užkalbėjimai",
-                    "text": "Senoviniai ritualai ir užkalbėjimai sėkmei, meilei, pinigams pritraukti ir apsaugai nuo negatyvo.",
-                    "button": "Sužinoti daugiau"
+                    "title": "Taro dėlionė",
+                    "text": "Gili situacijų analizė Taro kortomis, atskleidžianti paslėptus aspektus ir galimus kelius.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie Taro dėlionę",
+                    "alt": "Profesionalus būrimas Taro kortomis"
                 },
                 "4": {
-                    "title": "Vaško liejimas",
-                    "text": "Diagnostika ir negatyvių poveikių nuėmimas senoviniu vaško liejimo metodu.",
-                    "button": "Sužinoti daugiau"
+                    "title": "Ritualai ir užkalbėjimai",
+                    "text": "Senoviniai ritualai ir užkalbėjimai sėkmei, meilei, pinigams pritraukti ir apsaugai nuo negatyvo.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie ritualus",
+                    "alt": "Efektyvūs ritualai ir magiški užkalbėjimai"
                 },
                 "5": {
+                    "title": "Vaško liejimas",
+                    "text": "Diagnostika ir negatyvių poveikių nuėmimas senoviniu vaško liejimo metodu.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie vaško liejimą",
+                    "alt": "Vaško liejimas negatyvo nuėmimui"
+                },
+                "6": {
                     "title": "Amuletai ir talismanai",
                     "text": "Individualių apsauginių amuletų ir talismanų kūrimas įvairioms gyvenimo situacijoms.",
-                    "button": "Sužinoti daugiau"
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie amuletus",
+                    "alt": "Pakrauti apsauginiai amuletai ir talismanai"
+                },
+                "7": {
+                    "title": "Akmenų programavimas",
+                    "text": "Asmeninių konteinerių-akmenų kūrimas blokų nuėmimui ir teigiamų pokyčių pritraukimui.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie akmenų programavimą",
+                    "alt": "Akmenų programavimas sėkmei ir gerovei"
+                },
+                "8": {
+                    "title": "Erdvės valymas",
+                    "text": "Energetinis namų, butų ir daiktų valymas nuo neigiamų įtakų.",
+                    "button": "Sužinoti daugiau",
+                    "aria_label": "Sužinoti daugiau apie erdvės valymą",
+                    "alt": "Energetinis namų ir erdvės valymas"
                 }
             },
             "controls": {
                 "prev": "Ankstesnis",
-                "next": "Kitas"
+                "next": "Kitas",
+                "indicator_1": "Peržiūrėti 1 paslaugą",
+                "indicator_2": "Peržiūrėti 2 paslaugą",
+                "indicator_3": "Peržiūrėti 3 paslaugą",
+                "indicator_4": "Peržiūrėti 4 paslaugą",
+                "indicator_5": "Peržiūrėti 5 paslaugą",
+                "indicator_6": "Peržiūrėti 6 paslaugą",
+                "indicator_7": "Peržiūrėti 7 paslaugą",
+                "indicator_8": "Peržiūrėti 8 paslaugą"
             }
         },
         "prices": {
@@ -227,28 +400,80 @@
             "explanation": "Kainos nurodytos eurais. Galimas mokėjimas rubliais, tiksli kaina bus nurodyta po darbo pagal to meto kursą.",
             "items": {
                 "1": {
-                    "title": "Taro kortų būrimas",
-                    "price": "Kaina: 50€"
+                    "title": "Vienas klausimas kortoms",
+                    "price": "Kaina: 5€"
                 },
                 "2": {
-                    "title": "Natalinė korta",
-                    "price": "Kaina: 75€"
+                    "title": "2–3 klausimai kortoms",
+                    "price": "Kaina: 10€"
                 },
                 "3": {
-                    "title": "Runų būrimas",
-                    "price": "Kaina: 60€"
+                    "title": "Daugiau nei trys klausimai kortoms",
+                    "price": "Kaina: 20€"
                 },
                 "4": {
-                    "title": "Meilės būrimas",
-                    "price": "Kaina: 55€"
+                    "title": "Išdėstymas + papildomi klausimai",
+                    "price": "Kaina: 35€"
                 },
                 "5": {
-                    "title": "Ateities būrimas",
-                    "price": "Kaina: 65€"
+                    "title": "Metinis išdėstymas",
+                    "price": "Kaina: 50€"
                 },
                 "6": {
-                    "title": "Negatyvo nuėmimas",
-                    "price": "Kaina: 80€"
+                    "title": "Mokymai burti kortomis",
+                    "price": "Kaina: 500€"
+                },
+                "7": {
+                    "title": "Tiesos atskleidimo apeiga",
+                    "price": "Kaina: 10€"
+                },
+                "8": {
+                    "title": "Reikiamų kelių atidarymas",
+                    "price": "Kaina: 10€"
+                },
+                "9": {
+                    "title": "Pagalba parduodant turtą",
+                    "price": "Kaina: 10€"
+                },
+                "10": {
+                    "title": "Pagalba išgyvenant išsiskyrimą",
+                    "price": "Kaina: 10€"
+                },
+                "11": {
+                    "title": "Apeigos sėkmingam darbų užbaigimui",
+                    "price": "Kaina: 10€"
+                },
+                "12": {
+                    "title": "Apsaugos uždėjimas",
+                    "price": "Kaina: 10€"
+                },
+                "13": {
+                    "title": "Būsto valymas",
+                    "price": "Kaina: 50–100€"
+                },
+                "14": {
+                    "title": "Vaško liejimas",
+                    "price": "Kaina: 20€"
+                },
+                "15": {
+                    "title": "Konteineris",
+                    "price": "Kaina: 10€"
+                },
+                "16": {
+                    "title": "Jūsų žvakės užkalbėjimas",
+                    "price": "Kaina: 10€"
+                },
+                "17": {
+                    "title": "Žvakės gamyba iš nuosavų medžiagų",
+                    "price": "Kaina: 13€"
+                },
+                "18": {
+                    "title": "Amuleto programavimas (iš Jūsų daikto)",
+                    "price": "Kaina: 10€"
+                },
+                "19": {
+                    "title": "Amuleto programavimas (iš mano daikto)",
+                    "price": "Kaina: 10€ + mano daikto kaina"
                 }
             }
         },
@@ -259,37 +484,64 @@
             "phase": "Mėnulio fazė:",
             "next_phase": "Iki kitos fazės:",
             "rituals": "Kokie ritualai dabar atliekami:",
-            "loading": "Kraunama..."
+            "loading": "Kraunama...",
+            "image_alt_prefix": "Mėnulio fazė: "
         },
         "calendar": {
             "heading": "Kalendorius",
             "description": "Datos, kada būnu kituose miestuose."
         },
         "footer": {
-            "heading": "Susisiekite su manimi",
-            "text": "Aš čia, kad jums padėčiau.",
-            "copyright": "© 2025 \"Gerosios Fėjos kampelis\""
+            "heading": "Esu čia, kad Jums padėčiau",
+            "text": "Nelikite vieni su savo išgyvenimais. Parašykite man, mes viską aptarsime ir kartu rasime sprendimą.",
+            "copyright": "© 2025 \"Gerosios Fėjos kampelis\" Svetainė sukurta kaip diplominis projektas. Autorius: Vladimir Karin.",
+            "social": {
+                "facebook": "Aplankykite mūsų Facebook puslapį",
+                "facebook_alt": "Facebook logotipas",
+                "instagram": "Aplankykite mūsų Instagram puslapį",
+                "instagram_alt": "Instagram logotipas",
+                "vkontakte": "Aplankykite mūsų VKontakte puslapį",
+                "vkontakte_alt": "VKontakte logotipas",
+                "telegram": "Parašykite man Telegram",
+                "telegram_alt": "Telegram logotipas",
+                "viber": "Parašykite man Viber",
+                "viber_alt": "Viber logotipas",
+                "whatsapp": "Parašykite man WhatsApp",
+                "whatsapp_alt": "WhatsApp logotipas"
+            }
         },
         "popups": {
             "1": {
-                "title": "Būrimas kortomis",
-                "content": "<p>Būrimas kortomis – tai senovinis menas pranašauti ateitį ir analizuoti dabartį per kortų simbolius ir vaizdinius. Savo praktikoje naudoju tiek paprastas žaidimo kortas, tiek specialias būrimo kalades.</p><p>Kortų pagalba galima gauti atsakymus į rūpimus klausimus apie:</p><ul><li>Asmeninius santykius ir meilę</li><li>Karjerą ir profesinį tobulėjimą</li><li>Finansinę padėtį ir materialinę gerovę</li><li>Gyvenimo kelią ir pašaukimą</li></ul><p>Kiekviena dėlionė yra individuali ir atsižvelgia į jūsų konkrečią situaciją. Kruopščiai interpretuoju kortų simbolius ir jų tarpusavio ryšį, kad suteikčiau jums tiksliausią ir naudingiausią pranašystę.</p><p>Būrimo seansas padės jums pamatyti paslėptus situacijos aspektus, gauti patarimą sprendimų priėmimui ir sužinoti apie galimas įvykių vystymosi perspektyvas.</p>"
+                "title": "Darbo principai",
+                "content": "<p>Manau, kad svarbu būti sąžininga su jumis apie tai, kaip dirbu ir ko principingai nedarau.</p><p><strong>Ko aš NIEKADA nedarau:</strong></p><ul><li>Neužsiimu meilės burtais ir atskyrimais</li><li>Neatlieku ritualų prieš kitų žmonių valią</li><li>Nemanipuliuoju kito žmogaus valia ir pasirinkimo laisve</li><li>Nežadu neįmanomo</li><li>Nekuriu priklausomybės nuo magiškų praktikų</li><li>Neburiu nėščioms moterims ir vaikams – laikau šias būsenas ypač jautriomis ir reikalaujančiomis atsargaus požiūrio.</li></ul><p>Nėščioms galiu pažiūrėti situaciją tik tada, kai moteris dar nežino apie savo padėtį arba stovi prieš pasirinkimą – gimdyti ar ne. Vaikams kortomis žiūriu tik į sveikatą. Man svarbu dirbti atsargiai, be žalos.</p><p><strong>Mano principai:</strong></p><ul><li>Dirbu išimtinai pozityvioje kryptyje</li><li>Gerbu kiekvieno žmogaus pasirinkimo laisvę</li><li>Padedu sukurti sąlygas teigiamiems pokyčiams</li><li>Sakau tiesą, net jei ji sunki</li><li>Tikiu, kad žmogus pats turi būti aktyvus savo gyvenimo dalyvis</li></ul><p>Magiška pagalba – tai parama ir energijos nukreipimas, bet ne jūsų pačių pastangų pakaitalas. Esu čia, kad padėčiau jums rasti kelią, bet eiti juo turėsite patys.</p>"
             },
             "2": {
-                "title": "Taro dėlionė",
-                "content": "<p>Taro kortos – tai galingas įrankis giliai gyvenimiškų situacijų analizei ir savęs pažinimui. Skirtingai nuo paprastų kortų, Taro sistema turi turtingą simboliką ir daugiasluoksnes reikšmes, kas leidžia atlikti detalią praeities, dabarties ir galimos ateities analizę.</p><p>Savo praktikoje naudoju įvairias Taro dėliones:</p><ul><li><strong>Keltų kryžius</strong> – klasikinė dėlionė giliai konkrečios situacijos analizei</li><li><strong>Santykių dėlionė</strong> – meilės ir partnerystės santykių analizei</li><li><strong>Dienos korta</strong> – patarimui einamajai dienai gauti</li><li><strong>Dėlionė „Kelias“</strong> – jūsų gyvenimo kelio ir pašaukimo supratimui</li></ul><p>Taro būrimo seansas padės jums giliai suprasti vykstančius procesus, atskleisti paslėptus motyvus, pamatyti potencialias kliūtis ir rasti galimus kelius joms įveikti.</p><p>Kiekviena dėlionė lydima išsamaus kortų reikšmių ir jų tarpusavio ryšių paaiškinimo jūsų konkrečios situacijos kontekste.</p>"
+                "title": "Būrimas kortomis",
+                "content": "<p>Buriu įprastomis žaidimo kortomis – be sudėtingų sistemų ir nereikalingų įmantrybių. Šios kortos yra paprastos savo forma, bet labai tikslios savo esme. Per jas gerai matyti tai, kas iš tikrųjų vyksta žmogaus gyvenime.</p><p>Dėlionėse su žaidimo kortomis galima pažiūrėti beveik bet kurią gyvenimo sritį ir gauti atsakymus į įvairiausius klausimus. Kortos parodo bendrą situacijos būklę, paslėptus momentus, įvykių priežastis ir galimus vystymosi kelius.</p><p>Aš atlieku:</p><ul><li>bendrus dėliojimus – kai svarbu suprasti, kas vyksta gyvenime apskritai</li><li>dėliones meilei, santykiams, draugystei</li><li>darbo, finansų ir materialinės sferos klausimus</li><li>sveikatos ir savijautos dėliones</li><li>kortų patarimą – užuominą, kaip geriau pasielgti konkrečioje situacijoje</li></ul><p>Kiekviena dėlionė individuali. Neskaitau „pagal šabloną“ – žiūriu būtent jūsų situaciją ir atsakau į jūsų užklausą. Kortos padeda pamatyti tai, kas gali būti neakivaizdu, susigaudyti abejonėse ir suprasti, kuria kryptimi geriau judėti toliau.</p>"
             },
             "3": {
+                "title": "Taro dėlionė",
+                "content": "<p>Taip pat dirbu su Taro kortomis – tai gilesnis įrankis, padedantis suprasti, kas vyksta gyvenime, ir pažvelgti į situacijų esmę. Skirtingai nuo paprastų žaidimo kortų, Taro parodo daugiasluoksnes prasmes ir paslėptus niuansus, padedančius pamatyti ne tik esamą padėtį, bet ir galimus vystymosi kelius.</p><p>Kai dėlioju Taro kortas, matau jas savaip, savo unikaliame išdėstyme. Kortos padeda suprasti paslėptus motyvus, įvykių priežastis ir suteikia švelnias užuominas, kur geriau nukreipti savo dėmesį.</p><p>Kiekvieną seansą atlieku su dėmesiu jūsų situacijai. Taro, kaip ir paprastos kortos, padeda pamatyti tai, kas gali būti neakivaizdu, susigaudyti abejonėse ir pajusti aiškumą tame, kas vyksta.</p>"
+            },
+            "4": {
                 "title": "Ritualai ir užkalbėjimai",
                 "content": "<p>Ritualai ir užkalbėjimai – tai senovinės praktikos, skirtos pritraukti norimus pokyčius į gyvenimą arba apsisaugoti nuo nepageidaujamos įtakos. Jos remiasi darbu su gamtos energijomis ir žodžio galia.</p><p>Atlieku įvairių rūšių ritualus:</p><ul><li><strong>Meilės ritualai</strong> – meilei pritraukti, santykiams gerinti, jausmams stiprinti</li><li><strong>Pinigų apeigos</strong> – finansinei gerovei pritraukti, naujiems pajamų šaltiniams</li><li><strong>Apsivalymo ritualai</strong> – išsilaisvinimui nuo negatyvių energijų, būsto valymui</li><li><strong>Apsauginiai užkalbėjimai</strong> – energetinės apsaugos nuo išorinio poveikio sukūrimui</li></ul><p>Kiekvienas ritualas parenkamas individualiai, atsižvelgiant į jūsų konkrečią situaciją ir poreikius. Geriausiam rezultatui pasiekti svarbu laikytis visų rekomendacijų ir atlikti būtinus veiksmus nurodytu laiku.</p><p>Prisiminkite, kad ritualai ir užkalbėjimai – tai pagalba ir energijos nukreipimas, tačiau jie veikia harmonijoje su jūsų pačių pastangomis ir ketinimais.</p>"
             },
-            "4": {
-                "title": "Vaško liejimas",
-                "content": "<p>Vaško liejimas – tai senovinis slaviškas diagnostikos ir negatyvių poveikių nuėmimo metodas. Procedūra susideda iš išlydyto vaško pylimo į šaltą vandenį virš žmogaus ar jo nuotraukos.</p><p>Sustingęs vaškas įgauna formas, kurios turi diagnostinę reikšmę ir parodo:</p><ul><li>Nužiūrėjimo, prakeiksmo ar kitų negatyvių poveikių buvimą</li><li>Energetinius blokus ir problemines zonas</li><li>Negatyvių įtakų šaltinius ir priežastis</li><li>Žmogaus energetinio lauko būklę</li></ul><p>Vaško liejimo procedūra ne tik diagnozuoja problemą, bet ir tuo pačiu metu nuima negatyvų poveikį, perkeldama jį nuo žmogaus į vašką. Išlietos formos vėliau neutralizuojamos specialiu būdu.</p><p>Pilnam apsivalymui paprastai reikia nuo 1 iki 9 seansų, priklausomai nuo negatyvaus poveikio stiprumo ir trukmės. Po procedūros pateikiamos rekomendacijos dėl energetinės apsaugos ir atsistatymo.</p>"
-            },
             "5": {
+                "title": "Vaško liejimas",
+                "content": "<p>Vaško liejimas – tai senovinis slaviškas diagnostikos ir negatyvių poveikių nuėmimo metodas. Procedūra susideda iš išlydyto vaško pylimo į šaltą vandenį virš žmogaus ar jo nuotraukos.</p><p>Sustingęs vaškas įgauna formas, kurios turi diagnostinę reikšmę ir parodo:</p><ul><li>Nužiūrėjimo, prakeiksmo ar kitų negatyvių poveikių buvimą</li><li>Energetinius blokus ir problemines zonas</li><li>Negatyvių įtakų šaltinius ir priežastis</li><li>Žmogaus energetinio lauko būklę</li></ul><p>Vaško liejimo procedūra ne tik diagnozuoja problemą, bet ir tuo pačiu metu nuima negatyvų poveikį, perkeldama jį nuo žmogaus į vašką. Taip pat vaško liejimu galima atstatyti ir pagerinti žmogaus būseną bei pripildyti jo energetinį lauką. Išlietos formos vėliau neutralizuojamos specialiu būdu.</p><p>Liejimų kiekis paprastai priklauso nuo žmonių prašymo. Po procedūros pateikiamos rekomendacijos dėl energetinės apsaugos ir atsistatymo.</p>"
+            },
+            "6": {
                 "title": "Amuletai ir talismanai",
-                "content": "<p>Amuletai ir talismanai – tai daiktai, pakrauti ypatinga energija apsaugai, sėkmės ir gerovės pritraukimui. Kuriu individualius amuletus, atsižvelgdama į jūsų poreikius, energetikos ypatumus ir konkrečius tikslus.</p><p>Amuletų rūšys, kurias gaminu:</p><ul><li><strong>Apsauginiai amuletai</strong> – saugo nuo negatyvių energijų ir poveikių</li><li><strong>Meilės talismanai</strong> – pritraukia meilę, harmonizuoja santykius</li><li><strong>Pinigų amuletai</strong> – skatina finansinę gerovę</li><li><strong>Sveikata ir gyvybinės jėgos</strong> – stiprina energetiką ir saugo sveikatą</li><li><strong>Kelioniniai amuletai</strong> – užtikrina apsaugą kelyje ir persikraustant</li></ul><p>Kiekvienas amuletas kuriamas tam tikru laiku, naudojant specialias medžiagas ir aktyvacijos ritualus. Prie amuleto pridedamos instrukcijos dėl teisingo naudojimo ir periodinio pakrovimo.</p><p>Svarbu prisiminti, kad amuletas – tai asmeninis daiktas, kuris susiderina su konkrečio žmogaus energetika ir neturėtų būti perduodamas kitiems žmonėms.</p>"
+                "content": "<p>Amuletai ir talismanai – tai daiktai, pakrauti ypatinga energija apsaugai, sėkmės ir gerovės pritraukimui. Aš programuoju (užkalbu) individualius amuletus, atsižvelgdama į jūsų poreikius, energetikos ypatumus ir konkrečius tikslus.</p><p>Amuletų rūšys, kurias programuoju:</p><ul><li><strong>Apsauginiai amuletai</strong> – saugo nuo neigiamų energijų ir poveikių</li><li><strong>Meilės talismanai</strong> – pritraukia meilę, harmonizuoja santykius</li><li><strong>Pinigų amuletai</strong> – skatina finansinę gerovę</li><li><strong>Sveikata ir gyvybinės jėgos</strong> – stiprina energetiką ir saugo sveikatą</li><li><strong>Kelioniniai amuletai</strong> – užtikrina apsaugą kelyje ir persikraustant</li></ul><p>Kiekvienas amuletas kuriamas tam tikru laiku, naudojant specialius užkalbėjimus ir aktyvacijos ritualus. Prie amuleto pridedamos instrukcijos dėl teisingo naudojimo, periodinio pakrovimo ir valymo.</p><p>Svarbu prisiminti, kad amuletas – tai asmeninis daiktas, kuris susiderina su konkrečio žmogaus energetika ir neturėtų būti perduodamas kitiems žmonėms.</p>"
+            },
+            "7": {
+                "title": "Akmenų programavimas",
+                "content": "<p>Akmenų-konteinerių programavimas – tai ypatinga asmeninių energetinių padėjėjų kūrimo praktika. Naudoju dekoratyvinius akmenis, kuriuos nustatau konkrečiai užduočiai kiekvienam žmogui.</p><p>Kas yra akmuo-konteineris?</p><p>Tai nedidelis dekoratyvinis akmuo, suprogramuotas kliūčių pašalinimui iš jūsų gyvenimo ir pritraukti tai, kas pagerins gyvenimo kokybę. Kiekvienas akmuo unikalus ir programuojamas individualiai.</p><p>Kaip tai veikia:</p><ul><li>Klientas pats pasirenka mano suteiktą akmenį</li><li>Nustatau jūsų konkrečią užduotį ar problemą</li><li>Atlieku programavimo ritualą norimam rezultatui</li><li>Aktyvuoju akmenį tam tikru laiku</li></ul><p>Akmuo-konteineris gali būti nustatytas skirtingiems tikslams: energetinių blokų nuėmimui, naujų galimybių atsivėrimui, tam tikros gyvenimo sferos pagerinimui, reikalingų įvykių pritraukimui.</p><p> 'Konteinerius' išsiunčiu dirbti į upę.</p>"
+            },
+            "8": {
+                "title": "Erdvės valymas",
+                "content": "<p>Energetinis valymas – tai svarbi praktika harmonijai jūsų namuose ir gyvenime palaikyti. Atlieku namų, butų, biurų ir atskirų daiktų valymą nuo susikrovusio negatyvo.</p><p>Kada reikia valymo:</p><ul><li>Po konfliktų ar sunkių situacijų namuose</li><li>Persikraunant į naują būstą</li><li>Jei jaučiate sunkumą, diskomfortą patalpose</li><li>Po ligos ar nemalonių įvykių</li><li>Reguliariai energetinei higienai</li></ul><p>Ką aš darau:</p><ul><li>Diagnozuoju energetinę erdvės būklę</li><li>Atlieku valymo ritualus nuo neigiamų įtakų</li><li>Valau daiktus, kurie gali nešti neigiamą energiją</li><li>Kuriu erdvės apsaugą</li><li>Pateikiu rekomendacijas energetikos švaros palaikymui</li></ul><p>Valymą galima atlikti tiek asmeniškai, tiek nuotoliniu būdu pagal patalpos nuotrauką. Po procedūros pajusite lengvumą ir komfortą savo namuose.</p>"
             }
         }
     }
