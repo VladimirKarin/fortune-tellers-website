@@ -37,6 +37,8 @@
 // - Uses parent-based DOM traversal (not index-based)
 // - Reference date updated to Dec 2024 for better accuracy
 
+import { getCurrentLanguage, getTranslation } from './i18n.js';
+
 /* ===================================
    📊 MOON PHASE DATA - LOCALIZED INFORMATION
    =================================== */
@@ -277,9 +279,10 @@ async function setLoadingState(isLoading) {
         moonDOM.layout?.classList.add('loading');
 
         // Update text elements
-        if (moonDOM.phaseName) moonDOM.phaseName.textContent = 'Загрузка...';
-        if (moonDOM.rituals) moonDOM.rituals.textContent = 'Загрузка...';
-        if (moonDOM.countdown) moonDOM.countdown.textContent = 'Загрузка...';
+        const loadingText = getTranslation('moon.loading') || 'Загрузка...';
+        if (moonDOM.phaseName) moonDOM.phaseName.textContent = loadingText;
+        if (moonDOM.rituals) moonDOM.rituals.textContent = loadingText;
+        if (moonDOM.countdown) moonDOM.countdown.textContent = loadingText;
     } else {
         // Ensure minimum loading time for smooth UX
         if (loadingStartTime) {
@@ -333,11 +336,17 @@ function updateMoonUI(moonData) {
             throw new Error('DOM elements not ready for update');
         }
 
+        const currentLang = getCurrentLanguage();
+        const isRU = currentLang === 'ru';
+
         // Update moon phase image with fade transition
         if (moonDOM.image) {
             moonDOM.image.style.opacity = '0';
             moonDOM.image.src = moonData.moonPhaseImage;
-            moonDOM.image.alt = `Изображение фазы ${moonData.moonPhaseNameRussian}`;
+            
+            const phaseName = isRU ? moonData.moonPhaseNameRussian : moonData.moonPhaseNameLithuanian;
+            const altPrefix = getTranslation('moon.image_alt_prefix') || 'Фаза луны: ';
+            moonDOM.image.alt = `${altPrefix}${phaseName}`;
 
             moonDOM.image.onload = () => {
                 moonDOM.image.style.transition = 'opacity 0.3s ease';
@@ -347,16 +356,19 @@ function updateMoonUI(moonData) {
 
         // Update phase name
         if (moonDOM.phaseName) {
-            moonDOM.phaseName.textContent = moonData.moonPhaseNameRussian;
+            moonDOM.phaseName.textContent = isRU ? moonData.moonPhaseNameRussian : moonData.moonPhaseNameLithuanian;
         }
 
         // Update rituals list (comma-separated)
         if (moonDOM.rituals) {
-            moonDOM.rituals.textContent =
-                moonData.moonPhaseRitualsRussian.join(', ');
+            const ritualsList = isRU ? moonData.moonPhaseRitualsRussian : moonData.moonPhaseRitualsLithuanian;
+            moonDOM.rituals.textContent = ritualsList.join(', ');
         }
+        
+        // Cache current data for language switches
+        moonDOM.currentMoonData = moonData;
 
-        console.log(`✅ Moon UI updated: ${moonData.moonPhaseNameRussian}`);
+        console.log(`✅ Moon UI updated: ${isRU ? moonData.moonPhaseNameRussian : moonData.moonPhaseNameLithuanian}`);
     } catch (error) {
         console.error('❌ Error updating moon UI:', error);
         showMoonError('Ошибка при обновлении интерфейса');
@@ -428,10 +440,18 @@ function calculateNextPhaseCountdown(currentCycle = null) {
         const hours = Math.floor((daysUntilNext - days) * 24);
         const minutes = Math.floor(((daysUntilNext - days) * 24 - hours) * 60);
 
+        // Localized units
+        const unitDays = getTranslation('countdown.days') || 'дн.';
+        const unitHours = getTranslation('countdown.hours') || 'ч.';
+        const unitMinutes = getTranslation('countdown.minutes') || 'мин.';
+
         // Update countdown display
         if (moonDOM.countdown) {
-            moonDOM.countdown.textContent = `${days} дн. ${hours} ч. ${minutes} мин`;
+            moonDOM.countdown.textContent = `${days} ${unitDays} ${hours} ${unitHours} ${minutes} ${unitMinutes}`;
         }
+        
+        // Cache current cycle for language switches
+        moonDOM.currentCyclePosition = currentCycle;
     } catch (error) {
         console.error('❌ Error calculating countdown:', error);
         if (moonDOM?.countdown) {
@@ -789,6 +809,19 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Initializing Moon Phase Module...');
     initializeMoonPhase();
     setupNetworkMonitoring();
+
+    // Listen for language changes to refresh the display
+    window.addEventListener('languageChanged', () => {
+        if (moonDOM && moonDOM.isReady()) {
+            if (moonDOM.currentMoonData) {
+                updateMoonUI(moonDOM.currentMoonData);
+            }
+            if (typeof moonDOM.currentCyclePosition !== 'undefined') {
+                calculateNextPhaseCountdown(moonDOM.currentCyclePosition);
+            }
+        }
+    });
+
     console.log('✅ Moon Phase Module initialized');
 });
 
