@@ -2,7 +2,8 @@
     "ru": {
         "meta": {
             "title": "Уголок Доброй Феи | Гадание на картах и Таро",
-            "description": "Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня."
+            "description": "Профессиональное гадание на картах Таро, ритуалы, снятие негатива и восковая отливка. Узнайте свое будущее и получите магическую поддержку сегодня.",
+            "keywords": "гадание на картах, таро расклад, магические ритуалы, заговоры, восковая отливка, обереги, амулеты, предсказание будущего"
         },
         "nav": {
             "home": "Главная",
@@ -274,8 +275,9 @@
     },
     "lt": {
         "meta": {
-            "title": "Gerosios Fėjos kampelis",
-            "description": "Būrėjos svetainė. Būrimas paprastomis kartomis, Taro kortomis, ritualai, vaško liejimas, negatyvo nuėmimas, nužiūrėjimo nuėmimas, apsauga, amuletai."
+            "title": "Gerosios Fėjos kampelis | Būrimas kortomis ir Taro",
+            "description": "Profesionalus būrimas Taro kortomis, ritualai, vaško liejimas ir negatyvo nuėmimas. Sužinokite savo ateitį ir gaukite magišką pagalbą šiandien.",
+            "keywords": "būrimas kortomis, taro dėlionės, magiški ritualai, užkalbėjimai, vaško liejimas, amuletai, talismanai, ateities spėjimas"
         },
         "nav": {
             "home": "Pagrindinis",
