@@ -33,9 +33,10 @@
 //
 // ⚠️ IMPORTANT NOTES:
 // - Initialized from script.js (not self-initializing)
-// - Must call initializeCountdown() exactly once
 // - Must call cleanupCountdown() on page unload
 // - Target date read from HTML data-target-date attribute
+
+import { CONFIG } from './config.js';
 
 /* ===================================
    🔑 CONFIGURATION
@@ -120,12 +121,18 @@ function getCountdownElements() {
  * @private
  */
 function getTargetDate() {
+    // 1. Check central configuration FIRST (highest priority)
+    if (CONFIG.COUNTDOWN_DATE) {
+        const configDate = new Date(CONFIG.COUNTDOWN_DATE).getTime();
+        if (!isNaN(configDate)) return configDate;
+    }
+
     const elements = getCountdownElements();
 
-    // Read target date from HTML data attribute
+    // 2. Fallback: Read target date from HTML data attribute
     const targetDateString = elements.section?.getAttribute('data-target-date');
 
-    // Use provided date or fall back to default
+    // 3. Last Fallback: Use default constant
     const dateString = targetDateString || DEFAULT_TARGET_DATE;
 
     // Parse date and convert to timestamp

@@ -38,11 +38,9 @@
 // - .calendar-day--travel: Falls within travel date range
 // - .calendar-day--other-month: Belongs to previous/next month
 //
-// ⚠️ IMPORTANT NOTES:
-// - Initialized from script.js (call renderCalendar() and startAutoUpdate())
-// - Travel dates configured in tripDates object
-// - Auto-update interval: 6 hours (configurable)
 // - Always shows 6 weeks (42 days) for consistent height
+
+import { CONFIG } from './config.js';
 
 /* ===================================
    🌐 CONFIGURATION & STATE
@@ -62,23 +60,6 @@
  */
 const UPDATE_INTERVAL = 6 * 60 * 60 * 1000;
 
-/**
- * Travel schedule configuration
- * Defines when and where the fortune teller will be traveling
- *
- * @constant {Object}
- * @property {string} cityRussian - Destination city name in Russian
- * @property {string} start - Start date in ISO format (YYYY-MM-DD)
- * @property {string} end - End date in ISO format (YYYY-MM-DD)
- *
- * 📝 Note: Dates are inclusive (both start and end dates are highlighted)
- * 🔧 TODO: Consider moving to external configuration or fetching from API
- */
-const tripDates = {
-    cityRussian: 'Вильнюс', // Vilnius in Russian
-    start: '2026-01-19',
-    end: '2026-01-27',
-};
 
 /**
  * Current date information object
@@ -229,7 +210,7 @@ function isToday(day) {
  */
 function isTrip(day) {
     const formatted = formatDateISO(day);
-    return formatted >= tripDates.start && formatted <= tripDates.end;
+    return formatted >= CONFIG.TRIP_DATES.start && formatted <= CONFIG.TRIP_DATES.end;
 }
 
 /**
@@ -569,7 +550,7 @@ export function renderCalendar() {
         if (isTripFlag) {
             const cityElement = document.createElement('div');
             cityElement.className = 'calendar-day__city';
-            cityElement.textContent = tripDates.cityRussian;
+            cityElement.textContent = CONFIG.TRIP_DATES.cityRussian;
             cell.appendChild(cityElement);
         }
 

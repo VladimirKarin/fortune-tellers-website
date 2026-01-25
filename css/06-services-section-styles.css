@@ -22,26 +22,26 @@
 
 :root {
     /* 🎠 Carousel dimensions */
-    --carousel-height: 50rem; /* Total carousel container height */
-    --carousel-max-width: 100rem; /* Maximum carousel width */
+    --carousel-height: 60rem; /* INCREASED: More room for larger cards */
+    --carousel-max-width: 110rem; /* INCREASED: For wider cards */
 
     /* 🎴 Card sizing - base dimensions */
-    --card-base-height: 32rem; /* Default card height */
-    --card-base-width: 33rem; /* Default card width */
+    --card-base-height: 40rem; /* INCREASED: For taller visual area */
+    --card-base-width: 36rem; /* INCREASED: For better proportions */
 
     /* 🎴 Card sizing - featured (center) card */
-    --card-featured-height: 44rem; /* Center card height (tallest) */
-    --card-featured-width: 40rem; /* Center card width (widest) */
+    --card-featured-height: 52rem; /* INCREASED: Peak height */
+    --card-featured-width: 44rem; /* INCREASED: Prominence */
 
     /* 🎴 Card sizing - secondary cards */
-    --card-secondary-height: 38rem; /* Adjacent cards height */
-    --card-secondary-width: 36rem; /* Adjacent cards width */
+    --card-secondary-height: 46rem; /* INCREASED: Better stepping */
+    --card-secondary-width: 40rem; /* INCREASED */
 
     /* 🖼️ Visual area (image) height */
-    --card-visual-height: 18rem; /* Image section at top of card */
+    --card-visual-height: 26rem; /* INCREASED: Much more artwork visibility */
 
     /* 📦 Card content padding */
-    --card-content-padding: 2rem; /* Internal padding for card text area */
+    --card-content-padding: 2.5rem; /* INCREASED: More breathing room */
 
     /* 🎬 Animation settings */
     --carousel-transition-speed: 0.3s; /* Card movement animation duration */
@@ -208,7 +208,7 @@
     height: var(--card-visual-height); /* Fixed image area height */
     width: 100%; /* Full card width */
     background-size: cover; /* Fill area while maintaining aspect ratio */
-    background-position: center; /* Center image within area */
+    background-position: center 20%; /* 🎯 TARGETED: Shift focus slightly up to capture subject faces/top detail */
     position: relative; /* Context for accent line */
     overflow: hidden; /* Clip image overflow */
 }
