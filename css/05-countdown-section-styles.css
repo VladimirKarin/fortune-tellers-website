@@ -41,10 +41,14 @@
 .timebox {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
-    gap: clamp(1.5rem, 6vw, 8rem); /* 🎯 INCREASED: More space for larger numbers */
+    gap: clamp(
+        2rem,
+        8vw,
+        10rem
+    ); /* 🎯 INCREASED: Even more space for larger numbers */
     margin: clamp(1.6rem, 4vw, 3.2rem) auto 0 auto; /* Centered with top spacing */
     width: 100%;
-    max-width: 90rem; /* INCREASED: wider to accommodate larger gap */
+    max-width: 110rem; /* INCREASED: wider to accommodate larger gap and numbers */
     justify-items: center; /* Center items horizontally within grid cells */
 }
 
@@ -74,26 +78,34 @@
    =================================== */
 
 /* Large countdown numbers - Optimized responsive sizing */
-.time h3 {
+.time-value {
     font-size: clamp(
-        3rem,
-        8vw,
-        6.4rem
-    ); /* 🎯 INCREASED: Much larger for visual impact */
+        5rem,
+        15vw,
+        8rem
+    ); /* 🎯 MASSIVE: Significantly larger for premium visual impact */
     font-weight: 700; /* Bold for emphasis and readability */
     line-height: 1; /* Tight line height for compact numbers */
     margin: 0; /* Remove default margins */
     letter-spacing: -0.02em; /* Slight negative spacing for visual tightness */
     color: var(--color-light-text); /* Consistent with section color */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Depth and readability on gradient */
+
+    /* 🎯 ENHANCED: Mystic glow effect */
+    text-shadow:
+        0 0 20px rgba(142, 68, 173, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.3);
 
     /* 🎯 OPTIMIZED: Smooth number transitions when updating */
-    transition: opacity 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 /* Time unit labels (дн., ч., мин., с.) - Typography styling */
 .time p {
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem); /* INCREASED: Proportional label sizing */
+    font-size: clamp(
+        1.2rem,
+        2.5vw,
+        1.6rem
+    ); /* INCREASED: Proportional label sizing */
     margin: clamp(0.5rem, 1vw, 1rem) 0 0 0; /* Top margin for spacing */
     opacity: 0.9; /* Slightly transparent for visual hierarchy */
     color: var(--color-light-text); /* Consistent color scheme */
@@ -115,11 +127,11 @@
 @media (max-width: 1200px) {
     .timebox {
         gap: clamp(1rem, 5vw, 6rem); /* Updated gap */
-        max-width: 80rem; 
+        max-width: 80rem;
     }
 
-    .time h3 {
-        font-size: clamp(2.6rem, 7vw, 5.2rem); 
+    .time-value {
+        font-size: clamp(4rem, 10vw, 8rem);
     }
 }
 
@@ -130,7 +142,7 @@
     }
 
     .timebox {
-        gap: clamp(0.8rem, 4vw, 4rem); 
+        gap: clamp(0.8rem, 4vw, 4rem);
         max-width: 70rem;
     }
 
@@ -138,34 +150,30 @@
         padding: var(--spacing-xs); /* Add padding for touch targets */
     }
 
-    .time h3 {
-        font-size: clamp(2.4rem, 8vw, 4.2rem); 
+    .time-value {
+        font-size: clamp(3.5rem, 9vw, 6rem);
     }
 
     .time p {
-        font-size: clamp(1rem, 2.5vw, 1.4rem); 
+        font-size: clamp(1rem, 2.5vw, 1.4rem);
     }
 }
 
 /* 📱 MOBILE (≤480px) */
 @media (max-width: 480px) {
     .timebox {
-        gap: clamp(0.6rem, 3.5vw, 3rem); 
+        gap: clamp(1rem, 4vw, 4rem); /* More room for numbers */
         max-width: 100%; /* Full width utilization */
     }
 
-    .time h3 {
-        font-size: clamp(
-            2rem,
-            10vw,
-            3.6rem
-        ); /* Bold presence on mobile */
-        font-weight: 600; 
+    .time-value {
+        font-size: clamp(3.2rem, 12vw, 5.4rem); /* Bold presence on mobile */
+        font-weight: 600;
     }
 
     .time p {
-        font-size: clamp(1rem, 4vw, 1.2rem); 
-        margin-top: 0.4rem; 
+        font-size: clamp(1rem, 4vw, 1.2rem);
+        margin-top: 0.6rem;
     }
 }
 
@@ -181,7 +189,7 @@
 */
 
 /* Red tinted numbers when countdown expires */
-.countdown-section.countdown-expired .time h3 {
+.countdown-section.countdown-expired .time-value {
     color: var(--color-error); /* Error red from general.css variables */
     opacity: 0.7; /* Faded appearance */
 }

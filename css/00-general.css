@@ -220,6 +220,20 @@
     box-sizing: border-box; /* Include padding/border in element width */
 }
 
+/* 🎯 ENHANCED: Global image normalization */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 🎬 ENHANCED: Subtle interactive pulse animation */
+@keyframes softPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
 /* 
    Enhanced focus styles for keyboard navigation accessibility
    Provides clear visual feedback for keyboard users
