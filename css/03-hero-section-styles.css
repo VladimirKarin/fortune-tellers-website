@@ -128,41 +128,26 @@
 }
 
 .hero__button {
-    background: transparent;
-    color: var(--color-accent);
-    border: 2px solid var(--color-accent);
-    border-radius: 50px; /* Full pill shape */
+    background: var(--color-accent); /* Gold background by default */
+    color: var(--color-primary); /* Dark text for contrast */
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Subtle light border */
+    border-radius: var(--border-radius-button); /* 🎯 ASYMMETRICAL: Matches Price section */
     padding: 1.6rem 3.6rem;
     font-size: var(--font-size-lg);
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    position: relative;
-    overflow: hidden;
+    cursor: pointer;
     transition: all var(--transition-smooth);
-    box-shadow: 0 0 10px rgba(255, 165, 0, 0.2);
-}
-
-.hero__button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    background: var(--color-accent);
-    transition: width var(--transition-smooth);
-    z-index: -1;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); /* Gold glow */
 }
 
 .hero__button:hover {
-    color: var(--color-background); /* Text turns dark on hover */
-    box-shadow: 0 0 20px var(--color-accent);
-    transform: translateY(-3px);
-}
-
-.hero__button:hover::before {
-    width: 100%;
+    background: #fff; /* White on hover */
+    color: var(--color-primary); /* Maintains dark text */
+    border-color: var(--color-accent); /* Gold border */
+    transform: translateY(-2px); /* Subtle lift */
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6); /* Bright glow */
 }
 
 /* ===================================
