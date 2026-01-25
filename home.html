@@ -10,20 +10,20 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-domain.com/"> <!-- TODO: Update with real domain -->
+    <meta property="og:url" content="{{DOMAIN}}/" data-domain-replace="content">
     <meta property="og:title" content="Уголок Доброй Феи | Гадание на картах и Таро" data-i18n-attr="content:meta.title">
     <meta property="og:description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня." data-i18n-attr="content:meta.description">
-    <meta property="og:image" content="https://your-domain.com/img/01-header-section/logo/logoCrop2.png">
+    <meta property="og:image" content="{{DOMAIN}}/img/01-header-section/logo/logoCrop2.png" data-domain-replace="content">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://your-domain.com/"> <!-- TODO: Update with real domain -->
+    <meta property="twitter:url" content="{{DOMAIN}}/" data-domain-replace="content">
     <meta property="twitter:title" content="Уголок Доброй Феи | Гадание на картах и Таро" data-i18n-attr="content:meta.title">
     <meta property="twitter:description" content="Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Узнайте свое будущее сегодня." data-i18n-attr="content:meta.description">
-    <meta property="twitter:image" content="https://your-domain.com/img/01-header-section/logo/logoCrop2.png">
+    <meta property="twitter:image" content="{{DOMAIN}}/img/01-header-section/logo/logoCrop2.png" data-domain-replace="content">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://your-domain.com/"> <!-- TODO: Update with real domain -->
+    <link rel="canonical" href="{{DOMAIN}}/" data-domain-replace="href">
 
     <!-- Favicon -->
     <link rel="icon" href="./img/01-header-section/logo/logoCrop2.png" type="image/png">
@@ -62,10 +62,10 @@
       "@type": "ProfessionalService",
       "name": "Уголок Доброй Феи",
       "alternateName": "Gerosios Fėjos kampelis",
-      "image": "https://your-domain.com/img/01-header-section/logo/logoCrop2.png",
+      "image": "{{DOMAIN}}/img/01-header-section/logo/logoCrop2.png",
       "description": "Профессиональное гадание на картах Таро, ритуалы, снятие негатива. Специалист в Вильнюсе и онлайн.",
       "priceRange": "€€",
-      "url": "https://your-domain.com/",
+      "url": "{{DOMAIN}}/",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "LT",
@@ -197,7 +197,7 @@
             <hr class="divider-glow-wave">
 
             <!-- Countdown Component-->
-            <section class="countdown-section section-padding" role="region" aria-labelledby="countdown-heading" data-target-date="2026-02-14T00:00:00">
+            <section class="countdown-section section-padding" role="region" aria-labelledby="countdown-heading">
                 <div class="container grid--center-v">
                     <h2 id="countdown-heading" class="heading-secondary" data-i18n="countdown.heading">Бесплатные вопросы через:</h2>
                     <div class="timebox" role="timer" aria-live="polite" aria-atomic="true">

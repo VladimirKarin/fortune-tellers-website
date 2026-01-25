@@ -3,9 +3,8 @@
    ================================================ */
 
 :root {
-    --carousel-height: 60rem;
-    --card-width-center: 36rem;
-    --card-width-side: 30rem;
+    --carousel-height: 64rem; /* Balanced with taller images */
+    --card-width: 35rem; /* 🎯 UNIFORM: All cards share this width now */
     --card-transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -58,9 +57,9 @@
     top: 50%;
     left: 50%;
     /* Start centered, specific classes move it */
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: translate(-50%, -50%);
     
-    width: var(--card-width-side);
+    width: var(--card-width);
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: var(--border-radius-lg);
@@ -83,10 +82,8 @@
    =================================== */
 /* Center Card - Featured */
 .gallery-item-3 {
-    width: var(--card-width-center);
-    height: auto;
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%); /* Removed scale(1) */
     z-index: 10; /* Highest priority */
     border-color: rgba(255, 165, 0, 0.3); /* Gold hint */
     box-shadow: 
@@ -96,37 +93,37 @@
 
 /* Side Cards - Immediate Neighbors */
 .gallery-item-2 {
-    /* -50% (center) - 60% (offset) = -110% */
-    transform: translate(-110%, -50%) scale(0.9);
+    /* -50% (center) - 65% (offset) = -115% */
+    transform: translate(-115%, -50%); /* Removed scale(0.9) */
     opacity: 0.7;
-    z-index: 5; /* Middle priority */
+    z-index: 5;
 }
 .gallery-item-4 {
-    /* -50% (center) + 60% (offset) = 10% */
-    transform: translate(10%, -50%) scale(0.9);
+    /* -50% (center) + 65% (offset) = 15% */
+    transform: translate(15%, -50%); /* Removed scale(0.9) */
     opacity: 0.7;
-    z-index: 5; /* Middle priority */
+    z-index: 5;
 }
 
 /* Outer Cards - Far Edges */
 .gallery-item-1 {
-    /* -50% (center) - 100% (offset) = -150% */
-    transform: translate(-150%, -50%) scale(0.8);
+    /* -50% (center) - 110% (offset) = -160% */
+    transform: translate(-160%, -50%); /* Removed scale(0.8) */
     opacity: 0.4;
-    z-index: 1; /* Lowest visible priority */
+    z-index: 1;
 }
 .gallery-item-5 {
-    /* -50% (center) + 100% (offset) = 50% */
-    transform: translate(50%, -50%) scale(0.8);
+    /* -50% (center) + 110% (offset) = 60% */
+    transform: translate(60%, -50%); /* Removed scale(0.8) */
     opacity: 0.4;
-    z-index: 1; /* Lowest visible priority */
+    z-index: 1;
 }
 
 /* ===================================
    CARD CONTENT
    =================================== */
 .gallery-item-visual {
-    height: 20rem;
+    height: 28rem; /* 🎯 INCREASED: Better visibility for 3D renders */
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -136,6 +133,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 15%; /* 🎯 TARGETED: Focus on artwork subjects */
     display: block;
 }
 
@@ -146,7 +144,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 40%;
+    height: 30%; /* 🎯 ADJUSTED: Proportional to taller image */
     background: linear-gradient(to top, rgba(10, 5, 20, 0.9), transparent);
 }
 
@@ -361,6 +359,6 @@
         width: 85vw; 
         transform: translate(-50%, -50%) !important;
     }
-    :root { --carousel-height: 50rem; }
+    :root { --carousel-height: 54rem; }
 }
 

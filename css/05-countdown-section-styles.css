@@ -41,10 +41,10 @@
 .timebox {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
-    gap: clamp(1rem, 5vw, 6rem); /* 🎯 OPTIMIZED: Simplified gap scaling */
+    gap: clamp(1.5rem, 6vw, 8rem); /* 🎯 INCREASED: More space for larger numbers */
     margin: clamp(1.6rem, 4vw, 3.2rem) auto 0 auto; /* Centered with top spacing */
     width: 100%;
-    max-width: 80rem; /* Limit maximum width for better readability */
+    max-width: 90rem; /* INCREASED: wider to accommodate larger gap */
     justify-items: center; /* Center items horizontally within grid cells */
 }
 
@@ -76,10 +76,10 @@
 /* Large countdown numbers - Optimized responsive sizing */
 .time .time-value {
     font-size: clamp(
-        2rem,
-        5vw,
-        4.8rem
-    ); /* 🎯 OPTIMIZED: Balanced scaling for all screens */
+        3.5rem,
+        8vw,
+        6.4rem
+    ); /* 🎯 INCREASED: Much larger for visual impact */
     font-weight: 700; /* Bold for emphasis and readability */
     line-height: 1; /* Tight line height for compact numbers */
     margin: 0; /* Remove default margins */
@@ -93,7 +93,7 @@
 
 /* Time unit labels (дн., ч., мин., с.) - Typography styling */
 .time p {
-    font-size: clamp(1rem, 2vw, 1.4rem); /* Proportional label sizing */
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem); /* INCREASED: Proportional label sizing */
     margin: clamp(0.5rem, 1vw, 1rem) 0 0 0; /* Top margin for spacing */
     opacity: 0.9; /* Slightly transparent for visual hierarchy */
     color: var(--color-light-text); /* Consistent color scheme */
@@ -114,12 +114,12 @@
 /* 📱 TABLET & SMALL DESKTOP (≤1200px) */
 @media (max-width: 1200px) {
     .timebox {
-        gap: clamp(0.8rem, 4vw, 4rem); /* Reduced gap for medium screens */
-        max-width: 70rem; /* Narrower container */
+        gap: clamp(1rem, 5vw, 6rem); /* Updated gap */
+        max-width: 80rem; 
     }
 
     .time .time-value {
-        font-size: clamp(1.8rem, 4.5vw, 4rem); /* Slightly smaller numbers */
+        font-size: clamp(3rem, 7vw, 5.2rem); 
     }
 }
 
@@ -130,8 +130,8 @@
     }
 
     .timebox {
-        gap: clamp(0.6rem, 3vw, 3rem); /* Tighter gaps on tablets */
-        max-width: 60rem;
+        gap: clamp(0.8rem, 4vw, 4rem); 
+        max-width: 70rem;
     }
 
     .time {
@@ -139,33 +139,33 @@
     }
 
     .time .time-value {
-        font-size: clamp(1.6rem, 5vw, 3.2rem); /* Mobile-friendly sizing */
+        font-size: clamp(2.6rem, 8vw, 4.2rem); 
     }
 
     .time p {
-        font-size: clamp(0.9rem, 2vw, 1.2rem); /* Proportional labels */
+        font-size: clamp(1rem, 2.5vw, 1.4rem); 
     }
 }
 
 /* 📱 MOBILE (≤480px) */
 @media (max-width: 480px) {
     .timebox {
-        gap: clamp(0.4rem, 2.5vw, 2rem); /* Minimal gaps for small screens */
-        max-width: 100%; /* Full width utilization */
+        gap: clamp(0.6rem, 3.5vw, 3rem); 
+        max-width: 100%; 
     }
 
     .time .time-value {
         font-size: clamp(
-            1.4rem,
-            6vw,
-            2.8rem
-        ); /* Optimized for mobile readability */
-        font-weight: 600; /* Slightly lighter for small sizes */
+            2.2rem,
+            10vw,
+            3.6rem
+        ); /* Bold presence on mobile */
+        font-weight: 600; 
     }
 
     .time p {
-        font-size: clamp(0.8rem, 3vw, 1rem); /* Small but readable labels */
-        margin-top: 0.4rem; /* Compact spacing */
+        font-size: clamp(1rem, 4vw, 1.2rem); 
+        margin-top: 0.4rem; 
     }
 }
 

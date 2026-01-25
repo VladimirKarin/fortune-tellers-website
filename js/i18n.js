@@ -3,6 +3,8 @@
  * Handles language switching, translation loading, and dynamic content updates.
  */
 
+import { CONFIG } from './config.js';
+
 const LANG_KEY = 'fortuneTellerLanguage';
 const DEFAULT_LANG = 'ru';
 let translations = {};
@@ -18,6 +20,9 @@ export async function initI18n() {
         
         // Apply initial translation
         translatePage();
+        
+        // Update global URLs (domain replacement)
+        updateGlobalUrls();
         
         // Setup language switcher
         setupLanguageSwitcher();
@@ -125,5 +130,47 @@ function setupLanguageSwitcher() {
             const lang = btn.getAttribute('data-lang');
             switchLanguage(lang);
         });
+    });
+}
+/**
+ * Update global URLs and Schema.org scripts with the domain from CONFIG
+ */
+function updateGlobalUrls() {
+    const domain = CONFIG.DOMAIN.replace(/\/$/, ''); // Remove trailing slash if any
+    
+    // 1. Update elements with data-domain-replace
+    document.querySelectorAll('[data-domain-replace]').forEach(el => {
+        const attr = el.getAttribute('data-domain-replace');
+        if (attr) {
+            // Update specific attribute
+            let value = el.getAttribute(attr);
+            if (value) {
+                value = value.replaceAll('{{DOMAIN}}', domain);
+                el.setAttribute(attr, value);
+            }
+        } else {
+            // Update text content
+            el.textContent = el.textContent.replaceAll('{{DOMAIN}}', domain);
+        }
+    });
+
+    // 2. Update canonical link (special case if not marked)
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical && canonical.href.includes('fortunetellers.com')) {
+        canonical.href = canonical.href.replace(/https?:\/\/[^\/]+/, domain);
+    }
+    
+    // 3. Update Schema.org scripts
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
+        try {
+            let content = script.textContent;
+            if (content.includes('fortunetellers.com') || content.includes('{{DOMAIN}}')) {
+                content = content.replaceAll('https://fortunetellers.com', domain);
+                content = content.replaceAll('{{DOMAIN}}', domain);
+                script.textContent = content;
+            }
+        } catch (e) {
+            console.warn('❌ Failed to update Schema script:', e);
+        }
     });
 }
