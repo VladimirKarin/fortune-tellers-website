@@ -179,7 +179,8 @@ class Carousel {
         this.itemsArray = Array.from(this.galleryItems);
 
         // Track current center position (0-indexed)
-        this.currentIndex = 0;
+        // Offset by -2 so that itemsArray[0] ("Principles") starts in center (gallery-item-3)
+        this.currentIndex = this.itemsArray.length - 2;
 
         // Setup all event listeners
         this.setupEventListeners();
