@@ -90,22 +90,18 @@
     letter-spacing: -0.02em; /* Slight negative spacing for visual tightness */
     color: var(--color-light-text); /* Consistent with section color */
 
-    /* 🎯 ENHANCED: Mystic glow effect */
+    /* Mystic glow effect */
     text-shadow:
         0 0 20px rgba(142, 68, 173, 0.6),
         0 2px 4px rgba(0, 0, 0, 0.3);
 
-    /* 🎯 OPTIMIZED: Smooth number transitions when updating */
+    /* Smooth number transitions when updating */
     transition: all 0.3s ease-in-out;
 }
 
 /* Time unit labels (дн., ч., мин., с.) - Typography styling */
 .time p {
-    font-size: clamp(
-        1.2rem,
-        2.5vw,
-        1.6rem
-    ); /* INCREASED: Proportional label sizing */
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem); /* Proportional label sizing */
     margin: clamp(0.5rem, 1vw, 1rem) 0 0 0; /* Top margin for spacing */
     opacity: 0.9; /* Slightly transparent for visual hierarchy */
     color: var(--color-light-text); /* Consistent color scheme */
@@ -119,7 +115,6 @@
    =================================== */
 
 /* 
-   🎯 OPTIMIZED: Reduced from 5 breakpoints to 3 for easier maintenance
    Breakpoints align with your site standard: 1200px, 768px, 480px
 */
 

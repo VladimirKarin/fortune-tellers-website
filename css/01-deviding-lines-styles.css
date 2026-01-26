@@ -28,8 +28,7 @@
    =================================== */
 
 /* 
-   🔄 TRANSLATED: Animated dividing line with wave glow effect
-   Original: "Волновое свечение - Исправленная анимированная разделительная линия (вариант 1)"
+   Animated dividing line with wave glow effect
    
    Primary divider style used between major sections
    Features pulsing base glow with traveling wave effect
@@ -127,11 +126,13 @@
 */
 @keyframes basePulse {
     0% {
-        box-shadow: 0 0 8px rgba(142, 68, 173, 0.3),
+        box-shadow:
+            0 0 8px rgba(142, 68, 173, 0.3),
             /* Inner glow */ 0 0 16px rgba(155, 89, 182, 0.2); /* Outer glow */
     }
     100% {
-        box-shadow: 0 0 15px rgba(142, 68, 173, 0.6),
+        box-shadow:
+            0 0 15px rgba(142, 68, 173, 0.6),
             /* Stronger inner glow */ 0 0 25px rgba(155, 89, 182, 0.4),
             /* Stronger mid glow */ 0 0 35px rgba(198, 155, 221, 0.2); /* Outer glow */
     }

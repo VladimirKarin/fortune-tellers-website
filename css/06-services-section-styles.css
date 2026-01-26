@@ -22,10 +22,10 @@
 
 :root {
     /* 🎠 Carousel dimensions */
-    --carousel-height: 70rem; /* 🎯 INCREASED: To fit the taller cards */
-    --carousel-max-width: 120rem; /* Expanded for wider tiered layout */
+    --carousel-height: 70rem;
+    --carousel-max-width: 120rem;
 
-    /* 🎴 Card sizing - RESTORED TIERED PROPORTIONS (Enhanced Height) */
+    /* 🎴 Card sizing */
     --card-base-height: 46rem;
     --card-base-width: 38rem;
 
@@ -105,7 +105,7 @@
    All carousel cards share these foundation styles
 */
 .gallery-item {
-    /* Dimensions - 🎯 UNIFORM: All cards start with the same size */
+    /* Dimensions - All cards start with the same size */
     height: 48rem;
     width: 38rem;
 
@@ -204,12 +204,12 @@
     overflow: hidden; /* Clip image overflow */
 }
 
-/* 🎯 FIX: Ensure service images fill area correctly without distortion */
+/* Ensure service images fill area correctly without distortion */
 .gallery-item-visual img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 20%; /* 🎯 TARGETED: Shift focus slightly up */
+    object-position: center 20%; /* Shift focus slightly up */
     display: block;
 }
 
@@ -392,8 +392,7 @@
    =================================== */
 
 /* 
-   🔄 TRANSLATED: Popup overlay - fullscreen darkened background
-   Original: "Затемнённый фон попапа"
+   Popup overlay - fullscreen darkened background.
    Managed dynamically by PopupManager in script.js
 */
 .popup-overlay {

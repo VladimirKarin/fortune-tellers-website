@@ -174,8 +174,8 @@
        - height: Smooth expand/collapse animation
        - opacity: Fade in/out effect (slight delay for better visual)
     */
-    transition: height var(--prices-animation-duration)
-            var(--prices-animation-easing),
+    transition:
+        height var(--prices-animation-duration) var(--prices-animation-easing),
         opacity 0.3s ease 0.1s; /* Opacity transitions slightly after height starts */
 
     /* 🔧 DEBUG: Uncomment to see grid boundaries
@@ -229,7 +229,8 @@
     opacity: 1; /* Fully visible when grid is open */
 
     /* Hover transition */
-    transition: transform var(--transition-smooth),
+    transition:
+        transform var(--transition-smooth),
         box-shadow var(--transition-smooth);
 }
 

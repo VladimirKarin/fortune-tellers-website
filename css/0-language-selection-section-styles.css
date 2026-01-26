@@ -30,8 +30,7 @@
    =================================== */
 
 /* 
-   ✅ CRITICAL FIX: Only apply reset to language selection page
-   Prevents styles from affecting main site pages
+   =Only apply reset to language selection page=
 */
 .language-selection-page * {
     margin: 0;

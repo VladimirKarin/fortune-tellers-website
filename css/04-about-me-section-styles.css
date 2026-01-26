@@ -33,8 +33,7 @@
    =================================== */
 
 /* 
-   🔄 TRANSLATED: Grid system override for About Me section
-   Original: "Равномерно по 3 столбца, без «раздувания» контентом"
+   Grid system override for About Me section
    Creates 3 equal columns without content-based expansion
 */
 .about-me-section .grid--3-cols {
@@ -46,8 +45,7 @@
 }
 
 /* 
-   🔄 TRANSLATED: Prevent cards from expanding beyond grid constraints
-   Original: "Обязательно добавляем, чтобы карточки не «расширялись» под содержимое"
+   Prevent cards from expanding beyond grid constraints
 */
 .about-me-section .grid--3-cols > .about-me-card {
     min-width: 0; /* Critical for proper grid behavior with long content */
@@ -64,8 +62,7 @@
    =================================== */
 
 /* 
-   🔄 TRANSLATED: Individual card container
-   Original: "Карточки"
+Individual card container
 */
 .about-me-card {
     /* Size constraints */
@@ -113,7 +110,6 @@
 
 /* 
    🎬 ANIMATION: Directional entrance variations
-   🔄 TRANSLATED: "Состояния для разных направлений появления"
    Cards can slide in from different angles based on screen layout
 */
 
@@ -140,7 +136,6 @@
 
 /* 
    🎬 ANIMATION: Final visible state
-   🔄 TRANSLATED: "Финальное состояние - видимые карточки"
    This class is added by JavaScript when cards enter viewport
 */
 .about-me-card.animate-in {
@@ -150,7 +145,6 @@
 
 /* 
    🎬 ANIMATION: Staggered entrance delays
-   🔄 TRANSLATED: "Задержки для staggered эффекта"
    Creates waterfall effect - cards appear one after another
 */
 .about-me-card:nth-child(1).animate-in {
@@ -175,7 +169,6 @@
 
 /* 
    🔄 TRANSLATED: Card image styling
-   Original: "Изображение"
 */
 .about-me-card__img {
     width: 100%; /* Full card width */
@@ -186,12 +179,11 @@
 
 /* 
    🔄 TRANSLATED: Card content container
-   Original: "Контент карточки"
 */
 .about-me-card__content {
     background-color: var(--color-card-bg); /* Light purple background */
     padding: 2.4rem 3.6rem 3.6rem; /* Asymmetrical padding (top smaller) */
-    
+
     /* 📏 Equal height behavior */
     flex-grow: 1;
     display: flex;
@@ -215,11 +207,10 @@
 }
 
 /* ===================================
-   6️⃣ RESPONSIVE BREAKPOINTS (SIMPLIFIED)
+   6️⃣ RESPONSIVE BREAKPOINTS
    =================================== */
 
 /* 
-   🎯 OPTIMIZED: Reduced from 6 breakpoints to 4 for easier maintenance
    Aligns with site standard: 1200px, 768px, 480px + default
 */
 

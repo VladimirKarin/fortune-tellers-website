@@ -128,7 +128,7 @@
 
 /**
  * Navigation list
- * 🔄 TRANSLATED: Horizontal on desktop, vertical off-canvas on mobile
+ * Horizontal on desktop, vertical off-canvas on mobile
  * Original: "nav list (desktop inline, mobile off-canvas)"
  */
 .nav-list {
@@ -271,7 +271,7 @@
 
 /**
  * Mobile menu panel
- * 🔄 TRANSLATED: Off-canvas side panel that slides in from right
+ * Off-canvas side panel that slides in from right
  * Original: "Off-canvas panel behaviour: switch .nav-list to column and position fixed"
  * 
  * Hidden off-screen by default (translateX(100%))
@@ -284,7 +284,6 @@
    =================================== */
 
 /*
-   🎯 OPTIMIZED: Reduced from 6 breakpoints to 4 for consistency
    Aligns with site standard: 1200px, 768px, 480px + default
 */
 

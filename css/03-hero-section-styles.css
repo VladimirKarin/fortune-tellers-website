@@ -65,15 +65,14 @@
    =================================== */
 
 /* 
-   🔄 TRANSLATED: Base styles for large and medium screens
-   Original: "Базовые стили для больших и средних экранов"
+   Base styles for large and medium screens
 */
 .hero-section {
     /* Container sizing */
     max-width: 193rem; /* 1930px maximum width for ultra-wide screens */
     min-height: var(
         --hero-min-height
-    ); /* 🔄 TRANSLATED: "заменили height на min-height" */
+    ); /* Minimum section height for large screens */
 
     /* Flexbox layout for content positioning */
     display: flex;
@@ -236,9 +235,7 @@
    =================================== */
 
 /* 
-   🎯 OPTIMIZED: Reduced from 6 breakpoints to 4 for consistency
    Aligns with site standard: 1200px, 768px, 480px + default
-   Removed clamp() overrides - let clamp() handle responsive sizing
 */
 
 /* 📱 LARGE TABLET / SMALL DESKTOP (≤1200px) */
