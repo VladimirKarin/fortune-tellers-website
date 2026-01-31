@@ -16,13 +16,13 @@ export const CONFIG = {
      */
     TRIP_DATES: {
         cityRussian: 'Вильнюс',
-        start: '2026-01-19',
-        end: '2026-01-27',
+        start: '2026-02-16',
+        end: '2026-02-23',
     },
 
     /**
      * Countdown timer target date.
      * Format: YYYY-MM-DDTHH:mm:ss
      */
-    COUNTDOWN_DATE: '2026-02-01T12:00:00',
+    COUNTDOWN_DATE: '2026-02-14T12:00:00',
 };
