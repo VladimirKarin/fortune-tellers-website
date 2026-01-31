@@ -91,9 +91,8 @@
 */
 .prices__button {
     display: block; /* Block level for centering */
-    margin: 0 auto; /* Center horizontally */
-    margin-top: clamp(2.4rem, 4vw, 3.2rem); /* Space above button */
-    padding: clamp(1rem, 2.5vw, 1.2rem) clamp(2rem, 4vw, 2.4rem); /* Responsive padding */
+    margin: clamp(3.2rem, 5vw, 4.8rem) auto 0; /* Increased spacing above button */
+    padding: clamp(1.2rem, 3vw, 1.4rem) clamp(2.4rem, 5vw, 3rem); /* Responsive padding */
 
     /* Visual styling - overrides general.css button */
     background: var(--color-highlight); /* Purple background */
@@ -146,10 +145,10 @@
 */
 .prices-grid {
     display: grid; /* CSS Grid layout */
-    gap: var(--prices-grid-gap); /* Space between cards */
+    gap: clamp(2rem, 4vw, 3.2rem); /* Universal responsive gap 20-32px */
     max-width: 120rem; /* Maximum container width (1200px) */
     margin: 0 auto; /* Center the grid */
-    padding: 0 clamp(1.6rem, 3vw, 3.2rem); /* Horizontal padding */
+    padding: 0 clamp(2rem, 4vw, 3.2rem); /* Match padding to gap */
     width: 100%; /* Full width up to max-width */
 
     /* 
@@ -159,7 +158,7 @@
     */
     grid-template-columns: repeat(
         auto-fit,
-        minmax(clamp(28rem, 45vw, 40rem), 1fr)
+        minmax(min(100%, 32rem), 1fr)
     );
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -203,43 +202,34 @@
 */
 .prices-card {
     width: 100%; /* Fill grid cell width */
-    min-width: clamp(28rem, 90vw, 40rem); /* Responsive minimum width */
-    max-width: 100%; /* Don't exceed grid cell */
-    padding: var(--prices-card-padding); /* Responsive internal padding */
-
-    /* Visual styling */
+    padding: clamp(1.6rem, 3vw, 2rem); /* Fluid responsive padding */
     border-radius: var(
         --border-radius-button
     ); /* Unique asymmetrical shape (2rem 0 1.5rem 0) */
     background-color: var(--color-card-bg); /* Light card background */
     box-shadow: var(--shadow-light); /* Subtle depth shadow */
-
-    /* Layout */
     overflow: hidden; /* Clip content to border radius */
     position: relative; /* For pseudo-elements or absolute children */
-
-    /* 
-       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       🎬 ANIMATION: Initial state
-       Cards start in normal position (no transform)
-       Animation is triggered by adding .prices-card-animate-in class
-       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    */
+    
+    /* Animation properties */
     transform: translateY(0); /* Normal position */
     opacity: 1; /* Fully visible when grid is open */
-
+    
     /* Hover transition */
     transition:
-        transform var(--transition-smooth),
-        box-shadow var(--transition-smooth);
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-/* Card hover effect - lift on hover */
-/* 
+/* Card hover effect - subtle premium lift */
 .prices-card:hover {
-    transform: translateY(-4px); /* Lift card slightly 
-    box-shadow: var(--shadow-hover); /* Deeper shadow for elevation 
-} */
+    transform: translateY(-3px); /* Subtle lift */
+    box-shadow: 0 8px 16px rgba(74, 63, 112, 0.15); /* Softer purple shadow */
+}
+
+.prices-card:active {
+    transform: translateY(-1px); /* Reduce lift on click */
+}
 
 /* Card title (service name) */
 .prices-card__title {

@@ -27,8 +27,8 @@
     --hero-overlay-opacity: 0.3; /* Optional: for background overlay */
 
     /* 📐 Hero content spacing */
-    --hero-content-margin-top: var(--spacing-huge); /* Top spacing (64px) */
-    --hero-content-margin-left: var(--spacing-xl); /* Left spacing (48px) */
+    --hero-content-margin-top: clamp(4rem, 7vw, 9.6rem); /* Fluid top margin 40-96px */
+    --hero-content-margin-left: clamp(2.4rem, 5vw, 4.8rem); /* Fluid left margin 24-48px */
     --hero-content-max-width: 60rem; /* Maximum content width */
     --hero-content-padding-x: clamp(
         2rem,
@@ -153,7 +153,7 @@
     letter-spacing: 0.5px; /* Slight spacing for readability */
 
     /* Spacing */
-    margin-bottom: clamp(1rem, 4vw, 2rem); /* Responsive bottom margin */
+    margin-bottom: clamp(1.5rem, 5vw, 3rem); /* More generous responsive spacing */
 
     /* Visual enhancement */
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Depth on background image */
@@ -263,7 +263,7 @@
     }
 
     .hero__content {
-        margin: clamp(3rem, 5vw, 4rem) 0 0 clamp(2rem, 4vw, 3rem); /* Tighter margins */
+        margin: clamp(4rem, 8vw, 6rem) 0 0 clamp(2rem, 4vw, 3rem); /* Increased top margin for tablets */
         padding: 0 clamp(1.5rem, 4vw, 4rem); /* Reduce horizontal padding */
         max-width: clamp(30rem, 85%, 60rem); /* Wider on tablets */
     }
@@ -289,35 +289,38 @@
 /* 📱 MOBILE (≤480px) */
 @media (max-width: 480px) {
     .hero-section {
-        padding: clamp(2rem, 4vw, 3rem) 0; /* Minimal vertical padding */
+        padding: clamp(3rem, 6vw, 4rem) 0; /* Increased vertical padding for breathing room */
     }
 
     .hero__content {
-        margin: clamp(2rem, 4vw, 3rem) 0 0 clamp(1.5rem, 3vw, 2rem); /* Compact margins */
+        margin: clamp(5rem, 10vw, 6rem) 0 0 clamp(1.5rem, 3vw, 2rem); /* Much larger top margin */
         padding: 0 clamp(1rem, 3vw, 2rem); /* Minimal horizontal padding */
         max-width: clamp(28rem, 95%, 50rem); /* Nearly full width */
     }
 
     .hero__heading-primary {
         font-size: clamp(2.2rem, 7vw, 3rem); /* Smaller heading on mobile */
-        margin-bottom: clamp(0.6rem, 2vw, 1rem); /* Tight spacing */
+        margin-bottom: clamp(0.8rem, 2.5vw, 1.2rem); /* Adjusted spacing */
     }
 
     .hero__text {
         font-size: clamp(1.3rem, 4vw, 1.6rem); /* Smaller text on mobile */
-        margin-bottom: clamp(1.2rem, 3vw, 2rem); /* Compact spacing */
+        margin-bottom: clamp(1.6rem, 4vw, 2.4rem); /* Increased spacing before button */
     }
 
     .hero__buttons {
         flex-direction: column; /* Stack buttons vertically on mobile */
-        gap: clamp(0.8rem, 2vw, 1rem); /* Minimal vertical gap */
+        gap: clamp(1.2rem, 3vw, 1.6rem); /* Increased gap for better spacing */
         width: 100%; /* Full width container */
+        max-width: 40rem; /* Prevent overly wide buttons */
+        margin: 0 auto; /* Center button container */
     }
 
     .hero__button {
         width: 100%; /* Full-width buttons on mobile */
-        padding: clamp(1.2rem, 3vw, 1.6rem) clamp(1.6rem, 4vw, 2rem); /* Adjust padding */
-        font-size: clamp(1.2rem, 3.5vw, 1.4rem); /* Smaller button text */
+        padding: 1.6rem 2.4rem; /* Fixed, comfortable padding */
+        font-size: clamp(1.4rem, 4vw, 1.6rem); /* Larger, more readable text */
+        min-height: 48px; /* Ensure touch target */
     }
 }
 

@@ -21,25 +21,25 @@
    =================================== */
 
 :root {
-    /* 🎠 Carousel dimensions */
-    --carousel-height: 70rem;
+    /* 🎠 Carousel dimensions - Responsive for better viewport fit */
+    --carousel-height: clamp(50rem, 65vw, 56rem); /* Responsive height 500-560px */
     --carousel-max-width: 120rem;
 
-    /* 🎴 Card sizing */
-    --card-base-height: 46rem;
-    --card-base-width: 38rem;
+    /* 🎴 Card sizing - widths match square image aspect ratio */
+    --card-base-height: 38rem;
+    --card-base-width: 26rem;
 
-    --card-featured-height: 60rem; /* Peak prominence */
-    --card-featured-width: 48rem;
+    --card-featured-height: 48rem; /* Peak prominence */
+    --card-featured-width: 26rem;
 
-    --card-secondary-height: 54rem; /* Elegant stepping */
-    --card-secondary-width: 42rem;
+    --card-secondary-height: 44rem; /* Elegant stepping */
+    --card-secondary-width: 26rem;
 
-    /* 🖼️ Visual area (image) height - Deeply visual */
-    --card-visual-height: 32rem;
+    /* 🖼️ Visual area (image) height - Compact for better screen fit */
+    --card-visual-height: 26rem;
 
     /* 📦 Card content padding */
-    --card-content-padding: 2.5rem;
+    --card-content-padding: clamp(1.8rem, 3vw, 2.5rem); /* Responsive padding */
 
     /* 🎬 Animation settings */
     --carousel-transition-speed: 0.3s; /* Card movement animation duration */
@@ -105,9 +105,9 @@
    All carousel cards share these foundation styles
 */
 .gallery-item {
-    /* Dimensions - All cards start with the same size */
-    height: 48rem;
-    width: 38rem;
+    /* Dimensions - Compact size for better viewport fit, width matches square images */
+    height: 40rem;
+    width: 26rem;
 
     /* Positioning */
     position: absolute;
@@ -204,12 +204,12 @@
     overflow: hidden; /* Clip image overflow */
 }
 
-/* Ensure service images fill area correctly without distortion */
+/* Service images fill the entire visual area */
 .gallery-item-visual img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center 20%; /* Shift focus slightly up */
+    object-fit: cover; /* Fill space completely, may crop edges */
+    object-position: center center; /* Center the image */
     display: block;
 }
 
@@ -229,12 +229,13 @@
    Bottom portion of card with title, description, and button
 */
 .gallery-item-content {
-    padding: var(--card-content-padding); /* Consistent internal spacing */
+    padding: var(--card-content-padding); /* Responsive internal spacing */
     text-align: left; /* Left-align text */
     flex-grow: 1; /* Fill remaining card height */
     display: flex;
     flex-direction: column; /* Stack elements vertically */
     justify-content: space-between; /* Space out title, text, and button */
+    gap: clamp(1rem, 2vw, 1.5rem); /* Add internal spacing between elements */
 }
 
 /* Card title styling */
@@ -300,8 +301,8 @@
     display: flex;
     justify-content: center; /* Center buttons horizontally */
     align-items: center; /* Align buttons vertically */
-    margin: var(--spacing-lg) 0; /* Vertical spacing around controls */
-    gap: var(--spacing-md); /* Space between buttons */
+    margin: clamp(2.4rem, 4vw, 3.2rem) 0; /* Responsive vertical spacing */
+    gap: clamp(1.6rem, 3vw, 2.4rem); /* Flexible gap 16-24px */
 }
 
 /* 
@@ -367,12 +368,26 @@
    Clickable elements representing each carousel position
 */
 .gallery-indicator {
-    width: 1rem; /* Dot size */
-    height: 1rem; /* Dot size */
+    width: 1.2rem; /* Increased dot size 12px */
+    height: 1.2rem;
     border-radius: 50%; /* Perfect circle */
     background-color: rgba(74, 63, 112, 0.3); /* Faded purple */
     cursor: pointer; /* Indicate clickability */
     transition: all var(--transition-smooth); /* Smooth state changes */
+    
+    /* Expand touch target to meet WCAG minimum */
+    position: relative;
+}
+
+.gallery-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px; /* WCAG minimum touch target */
+    height: 44px;
+    border-radius: 50%;
 }
 
 /* Active indicator (current position) */
@@ -481,9 +496,9 @@
     cursor: pointer; /* Indicate clickability */
     color: var(--color-text); /* Dark purple */
 
-    /* Size */
-    width: 3rem;
-    height: 3rem;
+    /* Size - Increased to minimum touch target */
+    width: 4.4rem; /* Increased from 3rem to meet WCAG */
+    height: 4.4rem;
 
     /* Layout */
     display: flex;
@@ -558,6 +573,11 @@
         font-size: 1.4rem; /* Slightly smaller */
         padding: 0.8rem 1.6rem; /* Smaller padding */
     }
+    
+    /* Add space below carousel */
+    .gallery-container {
+        margin-bottom: 3rem;
+    }
 }
 
 /* 📱 TABLET PORTRAIT (≤900px) - Hide outer cards */
@@ -576,13 +596,23 @@
     .gallery-item-4 {
         left: 75%; /* Move closer to center */
     }
+    
+    /* Add space below carousel */
+    .gallery-container {
+        margin-bottom: 4rem;
+    }
 }
 
 /* 📱 MOBILE (≤599px) - Single card view */
 @media (max-width: 599px) {
-    /* Reduce carousel height for mobile */
+    :root {
+        --carousel-height: clamp(38rem, 75vw, 48rem); /* Mobile height adjustment */
+    }
+    
+    /* Use mobile-adjusted carousel height */
     .gallery-container {
-        height: 42rem; /* Shorter container */
+        height: var(--carousel-height);
+        margin-bottom: 4rem; /* Increased space to prevent button overlap */
     }
 
     /* Hide positions 2 and 4 (side cards) */
@@ -591,16 +621,16 @@
         display: none; /* Only center card visible */
     }
 
-    /* Maintain uniform card size on small desktop/tablet */
+    /* Maintain uniform card size on mobile - adjusted for content gap */
     .gallery-item-3 {
-        width: 38rem;
+        width: 26rem;
         max-width: 90%;
-        height: 48rem;
+        height: 44rem; /* Increased from 40rem to accommodate visual area + gap */
     }
 
-    /* Adjust card visual area for mobile */
+    /* Adjust card visual area for mobile - prevent image squashing */
     .gallery-item-visual {
-        height: 16rem; /* Shorter image area */
+        height: 18rem; /* Increased from 14rem to accommodate content gap */
     }
 
     /* Optimize card content for mobile */

@@ -227,6 +227,21 @@ img {
     display: block;
 }
 
+/* Lazy loading image states - exclude carousel/gallery images */
+img[loading="lazy"]:not(.gallery-item-visual img) {
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+img.lazy-loaded {
+    opacity: 1;
+}
+
+/* Ensure gallery images are always visible */
+.gallery-item-visual img {
+    opacity: 1 !important;
+}
+
 /* Subtle interactive pulse animation */
 @keyframes softPulse {
     0% {
@@ -250,7 +265,22 @@ img {
 *:focus-visible {
     outline: 2px solid var(--color-highlight); /* Purple outline for visibility */
     outline-offset: 3px; /* Space between element and outline */
-    box-shadow: var(--shadow-focus); /* Additional glow effect */
+}
+
+/* Enhanced button focus */
+button:focus-visible {
+    outline: 3px solid var(--color-highlight); /* Thicker outline for buttons */
+    outline-offset: 4px; /* More space for prominence */
+    box-shadow: 0 0 0 6px rgba(142, 68, 173, 0.2); /* Purple glow */
+}
+
+/* Card focus */
+.about-me-card:focus-visible,
+.prices-card:focus-visible,
+.gallery-item:focus-visible {
+    outline: 3px solid var(--color-highlight);
+    outline-offset: 5px;
+    box-shadow: 0 0 0 8px rgba(142, 68, 173, 0.15);
 }
 
 /* 
@@ -260,6 +290,8 @@ img {
 html {
     font-size: 62.5%; /* 1rem = 10px for easy math */
     scroll-behavior: smooth; /* Smooth scrolling between sections */
+    scroll-padding-top: 8rem; /* Offset for fixed header on anchor navigation */
+    overflow-x: hidden; /* Prevent horizontal scrollbars */
 }
 
 /* 
@@ -271,11 +303,12 @@ body {
     min-height: 100vh; /* Full viewport height minimum */
     display: flex;
     flex-direction: column; /* Stack header, main, footer vertically */
-    line-height: 1; /* Reset line-height for precise control */
+    line-height: 1.5; /* Improved default for better readability */
     font-weight: 400; /* Normal font weight default */
     color: var(--color-light-text); /* Light text for dark backgrounds */
     font-family: var(--font-secondary); /* Roboto as default body font */
     font-size: var(--font-size-base); /* 16px base font size */
+    overflow-x: hidden; /* Double protection against horizontal overflow */
 }
 
 /* ===================================
@@ -307,8 +340,16 @@ body {
 h1,
 h2,
 h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-primary); /* Montserrat for headings */
+    line-height: 1.2; /* Tighter line height for headings */
+    font-size: var(--font-size-base); /* Default to 16px */
+}
+
 p {
-    font-family: var(--font-primary); /* Montserrat for all text elements */
+    font-family: var(--font-primary); /* Montserrat for paragraphs */
     line-height: 1.6; /* Comfortable reading line height */
     font-size: var(--font-size-base); /* Default to 16px */
 }
@@ -333,7 +374,7 @@ p {
    Apply to section containers for uniform spacing
 */
 .section-padding {
-    padding: var(--spacing-xxl) 0; /* 64px top and bottom */
+    padding: clamp(4rem, 8vw, 6.4rem) 0; /* Responsive 40-64px vertical spacing */
     text-align: center; /* Center-align section content */
 }
 
@@ -416,12 +457,12 @@ button:active {
    Used for main section headings throughout the site
 */
 .heading-secondary {
-    font-size: var(--font-size-xxl); /* 30px for prominent sections */
+    font-size: clamp(2.4rem, 4vw, 3rem); /* Responsive 24-30px heading size */
     line-height: 1.2; /* Tighter line height for headings */
     text-transform: uppercase; /* Bold, uppercase styling */
     font-weight: 700; /* Bold weight */
     color: var(--color-light-text); /* Light text for dark backgrounds */
-    letter-spacing: 1px; /* Subtle letter spacing */
+    letter-spacing: clamp(0.75px, 0.15vw, 1px); /* Fluid letter spacing */
 }
 
 /* 
@@ -458,8 +499,8 @@ button:active {
 */
 .grid {
     display: grid;
-    row-gap: var(--spacing-huge); /* 96px between rows */
-    column-gap: var(--spacing-xxl); /* 64px between columns */
+    row-gap: clamp(4.8rem, 8vw, 9.6rem); /* Responsive 48-96px row spacing */
+    column-gap: clamp(3.2rem, 5vw, 6.4rem); /* Responsive 32-64px column spacing */
 }
 
 /* Grid column variations */
@@ -528,16 +569,9 @@ button:active {
         gap: var(--spacing-lg); /* Consistent spacing */
     }
 
-    /* Adjust container padding for medium screens */
-    .container {
-        padding: 0 var(--spacing-md); /* Reduce padding on smaller screens */
-    }
-
-    /* Adjust grid gaps for better spacing */
-    .grid {
-        row-gap: var(--spacing-xxl); /* Reduce row gaps */
-        column-gap: var(--spacing-lg); /* Reduce column gaps */
-    }
+    /* Container padding handled by base clamp() */
+    
+    /* Grid gaps handled by base clamp() */
 }
 
 /* 
@@ -559,10 +593,7 @@ button:active {
         gap: var(--spacing-md); /* Medium spacing between items */
     }
 
-    /* Adjust typography for mobile */
-    .heading-secondary {
-        font-size: 2.4rem; /* Smaller heading on mobile */
-    }
+    /* Typography handled by base clamp() */
 
     /* All grids become single column on mobile */
     .grid--2-cols,
@@ -588,9 +619,9 @@ button:active {
    Final optimizations for smallest screens
 */
 @media (max-width: 480px) {
-    /* Further reduce container padding */
+    /* Enhanced mobile container padding */
     .container {
-        padding: 0 var(--spacing-sm); /* Minimal padding on small screens */
+        padding: 0 clamp(2rem, 5vw, 2.4rem); /* Responsive 20-24px padding */
     }
 
     /* Adjust font sizes for very small screens */
@@ -601,7 +632,12 @@ button:active {
     /* Stack footer grid on very small screens */
     .footer-grid {
         grid-template-columns: 1fr; /* Single column footer */
-        gap: var(--spacing-md); /* Medium gap between sections */
+        gap: clamp(3.2rem, 6vw, 4.8rem); /* Generous vertical spacing */
+        text-align: center; /* Center footer elements */
+    }
+    
+    .footer-img {
+        order: -1; /* Ensure logo appears first */
     }
 }
 

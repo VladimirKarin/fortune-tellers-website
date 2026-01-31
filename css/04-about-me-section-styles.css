@@ -41,7 +41,7 @@
         3,
         minmax(0, 1fr)
     ); /* minmax(0, 1fr) prevents overflow */
-    gap: var(--spacing-xxl); /* 64px gap between cards */
+    gap: clamp(3.2rem, 6vw, 6.4rem); /* Fluid gap from start 32-64px */
 }
 
 /* 
@@ -182,7 +182,9 @@ Individual card container
 */
 .about-me-card__content {
     background-color: var(--color-card-bg); /* Light purple background */
-    padding: 2.4rem 3.6rem 3.6rem; /* Asymmetrical padding (top smaller) */
+    padding: clamp(2rem, 3.5vw, 2.4rem) /* top */ 
+             clamp(2.4rem, 4vw, 3.6rem) /* right/left */
+             clamp(2.4rem, 4vw, 3.6rem); /* bottom */
 
     /* 📏 Equal height behavior */
     flex-grow: 1;
@@ -194,7 +196,7 @@ Individual card container
 .about-me-card__title {
     font-size: clamp(1.8rem, 2vw, 2rem); /* Responsive title size */
     font-weight: 600; /* Semi-bold */
-    margin-bottom: var(--spacing-lg); /* Space before text */
+    margin-bottom: clamp(1.6rem, 2.5vw, 3.2rem); /* Proportional responsive spacing */
     color: var(--color-primary); /* Brand purple */
 }
 
@@ -216,10 +218,7 @@ Individual card container
 
 /* 📱 LARGE TABLET / SMALL DESKTOP (≤1200px) */
 @media (max-width: 1200px) {
-    .about-me-section .grid--3-cols {
-        grid-template-columns: repeat(3, minmax(0, 1fr)); /* Keep 3 columns */
-        gap: clamp(2rem, 5vw, 6.4rem); /* Responsive gap scaling */
-    }
+    /* Grid gap handled by base clamp() */
 }
 
 /* 📱 TABLET (≤991px) - Switch to 2-column layout */
